@@ -1,16 +1,16 @@
 CREATE TABLE public."GraphEdge"
 (
     "EdgeID" SERIAL PRIMARY KEY NOT NULL,
-    "StartingNodeID" INT NOT NULL,
-    "EndingNodeID" INT NOT NULL,
-    distance INT,
+    "Node1ID" INT NOT NULL,
+    "Node2ID" INT NOT NULL,
+    FromToAction character varying,
+    ToFromAction character varying,
+    distance real,
+    pathShape json,
     CONSTRAINT fk_starting_nodeid
-		FOREIGN KEY("StartingNodeID") 
+		FOREIGN KEY("Node1ID") 
 			REFERENCES public."GraphNode"("NodeID"),
     CONSTRAINT fk_ending_nodeid
-		FOREIGN KEY("EndingNodeID") 
+		FOREIGN KEY("Node2ID") 
 			REFERENCES public."GraphNode"("NodeID")
 );
-
-ALTER TABLE IF EXISTS public."GraphEdge"
-    OWNER to capy;

@@ -5,6 +5,3 @@ CREATE TABLE public."GraphNode"
     longitude double precision,
     description character varying
 );
-
-ALTER TABLE IF EXISTS public."GraphNode"
-    OWNER to capy;

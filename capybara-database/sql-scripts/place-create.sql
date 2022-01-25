@@ -10,6 +10,3 @@ CREATE TABLE public."Place"
 		FOREIGN KEY("NodeID") 
 			REFERENCES public."GraphNode"("NodeID")
 );
-
-ALTER TABLE IF EXISTS public."Place"
-    OWNER to capy;

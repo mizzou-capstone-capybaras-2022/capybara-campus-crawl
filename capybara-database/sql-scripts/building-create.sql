@@ -5,5 +5,3 @@ CREATE TABLE public."Building"
     geojson json
 );
 
-ALTER TABLE IF EXISTS public."Building"
-    OWNER to capy;

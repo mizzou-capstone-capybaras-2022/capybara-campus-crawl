@@ -10,6 +10,3 @@ CREATE TABLE public."Door"
 		FOREIGN KEY("BuildingID") 
 			REFERENCES public."Building"("BuildingID")
 );
-
-ALTER TABLE IF EXISTS public."Door"
-    OWNER to capy;
