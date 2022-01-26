@@ -32,12 +32,21 @@ CREATE TABLE public."GraphEdge"
 
 CREATE TABLE public."SavedPath"
 (
-    "PathID" SERIAL PRIMARY KEY NOT NULL,
-	"endingNodeID" INT NOT NULL,
-	"startingNodeID" INT NOT NULL,
-	"GraphEdgeIDs" INT[] NOT NULL,
-	distance real
+  "SavedPathID" SERIAL PRIMARY KEY NOT NULL,
+  "endingNodeID" INT NOT NULL,
+  "startingNodeID" INT NOT NULL,
+  distance real
 );
+
+CREATE TABLE IF NOT EXISTS public."PathEdges"
+(
+  "PathEdgeID" SERIAL PRIMARY KEY NOT NULL,
+  "SavedPathID" integer NOT NULL,    
+  "EdgeID" integer NOT NULL,
+  CONSTRAINT fk_savedPathID FOREIGN KEY("SavedPathID") REFERENCES public."SavedPath"("SavedPathID"),
+  CONSTRAINT fk_edgeID FOREIGN KEY("EdgeID") REFERENCES public."GraphEdge"("EdgeID")
+)
+
 
 CREATE TYPE type_of_place AS ENUM ('study', 'dining', 'classroom');
 
