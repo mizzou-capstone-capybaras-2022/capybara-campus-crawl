@@ -13,7 +13,7 @@ public class GraphNode {
 	
 	@Id
 	@Column(name="\"NodeID\"")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long NodeID;
 	
 	private Double latitude;
@@ -24,8 +24,8 @@ public class GraphNode {
 	 @Override
 	 public String toString() {
 	   return String.format(
-	       "GraphNode[id=%d, lat='%f', lon='%f']",
-	       NodeID, latitude, longitude);
+	       "GraphNode[id=%d, lat='%f', lon='%f', description='%s']",
+	       NodeID, latitude, longitude, description);
 	 }
 	 
 	public GraphNode() {
