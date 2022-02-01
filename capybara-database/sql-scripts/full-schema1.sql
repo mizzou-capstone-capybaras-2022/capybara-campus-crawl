@@ -20,6 +20,7 @@ CREATE TABLE public."GraphEdge"
     "Node2ID" INT NOT NULL,
     FromToAction character varying,
     ToFromAction character varying,
+    bidirectional boolean DEFAULT false,
     distance real,
     pathShape json,
     CONSTRAINT fk_starting_nodeid
@@ -29,6 +30,7 @@ CREATE TABLE public."GraphEdge"
 		FOREIGN KEY("Node2ID") 
 			REFERENCES public."GraphNode"("NodeID")
 );
+
 
 CREATE TABLE public."SavedPath"
 (

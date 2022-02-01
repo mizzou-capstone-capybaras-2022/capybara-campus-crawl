@@ -5,6 +5,7 @@ CREATE TABLE public."GraphEdge"
     "Node2ID" INT NOT NULL,
     FromToAction character varying,
     ToFromAction character varying,
+    bidirectional boolean DEFAULT false,
     distance real,
     pathShape json,
     CONSTRAINT fk_starting_nodeid
