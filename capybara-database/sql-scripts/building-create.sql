@@ -2,6 +2,8 @@ CREATE TABLE public."Building"
 (
     "BuildingID" SERIAL PRIMARY KEY NOT NULL,
     name character varying,
-    geojson json
+    "NodeID" INT DEFAULT NULL,
+    geojson json,
+    FOREIGN KEY("NodeID") 
+			REFERENCES public."GraphNode"("NodeID")
 );
-
