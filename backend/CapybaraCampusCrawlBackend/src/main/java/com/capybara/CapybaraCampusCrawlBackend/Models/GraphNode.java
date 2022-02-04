@@ -18,7 +18,7 @@ public class GraphNode {
 	
 	@Id
 	@Column(name="\"NodeID\"")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long NodeID;
 	
 	private Double latitude;

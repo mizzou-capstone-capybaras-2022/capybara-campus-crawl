@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
-import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNodeRepository;
 
 @RestController
 public class GraphNodeController {

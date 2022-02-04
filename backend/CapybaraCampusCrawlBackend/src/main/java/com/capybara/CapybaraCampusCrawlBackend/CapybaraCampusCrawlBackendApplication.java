@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
-import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNodeRepository;
 
 import org.hibernate.boot.model.naming.ImplicitNamingStrategy;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl;
@@ -28,12 +30,12 @@ public class CapybaraCampusCrawlBackendApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(GraphNodeRepository repository) {
+	public CommandLineRunner demo(BuildingRepository repository) {
 		return (args) -> {
-			logger.info("Fetching GraphNodes");
+			logger.info("Fetching Buildings");
 			
-			for (GraphNode node : repository.findAll()) {
-				logger.info(node.toString());
+			for (Building building : repository.findAll()) {
+				logger.info(building.toString());
 			}
 		};
 		
