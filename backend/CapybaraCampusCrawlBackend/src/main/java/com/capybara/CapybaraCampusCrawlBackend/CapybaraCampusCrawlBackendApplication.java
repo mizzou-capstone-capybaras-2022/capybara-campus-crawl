@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Door;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 
 import org.hibernate.boot.model.naming.ImplicitNamingStrategy;
@@ -30,12 +32,12 @@ public class CapybaraCampusCrawlBackendApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(BuildingRepository repository) {
+	public CommandLineRunner demo(DoorRepository repository) {
 		return (args) -> {
-			logger.info("Fetching Buildings");
+			logger.info("Fetching Doors");
 			
-			for (Building building : repository.findAll()) {
-				logger.info(building.toString());
+			for (Door door : repository.findAll()) {
+				logger.info(door.toString());
 			}
 		};
 		

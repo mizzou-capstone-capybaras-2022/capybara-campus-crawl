@@ -1,7 +1,7 @@
 # Models
-- [ ] Building  
-- [ ] Door
-- [ ] GraphEdge
+- [X] Building  
+- [X] Door
+- [X] GraphEdge
 - [X] GraphNode
 - [ ] PIMetrics
 - [ ] PathEdges
@@ -10,9 +10,9 @@
 - [ ] SavedPath
 
 # Data Repositories
-- [ ] Building  
-- [ ] Door
-- [ ] GraphEdge
+- [X] Building  
+- [X] Door
+- [X] GraphEdge
 - [X] GraphNode
 - [ ] PIMetrics
 - [ ] PathEdges

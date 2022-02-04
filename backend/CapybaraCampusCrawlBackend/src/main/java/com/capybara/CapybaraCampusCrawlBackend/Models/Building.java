@@ -27,13 +27,16 @@ public class Building {
 	@JoinColumn(name="\"NodeID\"", nullable=true)
 	private GraphNode graphNode;
 	
+	//TODO Many Doors belong to One Building
+	
 	public Building() {
 		super();
 	}
 	
-	public Building(String name, String geojson) {
+	public Building(String name, String geojson, GraphNode graphNode) {
 		this.name = name;
 		this.geojson = geojson;
+		this.graphNode = graphNode;
 	}
 
 	public String getName() {
