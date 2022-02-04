@@ -6,7 +6,7 @@
 - [ ] PIMetrics
 - [ ] PathEdges
 - [ ] Place
-- [ ] Room
+- [X] Room
 - [ ] SavedPath
 
 # Data Repositories
@@ -17,5 +17,5 @@
 - [ ] PIMetrics
 - [ ] PathEdges
 - [ ] Place
-- [ ] Room
+- [X] Room
 - [ ] SavedPath
