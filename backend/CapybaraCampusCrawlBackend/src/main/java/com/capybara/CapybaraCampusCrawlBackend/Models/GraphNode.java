@@ -19,7 +19,7 @@ public class GraphNode {
 	@Id
 	@Column(name="\"NodeID\"")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long NodeID;
+	private Long nodeId;
 	
 	private Double latitude;
 	private Double longitude;
@@ -30,7 +30,7 @@ public class GraphNode {
 	 public String toString() {
 	   return String.format(
 	       "GraphNode[id=%d, lat='%f', lon='%f']",
-	       NodeID, latitude, longitude);
+	       nodeId, latitude, longitude);
 	 }
 	 
 	public GraphNode() {
@@ -44,7 +44,7 @@ public class GraphNode {
 	}
 
 	public Long getNodeID() {
-		return NodeID;
+		return nodeId;
 	}
 
 	public Double getLatitude() {
