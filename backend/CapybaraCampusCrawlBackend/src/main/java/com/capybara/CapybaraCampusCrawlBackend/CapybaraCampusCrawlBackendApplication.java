@@ -16,6 +16,7 @@ import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PiMetricRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PlaceRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.RoomRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.SavedPathRepository;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Door;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphEdge;
@@ -23,6 +24,7 @@ import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.PiMetric;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Place;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Room;
+import com.capybara.CapybaraCampusCrawlBackend.Models.SavedPath;
 
 import org.hibernate.boot.model.naming.ImplicitNamingStrategy;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl;
@@ -70,12 +72,12 @@ public class CapybaraCampusCrawlBackendApplication {
 	
 	
 	@Bean
-	public CommandLineRunner demo(GraphEdgeRepository repository) {
+	public CommandLineRunner demo(SavedPathRepository repository) {
 		return (args) -> {
-			logger.info("Finding Metrics");
+			logger.info("Finding Saved Paths");
 			
-			for (GraphEdge edge : repository.findAll()) {
-				logger.info(edge.toString());
+			for (SavedPath path : repository.findAll()) {
+				logger.info(path.toString());
 			}
 			
 		};

@@ -4,7 +4,7 @@
 - [X] GraphEdge
 - [X] GraphNode
 - [X] PIMetrics
-- [ ] PathEdges
+- [X] PathEdges
 - [X] Place
 - [X] Room
 - [X] SavedPath
@@ -15,7 +15,7 @@
 - [X] GraphEdge
 - [X] GraphNode
 - [X] PIMetrics
-- [ ] PathEdges
+- [X] PathEdges
 - [X] Place
 - [X] Room
 - [X] SavedPath
