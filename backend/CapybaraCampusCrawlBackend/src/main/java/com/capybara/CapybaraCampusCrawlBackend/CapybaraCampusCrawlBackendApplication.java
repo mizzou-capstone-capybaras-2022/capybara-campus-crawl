@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PiMetricRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PlaceRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.RoomRepository;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Door;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
+import com.capybara.CapybaraCampusCrawlBackend.Models.PiMetric;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Place;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Room;
 
@@ -49,6 +51,7 @@ public class CapybaraCampusCrawlBackendApplication {
 	}
 	*/
 	
+	/*
 	@Bean
 	public CommandLineRunner demo(PlaceRepository repository) {
 		return (args) -> {
@@ -61,6 +64,21 @@ public class CapybaraCampusCrawlBackendApplication {
 		};
 		
 	}
+	*/
+	
+	
+	@Bean
+	public CommandLineRunner demo(PiMetricRepository repository) {
+		return (args) -> {
+			logger.info("Finding Metrics");
+			
+			for (PiMetric metric : repository.findAll()) {
+				logger.info(metric.toString());
+			}
+			
+		};
+		
+	}	
 	
 	@Bean
 	public PhysicalNamingStrategy physical() {
