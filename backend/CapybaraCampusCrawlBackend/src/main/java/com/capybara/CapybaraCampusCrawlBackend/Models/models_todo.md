@@ -7,7 +7,7 @@
 - [ ] PathEdges
 - [X] Place
 - [X] Room
-- [ ] SavedPath
+- [X] SavedPath
 
 # Data Repositories
 - [X] Building  
@@ -18,4 +18,4 @@
 - [ ] PathEdges
 - [X] Place
 - [X] Room
-- [ ] SavedPath
+- [X] SavedPath

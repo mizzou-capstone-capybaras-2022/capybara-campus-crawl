@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PiMetricRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PlaceRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.RoomRepository;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Door;
+import com.capybara.CapybaraCampusCrawlBackend.Models.GraphEdge;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.PiMetric;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Place;
@@ -68,12 +70,12 @@ public class CapybaraCampusCrawlBackendApplication {
 	
 	
 	@Bean
-	public CommandLineRunner demo(PiMetricRepository repository) {
+	public CommandLineRunner demo(GraphEdgeRepository repository) {
 		return (args) -> {
 			logger.info("Finding Metrics");
 			
-			for (PiMetric metric : repository.findAll()) {
-				logger.info(metric.toString());
+			for (GraphEdge edge : repository.findAll()) {
+				logger.info(edge.toString());
 			}
 			
 		};
