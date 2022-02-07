@@ -3,7 +3,7 @@
 - [X] Door
 - [X] GraphEdge
 - [X] GraphNode
-- [ ] PIMetrics
+- [X] PIMetrics
 - [ ] PathEdges
 - [X] Place
 - [X] Room
@@ -14,7 +14,7 @@
 - [X] Door
 - [X] GraphEdge
 - [X] GraphNode
-- [ ] PIMetrics
+- [X] PIMetrics
 - [ ] PathEdges
 - [X] Place
 - [X] Room
