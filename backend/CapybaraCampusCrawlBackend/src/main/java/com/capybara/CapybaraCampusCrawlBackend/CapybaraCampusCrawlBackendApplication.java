@@ -8,6 +8,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
@@ -33,6 +37,7 @@ import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.slf4j.Logger;
 
 @SpringBootApplication()
+@EnableWebMvc
 public class CapybaraCampusCrawlBackendApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(CapybaraCampusCrawlBackendApplication.class);
@@ -40,36 +45,6 @@ public class CapybaraCampusCrawlBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CapybaraCampusCrawlBackendApplication.class, args);
 	}
-	
-	/*
-	@Bean
-	public CommandLineRunner demo(RoomRepository repository) {
-		return (args) -> {
-			logger.info("Fetching Rooms");
-			
-			for (Room room : repository.findAll()) {
-				logger.info(room.toString());
-			}
-		};
-		
-	}
-	*/
-	
-	/*
-	@Bean
-	public CommandLineRunner demo(PlaceRepository repository) {
-		return (args) -> {
-			logger.info("Finding Places");
-			
-			for (Place place : repository.findAll()) {
-				logger.info(place.toString());
-			}
-			
-		};
-		
-	}
-	*/
-	
 	
 	@Bean
 	public CommandLineRunner demo(SavedPathRepository repository) {
