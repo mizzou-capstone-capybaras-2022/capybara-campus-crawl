@@ -11,7 +11,7 @@ CREATE TABLE public."Building"
     "BuildingID" SERIAL PRIMARY KEY NOT NULL,
     name character varying,
     "NodeID" INT DEFAULT NULL,
-    geojson json,
+    geojson text,
     FOREIGN KEY("NodeID") 
 			REFERENCES public."GraphNode"("NodeID")
 );
@@ -25,7 +25,7 @@ CREATE TABLE public."GraphEdge"
     ToFromAction character varying,
     bidirectional boolean DEFAULT false,
     distance real,
-    pathShape json,
+    pathShape text,
     CONSTRAINT fk_starting_nodeid
 		FOREIGN KEY("Node1ID") 
 			REFERENCES public."GraphNode"("NodeID"),

@@ -1,5 +1,6 @@
 package com.capybara.CapybaraCampusCrawl.databaseseeder.CapybaraDatabaseSeeder;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,11 +50,68 @@ public class CapybaraDatabaseSeederApplication {
 	    return new ImplicitNamingStrategyLegacyJpaImpl();
 	}
 	
+	public static List<Map<String, String>> readFileHashMap(CSVReaderHeaderAware reader){
+		
+		List<Map<String, String>> hashMapList = new ArrayList<Map<String, String>>();
+		
+		Map<String, String> currentHashMap = null;
+		
+		try {
+			currentHashMap = reader.readMap();
+		
+			while (currentHashMap != null)
+			{
+				hashMapList.add(currentHashMap);
+				currentHashMap = reader.readMap();
+			}
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return hashMapList;
+	}
+
 	
 	@Bean
-	public CommandLineRunner runner(GraphNodeRepository repository) {
-		
+	public CommandLineRunner runner(GraphNodeRepository nodeRepository, BuildingRepository buildingRepository) {
+		log.debug("preparing to read all files");
 		return (args) -> {
+			String buildingsWithoutDoorsFileName = "src/main/resources/BuildingsWithoutDoors.csv";
+			BufferedReader streamReader = new BufferedReader(new FileReader(buildingsWithoutDoorsFileName));
+			CSVReaderHeaderAware reader;
+			
+			List<Map<String, String>> buildingsToSeed = new ArrayList<Map<String, String>>();
+			
+			try {
+				reader = new CSVReaderHeaderAware(streamReader);
+				log.info("preparing to read all files");
+				buildingsToSeed = readFileHashMap(reader);
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			for (Map<String, String> buildingRow : buildingsToSeed) {
+				log.info(buildingRow.toString());
+				
+				Double nodeLatitude = Double.parseDouble(buildingRow.get("Latitude"));
+				Double nodeLongitude = Double.parseDouble(buildingRow.get("Longitude"));
+				String nodeDescription = buildingRow.get("Description");
+				String buildingName = buildingRow.get("Building Name");
+				
+				GraphNode graphNode = new GraphNode(nodeLatitude, nodeLongitude, nodeDescription);
+				graphNode = nodeRepository.save(graphNode);
+				
+				if (graphNode.getNodeID() != null) {
+					Building building = new Building(buildingName, "{}", graphNode);
+					buildingRepository.save(building);
+				}
+			}
+			
 			
 		};
 				

@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
             - capybaradbdata:/var/lib/postgresql/data
-            - ./capybara-database/sql-scripts/full-schema.sql:/docker-entrypoint-initdb.d/create_tables.sql
+            - ./capybara-database/sql-scripts/container-backup.sql:/docker-entrypoint-initdb.d/create_tables.sql
     environment:
       POSTGRES_USER: capy
       POSTGRES_PASSWORD: capy

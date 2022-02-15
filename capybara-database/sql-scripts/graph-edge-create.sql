@@ -7,7 +7,7 @@ CREATE TABLE public."GraphEdge"
     ToFromAction character varying,
     bidirectional boolean DEFAULT false,
     distance real,
-    pathShape json,
+    pathShape text,
     CONSTRAINT fk_starting_nodeid
 		FOREIGN KEY("Node1ID") 
 			REFERENCES public."GraphNode"("NodeID"),
