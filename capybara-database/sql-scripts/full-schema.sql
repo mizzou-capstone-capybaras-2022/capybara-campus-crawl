@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS public."PathEdges"
   "EdgeID" integer NOT NULL,
   CONSTRAINT fk_savedPathID FOREIGN KEY("SavedPathID") REFERENCES public."SavedPath"("SavedPathID"),
   CONSTRAINT fk_edgeID FOREIGN KEY("EdgeID") REFERENCES public."GraphEdge"("EdgeID")
-)
+);
 
 CREATE TABLE public."Place"
 (
