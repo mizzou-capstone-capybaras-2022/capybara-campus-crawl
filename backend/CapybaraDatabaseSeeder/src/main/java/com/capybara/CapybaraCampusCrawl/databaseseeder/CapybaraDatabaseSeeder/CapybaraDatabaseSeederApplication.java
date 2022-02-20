@@ -34,6 +34,8 @@ import com.opencsv.exceptions.CsvValidationException;
 @EnableJpaRepositories("com.capybara.CapybaraCampusCrawl.databaseseeder.Models")
 public class CapybaraDatabaseSeederApplication {
 	
+	private static final String SHARED_FILE_PATH = "src/main/resources";
+	
 	private static final Logger log = LoggerFactory.getLogger(CapybaraDatabaseSeederApplication.class);
 	
 	public static void main(String[] args) {
@@ -51,16 +53,25 @@ public class CapybaraDatabaseSeederApplication {
 	}
 
 	@Bean
-	public CommandLineRunner runner(GraphNodeRepository nodeDao, BuildingRepository buildingDao, DoorRepository doorDao) {
+	public CommandLineRunner runner(GraphNodeRepository nodeDao, BuildingRepository buildingDao, DoorRepository doorDao, GraphEdgeRepository graphEdgeDao) {
 		log.debug("preparing to read all files");
 		return (args) -> {
-			String buildingsWithoutDoorsFileName = "src/main/resources/building-points.csv";
+			String buildingsWithoutDoorsFileName = SHARED_FILE_PATH + "/building-points.csv";
 			
 			BuildingsOnlyPointsSeeder buildingSeeder = new BuildingsOnlyPointsSeeder(buildingsWithoutDoorsFileName, nodeDao, buildingDao, log);
 			
 			log.info("Seeding buildings without any doors!: ");
-			buildingSeeder.SeedBuildings();
+			buildingSeeder.Seed();
 			
+			String buildingDoorsPath = SHARED_FILE_PATH + "/building-doors.csv";
+			String buildingDoorDistancesPath = SHARED_FILE_PATH + "/building-inside-distances.csv";
+			String shortenedBuildingNameToFullBuildingNamePath = SHARED_FILE_PATH + "/shortened-building-name-to-full-building-name.csv";
+			
+			BuildingsWithDoorsSeeder buildingWithDoorsSeeder = new BuildingsWithDoorsSeeder(buildingDoorsPath, buildingDoorDistancesPath,shortenedBuildingNameToFullBuildingNamePath,nodeDao,buildingDao,doorDao,graphEdgeDao,log);
+
+			log.info("Seeding buildings with doors!: ");
+			buildingWithDoorsSeeder.Seed();
+				
 		};
 				
 	}

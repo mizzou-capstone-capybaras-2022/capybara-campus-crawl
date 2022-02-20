@@ -30,7 +30,7 @@ public class BuildingsOnlyPointsSeeder {
 		this.log = logger;
 	}
 	
-	public void SeedBuildings() {
+	public void Seed() {
 		CSVReaderHeaderAware reader;
 		
 		List<Map<String, String>> buildingsToSeed = new ArrayList<Map<String, String>>();

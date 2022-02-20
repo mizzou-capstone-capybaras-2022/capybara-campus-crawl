@@ -25,23 +25,41 @@ public class Door {
 	@OneToOne
 	@JoinColumn(name="\"BuildingID\"", nullable=false)
 	private Building building;
-	
+
 	Door(){
 		super();
 	}
 	
-	Door(GraphNode node, Building building){
+	public Door(GraphNode node, Building building){
 		this.node = node;
 		this.building = building;
 	}
+	 
+	public GraphNode getNode() {
+		return node;
+	}
+
+	public void setNode(GraphNode node) {
+		this.node = node;
+	}
+
+	public Building getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
+
+	public Long getDoorId() {
+		return doorId;
+	}
 	
 	@Override
-	 public String toString() {
-	   return String.format(
-	       "Door[id=%d, NodeId='%d', BuildingId='%d']",
-	       doorId, node.getNodeID(), building.getBuildingId());
-	 }
-	 
-	
+	public String toString() {
+	  return String.format(
+	      "Door[id=%d, NodeId='%d', BuildingId='%d']",
+	      doorId, node.getNodeID(), building.getBuildingId());
+	}
 	
 }
