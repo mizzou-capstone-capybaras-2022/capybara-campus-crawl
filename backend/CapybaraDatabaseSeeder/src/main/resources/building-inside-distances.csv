@@ -141,3 +141,17 @@ RJIB,RJID,132.5
 RJIC,RJID,62.5
 GeoScienceA,GeoScienceB,274
 SwitzlerA,SwitzlerB,101
+HillA,HillB,138
+TownsendA,TownsendB,115
+TownsendA,TownsendC,207.5
+TownsendA,TownsendD,262.5
+TownsendA,TownsendE,250
+TownsendB,TownsendC,200
+TownsendB,TownsendD,273
+TownsendB,TownsendE,262.5
+TownsendC,TownsendD,200
+TownsendC,TownsendE,200
+TownsendD,TownsendE,115
+AcademicA,AcademicB,261
+AcademicA,AcademicC,124
+AcademicB,AcademicC,228
