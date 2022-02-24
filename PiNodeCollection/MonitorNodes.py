@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import logging
 import os
+import signal
 import subprocess
 
 """
@@ -28,4 +29,13 @@ if __name__ == "__main__":
         formatter = l.Formatter(logging.BASIC_FORMAT)
         handler.setFormatter(formatter)
         logger.addHandler(handler)
+
+    logger.info("Starting airodump-ng...")
+    redirectOutput = open("/dev/null",'w')
+    airdumpProcess = subprocess.Popen("exec airodump-ng -w output --output-format csv wlan1",stdout=redirectOutput,shell=True)
+
+
+
+    airdumpProcess.kill()
+    redirectOutput.close()
     
