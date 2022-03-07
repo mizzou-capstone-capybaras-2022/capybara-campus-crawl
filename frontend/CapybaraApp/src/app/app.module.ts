@@ -7,6 +7,7 @@ import { MapComponent } from './map/map.component';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     BrowserModule,
     MatTabsModule,
     AppRoutingModule,
-    LeafletModule
+    LeafletModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
