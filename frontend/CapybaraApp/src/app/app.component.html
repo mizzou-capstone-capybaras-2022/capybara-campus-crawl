@@ -1,56 +1,29 @@
 
     <div class="body">
-      <link href="./app.component.scss" rel="stylesheet" />
-
       <div class="home-container">
-        <header data-role="Accordion" class="home-header">
-          <span class="home-text">
+          <div class="home-text">
             <span class="home-text1">
               Welcome to the Capybara College Crawl
             </span>
-            <br />
+            <br>
             <span class="home-text3">
               Explore Mizzou and get the best routes below!
             </span>
-          </span>
+          </div>
           <div class="home-separator"></div>
 
           <div class="home-container1">
-            <mat-tab-group>
+            <mat-tab-group mat-align-tabs="center">
               <mat-tab label="Home"> Home </mat-tab>
-              <mat-tab label="InputLoc"> Input Locations </mat-tab>
-              <mat-tab label="Constraint"> Add Constraints </mat-tab>
-              <mat-tab label="SearchB"> Search Buildings </mat-tab>
-              <mat-tab label="ViewPlace"> View Places </mat-tab>
-              </mat-tab-group>
-            <!--
-            <div class="home-container2">
-              <div class="home-container3">
-                <div class="home-container4">
-                  <a href="/" class="home-button button">View Map</a>
-                  <a href="/input_locations.html" class="home-button button">
-                    Input Locations
-                  </a>
-                  <a href="/constraints.html" class="home-button button">
-                    Add Constraints
-                  </a>
-                  <a href="/search_buildings.html" class="home-button button">
-                    Search Buildings
-                  </a>
-                  <a href="/view_places.html" class="home-button button">
-                    View Places
-                  </a>
-                </div>
-              </div>
-            </div>
-            -->
+              <mat-tab label="Input Locations"> Input Locations </mat-tab>
+              <mat-tab label="Add Constraints"> Add Constraints </mat-tab>
+              <mat-tab label="Search Buildings"> Search Buildings </mat-tab>
+              <mat-tab label="View Places"> View Places </mat-tab>
+            </mat-tab-group>
           </div>
-          
 
-          <nav class="home-nav"></nav>
-        </header>
-        <div class="home-banner">
-          <span><span><app-map></app-map>></span></span>
+        <div class="map-container">
+          <app-map></app-map>
         </div>
       </div>
     </div>
