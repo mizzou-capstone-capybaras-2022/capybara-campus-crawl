@@ -1,54 +1,47 @@
 
-        <header class="u-clearfix u-header u-header" id="sec-9a72"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h1 class="u-align-center u-text u-text-default u-text-1">Capybara Campus Crawl</h1>
-    </div></header>
-  <section class="u-clearfix u-section-1" id="sec-0b45">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-        <div class="u-layout">
-          <div class="u-layout-row">
-            <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-              <div class="u-container-layout u-container-layout-1">
-                <h1 class="u-text u-text-default u-text-1"> What We Are</h1>
-                <p class="u-text u-text-default u-text-2">Capybara Capus Crawl allows you to navigate the University of Missouri easily and efficiently. With our system you can prioritize different options like going inside on a snowy day or avoiding busy locations​. Fill out the form to the right and submit to get a map generated to find out your path to where your going!</p>
-              </div>
-            </div>
-            <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-              <div class="u-container-layout u-container-layout-2">
-                <p class="u-text u-text-default u-text-3">Form Location Here</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="u-clearfix u-section-2" id="sec-b4dc">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <app-map></app-map>
-    </div>
-  </section>
-  <section class="u-clearfix u-section-3" id="sec-bf3d">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-spacing-vertical u-layout-wrap u-layout-wrap-1">
-        <div class="u-layout">
-          <div class="u-layout-row">
-            <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-40 u-layout-cell-1">
-              <div class="u-container-layout u-valign-middle u-container-layout-1">
-                <h2 class="u-text u-text-default u-text-1">About Us</h2>
-                <p class="u-text u-text-2">We are a team of six students, Robert Graman, Alex Centorbi, Olivia Laval, Michael N, Daniel Marin and Isaac who are working together to collectively make the live the Mizzou students easier. We believe that with our system Mizzou student can navigate the campus more efficiently to get to class better on time and complete other tasks in the most time efficient manner possible.</p>
-              </div>
-            </div>
-            <div class="u-container-style u-layout-cell u-right-cell u-size-20 u-layout-cell-2" src="">
-              <div class="u-container-layout u-container-layout-2">
-                <h1 class="u-text u-text-default u-text-3">Insert Team Picture Here</h1>
+    <div class="body">
+      <link href="./app.component.scss" rel="stylesheet" />
+
+      <div class="home-container">
+        <header data-role="Accordion" class="home-header">
+          <span class="home-text">
+            <span class="home-text1">
+              Welcome to the Capybara College Crawl
+            </span>
+            <br />
+            <span class="home-text3">
+              Explore Mizzou and get the best routes below!
+            </span>
+          </span>
+          <div class="home-separator"></div>
+          <div class="home-container1">
+            <div class="home-container2">
+              <div class="home-container3">
+                <div class="home-container4">
+                  <a href="/" class="home-button button">View Map</a>
+                  <a href="/input_locations.html" class="home-button button">
+                    Input Locations
+                  </a>
+                  <a href="/constraints.html" class="home-button button">
+                    Add Constraints
+                  </a>
+                  <a href="/search_buildings.html" class="home-button button">
+                    Search Buildings
+                  </a>
+                  <a href="/view_places.html" class="home-button button">
+                    View Places
+                  </a>
+                </div>
               </div>
             </div>
           </div>
+          <nav class="home-nav"></nav>
+        </header>
+        <div class="home-banner">
+          <span><span><app-map></app-map>></span></span>
         </div>
       </div>
     </div>
-  </section>
 
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
