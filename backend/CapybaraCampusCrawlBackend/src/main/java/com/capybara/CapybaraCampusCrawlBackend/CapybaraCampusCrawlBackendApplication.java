@@ -47,19 +47,6 @@ public class CapybaraCampusCrawlBackendApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(SavedPathRepository repository) {
-		return (args) -> {
-			logger.info("Finding Saved Paths");
-			
-			for (SavedPath path : repository.findAll()) {
-				logger.info(path.toString());
-			}
-			
-		};
-		
-	}	
-	
-	@Bean
 	public PhysicalNamingStrategy physical() {
 	    return new PhysicalNamingStrategyStandardImpl();
 	}
