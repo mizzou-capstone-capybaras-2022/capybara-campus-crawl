@@ -17,9 +17,10 @@
   font-size: 25px;
 }
 .home-separator {
-  width: 100%;
+  width: 75%;
+  margin: auto;
   height: 1px;
-  border: 1px solid black;
+  border-top: 1px solid black;
 }
 
 .home-container1 {
@@ -32,6 +33,10 @@
   height: 60vh;
   width: 60%;
   margin: auto;
+}
+.weatherWidget{
+  width: 100%;
+  height: 100px;
 }
 /*
 .body {
