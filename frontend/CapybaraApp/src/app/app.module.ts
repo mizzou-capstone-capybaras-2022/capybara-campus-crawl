@@ -9,7 +9,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {ApiModule} from 'crawl-api';
+import {ApiModule} from '../services/crawl-api';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {ApiModule} from 'crawl-api';
     ApiModule,
     AppRoutingModule,
     LeafletModule,
+    HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [],

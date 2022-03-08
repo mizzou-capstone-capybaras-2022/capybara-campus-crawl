@@ -108,37 +108,6 @@
           }
         }
       }
-    },
-    "crawl-api": {
-      "projectType": "library",
-      "root": "projects/crawl-api",
-      "sourceRoot": "projects/crawl-api/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/crawl-api/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/crawl-api/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/crawl-api/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/crawl-api/src/test.ts",
-            "tsConfig": "projects/crawl-api/tsconfig.spec.json",
-            "karmaConfig": "projects/crawl-api/karma.conf.js"
-          }
-        }
-      }
     }
   },
   "defaultProject": "CapybaraApp"

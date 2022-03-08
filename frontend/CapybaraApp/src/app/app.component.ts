@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { BuildingControllerService } from 'src/services/crawl-api';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +10,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'CapybaraApp';
 
-  ngOnInit(){
+  constructor(private buildingDao: BuildingControllerService){
 
+  }
+
+  ngOnInit(){
+    this.buildingDao.index3().subscribe((value) => {
+      console.log(JSON.stringify(value));
+    })
   }
 }
