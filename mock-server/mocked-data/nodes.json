@@ -1,0 +1,1118 @@
+[
+  {
+    "latitude": 38.9437187,
+    "longitude": -92.32955217,
+    "description": "The Mizzou Alumni Center",
+    "nodeID": 1
+  },
+  {
+    "latitude": 38.94271735,
+    "longitude": -92.32471347,
+    "description": "Home of College of Agriculture",
+    "nodeID": 2
+  },
+  {
+    "latitude": 38.94038395,
+    "longitude": -92.32093289,
+    "description": "Dining and Fine Arts",
+    "nodeID": 3
+  },
+  {
+    "latitude": 38.94117984,
+    "longitude": -92.32417703,
+    "description": "GOBCC works to make the University of Missouri and Columbia community a more inclusive and welcoming environment for diverse populations through education, outreach, and collaboration.",
+    "nodeID": 4
+  },
+  {
+    "latitude": 38.93871078,
+    "longitude": -92.33204395,
+    "description": "Residential Life",
+    "nodeID": 5
+  },
+  {
+    "latitude": 38.94878467,
+    "longitude": -92.33031929,
+    "description": "State Historical Society",
+    "nodeID": 6
+  },
+  {
+    "latitude": 38.93894444,
+    "longitude": -92.33323216,
+    "description": "Residential Life",
+    "nodeID": 7
+  },
+  {
+    "latitude": 38.94003555,
+    "longitude": -92.31746614,
+    "description": "Veterinary Medicine & Surgery",
+    "nodeID": 8
+  },
+  {
+    "latitude": 38.94101503,
+    "longitude": -92.32136071,
+    "description": "Residential Life",
+    "nodeID": 9
+  },
+  {
+    "latitude": 38.94514142,
+    "longitude": -92.33156919,
+    "description": "Parking & Transportation Svcs",
+    "nodeID": 10
+  },
+  {
+    "latitude": 38.94265059,
+    "longitude": -92.31871605,
+    "description": "Office of Animal Resources",
+    "nodeID": 11
+  },
+  {
+    "latitude": 38.93985092,
+    "longitude": -92.3298955,
+    "description": "Military Science",
+    "nodeID": 12
+  },
+  {
+    "latitude": 38.94010544,
+    "longitude": -92.32614577,
+    "description": "Residential Life",
+    "nodeID": 13
+  },
+  {
+    "latitude": 38.9399,
+    "longitude": -92.3229,
+    "description": "Residential Life",
+    "nodeID": 14
+  },
+  {
+    "latitude": 38.93962977,
+    "longitude": -92.3268646,
+    "description": "Residential Life",
+    "nodeID": 15
+  },
+  {
+    "latitude": 38.94167427,
+    "longitude": -92.32031465,
+    "description": "Food Science",
+    "nodeID": 16
+  },
+  {
+    "latitude": 38.9399,
+    "longitude": -92.3229,
+    "description": "Residential Life",
+    "nodeID": 17
+  },
+  {
+    "latitude": 38.94011587,
+    "longitude": -92.32722133,
+    "description": "Residential Life",
+    "nodeID": 18
+  },
+  {
+    "latitude": 38.94767388,
+    "longitude": -92.3284927,
+    "description": "Journalism",
+    "nodeID": 19
+  },
+  {
+    "latitude": 38.93858664,
+    "longitude": -92.32290566,
+    "description": "Residential Life",
+    "nodeID": 20
+  },
+  {
+    "latitude": 38.94131544,
+    "longitude": -92.32310414,
+    "description": "Residential Life",
+    "nodeID": 21
+  },
+  {
+    "latitude": 38.94066872,
+    "longitude": -92.32037902,
+    "description": "Residential Life",
+    "nodeID": 22
+  },
+  {
+    "latitude": 38.94042672,
+    "longitude": -92.3265481,
+    "description": "Residential Life",
+    "nodeID": 23
+  },
+  {
+    "latitude": 38.93983214,
+    "longitude": -92.32866168,
+    "description": "Health Sciences Library",
+    "nodeID": 24
+  },
+  {
+    "latitude": 38.94920917,
+    "longitude": -92.33009934,
+    "description": "Missouri Press",
+    "nodeID": 25
+  },
+  {
+    "latitude": 38.9343013,
+    "longitude": -92.3306036,
+    "description": "Intercollegiate Athletics",
+    "nodeID": 26
+  },
+  {
+    "latitude": 38.94758627,
+    "longitude": -92.32615113,
+    "description": "Parking & Transportation Svcs",
+    "nodeID": 27
+  },
+  {
+    "latitude": 38.9386993,
+    "longitude": -92.32809305,
+    "description": "Hospital",
+    "nodeID": 28
+  },
+  {
+    "latitude": 38.9417452,
+    "longitude": -92.32253551,
+    "description": "Residential Life",
+    "nodeID": 29
+  },
+  {
+    "latitude": 38.94521756,
+    "longitude": -92.32870594,
+    "description": "main administration building for the University of Missouri.",
+    "nodeID": 30
+  },
+  {
+    "latitude": 38.94189957,
+    "longitude": -92.32454181,
+    "description": "Dining and Res Life",
+    "nodeID": 31
+  },
+  {
+    "latitude": 38.94873148,
+    "longitude": -92.32917398,
+    "description": "Journalism",
+    "nodeID": 32
+  },
+  {
+    "latitude": 38.94606138,
+    "longitude": -92.32293248,
+    "description": "Biological Science",
+    "nodeID": 33
+  },
+  {
+    "latitude": 38.94331399,
+    "longitude": -92.33329654,
+    "description": "Health Science",
+    "nodeID": 34
+  },
+  {
+    "latitude": 38.9481,
+    "longitude": -92.3317,
+    "description": "",
+    "nodeID": 35
+  },
+  {
+    "latitude": 38.9453,
+    "longitude": -92.3273,
+    "description": "",
+    "nodeID": 36
+  },
+  {
+    "latitude": 38.9453,
+    "longitude": -92.3327,
+    "description": "Res Life and dining",
+    "nodeID": 37
+  },
+  {
+    "latitude": 38.9478,
+    "longitude": -92.3281,
+    "description": "lots of Teacher offices",
+    "nodeID": 38
+  },
+  {
+    "latitude": 38.9478,
+    "longitude": -92.3315,
+    "description": "res life",
+    "nodeID": 39
+  },
+  {
+    "latitude": 38.9435,
+    "longitude": -92.3252,
+    "description": "grad student offices / athletic reaserch",
+    "nodeID": 40
+  },
+  {
+    "latitude": 38.9484,
+    "longitude": -92.3315,
+    "description": "res life",
+    "nodeID": 41
+  },
+  {
+    "latitude": 38.9325,
+    "longitude": -92.3338,
+    "description": "Sports stadium",
+    "nodeID": 42
+  },
+  {
+    "latitude": 38.936,
+    "longitude": -92.3332,
+    "description": "Sports stadium",
+    "nodeID": 43
+  },
+  {
+    "latitude": 38.9467,
+    "longitude": -92.3314,
+    "description": "Engineering",
+    "nodeID": 44
+  },
+  {
+    "latitude": 38.9478,
+    "longitude": -92.3282,
+    "description": "",
+    "nodeID": 45
+  },
+  {
+    "latitude": 38.93894444,
+    "longitude": -92.33323216,
+    "description": "Residential Life",
+    "nodeID": 46
+  },
+  {
+    "latitude": 38.937,
+    "longitude": -92.3252,
+    "description": "Parking",
+    "nodeID": 47
+  },
+  {
+    "latitude": 38.9395,
+    "longitude": -92.326,
+    "description": "hitt street market. Student grocerry",
+    "nodeID": 48
+  },
+  {
+    "latitude": 38.9468,
+    "longitude": -92.3267,
+    "description": "teacher offices",
+    "nodeID": 49
+  },
+  {
+    "latitude": 38.9492,
+    "longitude": -92.3295,
+    "description": "",
+    "nodeID": 50
+  },
+  {
+    "latitude": 38.9399,
+    "longitude": -92.3229,
+    "description": "Residential Life",
+    "nodeID": 51
+  },
+  {
+    "latitude": 38.9399,
+    "longitude": -92.3229,
+    "description": "Residential Life",
+    "nodeID": 52
+  },
+  {
+    "latitude": 38.9417,
+    "longitude": -92.323,
+    "description": "dining hall",
+    "nodeID": 53
+  },
+  {
+    "latitude": 38.94,
+    "longitude": -92.3213,
+    "description": "residential Life",
+    "nodeID": 54
+  },
+  {
+    "latitude": 38.9454,
+    "longitude": -92.3225,
+    "description": "",
+    "nodeID": 55
+  },
+  {
+    "latitude": 38.93894444,
+    "longitude": -92.33323216,
+    "description": "Residential Life",
+    "nodeID": 56
+  },
+  {
+    "latitude": 38.9408,
+    "longitude": -92.3292,
+    "description": "rec sports field ",
+    "nodeID": 57
+  },
+  {
+    "latitude": 38.9459,
+    "longitude": -92.3224,
+    "description": "",
+    "nodeID": 58
+  },
+  {
+    "latitude": 38.9414,
+    "longitude": -92.3266,
+    "description": "The rec",
+    "nodeID": 59
+  },
+  {
+    "latitude": 38.9453,
+    "longitude": -92.3267,
+    "description": "",
+    "nodeID": 60
+  },
+  {
+    "latitude": 38.9385,
+    "longitude": -92.3302,
+    "description": "Parking structure",
+    "nodeID": 61
+  },
+  {
+    "latitude": 38.9492,
+    "longitude": -92.3279,
+    "description": "",
+    "nodeID": 62
+  },
+  {
+    "latitude": 38.9437,
+    "longitude": -92.3242,
+    "description": "",
+    "nodeID": 63
+  },
+  {
+    "latitude": 38.9438,
+    "longitude": -92.3308,
+    "description": "Parking structure",
+    "nodeID": 64
+  },
+  {
+    "latitude": 38.9471,
+    "longitude": -92.3239,
+    "description": "Parking structure",
+    "nodeID": 65
+  },
+  {
+    "latitude": 38.9413,
+    "longitude": -92.3176,
+    "description": "University Vet",
+    "nodeID": 66
+  },
+  {
+    "latitude": 38.9415,
+    "longitude": -92.325,
+    "description": "Residential Life",
+    "nodeID": 67
+  },
+  {
+    "latitude": 38.9412,
+    "longitude": -92.32,
+    "description": "",
+    "nodeID": 68
+  },
+  {
+    "latitude": 38.9467,
+    "longitude": -92.3281,
+    "description": "",
+    "nodeID": 69
+  },
+  {
+    "latitude": 38.9467,
+    "longitude": -92.3305,
+    "description": "",
+    "nodeID": 70
+  },
+  {
+    "latitude": 38.94575055,
+    "longitude": -92.33129561,
+    "description": "",
+    "nodeID": 71
+  },
+  {
+    "latitude": -92.32437551,
+    "longitude": 38.94598211,
+    "description": "Door A for Walters Hall",
+    "nodeID": 72
+  },
+  {
+    "latitude": -92.32395306,
+    "longitude": 38.946028,
+    "description": "Door B for Walters Hall",
+    "nodeID": 73
+  },
+  {
+    "latitude": -92.3239544,
+    "longitude": 38.94587363,
+    "description": "Door C for Walters Hall",
+    "nodeID": 74
+  },
+  {
+    "latitude": 38.94726447,
+    "longitude": -92.32915847,
+    "description": "Door A for Geological Science",
+    "nodeID": 75
+  },
+  {
+    "latitude": 38.94731098,
+    "longitude": -92.32957951,
+    "description": "Door B for Geological Science",
+    "nodeID": 76
+  },
+  {
+    "latitude": 38.94604042,
+    "longitude": -92.33167786,
+    "description": "Door A for Academic Support Center",
+    "nodeID": 77
+  },
+  {
+    "latitude": 38.94614629,
+    "longitude": -92.33114678,
+    "description": "Door B for Academic Support Center",
+    "nodeID": 78
+  },
+  {
+    "latitude": 38.94626467,
+    "longitude": -92.3316383,
+    "description": "Door C for Academic Support Center",
+    "nodeID": 79
+  },
+  {
+    "latitude": 38.943259,
+    "longitude": -92.325279,
+    "description": "Door A for Natural Resources (Ag Science)",
+    "nodeID": 80
+  },
+  {
+    "latitude": 38.942949,
+    "longitude": -92.325436,
+    "description": "Door B for Natural Resources (Ag Science)",
+    "nodeID": 81
+  },
+  {
+    "latitude": 38.942548,
+    "longitude": -92.325451,
+    "description": "Door C for Natural Resources (Ag Science)",
+    "nodeID": 82
+  },
+  {
+    "latitude": 38.942418,
+    "longitude": -92.324874,
+    "description": "Door D for Natural Resources (Ag Science)",
+    "nodeID": 83
+  },
+  {
+    "latitude": 38.942591,
+    "longitude": -92.324058,
+    "description": "Door E for Natural Resources (Ag Science)",
+    "nodeID": 84
+  },
+  {
+    "latitude": 38.943136,
+    "longitude": -92.324221,
+    "description": "Door F for Natural Resources (Ag Science)",
+    "nodeID": 85
+  },
+  {
+    "latitude": 38.944687,
+    "longitude": -92.323696,
+    "description": "Door A for Curtis Hall",
+    "nodeID": 86
+  },
+  {
+    "latitude": 38.944808,
+    "longitude": -92.323466,
+    "description": "Door B for Curtis Hall",
+    "nodeID": 87
+  },
+  {
+    "latitude": 38.944739,
+    "longitude": -92.323231,
+    "description": "Door C for Curtis Hall",
+    "nodeID": 88
+  },
+  {
+    "latitude": 38.946331,
+    "longitude": -92.33086,
+    "description": "Door A for Lafferre Hall",
+    "nodeID": 89
+  },
+  {
+    "latitude": 38.9464736,
+    "longitude": -92.3301081,
+    "description": "Door B for Lafferre Hall",
+    "nodeID": 90
+  },
+  {
+    "latitude": 38.9459633,
+    "longitude": -92.3293808,
+    "description": "Door C for Lafferre Hall",
+    "nodeID": 91
+  },
+  {
+    "latitude": 38.9458082,
+    "longitude": -92.3292866,
+    "description": "Door D for Lafferre Hall",
+    "nodeID": 92
+  },
+  {
+    "latitude": 38.9457067,
+    "longitude": -92.330097,
+    "description": "Door E for Lafferre Hall",
+    "nodeID": 93
+  },
+  {
+    "latitude": 38.9471941,
+    "longitude": -92.3305285,
+    "description": "Door A for Parker Hall",
+    "nodeID": 94
+  },
+  {
+    "latitude": 38.9473539,
+    "longitude": -92.3303967,
+    "description": "Door B for Parker Hall",
+    "nodeID": 95
+  },
+  {
+    "latitude": 38.94470061,
+    "longitude": -92.32661798,
+    "description": "Door A for Ellis Library",
+    "nodeID": 96
+  },
+  {
+    "latitude": 38.94422206,
+    "longitude": -92.32689518,
+    "description": "Door B for Ellis Library",
+    "nodeID": 97
+  },
+  {
+    "latitude": 38.944916,
+    "longitude": -92.323179,
+    "description": "Door A for Herman Schlundt Hall",
+    "nodeID": 98
+  },
+  {
+    "latitude": 38.944979,
+    "longitude": -92.322961,
+    "description": "Door B for Herman Schlundt Hall",
+    "nodeID": 99
+  },
+  {
+    "latitude": 38.944781,
+    "longitude": -92.322899,
+    "description": "Door C for Herman Schlundt Hall",
+    "nodeID": 100
+  },
+  {
+    "latitude": 38.944559,
+    "longitude": -92.324973,
+    "description": "Door A for Gwynn / Stanley Hall",
+    "nodeID": 101
+  },
+  {
+    "latitude": 38.944766,
+    "longitude": -92.324814,
+    "description": "Door B for Gwynn / Stanley Hall",
+    "nodeID": 102
+  },
+  {
+    "latitude": 38.944762,
+    "longitude": -92.324467,
+    "description": "Door C for Gwynn / Stanley Hall",
+    "nodeID": 103
+  },
+  {
+    "latitude": 38.94469,
+    "longitude": -92.323824,
+    "description": "Door D for Gwynn / Stanley Hall",
+    "nodeID": 104
+  },
+  {
+    "latitude": 38.94236171,
+    "longitude": -92.32665998,
+    "description": "Door A for Student Center",
+    "nodeID": 105
+  },
+  {
+    "latitude": 38.94258711,
+    "longitude": -92.32747269,
+    "description": "Door B for Student Center",
+    "nodeID": 106
+  },
+  {
+    "latitude": 38.94287784,
+    "longitude": -92.32711778,
+    "description": "Door C for Student Center",
+    "nodeID": 107
+  },
+  {
+    "latitude": 38.94291868,
+    "longitude": -92.32649618,
+    "description": "Door D for Student Center",
+    "nodeID": 108
+  },
+  {
+    "latitude": 38.94252678,
+    "longitude": -92.32967813,
+    "description": "Door A for Cornell Hall",
+    "nodeID": 109
+  },
+  {
+    "latitude": 38.94309004,
+    "longitude": -92.32937235,
+    "description": "Door B for Cornell Hall",
+    "nodeID": 110
+  },
+  {
+    "latitude": 38.9432465,
+    "longitude": -92.32967276,
+    "description": "Door C for Cornell Hall",
+    "nodeID": 111
+  },
+  {
+    "latitude": -92.32978016,
+    "longitude": 38.94497245,
+    "description": "Door A for Townsend Hall",
+    "nodeID": 112
+  },
+  {
+    "latitude": -92.32960314,
+    "longitude": 38.94475549,
+    "description": "Door B for Townsend Hall",
+    "nodeID": 113
+  },
+  {
+    "latitude": -92.33008325,
+    "longitude": 38.94465536,
+    "description": "Door C for Townsend Hall",
+    "nodeID": 114
+  },
+  {
+    "latitude": -92.33057141,
+    "longitude": 38.94480139,
+    "description": "Door D for Townsend Hall",
+    "nodeID": 115
+  },
+  {
+    "latitude": -92.33034343,
+    "longitude": 38.94499957,
+    "description": "Door E for Townsend Hall",
+    "nodeID": 116
+  },
+  {
+    "latitude": 38.94337216,
+    "longitude": -92.32725642,
+    "description": "Door A for Arts & Sciences",
+    "nodeID": 117
+  },
+  {
+    "latitude": 38.94337216,
+    "longitude": -92.32741624,
+    "description": "Door B for Arts & Sciences",
+    "nodeID": 118
+  },
+  {
+    "latitude": 38.94377127,
+    "longitude": -92.32726701,
+    "description": "Door C for Arts & Sciences",
+    "nodeID": 119
+  },
+  {
+    "latitude": 38.94377576,
+    "longitude": -92.32740661,
+    "description": "Door D for Arts & Sciences",
+    "nodeID": 120
+  },
+  {
+    "latitude": -92.329699,
+    "longitude": 38.94549,
+    "description": "Door A for Hill Hall",
+    "nodeID": 121
+  },
+  {
+    "latitude": -92.329721,
+    "longitude": 38.945107,
+    "description": "Door B for Hill Hall",
+    "nodeID": 122
+  },
+  {
+    "latitude": 38.94374731,
+    "longitude": 92.32824324,
+    "description": "Door A for Hulston Hall",
+    "nodeID": 123
+  },
+  {
+    "latitude": 38.94375854,
+    "longitude": -92.32841654,
+    "description": "Door B for Hulston Hall",
+    "nodeID": 124
+  },
+  {
+    "latitude": 38.94392103,
+    "longitude": 92.32781,
+    "description": "Door C for Hulston Hall",
+    "nodeID": 125
+  },
+  {
+    "latitude": -92.32728034,
+    "longitude": 38.9460885,
+    "description": "Door A for Middlebush Hall",
+    "nodeID": 126
+  },
+  {
+    "latitude": -92.32714355,
+    "longitude": 38.9460885,
+    "description": "Door B for Middlebush Hall",
+    "nodeID": 127
+  },
+  {
+    "latitude": -92.32669562,
+    "longitude": 38.94611561,
+    "description": "Door C for Middlebush Hall",
+    "nodeID": 128
+  },
+  {
+    "latitude": -92.32669026,
+    "longitude": 38.94627207,
+    "description": "Door D for Middlebush Hall",
+    "nodeID": 129
+  },
+  {
+    "latitude": -92.3265186,
+    "longitude": 38.9459529,
+    "description": "Door E for Middlebush Hall",
+    "nodeID": 130
+  },
+  {
+    "latitude": -92.32370362,
+    "longitude": 38.94508614,
+    "description": "Door A for Stewart Hall",
+    "nodeID": 131
+  },
+  {
+    "latitude": -92.32395977,
+    "longitude": 38.94510387,
+    "description": "Door B for Stewart Hall",
+    "nodeID": 132
+  },
+  {
+    "latitude": 38.944591,
+    "longitude": -92.322905,
+    "description": "Door A for Chemistry Building",
+    "nodeID": 133
+  },
+  {
+    "latitude": 38.944253,
+    "longitude": -92.322949,
+    "description": "Door B for Chemistry Building",
+    "nodeID": 134
+  },
+  {
+    "latitude": 38.944222,
+    "longitude": -92.322239,
+    "description": "Door C for Chemistry Building",
+    "nodeID": 135
+  },
+  {
+    "latitude": 38.944068,
+    "longitude": -92.322657,
+    "description": "Door D for Chemistry Building",
+    "nodeID": 136
+  },
+  {
+    "latitude": 38.9475435,
+    "longitude": -92.3305047,
+    "description": "Door A for McAlester Hall",
+    "nodeID": 137
+  },
+  {
+    "latitude": 38.9475198,
+    "longitude": -92.3301054,
+    "description": "Door B for McAlester Hall",
+    "nodeID": 138
+  },
+  {
+    "latitude": 38.947731,
+    "longitude": -92.3305094,
+    "description": "Door C for McAlester Hall",
+    "nodeID": 139
+  },
+  {
+    "latitude": -92.32529014,
+    "longitude": 38.94506841,
+    "description": "Door A for Memorial Union",
+    "nodeID": 140
+  },
+  {
+    "latitude": -92.32529551,
+    "longitude": 38.94547728,
+    "description": "Door B for Memorial Union",
+    "nodeID": 141
+  },
+  {
+    "latitude": -92.32485563,
+    "longitude": 38.94541887,
+    "description": "Door C for Memorial Union",
+    "nodeID": 142
+  },
+  {
+    "latitude": -92.32503533,
+    "longitude": 38.9460134,
+    "description": "Door A for Mumford Hall",
+    "nodeID": 143
+  },
+  {
+    "latitude": -92.32485831,
+    "longitude": 38.94601653,
+    "description": "Door B for Mumford Hall",
+    "nodeID": 144
+  },
+  {
+    "latitude": -92.32494146,
+    "longitude": 38.94617402,
+    "description": "Door C for Mumford Hall",
+    "nodeID": 145
+  },
+  {
+    "latitude": -92.32928798,
+    "longitude": 38.94672161,
+    "description": "Door A for Switzler Hall",
+    "nodeID": 146
+  },
+  {
+    "latitude": -92.32955888,
+    "longitude": 38.94662252,
+    "description": "Door B for Switzler Hall",
+    "nodeID": 147
+  },
+  {
+    "latitude": 38.94471878,
+    "longitude": -92.32790592,
+    "description": "Door A for Tate Hall",
+    "nodeID": 148
+  },
+  {
+    "latitude": 38.94454,
+    "longitude": -92.327998,
+    "description": "Door B for Tate Hall",
+    "nodeID": 149
+  },
+  {
+    "latitude": 38.94464914,
+    "longitude": -92.32811291,
+    "description": "Door C for Tate Hall",
+    "nodeID": 150
+  },
+  {
+    "latitude": 38.94478841,
+    "longitude": -92.32810232,
+    "description": "Door D for Tate Hall",
+    "nodeID": 151
+  },
+  {
+    "latitude": 38.944909,
+    "longitude": -92.327978,
+    "description": "Door E for Tate Hall",
+    "nodeID": 152
+  },
+  {
+    "latitude": 38.94233242,
+    "longitude": -92.32802481,
+    "description": "Door A for Strickland Hall",
+    "nodeID": 153
+  },
+  {
+    "latitude": 38.94268139,
+    "longitude": -92.32784414,
+    "description": "Door B for Strickland Hall",
+    "nodeID": 154
+  },
+  {
+    "latitude": 38.94291763,
+    "longitude": -92.32789799,
+    "description": "Door C for Strickland Hall",
+    "nodeID": 155
+  },
+  {
+    "latitude": 38.944179,
+    "longitude": -92.324912,
+    "description": "Door A for Gentry Hall",
+    "nodeID": 156
+  },
+  {
+    "latitude": 38.9443,
+    "longitude": -92.324919,
+    "description": "Door B for Gentry Hall",
+    "nodeID": 157
+  },
+  {
+    "latitude": 38.944425,
+    "longitude": -92.325008,
+    "description": "Door C for Gentry Hall",
+    "nodeID": 158
+  },
+  {
+    "latitude": 38.944307,
+    "longitude": -92.325238,
+    "description": "Door D for Gentry Hall",
+    "nodeID": 159
+  },
+  {
+    "latitude": 38.944231,
+    "longitude": -92.32476,
+    "description": "Door E for Gentry Hall",
+    "nodeID": 160
+  },
+  {
+    "latitude": -92.32623696,
+    "longitude": 38.94579019,
+    "description": "Door A for Fine Arts Building",
+    "nodeID": 161
+  },
+  {
+    "latitude": -92.3258695,
+    "longitude": 38.94577767,
+    "description": "Door B for Fine Arts Building",
+    "nodeID": 162
+  },
+  {
+    "latitude": -92.3258239,
+    "longitude": 38.94540427,
+    "description": "Door C for Fine Arts Building",
+    "nodeID": 163
+  },
+  {
+    "latitude": -92.32593924,
+    "longitude": 38.94515185,
+    "description": "Door D for Fine Arts Building",
+    "nodeID": 164
+  },
+  {
+    "latitude": -92.32621014,
+    "longitude": 38.94515394,
+    "description": "Door E for Fine Arts Building",
+    "nodeID": 165
+  },
+  {
+    "latitude": -92.32631475,
+    "longitude": 38.94539384,
+    "description": "Door F for Fine Arts Building",
+    "nodeID": 166
+  },
+  {
+    "latitude": -92.32823789,
+    "longitude": 38.94581105,
+    "description": "Door A for Swallow Hall",
+    "nodeID": 167
+  },
+  {
+    "latitude": -92.32826337,
+    "longitude": 38.9456233,
+    "description": "Door B for Swallow Hall",
+    "nodeID": 168
+  },
+  {
+    "latitude": -92.32795626,
+    "longitude": 38.94577976,
+    "description": "Door C for Swallow Hall",
+    "nodeID": 169
+  },
+  {
+    "latitude": -92.32795492,
+    "longitude": 38.94560974,
+    "description": "Door D for Swallow Hall",
+    "nodeID": 170
+  },
+  {
+    "latitude": 38.93932727,
+    "longitude": -92.33171672,
+    "description": "Door A for Southwest Village",
+    "nodeID": 171
+  },
+  {
+    "latitude": 38.939,
+    "longitude": -92.3318,
+    "description": "Door B for Southwest Village",
+    "nodeID": 172
+  },
+  {
+    "latitude": -92.32530087,
+    "longitude": 38.94572135,
+    "description": "Door A for Whitten Hall",
+    "nodeID": 173
+  },
+  {
+    "latitude": -92.32510239,
+    "longitude": 38.94577976,
+    "description": "Door B for Whitten Hall",
+    "nodeID": 174
+  },
+  {
+    "latitude": 38.943853,
+    "longitude": -92.322682,
+    "description": "Door A for Physics Building",
+    "nodeID": 175
+  },
+  {
+    "latitude": 38.943417,
+    "longitude": -92.322689,
+    "description": "Door B for Physics Building",
+    "nodeID": 176
+  },
+  {
+    "latitude": 38.943138,
+    "longitude": -92.323608,
+    "description": "Door A for Life Sciences Center",
+    "nodeID": 177
+  },
+  {
+    "latitude": 38.943141,
+    "longitude": -92.323256,
+    "description": "Door B for Life Sciences Center",
+    "nodeID": 178
+  },
+  {
+    "latitude": 38.943068,
+    "longitude": -92.322642,
+    "description": "Door C for Life Sciences Center",
+    "nodeID": 179
+  },
+  {
+    "latitude": 38.942875,
+    "longitude": -92.323241,
+    "description": "Door D for Life Sciences Center",
+    "nodeID": 180
+  },
+  {
+    "latitude": 38.942794,
+    "longitude": -92.323618,
+    "description": "Door E for Life Sciences Center",
+    "nodeID": 181
+  },
+  {
+    "latitude": 38.942911,
+    "longitude": -92.32382,
+    "description": "Door F for Life Sciences Center",
+    "nodeID": 182
+  },
+  {
+    "latitude": -92.32801259,
+    "longitude": 38.9475216,
+    "description": "Door A for Reynolds Journalism Institude",
+    "nodeID": 183
+  },
+  {
+    "latitude": -92.32780874,
+    "longitude": 38.94751743,
+    "description": "Door B for Reynolds Journalism Institude",
+    "nodeID": 184
+  },
+  {
+    "latitude": -92.32804209,
+    "longitude": 38.94720035,
+    "description": "Door C for Reynolds Journalism Institude",
+    "nodeID": 185
+  },
+  {
+    "latitude": -92.32775509,
+    "longitude": 38.94727545,
+    "description": "Door D for Reynolds Journalism Institude",
+    "nodeID": 186
+  }
+]
