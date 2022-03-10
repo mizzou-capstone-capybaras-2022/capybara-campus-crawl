@@ -20,4 +20,4 @@ COPY --from=build ${EXTRACTED}/application/ ./
 COPY ./docker-config/application.properties ./config/application.properties
 COPY ./docker-config/secrets.properties ./config/secrets.properties
 
-ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher", "-spring.config.location=", "./config/application.properties,./config/secrets.properties"]
+ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher", "-spring.config.location=", "./config/application.properties"
