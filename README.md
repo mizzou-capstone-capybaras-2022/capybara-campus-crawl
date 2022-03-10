@@ -31,5 +31,5 @@ TBD
 # Running Mock server
 1. navigate to `/mock-server`
 2. Run the following
-`docker run --rm -ti -p 8090:8080 -v $PWD:/opt/imposter/config outofcoffee/imposter-openapi`
-3. Navigate to `localhost:8090/_spec` to play with the mocked api
+`docker run --rm -ti -p 8080:8080 -v $PWD:/opt/imposter/config outofcoffee/imposter-openapi`
+3. Navigate to `localhost:8080/_spec` to play with the mocked api
