@@ -71,7 +71,8 @@ public class CapybaraCampusCrawlBackendApplication {
 	@Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return args -> {
-        	String apiKey = env.getProperty("openrouteservice.api_key");
+        	String apiKey = env.getProperty("openrouteservice.api.key");
+        	logger.info("Key:" + apiKey);
             String orsRunner = restTemplate.getForObject(
                     "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" + apiKey + "&start=-92.32310414,38.94131544&end=-92.32290566,38.93858664", String.class);
             logger.info(orsRunner);

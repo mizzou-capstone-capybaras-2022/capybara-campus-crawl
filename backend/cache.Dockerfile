@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:experimental
 FROM openjdk:11 as build
 WORKDIR /workspace/app
 
@@ -6,7 +7,8 @@ COPY ${BACKEND_DIR}/mvnw .
 COPY ${BACKEND_DIR}/.mvn .mvn
 COPY ${BACKEND_DIR}/pom.xml .
 COPY ${BACKEND_DIR}/src src
-RUN ./mvnw install -DskipTests
+
+RUN --mount=type=cache,target=/root/.m2 ./mvnw install -DskipTests
 RUN java -Djarmode=layertools -jar target/*.jar extract --destination target/extracted
 
 FROM openjdk:11

@@ -26,7 +26,10 @@ services:
       - "5050:80"
   backend:
     container_name: fullstack_backend_container
-    build: ./backend
+    build: 
+      context: ./backend
+      # Uncomment below for buildkit, use COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build
+      dockerfile: cache.Dockerfile
     restart: always
     ports:
       - "8090:8090"
