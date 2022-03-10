@@ -27,3 +27,9 @@ TBD
 `dockerfile: cache.Dockerfile`
 2. run `COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build`
 3. You are ready to go
+
+# Running Mock server
+1. navigate to `/mock-server`
+2. Run the following
+`docker run --rm -ti -p 8090:8080 -v $PWD:/opt/imposter/config outofcoffee/imposter-openapi`
+3. Navigate to `localhost:8090/_spec` to play with the mocked api
