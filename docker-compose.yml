@@ -29,7 +29,7 @@ services:
     build: 
       context: ./backend
       # Uncomment below for buildkit, use COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build
-      dockerfile: cache.Dockerfile
+      #dockerfile: cache.Dockerfile
     restart: always
     ports:
       - "8090:8090"

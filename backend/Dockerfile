@@ -18,6 +18,8 @@ COPY --from=build ${EXTRACTED}/snapshot-dependencies/ ./
 COPY --from=build ${EXTRACTED}/application/ ./
 
 COPY ./docker-config/application.properties ./config/application.properties
-COPY ./docker-config/secrets.properties ./config/secrets.properties
+COPY ./docker-config/openrouteservice.properties ./config/openrouteservice.properties
 
-ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher", "-spring.config.location=", "./config/application.properties"
+RUN cat ./config/application.properties ./config/openrouteservice.properties > ./config/combined.properties
+
+ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher", "-spring.config.location=", "./config/combined.properties"]
