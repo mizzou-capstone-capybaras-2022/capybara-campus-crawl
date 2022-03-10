@@ -12,6 +12,11 @@ TBD
 - Daniel Marin
 - Alex Centorbi
 
+# Prepping Docker
+1. Navigate to `/backend/docker-config`
+2. Rename `openrouteservice-ex.properties` to `openrouteservice.properties`
+3. Replace the dummy apikey in the `openrouteservice.properties` and set `openrouteservice.active` equal to `true`
+
 # Docker
 1. run `docker compose build`
 2. run `docker compose up`
