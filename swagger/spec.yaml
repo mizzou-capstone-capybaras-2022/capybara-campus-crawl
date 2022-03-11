@@ -1,0 +1,244 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8090
+    description: Generated server url
+paths:
+  /graph-nodes/:
+    get:
+      tags:
+        - Graph Node Controller
+      operationId: getNodes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GraphNode'
+  /graph-edges/:
+    get:
+      tags:
+        - Graph Controller
+      operationId: getGraphs
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GraphEdge'
+  /doors/:
+    get:
+      tags:
+        - Door Controller
+      operationId: getDoors
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Door'
+  /buildings/:
+    get:
+      tags:
+        - Building Controller
+      operationId: getBuildings
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Building'
+  /building-route/:
+    get:
+      tags:
+        - Route Controller
+      operationId: getSimpleRouteBetweenBuildings
+      parameters:
+        - name: buildingRequest
+          in: query
+          description: building request
+          required: true
+          schema:
+            $ref: '#/components/schemas/BuildingRouteRequest'
+          style: form
+          explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+  /routes/:
+    get:
+      tags:
+        - Route Controller
+      summary: Get a route
+      operationId: getRoute
+      parameters:
+        - name: route request
+          in: query
+          description: route request
+          required: true
+          schema:
+            $ref: '#/components/schemas/RouteRequest'
+          style: form
+          explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+        '404':
+          description: Route not possible
+        '500':
+          description: Internal Server Error
+
+components:
+  schemas:
+    GraphNode:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        description:
+          type: string
+        nodeID:
+          type: integer
+          format: int64
+    GraphEdge:
+      type: object
+      properties:
+        edgeId:
+          type: integer
+          format: int64
+        fromNode:
+          $ref: '#/components/schemas/GraphNode'
+        toNode:
+          $ref: '#/components/schemas/GraphNode'
+        fromToAction:
+          type: string
+        toFromAction:
+          type: string
+        distance:
+          type: number
+          format: double
+        pathshape:
+          type: string
+        bidirectional:
+          type: boolean
+    Building:
+      type: object
+      properties:
+        buildingId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        geojson:
+          type: string
+        graphNode:
+          $ref: '#/components/schemas/GraphNode'
+        nodeID:
+          type: integer
+          format: int64
+    Door:
+      type: object
+      properties:
+        doorId:
+          type: integer
+          format: int64
+        node:
+          $ref: '#/components/schemas/GraphNode'
+        building:
+          $ref: '#/components/schemas/Building'
+    Point:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    BuildingLocation:
+      type: object
+      properties:
+        buildingId:
+          type: number
+          format: integer
+    Location:
+      oneOf:
+        - $ref: '#/components/schemas/BuildingLocation'
+        - $ref: '#/components/schemas/Point'
+        
+    TimeConstraint:
+      type: object
+      required:
+        - maxTime
+      properties:
+        maxTime:
+          # assume minutes
+          type: number
+          format: double
+              
+    PitstopConstraint:
+      type: object
+      required:
+        - location
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+    BuildingRouteRequest:
+      type: object
+      properties:
+        fromBuilding:
+          $ref: '#/components/schemas/BuildingLocation'
+        toBuilding:
+          $ref: '#/components/schemas/BuildingLocation'
+    RouteRequest:
+      type: object
+      properties:
+        fromLocation:
+          oneOf:
+            - $ref: '#/components/schemas/BuildingLocation'
+            - $ref: '#/components/schemas/Point'
+        toLocation:
+          oneOf:
+            - $ref: '#/components/schemas/BuildingLocation'
+            - $ref: '#/components/schemas/Point'
+        constraints:
+          type: object
+          properties:
+            preferIndoors:
+              type: boolean
+            avoidCrowds:
+              type: boolean
+            pitstops:
+              $ref: '#/components/schemas/PitstopConstraint'
+            timeConstraint:
+              $ref: '#/components/schemas/TimeConstraint'
+    RouteResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Point'
