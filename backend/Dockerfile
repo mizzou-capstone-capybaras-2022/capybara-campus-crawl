@@ -1,4 +1,4 @@
-FROM openjdk:11 as build
+FROM openjdk:8-jdk-alpine as build
 WORKDIR /workspace/app
 
 ARG BACKEND_DIR=/CapybaraCampusCrawlBackend
@@ -9,7 +9,7 @@ COPY ${BACKEND_DIR}/src src
 RUN ./mvnw install -DskipTests
 RUN java -Djarmode=layertools -jar target/*.jar extract --destination target/extracted
 
-FROM openjdk:11
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 ARG EXTRACTED=/workspace/app/target/extracted
 COPY --from=build ${EXTRACTED}/dependencies/ ./

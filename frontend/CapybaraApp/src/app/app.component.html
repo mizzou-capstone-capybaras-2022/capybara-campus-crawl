@@ -12,27 +12,7 @@
           </div>
           <div class="home-separator"></div>
           <div class="weatherWidget" ></div>
-
-          <script>
-             window.weatherWidgetConfig =  window.weatherWidgetConfig || [];
-             window.weatherWidgetConfig.push({
-                 selector:".weatherWidget",
-                 apiKey:"XEQ7W2P9DK63HD649J7ES43GM", //Sign up for your personal key
-                 location:"Columbia, MO", //Enter an address
-                 unitGroup:"us", //"us" or "metric"
-                 forecastDays:5, //how many days forecast to show
-                 title:"Columbia Missouri", //optional title to show in the
-                 showTitle:true,
-                 showConditions:true
-             });
-
-             (function() {
-             var d = document, s = d.createElement('script');
-             s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
-             s.setAttribute('data-timestamp', +new Date());
-             (d.head || d.body).appendChild(s);
-             })();
-          </script>
+          
           <div class="home-container1">
             <mat-tab-group mat-align-tabs="center">
               <mat-tab label="Home"> Home </mat-tab>
@@ -63,15 +43,6 @@
           (d.head || d.body).appendChild(s);
           })();
       </script>
-      <div class="home-container1">
-        <mat-tab-group mat-align-tabs="center">
-          <mat-tab label="Home"> Home </mat-tab>
-          <mat-tab label="Input Locations"> Input Locations </mat-tab>
-          <mat-tab label="Add Constraints"> Add Constraints </mat-tab>
-          <mat-tab label="Search Buildings"> Search Buildings </mat-tab>
-          <mat-tab label="View Places"> View Places </mat-tab>
-        </mat-tab-group>
-      </div>
 
     <div class="map-container">
       <app-map></app-map>
