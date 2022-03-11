@@ -13,9 +13,11 @@ TBD
 - Alex Centorbi
 
 # Prepping Docker
-1. Navigate to `/backend/docker-config`
-2. Rename `openrouteservice-ex.properties` to `openrouteservice.properties`
-3. Replace the dummy apikey in the `openrouteservice.properties` and set `openrouteservice.active` equal to `true`
+1. Create an account on https://openrouteservice.org/
+2. Create and copy an api token on openrouteservice
+3. Navigate to `/backend/docker-config`
+5. Copy `openrouteservice-ex.properties` to `openrouteservice.properties`
+6. Replace the dummy apikey in the `openrouteservice.properties` file and use the api token from openrouteservice and set `openrouteservice.active` equal to `true`
 
 # Docker
 1. run `docker compose build`
