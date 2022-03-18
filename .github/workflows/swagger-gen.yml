@@ -36,9 +36,20 @@ jobs:
         working-directory: swagger
         run: openapi-generator-cli generate -i spec.yaml -g typescript-angular -o /tmp/angular/
         
-      - name: Upload angular artiface
+      - name: Generate Spring Boot server
+        working-directory: swagger
+        run: openapi-generator-cli generate -i spec.yaml -g spring -o /tmp/spring-boot/
+        
+      - name: Upload Angular Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: angular-cli-client
           path: /tmp/angular/
+          
+        
+      - name: Upload Spring Boot artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: spring-server
+          path: /tmp/spring-boot/
         
