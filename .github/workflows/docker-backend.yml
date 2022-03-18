@@ -2,8 +2,10 @@ name: Build Backend Image
 
 on:
   push:
+    paths: 'backend/**'
     branches: [ main ]
   pull_request:
+    paths: 'backend/**'
     branches: [ main ]
 
 env:
