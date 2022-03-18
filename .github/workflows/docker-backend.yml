@@ -14,5 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Create OpenRouteService file
+      env:
+        OPEN_ROUTE_SERVICE_FILE: ${{secrets.OPEN_ROUTE_SERVICE_KEYS}}
+      run: |
+        echo "$OPEN_ROUTE_SERVICE_FILE" > ./backend/docker-config/openrouteservice.properties
+       
     - name: Build the Docker image
       run: cd backend && docker build . --file Dockerfile --tag capybara-backend:$(date +%s)
