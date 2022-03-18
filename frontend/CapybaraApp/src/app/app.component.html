@@ -1,16 +1,17 @@
 
     <div class="body">
       <div class="home-container">
-          <div class="home-text">
-            <span class="home-text1">
-              Welcome to the Capybara College Crawl
-            </span>
-            <br>
-            <span class="home-text3">
-              Explore Mizzou and get the best routes below!
-            </span>
-          </div>
-          <div class="home-separator"></div>
+        <div class="home-text">
+          <span class="home-text1">
+            Welcome to the Capybara College Crawl
+          </span>
+          <br>
+          <span class="home-text2">
+            Explore Mizzou and get the best routes below!
+          </span>
+        </div>
+        <div class="home-separator"></div>
+          <!--
           <div class="weatherWidget" ></div>
 
           <script>
@@ -33,15 +34,16 @@
              (d.head || d.body).appendChild(s);
              })();
           </script>
-          <div class="home-container1">
-            <mat-tab-group mat-align-tabs="center">
-              <mat-tab label="Home"> Home </mat-tab>
-              <mat-tab label="Input Locations"> <app-input-locations></app-input-locations> </mat-tab>
-              <mat-tab label="Add Constraints"> Add Constraints </mat-tab>
-              <mat-tab label="Search Buildings"> Search Buildings </mat-tab>
-              <mat-tab label="View Places"> View Places </mat-tab>
-            </mat-tab-group>
-          </div>
+          -->
+        <div class="home-container1">
+          <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Home"> <div class="home-text3">Please click one of the tabs above to get started</div> </mat-tab>
+            <mat-tab label="Input Locations"> <app-input-locations></app-input-locations> </mat-tab>
+            <mat-tab label="Add Constraints"> Add Constraints </mat-tab>
+            <mat-tab label="Search Buildings"> Search Buildings </mat-tab>
+            <mat-tab label="View Places"> View Places </mat-tab>
+          </mat-tab-group>
+        </div>
 
         <div class="map-container">
           <app-map></app-map>

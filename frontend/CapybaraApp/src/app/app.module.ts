@@ -13,6 +13,7 @@ import { InputLocationsComponent } from './input-locations/input-locations.compo
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,ReactiveFormsModule,
+    MatButtonModule
 
   ],
   providers: [],
