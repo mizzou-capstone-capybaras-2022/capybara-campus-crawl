@@ -6,8 +6,7 @@ name: SwaggerGen
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
-  pull_request:
+    paths: 'swagger/**'
     branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
