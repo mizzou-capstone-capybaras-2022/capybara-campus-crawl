@@ -5,7 +5,8 @@ services:
     build:
       context: ./frontend
       args:
-        - CONFIGURATION=docker
+        - TILESERVICE=${TILESERVICE:-http://localhost:8100/tile/{z}/{x}/{y}.png}
+        - BASEAPIPATH=${BASEAPIPATH:-http://localhost:8090}
     restart: always
     ports:
       - "4200:80"

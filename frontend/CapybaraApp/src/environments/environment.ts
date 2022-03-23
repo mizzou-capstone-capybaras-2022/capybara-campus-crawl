@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  tileservice: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  tileservice: "http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
   baseApiPath: 'http://localhost:8090'
 };
 

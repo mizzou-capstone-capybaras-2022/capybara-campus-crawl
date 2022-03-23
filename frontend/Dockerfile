@@ -1,11 +1,23 @@
 #stage 1
 FROM node:lts-alpine as node
-ARG CONFIGURATION=development
+
+ARG TILESERVICE=http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+ARG BASEAPIPATH=http://localhost:8090
 
 WORKDIR /app
+
 COPY ./CapybaraApp .
+
+RUN printf "export const environment = {\n" >> environment.docker.ts
+RUN printf "production: false,\n" >> environment.docker.ts
+RUN printf "tileservice: '${TILESERVICE}',\n" >> environment.docker.ts
+RUN printf "baseApiPath: '${BASEAPIPATH}'\n" >> environment.docker.ts
+RUN printf "};\n" >> environment.docker.ts
+
+RUN mv environment.docker.ts /app/src/environments/environment.docker.ts
+
 RUN npm install
-RUN npm run build -- --configuration=${CONFIGURATION}
+RUN npm run build -- --configuration=docker
 
 #stage 2
 FROM nginx:alpine
