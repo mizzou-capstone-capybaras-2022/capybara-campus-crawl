@@ -14,13 +14,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import { ComponentAddConstraintsComponent } from './component-add-constraints/component-add-constraints.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SearchBuildingsComponent } from './search-buildings/search-buildings.component';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    InputLocationsComponent
+    InputLocationsComponent,
+    ComponentAddConstraintsComponent,
+    SearchBuildingsComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +38,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,ReactiveFormsModule,
-    MatButtonModule
-
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
