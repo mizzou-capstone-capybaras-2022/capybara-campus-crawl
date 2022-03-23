@@ -19,14 +19,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Create OpenRouteService file
-      env:
-        OPEN_ROUTE_SERVICE_FILE: ${{secrets.OPEN_ROUTE_SERVICE_KEYS}}
-      run: |
-        echo "$OPEN_ROUTE_SERVICE_FILE" > ./backend/docker-config/openrouteservice.properties
-       
+
     - name: Build the Docker image
+      env:
+        ORS_KEY: ${{secrets.ORS_KEY}}
       run: cd backend && docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
     
     - name: Log in to registry
