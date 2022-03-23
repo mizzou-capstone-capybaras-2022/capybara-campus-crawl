@@ -27,8 +27,9 @@ jobs:
            --build-arg DATABASE_USER=${{secrets.DATABASE_USER}} \
            --build-arg DATABASE_PASSWD=${{secrets.DATABASE_PASSWD}} \
            --tag $IMAGE_NAME \
+           . \
            --label "runnumber=${GITHUB_RUN_ID}" \
-           .
+           
     
     - name: Log in to registry
       # This is where you will update the PAT to GITHUB_TOKEN
