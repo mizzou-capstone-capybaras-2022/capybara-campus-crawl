@@ -35,3 +35,8 @@ TBD
 2. Run the following
 `docker run --rm -ti -p 8080:8080 -v $PWD:/opt/imposter/config outofcoffee/imposter-openapi`
 3. Navigate to `localhost:8080/_spec` to play with the mocked api
+
+# Running the Map Tile server
+1. `docker volume create capy-openstreetmap-data`
+2. `docker run -v $PWD/MapData/missouri.pbf:/data.osm.pbf -v capy-openstreetmap-data:/var/lib/postgresql/12/main overv/openstreetmap-tile-server:1.3.10 import`
+3. `docker compose -f docker-compose-map.yml up`

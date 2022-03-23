@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  frontend:
+    container_name: fullstack_frontend_container
+    build:
+      context: ./frontend
+      args:
+        - CONFIGURATION=docker
+    restart: always
+    ports:
+      - "4200:80"
+volumes:
+        capybaradbdata:
+                driver: local
+networks:
+  default:
+    name: docker-capybara-network

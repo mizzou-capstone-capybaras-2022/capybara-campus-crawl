@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  backend:
+    container_name: fullstack_backend_container
+    build: 
+      context: ./backend
+      args:
+        - DATABASE_STRING=${DATABASE_STRING}
+        - DATABASE_USER=${DATABASE_USER} 
+        - DATABASE_PASSWD=${DATABASE_PASSWD}
+        - ORS_KEY=${ORS_KEY}
+      # Uncomment below for buildkit, use COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build
+      #dockerfile: cache.Dockerfile
+    restart: always
+    ports:
+      - "8090:8090"
+volumes:
+        capybaradbdata:
+                driver: local
+networks:
+  default:
+    name: docker-capybara-network
