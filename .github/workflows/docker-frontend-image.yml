@@ -20,14 +20,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Create OpenRouteService file
-      env:
-        OPEN_ROUTE_SERVICE_FILE: ${{secrets.OPEN_ROUTE_SERVICE_KEYS}}
-      run: |
-        echo "$OPEN_ROUTE_SERVICE_FILE" > ./backend/docker-config/openrouteservice.properties
-       
     - name: Build the Docker image
-      run: cd frontend && docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
+      run: cd frontend && docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}" --build-arg TILESERVICE=${{secrets.TILESERVICE}} BASEAPIPATH=${{secrets.BASEAPIPATH}}
     
     - name: Log in to registry
       # This is where you will update the PAT to GITHUB_TOKEN
