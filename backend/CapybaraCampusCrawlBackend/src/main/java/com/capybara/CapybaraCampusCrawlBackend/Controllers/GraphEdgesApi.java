@@ -4,6 +4,7 @@
  * Do not edit the class manually.
  */
 package com.capybara.CapybaraCampusCrawlBackend.Controllers;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -29,9 +30,9 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-09T11:18:48.083513-06:00[America/Chicago]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-18T22:02:47.023914Z[Etc/UTC]")
 @Validated
-@Tag(name = "Graph Edge Controller", description = "the graph-edges API")
+@Tag(name = "graph-edges", description = "the graph-edges API")
 public interface GraphEdgesApi {
 
     default Optional<NativeWebRequest> getRequest() {
@@ -45,6 +46,7 @@ public interface GraphEdgesApi {
      */
     @Operation(
         operationId = "getGraphs",
+        tags = { "Graph Controller" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  GraphEdge.class)))
         }

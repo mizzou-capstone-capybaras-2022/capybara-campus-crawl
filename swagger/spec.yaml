@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: OpenAPI definition
-  version: v1.0
+  version: v0
 servers:
   - url: http://localhost:8090
     description: Generated server url
@@ -88,7 +88,6 @@ paths:
       tags:
         - Route Controller
       summary: Get a route
-      operationId: getRoute
       parameters:
         - name: route request
           in: query
@@ -221,12 +220,10 @@ components:
       properties:
         fromLocation:
           oneOf:
-            - $ref: '#/components/schemas/BuildingLocation'
-            - $ref: '#/components/schemas/Point'
+            - $ref: '#/components/schemas/Location'
         toLocation:
           oneOf:
-            - $ref: '#/components/schemas/BuildingLocation'
-            - $ref: '#/components/schemas/Point'
+            - $ref: '#/components/schemas/Location'
         constraints:
           type: object
           properties:
@@ -242,3 +239,4 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Point'
+            

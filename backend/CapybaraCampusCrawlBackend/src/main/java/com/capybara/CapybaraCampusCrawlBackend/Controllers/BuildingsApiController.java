@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-09T11:18:48.083513-06:00[America/Chicago]")
 @Controller
 @RequestMapping("${openapi.openAPIDefinition.base-path:}")
 public class BuildingsApiController implements BuildingsApi {
