@@ -25,7 +25,7 @@ jobs:
            --build-arg TILESERVICE=${{secrets.TILESERVICE}} \
            --build-arg BASEAPIPATH=${{secrets.BASEAPIPATH}} \
            --tag $IMAGE_NAME \ 
-           --label "runnumber=${GITHUB_RUN_ID}" \
+           --label "runnumber=${GITHUB_RUN_ID}"
            
     
     - name: Log in to registry
