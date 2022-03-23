@@ -9,17 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { GraphNode } from './graphNode';
+import { TimeConstraint } from './timeConstraint';
+import { PitstopConstraint } from './pitstopConstraint';
 
 
-export interface GraphEdge { 
-    edgeId?: number;
-    fromNode?: GraphNode;
-    toNode?: GraphNode;
-    fromToAction?: string;
-    toFromAction?: string;
-    distance?: number;
-    pathshape?: string;
-    bidirectional?: boolean;
+export interface RouteRequestConstraints { 
+    preferIndoors?: boolean;
+    avoidCrowds?: boolean;
+    pitstops?: PitstopConstraint;
+    timeConstraint?: TimeConstraint;
 }
 

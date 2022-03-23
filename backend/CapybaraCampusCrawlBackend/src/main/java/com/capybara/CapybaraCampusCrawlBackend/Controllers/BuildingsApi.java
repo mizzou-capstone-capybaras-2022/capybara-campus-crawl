@@ -45,7 +45,7 @@ public interface BuildingsApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/buildings/",
-        produces = { "*/*" }
+        produces = {"application/json", "text/xml"}
     )
     default ResponseEntity<List<Building>> getBuildings(
         

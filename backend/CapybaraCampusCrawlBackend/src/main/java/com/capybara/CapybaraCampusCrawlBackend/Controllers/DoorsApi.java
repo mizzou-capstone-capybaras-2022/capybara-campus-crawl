@@ -45,7 +45,7 @@ public interface DoorsApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/doors/",
-        produces = { "*/*" }
+        produces = {"application/json", "text/xml"}
     )
     default ResponseEntity<List<Door>> getDoors(
         

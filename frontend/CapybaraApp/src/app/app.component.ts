@@ -15,8 +15,8 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.buildingDao.index3().subscribe((value) => {
-      console.log(JSON.stringify(value));
+    this.buildingDao.getBuildings().subscribe((value) => {
+      console.log(value);
     })
   }
 }

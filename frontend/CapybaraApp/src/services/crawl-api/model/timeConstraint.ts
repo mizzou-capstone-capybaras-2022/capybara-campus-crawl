@@ -9,17 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { GraphNode } from './graphNode';
 
 
-export interface GraphEdge { 
-    edgeId?: number;
-    fromNode?: GraphNode;
-    toNode?: GraphNode;
-    fromToAction?: string;
-    toFromAction?: string;
-    distance?: number;
-    pathshape?: string;
-    bidirectional?: boolean;
+export interface TimeConstraint { 
+    maxTime: number;
 }
 

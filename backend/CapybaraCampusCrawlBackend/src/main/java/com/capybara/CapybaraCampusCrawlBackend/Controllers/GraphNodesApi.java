@@ -45,7 +45,7 @@ public interface GraphNodesApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/graph-nodes/",
-        produces = { "*/*" }
+        produces = {"application/json", "text/xml"}
     )
     default ResponseEntity<List<GraphNode>> getNodes(
         

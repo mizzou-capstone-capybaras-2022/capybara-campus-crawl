@@ -9,17 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { GraphNode } from './graphNode';
+import { Location } from './location';
+import { RouteRequestConstraints } from './routeRequestConstraints';
 
 
-export interface GraphEdge { 
-    edgeId?: number;
-    fromNode?: GraphNode;
-    toNode?: GraphNode;
-    fromToAction?: string;
-    toFromAction?: string;
-    distance?: number;
-    pathshape?: string;
-    bidirectional?: boolean;
+export interface RouteRequest { 
+    fromLocation?: Location;
+    toLocation?: Location;
+    constraints?: RouteRequestConstraints;
 }
 

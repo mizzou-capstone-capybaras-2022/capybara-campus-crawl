@@ -9,17 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { GraphNode } from './graphNode';
+import { Point } from './point';
+import { BuildingLocation } from './buildingLocation';
 
 
-export interface GraphEdge { 
-    edgeId?: number;
-    fromNode?: GraphNode;
-    toNode?: GraphNode;
-    fromToAction?: string;
-    toFromAction?: string;
-    distance?: number;
-    pathshape?: string;
-    bidirectional?: boolean;
-}
+/**
+ * @type Location
+ * @export
+ */
+export type Location = BuildingLocation | Point;
 

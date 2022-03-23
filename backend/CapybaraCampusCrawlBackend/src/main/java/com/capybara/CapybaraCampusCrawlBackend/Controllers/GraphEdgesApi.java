@@ -53,7 +53,7 @@ public interface GraphEdgesApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/graph-edges/",
-        produces = { "*/*" }
+        produces = {"application/json", "text/xml"}
     )
     default ResponseEntity<List<GraphEdge>> getGraphs(
         

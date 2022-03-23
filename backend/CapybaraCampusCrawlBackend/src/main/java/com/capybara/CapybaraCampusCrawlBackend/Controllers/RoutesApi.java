@@ -60,7 +60,7 @@ public interface RoutesApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/routes/",
-        produces = { "*/*" },
+		produces = {"application/json", "text/xml"},
         consumes = { "application/json" }
     )
     default ResponseEntity<List<Point>> getRoute(

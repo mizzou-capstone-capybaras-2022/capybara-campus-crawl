@@ -49,7 +49,7 @@ public interface BuildingRouteApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/building-route/",
-        produces = { "*/*" },
+        produces = {"application/json", "text/xml"},
         consumes = { "application/json" }
     )
     default ResponseEntity<List<Point>> getSimpleRouteBetweenBuildings(
