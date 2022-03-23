@@ -4,11 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.BuildingRouteRequest;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
@@ -29,6 +32,12 @@ public class BuildingRouteApiController implements BuildingRouteApi {
 
     private final NativeWebRequest request;
 
+    @Autowired
+	OpenRouteServiceDao routeDao;
+    
+    @Autowired
+	BuildingRepository buildingDao;
+    
     @Autowired
     public BuildingRouteApiController(NativeWebRequest request) {
         this.request = request;

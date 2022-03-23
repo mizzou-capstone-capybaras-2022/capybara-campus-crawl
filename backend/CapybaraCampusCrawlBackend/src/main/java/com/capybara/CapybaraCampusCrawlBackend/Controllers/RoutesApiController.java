@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
 import com.capybara.CapybaraCampusCrawlBackend.Models.RouteRequest;
 
@@ -25,6 +26,9 @@ import javax.validation.Valid;
 @RequestMapping("${openapi.openAPIDefinition.base-path:}")
 public class RoutesApiController implements RoutesApi {
 
+	@Autowired
+	OpenRouteServiceDao routeDao;
+	
     private final NativeWebRequest request;
 
     @Autowired
