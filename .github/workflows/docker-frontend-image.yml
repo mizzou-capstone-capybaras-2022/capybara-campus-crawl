@@ -21,9 +21,12 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Build the Docker image
-      run: cd frontend && docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}" \
+      run: cd frontend && docker build . --file Dockerfile \
            --build-arg TILESERVICE=${{secrets.TILESERVICE}} \
-           --build-arg BASEAPIPATH=${{secrets.BASEAPIPATH}}
+           --build-arg BASEAPIPATH=${{secrets.BASEAPIPATH}} \
+           --tag $IMAGE_NAME \ 
+           --label "runnumber=${GITHUB_RUN_ID}" \
+           
     
     - name: Log in to registry
       # This is where you will update the PAT to GITHUB_TOKEN
