@@ -15,8 +15,9 @@ import { MatSelectModule } from '@angular/material/select';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 
-import {ApiModule} from '../services/crawl-api';
+import {ApiModule, BASE_PATH} from '../services/crawl-api';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: BASE_PATH, useValue: environment.baseApiPath },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
