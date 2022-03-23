@@ -5,26 +5,26 @@
  */
 package com.capybara.CapybaraCampusCrawlBackend.Controllers;
 
-import com.capybara.CapybaraCampusCrawlBackend.Models.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
+import com.capybara.CapybaraCampusCrawlBackend.Models.BuildingRouteRequest;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-18T22:02:47.023914Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-23T06:46:32.599746Z[Etc/UTC]")
 @Validated
 public interface BuildingRouteApi {
 
@@ -33,25 +33,27 @@ public interface BuildingRouteApi {
     }
 
     /**
-     * GET /building-route/
+     * PUT /building-route/ : Get a route
      *
-     * @param buildingRequest building request (required)
+     * @param buildingRouteRequest Get the Route with a building specific route request (required)
      * @return OK (status code 200)
      */
     @Operation(
         operationId = "getSimpleRouteBetweenBuildings",
+        summary = "Get a route",
         tags = { "Route Controller" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  Point.class)))
         }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
+        method = RequestMethod.PUT,
         value = "/building-route/",
-        produces = { "*/*" }
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     default ResponseEntity<List<Point>> getSimpleRouteBetweenBuildings(
-        @NotNull @Parameter(name = "buildingRequest", description = "building request", required = true, schema = @Schema(description = "")) @Valid BuildingRouteRequest buildingRequest
+        @Parameter(name = "BuildingRouteRequest", description = "Get the Route with a building specific route request", required = true, schema = @Schema(description = "")) @Valid @RequestBody BuildingRouteRequest buildingRouteRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

@@ -5,7 +5,6 @@
  */
 package com.capybara.CapybaraCampusCrawlBackend.Controllers;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -32,7 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-18T22:02:47.023914Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-23T06:46:32.599746Z[Etc/UTC]")
 @Validated
 public interface RoutesApi {
 
@@ -41,9 +40,9 @@ public interface RoutesApi {
     }
 
     /**
-     * GET /routes/ : Get a route
+     * PUT /routes/ : Get a route
      *
-     * @param routeRequest route request (required)
+     * @param routeRequest Get the Route with a generic route request (required)
      * @return OK (status code 200)
      *         or Route not possible (status code 404)
      *         or Internal Server Error (status code 500)
@@ -59,12 +58,13 @@ public interface RoutesApi {
         }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
+        method = RequestMethod.PUT,
         value = "/routes/",
-        produces = { "*/*" }
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     default ResponseEntity<List<Point>> getRoute(
-        @NotNull @Parameter(name = "route request", description = "route request", required = true, schema = @Schema(description = "")) @Valid RouteRequest routeRequest
+        @Parameter(name = "RouteRequest", description = "Get the Route with a generic route request", required = true, schema = @Schema(description = "")) @Valid @RequestBody RouteRequest routeRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
