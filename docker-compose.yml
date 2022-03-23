@@ -16,9 +16,9 @@ services:
     build: 
       context: ./backend
       args:
-        - DATABASE_STRING=jdbc:postgresql://fullstack_pg_container:5432/capybara_db
-        - DATABASE_USER=capy 
-        - DATABASE_PASSWD=capy
+        - DATABASE_STRING=${DATABASE_STRING:-jdbc:postgresql://fullstack_pg_container:5432/capybara_db}
+        - DATABASE_USER=${DATABASE_USER:-capy} 
+        - DATABASE_PASSWD=${DATABASE_PASSWD:-capy}
         - ORS_KEY=${ORS_KEY}
   db:
     container_name: fullstack_pg_container
