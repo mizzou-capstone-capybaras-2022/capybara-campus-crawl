@@ -219,11 +219,9 @@ components:
       type: object
       properties:
         fromLocation:
-          oneOf:
-            - $ref: '#/components/schemas/Location'
+          $ref: '#/components/schemas/Location'
         toLocation:
-          oneOf:
-            - $ref: '#/components/schemas/Location'
+          $ref: '#/components/schemas/Location'
         constraints:
           type: object
           properties:

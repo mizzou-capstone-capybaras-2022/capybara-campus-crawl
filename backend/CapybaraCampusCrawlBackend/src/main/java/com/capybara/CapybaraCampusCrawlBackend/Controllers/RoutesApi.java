@@ -23,6 +23,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
+import com.capybara.CapybaraCampusCrawlBackend.Models.RouteRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
