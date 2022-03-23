@@ -1,7 +1,15 @@
 plugin: openapi
-specFile: spec.yml 
+specFile: spec.yaml
 
 resources:
+  - path: /building-route/
+    method: put
+    response:
+      staticFile: mocked-data/fake-route.json
+  - path: /routes/
+    method: put
+    response:
+      staticFile: mocked-data/fake-route.json
   - path: /buildings/
     method: get
     response:

@@ -21,6 +21,7 @@ import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PiMetricRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.PlaceRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.RoomRepository;
@@ -47,7 +48,7 @@ public class CapybaraCampusCrawlBackendApplication {
 	private static final Logger logger = LoggerFactory.getLogger(CapybaraCampusCrawlBackendApplication.class);
 	
 	@Autowired
-	private Environment env;
+	Environment env;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CapybaraCampusCrawlBackendApplication.class, args);
@@ -69,16 +70,13 @@ public class CapybaraCampusCrawlBackendApplication {
 	}
 	
 	@Bean
-    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+    public CommandLineRunner run(OpenRouteServiceDao dao) throws Exception {
         return args -> {
         	
         	String useOrs = env.getProperty("openrouteservice.active");
         	logger.info("Ors: " + useOrs);
         	if (useOrs.contains("true")) {
-            	String apiKey = env.getProperty("openrouteservice.api.key");
-                String orsRunner = restTemplate.getForObject(
-                        "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" + apiKey + "&start=-92.32310414,38.94131544&end=-92.32290566,38.93858664", String.class);
-                logger.info(orsRunner);
+            	logger.info(dao.GetDummyData());
         	}
         	
         };
