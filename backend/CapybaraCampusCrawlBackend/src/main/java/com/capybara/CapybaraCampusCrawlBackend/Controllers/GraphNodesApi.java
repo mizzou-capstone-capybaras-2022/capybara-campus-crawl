@@ -24,7 +24,6 @@ import javax.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-18T22:02:47.023914Z[Etc/UTC]")
 @Validated
-@Tag(name = "graph-nodes", description = "the graph-nodes API")
 public interface GraphNodesApi {
 
     default Optional<NativeWebRequest> getRequest() {

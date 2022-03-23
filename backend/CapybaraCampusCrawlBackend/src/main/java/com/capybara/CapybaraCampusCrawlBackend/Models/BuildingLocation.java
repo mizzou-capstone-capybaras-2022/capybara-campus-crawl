@@ -23,10 +23,6 @@ public class BuildingLocation   {
     this.buildingId = buildingId;
     return this;
   }
-
-  public OneOfBuildingLocationPoint asOneOfBuildingLocationPoint() {
-	  return (new OneOfBuildingLocationPoint()).buildingId(buildingId);
-  }
   
   /**
    * Get buildingId

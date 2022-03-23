@@ -63,19 +63,18 @@ paths:
                 items:
                   $ref: '#/components/schemas/Building'
   /building-route/:
-    get:
+    put:
       tags:
         - Route Controller
       operationId: getSimpleRouteBetweenBuildings
-      parameters:
-        - name: buildingRequest
-          in: query
-          description: building request
-          required: true
-          schema:
-            $ref: '#/components/schemas/BuildingRouteRequest'
-          style: form
-          explode: true
+      summary: Get a route
+      requestBody:
+        description: Get the Route with a building specific route request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildingRouteRequest'
       responses:
         '200':
           description: OK
@@ -84,19 +83,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/RouteResponse'
   /routes/:
-    get:
+    put:
       tags:
         - Route Controller
+      operationId: getRoute
       summary: Get a route
-      parameters:
-        - name: route request
-          in: query
-          description: route request
-          required: true
-          schema:
-            $ref: '#/components/schemas/RouteRequest'
-          style: form
-          explode: true
+      requestBody:
+        description: Get the Route with a generic route request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteRequest'
       responses:
         '200':
           description: OK

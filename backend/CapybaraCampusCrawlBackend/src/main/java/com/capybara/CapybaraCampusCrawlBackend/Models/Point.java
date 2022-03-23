@@ -19,13 +19,7 @@ public class Point   {
 
   @JsonProperty("longitude")
   private Double longitude;
-
-  public OneOfBuildingLocationPoint asOneOfBuildingLocationPoint() {
-	  return (new OneOfBuildingLocationPoint())
-			  .latitude(latitude)
-			  .longitude(longitude);
-  }
-  
+ 
   public Point latitude(Double latitude) {
     this.latitude = latitude;
     return this;

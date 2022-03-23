@@ -2,8 +2,6 @@ package com.capybara.CapybaraCampusCrawlBackend.Models;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -14,20 +12,20 @@ import javax.annotation.Generated;
  * RouteRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-18T22:02:47.023914Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-23T06:29:46.400568Z[Etc/UTC]")
 public class RouteRequest   {
 
   @JsonProperty("fromLocation")
-  private JsonNullable<OneOfBuildingLocationPoint> fromLocation = JsonNullable.undefined();
+  private Location fromLocation;
 
   @JsonProperty("toLocation")
-  private JsonNullable<OneOfBuildingLocationPoint> toLocation = JsonNullable.undefined();
+  private Location toLocation;
 
   @JsonProperty("constraints")
   private RouteRequestConstraints constraints;
 
-  public RouteRequest fromLocation(OneOfBuildingLocationPoint fromLocation) {
-    this.fromLocation = JsonNullable.of(fromLocation);
+  public RouteRequest fromLocation(Location fromLocation) {
+    this.fromLocation = fromLocation;
     return this;
   }
 
@@ -37,16 +35,16 @@ public class RouteRequest   {
   */
   @Valid 
   @Schema(name = "fromLocation", required = false)
-  public JsonNullable<OneOfBuildingLocationPoint> getFromLocation() {
+  public Location getFromLocation() {
     return fromLocation;
   }
 
-  public void setFromLocation(JsonNullable<OneOfBuildingLocationPoint> fromLocation) {
+  public void setFromLocation(Location fromLocation) {
     this.fromLocation = fromLocation;
   }
 
-  public RouteRequest toLocation(OneOfBuildingLocationPoint toLocation) {
-    this.toLocation = JsonNullable.of(toLocation);
+  public RouteRequest toLocation(Location toLocation) {
+    this.toLocation = toLocation;
     return this;
   }
 
@@ -56,11 +54,11 @@ public class RouteRequest   {
   */
   @Valid 
   @Schema(name = "toLocation", required = false)
-  public JsonNullable<OneOfBuildingLocationPoint> getToLocation() {
+  public Location getToLocation() {
     return toLocation;
   }
 
-  public void setToLocation(JsonNullable<OneOfBuildingLocationPoint> toLocation) {
+  public void setToLocation(Location toLocation) {
     this.toLocation = toLocation;
   }
 
@@ -97,20 +95,9 @@ public class RouteRequest   {
         Objects.equals(this.constraints, routeRequest.constraints);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
   public int hashCode() {
     return Objects.hash(fromLocation, toLocation, constraints);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

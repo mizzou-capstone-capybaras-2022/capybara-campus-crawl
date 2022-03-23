@@ -34,6 +34,5 @@ public class RoutesApiController implements RoutesApi {
     public ResponseEntity<List<Point>> getRoute() {
     	return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
     }
-
     
 }
