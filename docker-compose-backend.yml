@@ -9,8 +9,6 @@ services:
         - DATABASE_USER=${DATABASE_USER:-capy} 
         - DATABASE_PASSWD=${DATABASE_PASSWD:-capy}
         - ORS_KEY=${ORS_KEY}
-      # Uncomment below for buildkit, use COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build
-      #dockerfile: cache.Dockerfile
     restart: always
     ports:
       - "8090:8090"

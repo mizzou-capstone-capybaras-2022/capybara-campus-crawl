@@ -10,9 +10,7 @@ services:
     ports:
       - "5050:80"
   backend:
-    extends:
-      file: docker-compose-backend.yml
-      service: backend
+    container_name: fullstack_backend_container
     build: 
       context: ./backend
       args:
@@ -20,6 +18,9 @@ services:
         - DATABASE_USER=${DATABASE_USER:-capy} 
         - DATABASE_PASSWD=${DATABASE_PASSWD:-capy}
         - ORS_KEY=${ORS_KEY}
+    restart: always
+    ports:
+      - "8090:8090"
   db:
     container_name: fullstack_pg_container
     image: postgres
