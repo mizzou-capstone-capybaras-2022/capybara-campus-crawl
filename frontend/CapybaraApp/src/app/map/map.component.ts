@@ -21,7 +21,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   constructor() {
-    this.streetMaps = tileLayer(environment.tileservice, { maxZoom: 18, attribution: '...' });
+    this.streetMaps = tileLayer(environment.tileservice + "/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '...' });
     
     this.route = polyline([[ 38.946831, -92.329229 ],
       [ 38.944311, -92.328049 ]]);

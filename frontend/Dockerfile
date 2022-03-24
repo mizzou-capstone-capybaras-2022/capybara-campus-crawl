@@ -1,7 +1,7 @@
 #stage 1
 FROM node:lts-alpine as node
 
-ARG TILESERVICE=http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+ARG TILESERVICE=http://{s}.tile.openstreetmap.org
 ARG BASEAPIPATH=http://localhost:8090
 
 WORKDIR /app
@@ -13,6 +13,8 @@ RUN printf "production: false,\n" >> environment.docker.ts
 RUN printf "tileservice: '${TILESERVICE}',\n" >> environment.docker.ts
 RUN printf "baseApiPath: '${BASEAPIPATH}'\n" >> environment.docker.ts
 RUN printf "};\n" >> environment.docker.ts
+
+RUN cat environment.docker.ts
 
 RUN mv environment.docker.ts /app/src/environments/environment.docker.ts
 

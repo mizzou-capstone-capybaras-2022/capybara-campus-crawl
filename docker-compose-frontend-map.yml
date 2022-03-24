@@ -14,7 +14,7 @@ services:
     build:
       context: ./frontend
       args:
-        - TILESERVICE=${TILESERVICE:-http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png}
+        - TILESERVICE=${TILESERVICE:-http://localhost:8100/tile}
         - BASEAPIPATH=${BASEAPIPATH:-http://localhost:8090}
     restart: always
     ports:
