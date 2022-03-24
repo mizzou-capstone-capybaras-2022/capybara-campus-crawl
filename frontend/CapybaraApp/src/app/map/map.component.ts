@@ -11,18 +11,18 @@ import { environment } from '../../environments/environment';
 })
 export class MapComponent implements AfterViewInit {
 
-  streetMaps: TileLayer;
-  route: Polyline
+  streetMaps: TileLayer
+  route: Polyline;
   layersControl: LeafletControlLayersConfig;
   options: {};
 
   private initMap(): void {
-
+    
   }
 
   constructor() {
     this.streetMaps = tileLayer(environment.tileservice + "/{z}/{x}/{y}.jpg" + "?key=" + environment.tileKey, { maxZoom: 18, attribution: '...' });
-    
+  
     this.route = polyline([[ 38.946831, -92.329229 ],
       [ 38.944311, -92.328049 ]]);
 

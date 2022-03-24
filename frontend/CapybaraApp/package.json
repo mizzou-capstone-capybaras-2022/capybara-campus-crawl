@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@asymmetrik/ngx-leaflet": "^13.0.2",
+    "@material/checkbox": "^13.0.0",
     "leaflet": "^1.7.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -28,7 +29,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.3",
-    "@angular/cli": "~13.2.3",
+    "@angular/cli": "^13.2.6",
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/leaflet": "^1.7.9",

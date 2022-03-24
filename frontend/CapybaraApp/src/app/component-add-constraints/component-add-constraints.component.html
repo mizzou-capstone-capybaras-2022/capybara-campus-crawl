@@ -1,0 +1,29 @@
+<div id="formContainer">
+
+    <form [formGroup]="addConstraints" (ngSubmit)="addConstraintsfn()">
+
+          
+          <mat-checkbox formControlName="indoor"></mat-checkbox>
+          <mat-label> Prefer Indoors</mat-label>
+        <br>
+        <br>
+    
+        <mat-checkbox formControlName="food"></mat-checkbox>
+        <mat-label> Stop for food</mat-label>
+
+        <br>
+        <br>
+        <mat-checkbox formControlName="time" ng-model="chkselct" (click)="toggleShow()"></mat-checkbox>
+        <mat-label> Is there a time constraint</mat-label>
+        <br>
+        <br>
+        <div *ngIf="isShown">
+            <input type="time">
+        </div>
+        <br>
+        <div>
+
+          <button mat-raised-button color="basic" type="submit" style="position: center;">Submit</button>
+        </div>
+      </form>
+  </div>

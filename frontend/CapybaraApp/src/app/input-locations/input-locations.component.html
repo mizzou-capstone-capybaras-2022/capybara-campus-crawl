@@ -1,24 +1,27 @@
 <div id="formContainer">
 
-<form [formGroup]="inputLocations" (ngSubmit)="inputLocationsFn()">
-  <mat-form-field appearance="standard">
-    <mat-label>Start location</mat-label>
-    <mat-select  formControlName="start">
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="standard">
-    <mat-label>Destination</mat-label>
-    <mat-select formControlName="destination">
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-  </div>
-</form>
+  <form [formGroup]="inputLocations" (ngSubmit)="inputLocationsFn()">
+    <mat-form-field appearance="standard">
+      <mat-label>Start location</mat-label>
+      <mat-select  formControlName="start">
+        <mat-option value="one">First option</mat-option>
+        <mat-option value="two">Second option</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Destination</mat-label>
+      <mat-select formControlName="destination">
+        <mat-option value="one">First option</mat-option>
+        <mat-option value="two">Second option</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+      <button mat-raised-button color="basic" type="submit">Submit</button>
+    </div>
+  </form>
 
 </div>

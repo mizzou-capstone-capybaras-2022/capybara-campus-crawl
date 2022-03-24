@@ -15,6 +15,13 @@ export class AppComponent {
   }
 
   ngOnInit(){
+    /**
+    console.log("TesT");
+    fetch('http://localhost:8090/buildings')
+      .then(response => response.json())
+      .then(data => console.log(data));
+    **/
+
     this.buildingDao.getBuildings().subscribe((value) => {
       console.log(value);
     })
