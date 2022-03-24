@@ -2,7 +2,7 @@ name: Build Frontend Image
 
 on:
   push:
-    paths: /backend/**
+    paths: /frontend/**
     branches: [ main ]
   pull_request:
     branches: [ main ]
