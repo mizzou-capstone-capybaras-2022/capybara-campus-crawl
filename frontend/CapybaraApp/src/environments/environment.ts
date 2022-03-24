@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   tileservice: "https://api.maptiler.com/maps/openstreetmap",
   baseApiPath: 'http://localhost:8090',
-  tileKey: "Yi08Gsh1GEgH4Q26vw6p"
+  tileKey: ""
 };
 
 /*
