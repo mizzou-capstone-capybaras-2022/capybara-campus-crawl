@@ -44,7 +44,7 @@ import { environment } from 'src/environments/environment';
     MatSelectModule,
     FormsModule,ReactiveFormsModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
