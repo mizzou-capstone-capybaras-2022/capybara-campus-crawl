@@ -21,6 +21,10 @@ import { SearchBuildingsComponent } from './search-buildings/search-buildings.co
 
 
 
+import {ApiModule, BASE_PATH} from '../services/crawl-api';
+import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +36,7 @@ import { SearchBuildingsComponent } from './search-buildings/search-buildings.co
   imports: [
     BrowserModule,
     MatTabsModule,
+    ApiModule,
     AppRoutingModule,
     LeafletModule,
     BrowserAnimationsModule,
@@ -40,8 +45,13 @@ import { SearchBuildingsComponent } from './search-buildings/search-buildings.co
     FormsModule,ReactiveFormsModule,
     MatButtonModule,
     MatCheckboxModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: BASE_PATH, useValue: environment.baseApiPath },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

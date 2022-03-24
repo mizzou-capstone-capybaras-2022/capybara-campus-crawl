@@ -1,0 +1,11 @@
+export * from './buildingController.service';
+import { BuildingControllerService } from './buildingController.service';
+export * from './doorController.service';
+import { DoorControllerService } from './doorController.service';
+export * from './graphController.service';
+import { GraphControllerService } from './graphController.service';
+export * from './graphNodeController.service';
+import { GraphNodeControllerService } from './graphNodeController.service';
+export * from './routeController.service';
+import { RouteControllerService } from './routeController.service';
+export const APIS = [BuildingControllerService, DoorControllerService, GraphControllerService, GraphNodeControllerService, RouteControllerService];

@@ -1,0 +1,3122 @@
+[
+  {
+    "edgeId": 1,
+    "fromNode": {
+      "latitude": 38.943259,
+      "longitude": -92.325279,
+      "description": "Door A for Natural Resources (Ag Science)",
+      "nodeID": 80
+    },
+    "toNode": {
+      "latitude": 38.942949,
+      "longitude": -92.325436,
+      "description": "Door B for Natural Resources (Ag Science)",
+      "nodeID": 81
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 179.66667,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 2,
+    "fromNode": {
+      "latitude": 38.943259,
+      "longitude": -92.325279,
+      "description": "Door A for Natural Resources (Ag Science)",
+      "nodeID": 80
+    },
+    "toNode": {
+      "latitude": 38.942548,
+      "longitude": -92.325451,
+      "description": "Door C for Natural Resources (Ag Science)",
+      "nodeID": 82
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 315,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 3,
+    "fromNode": {
+      "latitude": 38.943259,
+      "longitude": -92.325279,
+      "description": "Door A for Natural Resources (Ag Science)",
+      "nodeID": 80
+    },
+    "toNode": {
+      "latitude": 38.942418,
+      "longitude": -92.324874,
+      "description": "Door D for Natural Resources (Ag Science)",
+      "nodeID": 83
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 380.33334,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 4,
+    "fromNode": {
+      "latitude": 38.943259,
+      "longitude": -92.325279,
+      "description": "Door A for Natural Resources (Ag Science)",
+      "nodeID": 80
+    },
+    "toNode": {
+      "latitude": 38.942591,
+      "longitude": -92.324058,
+      "description": "Door E for Natural Resources (Ag Science)",
+      "nodeID": 84
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 555.3333,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 5,
+    "fromNode": {
+      "latitude": 38.943259,
+      "longitude": -92.325279,
+      "description": "Door A for Natural Resources (Ag Science)",
+      "nodeID": 80
+    },
+    "toNode": {
+      "latitude": 38.943136,
+      "longitude": -92.324221,
+      "description": "Door F for Natural Resources (Ag Science)",
+      "nodeID": 85
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 788.6667,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 6,
+    "fromNode": {
+      "latitude": 38.942949,
+      "longitude": -92.325436,
+      "description": "Door B for Natural Resources (Ag Science)",
+      "nodeID": 81
+    },
+    "toNode": {
+      "latitude": 38.942418,
+      "longitude": -92.324874,
+      "description": "Door D for Natural Resources (Ag Science)",
+      "nodeID": 83
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 315,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 7,
+    "fromNode": {
+      "latitude": 38.942949,
+      "longitude": -92.325436,
+      "description": "Door B for Natural Resources (Ag Science)",
+      "nodeID": 81
+    },
+    "toNode": {
+      "latitude": 38.942591,
+      "longitude": -92.324058,
+      "description": "Door E for Natural Resources (Ag Science)",
+      "nodeID": 84
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 357,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 8,
+    "fromNode": {
+      "latitude": 38.942949,
+      "longitude": -92.325436,
+      "description": "Door B for Natural Resources (Ag Science)",
+      "nodeID": 81
+    },
+    "toNode": {
+      "latitude": 38.943136,
+      "longitude": -92.324221,
+      "description": "Door F for Natural Resources (Ag Science)",
+      "nodeID": 85
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 532,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 9,
+    "fromNode": {
+      "latitude": 38.942949,
+      "longitude": -92.325436,
+      "description": "Door B for Natural Resources (Ag Science)",
+      "nodeID": 81
+    },
+    "toNode": {
+      "latitude": 38.942548,
+      "longitude": -92.325451,
+      "description": "Door C for Natural Resources (Ag Science)",
+      "nodeID": 82
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 765.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 10,
+    "fromNode": {
+      "latitude": 38.942548,
+      "longitude": -92.325451,
+      "description": "Door C for Natural Resources (Ag Science)",
+      "nodeID": 82
+    },
+    "toNode": {
+      "latitude": 38.942418,
+      "longitude": -92.324874,
+      "description": "Door D for Natural Resources (Ag Science)",
+      "nodeID": 83
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 198.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 11,
+    "fromNode": {
+      "latitude": 38.942548,
+      "longitude": -92.325451,
+      "description": "Door C for Natural Resources (Ag Science)",
+      "nodeID": 82
+    },
+    "toNode": {
+      "latitude": 38.942591,
+      "longitude": -92.324058,
+      "description": "Door E for Natural Resources (Ag Science)",
+      "nodeID": 84
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 380.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 12,
+    "fromNode": {
+      "latitude": 38.942548,
+      "longitude": -92.325451,
+      "description": "Door C for Natural Resources (Ag Science)",
+      "nodeID": 82
+    },
+    "toNode": {
+      "latitude": 38.943136,
+      "longitude": -92.324221,
+      "description": "Door F for Natural Resources (Ag Science)",
+      "nodeID": 85
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 613.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 13,
+    "fromNode": {
+      "latitude": 38.942418,
+      "longitude": -92.324874,
+      "description": "Door D for Natural Resources (Ag Science)",
+      "nodeID": 83
+    },
+    "toNode": {
+      "latitude": 38.942591,
+      "longitude": -92.324058,
+      "description": "Door E for Natural Resources (Ag Science)",
+      "nodeID": 84
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 245,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 14,
+    "fromNode": {
+      "latitude": 38.942418,
+      "longitude": -92.324874,
+      "description": "Door D for Natural Resources (Ag Science)",
+      "nodeID": 83
+    },
+    "toNode": {
+      "latitude": 38.943136,
+      "longitude": -92.324221,
+      "description": "Door F for Natural Resources (Ag Science)",
+      "nodeID": 85
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 478.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 15,
+    "fromNode": {
+      "latitude": 38.942591,
+      "longitude": -92.324058,
+      "description": "Door E for Natural Resources (Ag Science)",
+      "nodeID": 84
+    },
+    "toNode": {
+      "latitude": 38.943136,
+      "longitude": -92.324221,
+      "description": "Door F for Natural Resources (Ag Science)",
+      "nodeID": 85
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 245,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 16,
+    "fromNode": {
+      "latitude": 38.943853,
+      "longitude": -92.322682,
+      "description": "Door A for Physics Building",
+      "nodeID": 175
+    },
+    "toNode": {
+      "latitude": 38.943417,
+      "longitude": -92.322689,
+      "description": "Door B for Physics Building",
+      "nodeID": 176
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 158.66667,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 17,
+    "fromNode": {
+      "latitude": 38.943138,
+      "longitude": -92.323608,
+      "description": "Door A for Life Sciences Center",
+      "nodeID": 177
+    },
+    "toNode": {
+      "latitude": 38.943141,
+      "longitude": -92.323256,
+      "description": "Door B for Life Sciences Center",
+      "nodeID": 178
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 186.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 18,
+    "fromNode": {
+      "latitude": 38.943138,
+      "longitude": -92.323608,
+      "description": "Door A for Life Sciences Center",
+      "nodeID": 177
+    },
+    "toNode": {
+      "latitude": 38.943068,
+      "longitude": -92.322642,
+      "description": "Door C for Life Sciences Center",
+      "nodeID": 179
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 389.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 19,
+    "fromNode": {
+      "latitude": 38.943138,
+      "longitude": -92.323608,
+      "description": "Door A for Life Sciences Center",
+      "nodeID": 177
+    },
+    "toNode": {
+      "latitude": 38.942875,
+      "longitude": -92.323241,
+      "description": "Door D for Life Sciences Center",
+      "nodeID": 180
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 196,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 20,
+    "fromNode": {
+      "latitude": 38.943138,
+      "longitude": -92.323608,
+      "description": "Door A for Life Sciences Center",
+      "nodeID": 177
+    },
+    "toNode": {
+      "latitude": 38.942794,
+      "longitude": -92.323618,
+      "description": "Door E for Life Sciences Center",
+      "nodeID": 181
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 301,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 21,
+    "fromNode": {
+      "latitude": 38.943138,
+      "longitude": -92.323608,
+      "description": "Door A for Life Sciences Center",
+      "nodeID": 177
+    },
+    "toNode": {
+      "latitude": 38.942911,
+      "longitude": -92.32382,
+      "description": "Door F for Life Sciences Center",
+      "nodeID": 182
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 214.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 22,
+    "fromNode": {
+      "latitude": 38.943141,
+      "longitude": -92.323256,
+      "description": "Door B for Life Sciences Center",
+      "nodeID": 178
+    },
+    "toNode": {
+      "latitude": 38.943068,
+      "longitude": -92.322642,
+      "description": "Door C for Life Sciences Center",
+      "nodeID": 179
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 203,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 23,
+    "fromNode": {
+      "latitude": 38.943141,
+      "longitude": -92.323256,
+      "description": "Door B for Life Sciences Center",
+      "nodeID": 178
+    },
+    "toNode": {
+      "latitude": 38.942875,
+      "longitude": -92.323241,
+      "description": "Door D for Life Sciences Center",
+      "nodeID": 180
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 107.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 24,
+    "fromNode": {
+      "latitude": 38.943141,
+      "longitude": -92.323256,
+      "description": "Door B for Life Sciences Center",
+      "nodeID": 178
+    },
+    "toNode": {
+      "latitude": 38.942794,
+      "longitude": -92.323618,
+      "description": "Door E for Life Sciences Center",
+      "nodeID": 181
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 261.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 25,
+    "fromNode": {
+      "latitude": 38.943141,
+      "longitude": -92.323256,
+      "description": "Door B for Life Sciences Center",
+      "nodeID": 178
+    },
+    "toNode": {
+      "latitude": 38.942911,
+      "longitude": -92.32382,
+      "description": "Door F for Life Sciences Center",
+      "nodeID": 182
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 347.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 26,
+    "fromNode": {
+      "latitude": 38.943068,
+      "longitude": -92.322642,
+      "description": "Door C for Life Sciences Center",
+      "nodeID": 179
+    },
+    "toNode": {
+      "latitude": 38.942875,
+      "longitude": -92.323241,
+      "description": "Door D for Life Sciences Center",
+      "nodeID": 180
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 210,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 27,
+    "fromNode": {
+      "latitude": 38.943068,
+      "longitude": -92.322642,
+      "description": "Door C for Life Sciences Center",
+      "nodeID": 179
+    },
+    "toNode": {
+      "latitude": 38.942794,
+      "longitude": -92.323618,
+      "description": "Door E for Life Sciences Center",
+      "nodeID": 181
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 380.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 28,
+    "fromNode": {
+      "latitude": 38.943068,
+      "longitude": -92.322642,
+      "description": "Door C for Life Sciences Center",
+      "nodeID": 179
+    },
+    "toNode": {
+      "latitude": 38.942911,
+      "longitude": -92.32382,
+      "description": "Door F for Life Sciences Center",
+      "nodeID": 182
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 452.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 29,
+    "fromNode": {
+      "latitude": 38.942875,
+      "longitude": -92.323241,
+      "description": "Door D for Life Sciences Center",
+      "nodeID": 180
+    },
+    "toNode": {
+      "latitude": 38.942794,
+      "longitude": -92.323618,
+      "description": "Door E for Life Sciences Center",
+      "nodeID": 181
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 170.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 30,
+    "fromNode": {
+      "latitude": 38.942875,
+      "longitude": -92.323241,
+      "description": "Door D for Life Sciences Center",
+      "nodeID": 180
+    },
+    "toNode": {
+      "latitude": 38.942911,
+      "longitude": -92.32382,
+      "description": "Door F for Life Sciences Center",
+      "nodeID": 182
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 242.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 31,
+    "fromNode": {
+      "latitude": 38.942794,
+      "longitude": -92.323618,
+      "description": "Door E for Life Sciences Center",
+      "nodeID": 181
+    },
+    "toNode": {
+      "latitude": 38.942911,
+      "longitude": -92.32382,
+      "description": "Door F for Life Sciences Center",
+      "nodeID": 182
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 86.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 32,
+    "fromNode": {
+      "latitude": 38.944179,
+      "longitude": -92.324912,
+      "description": "Door A for Gentry Hall",
+      "nodeID": 156
+    },
+    "toNode": {
+      "latitude": 38.9443,
+      "longitude": -92.324919,
+      "description": "Door B for Gentry Hall",
+      "nodeID": 157
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 126,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 33,
+    "fromNode": {
+      "latitude": 38.944179,
+      "longitude": -92.324912,
+      "description": "Door A for Gentry Hall",
+      "nodeID": 156
+    },
+    "toNode": {
+      "latitude": 38.944425,
+      "longitude": -92.325008,
+      "description": "Door C for Gentry Hall",
+      "nodeID": 158
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 170.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 34,
+    "fromNode": {
+      "latitude": 38.944179,
+      "longitude": -92.324912,
+      "description": "Door A for Gentry Hall",
+      "nodeID": 156
+    },
+    "toNode": {
+      "latitude": 38.944307,
+      "longitude": -92.325238,
+      "description": "Door D for Gentry Hall",
+      "nodeID": 159
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 238,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 35,
+    "fromNode": {
+      "latitude": 38.944179,
+      "longitude": -92.324912,
+      "description": "Door A for Gentry Hall",
+      "nodeID": 156
+    },
+    "toNode": {
+      "latitude": 38.944231,
+      "longitude": -92.32476,
+      "description": "Door E for Gentry Hall",
+      "nodeID": 160
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 60.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 36,
+    "fromNode": {
+      "latitude": 38.9443,
+      "longitude": -92.324919,
+      "description": "Door B for Gentry Hall",
+      "nodeID": 157
+    },
+    "toNode": {
+      "latitude": 38.944425,
+      "longitude": -92.325008,
+      "description": "Door C for Gentry Hall",
+      "nodeID": 158
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 86.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 37,
+    "fromNode": {
+      "latitude": 38.9443,
+      "longitude": -92.324919,
+      "description": "Door B for Gentry Hall",
+      "nodeID": 157
+    },
+    "toNode": {
+      "latitude": 38.944307,
+      "longitude": -92.325238,
+      "description": "Door D for Gentry Hall",
+      "nodeID": 159
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 154,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 38,
+    "fromNode": {
+      "latitude": 38.9443,
+      "longitude": -92.324919,
+      "description": "Door B for Gentry Hall",
+      "nodeID": 157
+    },
+    "toNode": {
+      "latitude": 38.944231,
+      "longitude": -92.32476,
+      "description": "Door E for Gentry Hall",
+      "nodeID": 160
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 186.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 39,
+    "fromNode": {
+      "latitude": 38.944425,
+      "longitude": -92.325008,
+      "description": "Door C for Gentry Hall",
+      "nodeID": 158
+    },
+    "toNode": {
+      "latitude": 38.944307,
+      "longitude": -92.325238,
+      "description": "Door D for Gentry Hall",
+      "nodeID": 159
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 128.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 40,
+    "fromNode": {
+      "latitude": 38.944425,
+      "longitude": -92.325008,
+      "description": "Door C for Gentry Hall",
+      "nodeID": 158
+    },
+    "toNode": {
+      "latitude": 38.944231,
+      "longitude": -92.32476,
+      "description": "Door E for Gentry Hall",
+      "nodeID": 160
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 231,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 41,
+    "fromNode": {
+      "latitude": 38.944307,
+      "longitude": -92.325238,
+      "description": "Door D for Gentry Hall",
+      "nodeID": 159
+    },
+    "toNode": {
+      "latitude": 38.944231,
+      "longitude": -92.32476,
+      "description": "Door E for Gentry Hall",
+      "nodeID": 160
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 298.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 42,
+    "fromNode": {
+      "latitude": 38.944916,
+      "longitude": -92.323179,
+      "description": "Door A for Herman Schlundt Hall",
+      "nodeID": 98
+    },
+    "toNode": {
+      "latitude": 38.944979,
+      "longitude": -92.322961,
+      "description": "Door B for Herman Schlundt Hall",
+      "nodeID": 99
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 98,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 43,
+    "fromNode": {
+      "latitude": 38.944916,
+      "longitude": -92.323179,
+      "description": "Door A for Herman Schlundt Hall",
+      "nodeID": 98
+    },
+    "toNode": {
+      "latitude": 38.944781,
+      "longitude": -92.322899,
+      "description": "Door C for Herman Schlundt Hall",
+      "nodeID": 100
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 130.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 44,
+    "fromNode": {
+      "latitude": 38.944979,
+      "longitude": -92.322961,
+      "description": "Door B for Herman Schlundt Hall",
+      "nodeID": 99
+    },
+    "toNode": {
+      "latitude": 38.944781,
+      "longitude": -92.322899,
+      "description": "Door C for Herman Schlundt Hall",
+      "nodeID": 100
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 102.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 45,
+    "fromNode": {
+      "latitude": 38.944559,
+      "longitude": -92.324973,
+      "description": "Door A for Gwynn / Stanley Hall",
+      "nodeID": 101
+    },
+    "toNode": {
+      "latitude": 38.944766,
+      "longitude": -92.324814,
+      "description": "Door B for Gwynn / Stanley Hall",
+      "nodeID": 102
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 163.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 46,
+    "fromNode": {
+      "latitude": 38.944559,
+      "longitude": -92.324973,
+      "description": "Door A for Gwynn / Stanley Hall",
+      "nodeID": 101
+    },
+    "toNode": {
+      "latitude": 38.944762,
+      "longitude": -92.324467,
+      "description": "Door C for Gwynn / Stanley Hall",
+      "nodeID": 103
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 270.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 47,
+    "fromNode": {
+      "latitude": 38.944559,
+      "longitude": -92.324973,
+      "description": "Door A for Gwynn / Stanley Hall",
+      "nodeID": 101
+    },
+    "toNode": {
+      "latitude": 38.94469,
+      "longitude": -92.323824,
+      "description": "Door D for Gwynn / Stanley Hall",
+      "nodeID": 104
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 457.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 48,
+    "fromNode": {
+      "latitude": 38.944766,
+      "longitude": -92.324814,
+      "description": "Door B for Gwynn / Stanley Hall",
+      "nodeID": 102
+    },
+    "toNode": {
+      "latitude": 38.944762,
+      "longitude": -92.324467,
+      "description": "Door C for Gwynn / Stanley Hall",
+      "nodeID": 103
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 186.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 49,
+    "fromNode": {
+      "latitude": 38.944766,
+      "longitude": -92.324814,
+      "description": "Door B for Gwynn / Stanley Hall",
+      "nodeID": 102
+    },
+    "toNode": {
+      "latitude": 38.94469,
+      "longitude": -92.323824,
+      "description": "Door D for Gwynn / Stanley Hall",
+      "nodeID": 104
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 373.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 50,
+    "fromNode": {
+      "latitude": 38.944762,
+      "longitude": -92.324467,
+      "description": "Door C for Gwynn / Stanley Hall",
+      "nodeID": 103
+    },
+    "toNode": {
+      "latitude": 38.94469,
+      "longitude": -92.323824,
+      "description": "Door D for Gwynn / Stanley Hall",
+      "nodeID": 104
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 242.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 51,
+    "fromNode": {
+      "latitude": 38.944687,
+      "longitude": -92.323696,
+      "description": "Door A for Curtis Hall",
+      "nodeID": 86
+    },
+    "toNode": {
+      "latitude": 38.944808,
+      "longitude": -92.323466,
+      "description": "Door B for Curtis Hall",
+      "nodeID": 87
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 98,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 52,
+    "fromNode": {
+      "latitude": 38.944687,
+      "longitude": -92.323696,
+      "description": "Door A for Curtis Hall",
+      "nodeID": 86
+    },
+    "toNode": {
+      "latitude": 38.944739,
+      "longitude": -92.323231,
+      "description": "Door C for Curtis Hall",
+      "nodeID": 88
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 151.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 53,
+    "fromNode": {
+      "latitude": 38.944808,
+      "longitude": -92.323466,
+      "description": "Door B for Curtis Hall",
+      "nodeID": 87
+    },
+    "toNode": {
+      "latitude": 38.944739,
+      "longitude": -92.323231,
+      "description": "Door C for Curtis Hall",
+      "nodeID": 88
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 114.3,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 54,
+    "fromNode": {
+      "latitude": 38.94236171,
+      "longitude": -92.32665998,
+      "description": "Door A for Student Center",
+      "nodeID": 105
+    },
+    "toNode": {
+      "latitude": 38.94258711,
+      "longitude": -92.32747269,
+      "description": "Door B for Student Center",
+      "nodeID": 106
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 326,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 55,
+    "fromNode": {
+      "latitude": 38.94236171,
+      "longitude": -92.32665998,
+      "description": "Door A for Student Center",
+      "nodeID": 105
+    },
+    "toNode": {
+      "latitude": 38.94287784,
+      "longitude": -92.32711778,
+      "description": "Door C for Student Center",
+      "nodeID": 107
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 270,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 56,
+    "fromNode": {
+      "latitude": 38.94236171,
+      "longitude": -92.32665998,
+      "description": "Door A for Student Center",
+      "nodeID": 105
+    },
+    "toNode": {
+      "latitude": 38.94291868,
+      "longitude": -92.32649618,
+      "description": "Door D for Student Center",
+      "nodeID": 108
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 211,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 57,
+    "fromNode": {
+      "latitude": 38.94258711,
+      "longitude": -92.32747269,
+      "description": "Door B for Student Center",
+      "nodeID": 106
+    },
+    "toNode": {
+      "latitude": 38.94287784,
+      "longitude": -92.32711778,
+      "description": "Door C for Student Center",
+      "nodeID": 107
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 190,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 58,
+    "fromNode": {
+      "latitude": 38.94258711,
+      "longitude": -92.32747269,
+      "description": "Door B for Student Center",
+      "nodeID": 106
+    },
+    "toNode": {
+      "latitude": 38.94291868,
+      "longitude": -92.32649618,
+      "description": "Door D for Student Center",
+      "nodeID": 108
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 349,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 59,
+    "fromNode": {
+      "latitude": 38.94287784,
+      "longitude": -92.32711778,
+      "description": "Door C for Student Center",
+      "nodeID": 107
+    },
+    "toNode": {
+      "latitude": 38.94291868,
+      "longitude": -92.32649618,
+      "description": "Door D for Student Center",
+      "nodeID": 108
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 214,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 60,
+    "fromNode": {
+      "latitude": 38.94233242,
+      "longitude": -92.32802481,
+      "description": "Door A for Strickland Hall",
+      "nodeID": 153
+    },
+    "toNode": {
+      "latitude": 38.94268139,
+      "longitude": -92.32784414,
+      "description": "Door B for Strickland Hall",
+      "nodeID": 154
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 204,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 61,
+    "fromNode": {
+      "latitude": 38.94233242,
+      "longitude": -92.32802481,
+      "description": "Door A for Strickland Hall",
+      "nodeID": 153
+    },
+    "toNode": {
+      "latitude": 38.94291763,
+      "longitude": -92.32789799,
+      "description": "Door C for Strickland Hall",
+      "nodeID": 155
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 320,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 62,
+    "fromNode": {
+      "latitude": 38.94268139,
+      "longitude": -92.32784414,
+      "description": "Door B for Strickland Hall",
+      "nodeID": 154
+    },
+    "toNode": {
+      "latitude": 38.94291763,
+      "longitude": -92.32789799,
+      "description": "Door C for Strickland Hall",
+      "nodeID": 155
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 111,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 63,
+    "fromNode": {
+      "latitude": 38.94252678,
+      "longitude": -92.32967813,
+      "description": "Door A for Cornell Hall",
+      "nodeID": 109
+    },
+    "toNode": {
+      "latitude": 38.94309004,
+      "longitude": -92.32937235,
+      "description": "Door B for Cornell Hall",
+      "nodeID": 110
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 274,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 64,
+    "fromNode": {
+      "latitude": 38.94252678,
+      "longitude": -92.32967813,
+      "description": "Door A for Cornell Hall",
+      "nodeID": 109
+    },
+    "toNode": {
+      "latitude": 38.9432465,
+      "longitude": -92.32967276,
+      "description": "Door C for Cornell Hall",
+      "nodeID": 111
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 429,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 65,
+    "fromNode": {
+      "latitude": 38.94309004,
+      "longitude": -92.32937235,
+      "description": "Door B for Cornell Hall",
+      "nodeID": 110
+    },
+    "toNode": {
+      "latitude": 38.9432465,
+      "longitude": -92.32967276,
+      "description": "Door C for Cornell Hall",
+      "nodeID": 111
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 116,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 66,
+    "fromNode": {
+      "latitude": 38.94337216,
+      "longitude": -92.32725642,
+      "description": "Door A for Arts & Sciences",
+      "nodeID": 117
+    },
+    "toNode": {
+      "latitude": 38.94337216,
+      "longitude": -92.32741624,
+      "description": "Door B for Arts & Sciences",
+      "nodeID": 118
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 48,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 67,
+    "fromNode": {
+      "latitude": 38.94337216,
+      "longitude": -92.32725642,
+      "description": "Door A for Arts & Sciences",
+      "nodeID": 117
+    },
+    "toNode": {
+      "latitude": 38.94377127,
+      "longitude": -92.32726701,
+      "description": "Door C for Arts & Sciences",
+      "nodeID": 119
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 173,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 68,
+    "fromNode": {
+      "latitude": 38.94337216,
+      "longitude": -92.32725642,
+      "description": "Door A for Arts & Sciences",
+      "nodeID": 117
+    },
+    "toNode": {
+      "latitude": 38.94377576,
+      "longitude": -92.32740661,
+      "description": "Door D for Arts & Sciences",
+      "nodeID": 120
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 180,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 69,
+    "fromNode": {
+      "latitude": 38.94337216,
+      "longitude": -92.32741624,
+      "description": "Door B for Arts & Sciences",
+      "nodeID": 118
+    },
+    "toNode": {
+      "latitude": 38.94377127,
+      "longitude": -92.32726701,
+      "description": "Door C for Arts & Sciences",
+      "nodeID": 119
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 175,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 70,
+    "fromNode": {
+      "latitude": 38.94337216,
+      "longitude": -92.32741624,
+      "description": "Door B for Arts & Sciences",
+      "nodeID": 118
+    },
+    "toNode": {
+      "latitude": 38.94377576,
+      "longitude": -92.32740661,
+      "description": "Door D for Arts & Sciences",
+      "nodeID": 120
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 179,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 71,
+    "fromNode": {
+      "latitude": 38.94377127,
+      "longitude": -92.32726701,
+      "description": "Door C for Arts & Sciences",
+      "nodeID": 119
+    },
+    "toNode": {
+      "latitude": 38.94377576,
+      "longitude": -92.32740661,
+      "description": "Door D for Arts & Sciences",
+      "nodeID": 120
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 38,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 72,
+    "fromNode": {
+      "latitude": 38.94374731,
+      "longitude": 92.32824324,
+      "description": "Door A for Hulston Hall",
+      "nodeID": 123
+    },
+    "toNode": {
+      "latitude": 38.94375854,
+      "longitude": -92.32841654,
+      "description": "Door B for Hulston Hall",
+      "nodeID": 124
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 50,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 73,
+    "fromNode": {
+      "latitude": 38.94374731,
+      "longitude": 92.32824324,
+      "description": "Door A for Hulston Hall",
+      "nodeID": 123
+    },
+    "toNode": {
+      "latitude": 38.94392103,
+      "longitude": 92.32781,
+      "description": "Door C for Hulston Hall",
+      "nodeID": 125
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 203,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 74,
+    "fromNode": {
+      "latitude": 38.94375854,
+      "longitude": -92.32841654,
+      "description": "Door B for Hulston Hall",
+      "nodeID": 124
+    },
+    "toNode": {
+      "latitude": 38.94392103,
+      "longitude": 92.32781,
+      "description": "Door C for Hulston Hall",
+      "nodeID": 125
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 228,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 75,
+    "fromNode": {
+      "latitude": 38.94470061,
+      "longitude": -92.32661798,
+      "description": "Door A for Ellis Library",
+      "nodeID": 96
+    },
+    "toNode": {
+      "latitude": 38.94422206,
+      "longitude": -92.32689518,
+      "description": "Door B for Ellis Library",
+      "nodeID": 97
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 216,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 76,
+    "fromNode": {
+      "latitude": 38.94471878,
+      "longitude": -92.32790592,
+      "description": "Door A for Tate Hall",
+      "nodeID": 148
+    },
+    "toNode": {
+      "latitude": 38.94454,
+      "longitude": -92.327998,
+      "description": "Door B for Tate Hall",
+      "nodeID": 149
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 276,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 77,
+    "fromNode": {
+      "latitude": 38.94471878,
+      "longitude": -92.32790592,
+      "description": "Door A for Tate Hall",
+      "nodeID": 148
+    },
+    "toNode": {
+      "latitude": 38.94464914,
+      "longitude": -92.32811291,
+      "description": "Door C for Tate Hall",
+      "nodeID": 150
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 191,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 78,
+    "fromNode": {
+      "latitude": 38.94471878,
+      "longitude": -92.32790592,
+      "description": "Door A for Tate Hall",
+      "nodeID": 148
+    },
+    "toNode": {
+      "latitude": 38.94478841,
+      "longitude": -92.32810232,
+      "description": "Door D for Tate Hall",
+      "nodeID": 151
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 207,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 79,
+    "fromNode": {
+      "latitude": 38.94471878,
+      "longitude": -92.32790592,
+      "description": "Door A for Tate Hall",
+      "nodeID": 148
+    },
+    "toNode": {
+      "latitude": 38.944909,
+      "longitude": -92.327978,
+      "description": "Door E for Tate Hall",
+      "nodeID": 152
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 261,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 80,
+    "fromNode": {
+      "latitude": 38.94454,
+      "longitude": -92.327998,
+      "description": "Door B for Tate Hall",
+      "nodeID": 149
+    },
+    "toNode": {
+      "latitude": 38.94464914,
+      "longitude": -92.32811291,
+      "description": "Door C for Tate Hall",
+      "nodeID": 150
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 108,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 81,
+    "fromNode": {
+      "latitude": 38.94454,
+      "longitude": -92.327998,
+      "description": "Door B for Tate Hall",
+      "nodeID": 149
+    },
+    "toNode": {
+      "latitude": 38.94478841,
+      "longitude": -92.32810232,
+      "description": "Door D for Tate Hall",
+      "nodeID": 151
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 116,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 82,
+    "fromNode": {
+      "latitude": 38.94454,
+      "longitude": -92.327998,
+      "description": "Door B for Tate Hall",
+      "nodeID": 149
+    },
+    "toNode": {
+      "latitude": 38.944909,
+      "longitude": -92.327978,
+      "description": "Door E for Tate Hall",
+      "nodeID": 152
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 133,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 83,
+    "fromNode": {
+      "latitude": 38.94464914,
+      "longitude": -92.32811291,
+      "description": "Door C for Tate Hall",
+      "nodeID": 150
+    },
+    "toNode": {
+      "latitude": 38.94478841,
+      "longitude": -92.32810232,
+      "description": "Door D for Tate Hall",
+      "nodeID": 151
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 45,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 84,
+    "fromNode": {
+      "latitude": 38.94464914,
+      "longitude": -92.32811291,
+      "description": "Door C for Tate Hall",
+      "nodeID": 150
+    },
+    "toNode": {
+      "latitude": 38.944909,
+      "longitude": -92.327978,
+      "description": "Door E for Tate Hall",
+      "nodeID": 152
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 113,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 85,
+    "fromNode": {
+      "latitude": 38.94478841,
+      "longitude": -92.32810232,
+      "description": "Door D for Tate Hall",
+      "nodeID": 151
+    },
+    "toNode": {
+      "latitude": 38.944909,
+      "longitude": -92.327978,
+      "description": "Door E for Tate Hall",
+      "nodeID": 152
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 115,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 86,
+    "fromNode": {
+      "latitude": 38.9475435,
+      "longitude": -92.3305047,
+      "description": "Door A for McAlester Hall",
+      "nodeID": 137
+    },
+    "toNode": {
+      "latitude": 38.9475198,
+      "longitude": -92.3301054,
+      "description": "Door B for McAlester Hall",
+      "nodeID": 138
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 118.1104,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 87,
+    "fromNode": {
+      "latitude": 38.9475435,
+      "longitude": -92.3305047,
+      "description": "Door A for McAlester Hall",
+      "nodeID": 137
+    },
+    "toNode": {
+      "latitude": 38.947731,
+      "longitude": -92.3305094,
+      "description": "Door C for McAlester Hall",
+      "nodeID": 139
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 70.86624,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 88,
+    "fromNode": {
+      "latitude": 38.9475198,
+      "longitude": -92.3301054,
+      "description": "Door B for McAlester Hall",
+      "nodeID": 138
+    },
+    "toNode": {
+      "latitude": 38.947731,
+      "longitude": -92.3305094,
+      "description": "Door C for McAlester Hall",
+      "nodeID": 139
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 129.92143,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 89,
+    "fromNode": {
+      "latitude": 38.9471941,
+      "longitude": -92.3305285,
+      "description": "Door A for Parker Hall",
+      "nodeID": 94
+    },
+    "toNode": {
+      "latitude": 38.9473539,
+      "longitude": -92.3303967,
+      "description": "Door B for Parker Hall",
+      "nodeID": 95
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 59.0552,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 90,
+    "fromNode": {
+      "latitude": 38.946331,
+      "longitude": -92.33086,
+      "description": "Door A for Lafferre Hall",
+      "nodeID": 89
+    },
+    "toNode": {
+      "latitude": 38.9464736,
+      "longitude": -92.3301081,
+      "description": "Door B for Lafferre Hall",
+      "nodeID": 90
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 221.457,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 91,
+    "fromNode": {
+      "latitude": 38.946331,
+      "longitude": -92.33086,
+      "description": "Door A for Lafferre Hall",
+      "nodeID": 89
+    },
+    "toNode": {
+      "latitude": 38.9459633,
+      "longitude": -92.3293808,
+      "description": "Door C for Lafferre Hall",
+      "nodeID": 91
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 261.31927,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 92,
+    "fromNode": {
+      "latitude": 38.946331,
+      "longitude": -92.33086,
+      "description": "Door A for Lafferre Hall",
+      "nodeID": 89
+    },
+    "toNode": {
+      "latitude": 38.9458082,
+      "longitude": -92.3292866,
+      "description": "Door D for Lafferre Hall",
+      "nodeID": 92
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 468.01245,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 93,
+    "fromNode": {
+      "latitude": 38.946331,
+      "longitude": -92.33086,
+      "description": "Door A for Lafferre Hall",
+      "nodeID": 89
+    },
+    "toNode": {
+      "latitude": 38.9457067,
+      "longitude": -92.330097,
+      "description": "Door E for Lafferre Hall",
+      "nodeID": 93
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 283.46497,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 94,
+    "fromNode": {
+      "latitude": 38.9464736,
+      "longitude": -92.3301081,
+      "description": "Door B for Lafferre Hall",
+      "nodeID": 90
+    },
+    "toNode": {
+      "latitude": 38.9459633,
+      "longitude": -92.3293808,
+      "description": "Door C for Lafferre Hall",
+      "nodeID": 91
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 200.78767,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 95,
+    "fromNode": {
+      "latitude": 38.9464736,
+      "longitude": -92.3301081,
+      "description": "Door B for Lafferre Hall",
+      "nodeID": 90
+    },
+    "toNode": {
+      "latitude": 38.9458082,
+      "longitude": -92.3292866,
+      "description": "Door D for Lafferre Hall",
+      "nodeID": 92
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 354.3312,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 96,
+    "fromNode": {
+      "latitude": 38.9464736,
+      "longitude": -92.3301081,
+      "description": "Door B for Lafferre Hall",
+      "nodeID": 90
+    },
+    "toNode": {
+      "latitude": 38.9457067,
+      "longitude": -92.330097,
+      "description": "Door E for Lafferre Hall",
+      "nodeID": 93
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 177.1656,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 97,
+    "fromNode": {
+      "latitude": 38.9459633,
+      "longitude": -92.3293808,
+      "description": "Door C for Lafferre Hall",
+      "nodeID": 91
+    },
+    "toNode": {
+      "latitude": 38.9458082,
+      "longitude": -92.3292866,
+      "description": "Door D for Lafferre Hall",
+      "nodeID": 92
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 320.37445,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 98,
+    "fromNode": {
+      "latitude": 38.9459633,
+      "longitude": -92.3293808,
+      "description": "Door C for Lafferre Hall",
+      "nodeID": 91
+    },
+    "toNode": {
+      "latitude": 38.9457067,
+      "longitude": -92.330097,
+      "description": "Door E for Lafferre Hall",
+      "nodeID": 93
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 236.2208,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 99,
+    "fromNode": {
+      "latitude": 38.9458082,
+      "longitude": -92.3292866,
+      "description": "Door D for Lafferre Hall",
+      "nodeID": 92
+    },
+    "toNode": {
+      "latitude": 38.9457067,
+      "longitude": -92.330097,
+      "description": "Door E for Lafferre Hall",
+      "nodeID": 93
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 305.61066,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 100,
+    "fromNode": {
+      "latitude": 38.93932727,
+      "longitude": -92.33171672,
+      "description": "Door A for Southwest Village",
+      "nodeID": 171
+    },
+    "toNode": {
+      "latitude": 38.939,
+      "longitude": -92.3318,
+      "description": "Door B for Southwest Village",
+      "nodeID": 172
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 170,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 101,
+    "fromNode": {
+      "latitude": 38.944591,
+      "longitude": -92.322905,
+      "description": "Door A for Chemistry Building",
+      "nodeID": 133
+    },
+    "toNode": {
+      "latitude": 38.944253,
+      "longitude": -92.322949,
+      "description": "Door B for Chemistry Building",
+      "nodeID": 134
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 133,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 102,
+    "fromNode": {
+      "latitude": 38.944222,
+      "longitude": -92.322239,
+      "description": "Door C for Chemistry Building",
+      "nodeID": 135
+    },
+    "toNode": {
+      "latitude": 38.944068,
+      "longitude": -92.322657,
+      "description": "Door D for Chemistry Building",
+      "nodeID": 136
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 186.7,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 103,
+    "fromNode": {
+      "latitude": -92.32370362,
+      "longitude": 38.94508614,
+      "description": "Door A for Stewart Hall",
+      "nodeID": 131
+    },
+    "toNode": {
+      "latitude": -92.32395977,
+      "longitude": 38.94510387,
+      "description": "Door B for Stewart Hall",
+      "nodeID": 132
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 175,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 104,
+    "fromNode": {
+      "latitude": -92.32437551,
+      "longitude": 38.94598211,
+      "description": "Door A for Walters Hall",
+      "nodeID": 72
+    },
+    "toNode": {
+      "latitude": -92.32395306,
+      "longitude": 38.946028,
+      "description": "Door B for Walters Hall",
+      "nodeID": 73
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 152.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 105,
+    "fromNode": {
+      "latitude": -92.32437551,
+      "longitude": 38.94598211,
+      "description": "Door A for Walters Hall",
+      "nodeID": 72
+    },
+    "toNode": {
+      "latitude": -92.3239544,
+      "longitude": 38.94587363,
+      "description": "Door C for Walters Hall",
+      "nodeID": 74
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 152.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 106,
+    "fromNode": {
+      "latitude": -92.32395306,
+      "longitude": 38.946028,
+      "description": "Door B for Walters Hall",
+      "nodeID": 73
+    },
+    "toNode": {
+      "latitude": -92.3239544,
+      "longitude": 38.94587363,
+      "description": "Door C for Walters Hall",
+      "nodeID": 74
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 52.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 107,
+    "fromNode": {
+      "latitude": -92.32503533,
+      "longitude": 38.9460134,
+      "description": "Door A for Mumford Hall",
+      "nodeID": 143
+    },
+    "toNode": {
+      "latitude": -92.32485831,
+      "longitude": 38.94601653,
+      "description": "Door B for Mumford Hall",
+      "nodeID": 144
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 90,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 108,
+    "fromNode": {
+      "latitude": -92.32503533,
+      "longitude": 38.9460134,
+      "description": "Door A for Mumford Hall",
+      "nodeID": 143
+    },
+    "toNode": {
+      "latitude": -92.32494146,
+      "longitude": 38.94617402,
+      "description": "Door C for Mumford Hall",
+      "nodeID": 145
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 75,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 109,
+    "fromNode": {
+      "latitude": -92.32485831,
+      "longitude": 38.94601653,
+      "description": "Door B for Mumford Hall",
+      "nodeID": 144
+    },
+    "toNode": {
+      "latitude": -92.32494146,
+      "longitude": 38.94617402,
+      "description": "Door C for Mumford Hall",
+      "nodeID": 145
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 75,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 110,
+    "fromNode": {
+      "latitude": -92.32623696,
+      "longitude": 38.94579019,
+      "description": "Door A for Fine Arts Building",
+      "nodeID": 161
+    },
+    "toNode": {
+      "latitude": -92.3258695,
+      "longitude": 38.94577767,
+      "description": "Door B for Fine Arts Building",
+      "nodeID": 162
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 45,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 111,
+    "fromNode": {
+      "latitude": -92.3258239,
+      "longitude": 38.94540427,
+      "description": "Door C for Fine Arts Building",
+      "nodeID": 163
+    },
+    "toNode": {
+      "latitude": -92.32593924,
+      "longitude": 38.94515185,
+      "description": "Door D for Fine Arts Building",
+      "nodeID": 164
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 60,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 112,
+    "fromNode": {
+      "latitude": -92.3258239,
+      "longitude": 38.94540427,
+      "description": "Door C for Fine Arts Building",
+      "nodeID": 163
+    },
+    "toNode": {
+      "latitude": -92.32621014,
+      "longitude": 38.94515394,
+      "description": "Door E for Fine Arts Building",
+      "nodeID": 165
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 100,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 113,
+    "fromNode": {
+      "latitude": -92.3258239,
+      "longitude": 38.94540427,
+      "description": "Door C for Fine Arts Building",
+      "nodeID": 163
+    },
+    "toNode": {
+      "latitude": -92.32631475,
+      "longitude": 38.94539384,
+      "description": "Door F for Fine Arts Building",
+      "nodeID": 166
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 102.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 114,
+    "fromNode": {
+      "latitude": -92.32593924,
+      "longitude": 38.94515185,
+      "description": "Door D for Fine Arts Building",
+      "nodeID": 164
+    },
+    "toNode": {
+      "latitude": -92.32621014,
+      "longitude": 38.94515394,
+      "description": "Door E for Fine Arts Building",
+      "nodeID": 165
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 40,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 115,
+    "fromNode": {
+      "latitude": -92.32593924,
+      "longitude": 38.94515185,
+      "description": "Door D for Fine Arts Building",
+      "nodeID": 164
+    },
+    "toNode": {
+      "latitude": -92.32631475,
+      "longitude": 38.94539384,
+      "description": "Door F for Fine Arts Building",
+      "nodeID": 166
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 100,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 116,
+    "fromNode": {
+      "latitude": -92.32621014,
+      "longitude": 38.94515394,
+      "description": "Door E for Fine Arts Building",
+      "nodeID": 165
+    },
+    "toNode": {
+      "latitude": -92.32631475,
+      "longitude": 38.94539384,
+      "description": "Door F for Fine Arts Building",
+      "nodeID": 166
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 60,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 117,
+    "fromNode": {
+      "latitude": -92.32529014,
+      "longitude": 38.94506841,
+      "description": "Door A for Memorial Union",
+      "nodeID": 140
+    },
+    "toNode": {
+      "latitude": -92.32529551,
+      "longitude": 38.94547728,
+      "description": "Door B for Memorial Union",
+      "nodeID": 141
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 142.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 118,
+    "fromNode": {
+      "latitude": -92.32529014,
+      "longitude": 38.94506841,
+      "description": "Door A for Memorial Union",
+      "nodeID": 140
+    },
+    "toNode": {
+      "latitude": -92.32485563,
+      "longitude": 38.94541887,
+      "description": "Door C for Memorial Union",
+      "nodeID": 142
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 197.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 119,
+    "fromNode": {
+      "latitude": -92.32529551,
+      "longitude": 38.94547728,
+      "description": "Door B for Memorial Union",
+      "nodeID": 141
+    },
+    "toNode": {
+      "latitude": -92.32485563,
+      "longitude": 38.94541887,
+      "description": "Door C for Memorial Union",
+      "nodeID": 142
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 222.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 120,
+    "fromNode": {
+      "latitude": -92.32530087,
+      "longitude": 38.94572135,
+      "description": "Door A for Whitten Hall",
+      "nodeID": 173
+    },
+    "toNode": {
+      "latitude": -92.32510239,
+      "longitude": 38.94577976,
+      "description": "Door B for Whitten Hall",
+      "nodeID": 174
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 80,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 121,
+    "fromNode": {
+      "latitude": -92.32728034,
+      "longitude": 38.9460885,
+      "description": "Door A for Middlebush Hall",
+      "nodeID": 126
+    },
+    "toNode": {
+      "latitude": -92.32714355,
+      "longitude": 38.9460885,
+      "description": "Door B for Middlebush Hall",
+      "nodeID": 127
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 62.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 122,
+    "fromNode": {
+      "latitude": -92.32728034,
+      "longitude": 38.9460885,
+      "description": "Door A for Middlebush Hall",
+      "nodeID": 126
+    },
+    "toNode": {
+      "latitude": -92.32669562,
+      "longitude": 38.94611561,
+      "description": "Door C for Middlebush Hall",
+      "nodeID": 128
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 232.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 123,
+    "fromNode": {
+      "latitude": -92.32728034,
+      "longitude": 38.9460885,
+      "description": "Door A for Middlebush Hall",
+      "nodeID": 126
+    },
+    "toNode": {
+      "latitude": -92.32669026,
+      "longitude": 38.94627207,
+      "description": "Door D for Middlebush Hall",
+      "nodeID": 129
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 232.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 124,
+    "fromNode": {
+      "latitude": -92.32728034,
+      "longitude": 38.9460885,
+      "description": "Door A for Middlebush Hall",
+      "nodeID": 126
+    },
+    "toNode": {
+      "latitude": -92.3265186,
+      "longitude": 38.9459529,
+      "description": "Door E for Middlebush Hall",
+      "nodeID": 130
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 350,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 125,
+    "fromNode": {
+      "latitude": -92.32714355,
+      "longitude": 38.9460885,
+      "description": "Door B for Middlebush Hall",
+      "nodeID": 127
+    },
+    "toNode": {
+      "latitude": -92.32669562,
+      "longitude": 38.94611561,
+      "description": "Door C for Middlebush Hall",
+      "nodeID": 128
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 232.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 126,
+    "fromNode": {
+      "latitude": -92.32714355,
+      "longitude": 38.9460885,
+      "description": "Door B for Middlebush Hall",
+      "nodeID": 127
+    },
+    "toNode": {
+      "latitude": -92.32669026,
+      "longitude": 38.94627207,
+      "description": "Door D for Middlebush Hall",
+      "nodeID": 129
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 232.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 127,
+    "fromNode": {
+      "latitude": -92.32714355,
+      "longitude": 38.9460885,
+      "description": "Door B for Middlebush Hall",
+      "nodeID": 127
+    },
+    "toNode": {
+      "latitude": -92.3265186,
+      "longitude": 38.9459529,
+      "description": "Door E for Middlebush Hall",
+      "nodeID": 130
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 350,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 128,
+    "fromNode": {
+      "latitude": -92.32669562,
+      "longitude": 38.94611561,
+      "description": "Door C for Middlebush Hall",
+      "nodeID": 128
+    },
+    "toNode": {
+      "latitude": -92.32669026,
+      "longitude": 38.94627207,
+      "description": "Door D for Middlebush Hall",
+      "nodeID": 129
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 75,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 129,
+    "fromNode": {
+      "latitude": -92.32669562,
+      "longitude": 38.94611561,
+      "description": "Door C for Middlebush Hall",
+      "nodeID": 128
+    },
+    "toNode": {
+      "latitude": -92.3265186,
+      "longitude": 38.9459529,
+      "description": "Door E for Middlebush Hall",
+      "nodeID": 130
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 135,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 130,
+    "fromNode": {
+      "latitude": -92.32669026,
+      "longitude": 38.94627207,
+      "description": "Door D for Middlebush Hall",
+      "nodeID": 129
+    },
+    "toNode": {
+      "latitude": -92.3265186,
+      "longitude": 38.9459529,
+      "description": "Door E for Middlebush Hall",
+      "nodeID": 130
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 162.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 131,
+    "fromNode": {
+      "latitude": -92.32823789,
+      "longitude": 38.94581105,
+      "description": "Door A for Swallow Hall",
+      "nodeID": 167
+    },
+    "toNode": {
+      "latitude": -92.32795626,
+      "longitude": 38.94577976,
+      "description": "Door C for Swallow Hall",
+      "nodeID": 169
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 62.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 132,
+    "fromNode": {
+      "latitude": -92.32823789,
+      "longitude": 38.94581105,
+      "description": "Door A for Swallow Hall",
+      "nodeID": 167
+    },
+    "toNode": {
+      "latitude": -92.32795492,
+      "longitude": 38.94560974,
+      "description": "Door D for Swallow Hall",
+      "nodeID": 170
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 97.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 133,
+    "fromNode": {
+      "latitude": -92.32826337,
+      "longitude": 38.9456233,
+      "description": "Door B for Swallow Hall",
+      "nodeID": 168
+    },
+    "toNode": {
+      "latitude": -92.32795626,
+      "longitude": 38.94577976,
+      "description": "Door C for Swallow Hall",
+      "nodeID": 169
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 97.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 134,
+    "fromNode": {
+      "latitude": -92.32826337,
+      "longitude": 38.9456233,
+      "description": "Door B for Swallow Hall",
+      "nodeID": 168
+    },
+    "toNode": {
+      "latitude": -92.32795492,
+      "longitude": 38.94560974,
+      "description": "Door D for Swallow Hall",
+      "nodeID": 170
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 62.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 135,
+    "fromNode": {
+      "latitude": -92.32801259,
+      "longitude": 38.9475216,
+      "description": "Door A for Reynolds Journalism Institude",
+      "nodeID": 183
+    },
+    "toNode": {
+      "latitude": -92.32780874,
+      "longitude": 38.94751743,
+      "description": "Door B for Reynolds Journalism Institude",
+      "nodeID": 184
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 50,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 136,
+    "fromNode": {
+      "latitude": -92.32801259,
+      "longitude": 38.9475216,
+      "description": "Door A for Reynolds Journalism Institude",
+      "nodeID": 183
+    },
+    "toNode": {
+      "latitude": -92.32804209,
+      "longitude": 38.94720035,
+      "description": "Door C for Reynolds Journalism Institude",
+      "nodeID": 185
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 115,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 137,
+    "fromNode": {
+      "latitude": -92.32801259,
+      "longitude": 38.9475216,
+      "description": "Door A for Reynolds Journalism Institude",
+      "nodeID": 183
+    },
+    "toNode": {
+      "latitude": -92.32775509,
+      "longitude": 38.94727545,
+      "description": "Door D for Reynolds Journalism Institude",
+      "nodeID": 186
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 132.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 138,
+    "fromNode": {
+      "latitude": -92.32780874,
+      "longitude": 38.94751743,
+      "description": "Door B for Reynolds Journalism Institude",
+      "nodeID": 184
+    },
+    "toNode": {
+      "latitude": -92.32804209,
+      "longitude": 38.94720035,
+      "description": "Door C for Reynolds Journalism Institude",
+      "nodeID": 185
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 115,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 139,
+    "fromNode": {
+      "latitude": -92.32780874,
+      "longitude": 38.94751743,
+      "description": "Door B for Reynolds Journalism Institude",
+      "nodeID": 184
+    },
+    "toNode": {
+      "latitude": -92.32775509,
+      "longitude": 38.94727545,
+      "description": "Door D for Reynolds Journalism Institude",
+      "nodeID": 186
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 132.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 140,
+    "fromNode": {
+      "latitude": -92.32804209,
+      "longitude": 38.94720035,
+      "description": "Door C for Reynolds Journalism Institude",
+      "nodeID": 185
+    },
+    "toNode": {
+      "latitude": -92.32775509,
+      "longitude": 38.94727545,
+      "description": "Door D for Reynolds Journalism Institude",
+      "nodeID": 186
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 62.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 141,
+    "fromNode": {
+      "latitude": 38.94726447,
+      "longitude": -92.32915847,
+      "description": "Door A for Geological Science",
+      "nodeID": 75
+    },
+    "toNode": {
+      "latitude": 38.94731098,
+      "longitude": -92.32957951,
+      "description": "Door B for Geological Science",
+      "nodeID": 76
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 274,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 142,
+    "fromNode": {
+      "latitude": -92.32928798,
+      "longitude": 38.94672161,
+      "description": "Door A for Switzler Hall",
+      "nodeID": 146
+    },
+    "toNode": {
+      "latitude": -92.32955888,
+      "longitude": 38.94662252,
+      "description": "Door B for Switzler Hall",
+      "nodeID": 147
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 101,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 143,
+    "fromNode": {
+      "latitude": -92.329699,
+      "longitude": 38.94549,
+      "description": "Door A for Hill Hall",
+      "nodeID": 121
+    },
+    "toNode": {
+      "latitude": -92.329721,
+      "longitude": 38.945107,
+      "description": "Door B for Hill Hall",
+      "nodeID": 122
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 138,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 144,
+    "fromNode": {
+      "latitude": -92.32978016,
+      "longitude": 38.94497245,
+      "description": "Door A for Townsend Hall",
+      "nodeID": 112
+    },
+    "toNode": {
+      "latitude": -92.32960314,
+      "longitude": 38.94475549,
+      "description": "Door B for Townsend Hall",
+      "nodeID": 113
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 115,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 145,
+    "fromNode": {
+      "latitude": -92.32978016,
+      "longitude": 38.94497245,
+      "description": "Door A for Townsend Hall",
+      "nodeID": 112
+    },
+    "toNode": {
+      "latitude": -92.33008325,
+      "longitude": 38.94465536,
+      "description": "Door C for Townsend Hall",
+      "nodeID": 114
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 207.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 146,
+    "fromNode": {
+      "latitude": -92.32978016,
+      "longitude": 38.94497245,
+      "description": "Door A for Townsend Hall",
+      "nodeID": 112
+    },
+    "toNode": {
+      "latitude": -92.33057141,
+      "longitude": 38.94480139,
+      "description": "Door D for Townsend Hall",
+      "nodeID": 115
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 262.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 147,
+    "fromNode": {
+      "latitude": -92.32978016,
+      "longitude": 38.94497245,
+      "description": "Door A for Townsend Hall",
+      "nodeID": 112
+    },
+    "toNode": {
+      "latitude": -92.33034343,
+      "longitude": 38.94499957,
+      "description": "Door E for Townsend Hall",
+      "nodeID": 116
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 250,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 148,
+    "fromNode": {
+      "latitude": -92.32960314,
+      "longitude": 38.94475549,
+      "description": "Door B for Townsend Hall",
+      "nodeID": 113
+    },
+    "toNode": {
+      "latitude": -92.33008325,
+      "longitude": 38.94465536,
+      "description": "Door C for Townsend Hall",
+      "nodeID": 114
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 200,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 149,
+    "fromNode": {
+      "latitude": -92.32960314,
+      "longitude": 38.94475549,
+      "description": "Door B for Townsend Hall",
+      "nodeID": 113
+    },
+    "toNode": {
+      "latitude": -92.33057141,
+      "longitude": 38.94480139,
+      "description": "Door D for Townsend Hall",
+      "nodeID": 115
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 273,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 150,
+    "fromNode": {
+      "latitude": -92.32960314,
+      "longitude": 38.94475549,
+      "description": "Door B for Townsend Hall",
+      "nodeID": 113
+    },
+    "toNode": {
+      "latitude": -92.33034343,
+      "longitude": 38.94499957,
+      "description": "Door E for Townsend Hall",
+      "nodeID": 116
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 262.5,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 151,
+    "fromNode": {
+      "latitude": -92.33008325,
+      "longitude": 38.94465536,
+      "description": "Door C for Townsend Hall",
+      "nodeID": 114
+    },
+    "toNode": {
+      "latitude": -92.33057141,
+      "longitude": 38.94480139,
+      "description": "Door D for Townsend Hall",
+      "nodeID": 115
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 200,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 152,
+    "fromNode": {
+      "latitude": -92.33008325,
+      "longitude": 38.94465536,
+      "description": "Door C for Townsend Hall",
+      "nodeID": 114
+    },
+    "toNode": {
+      "latitude": -92.33034343,
+      "longitude": 38.94499957,
+      "description": "Door E for Townsend Hall",
+      "nodeID": 116
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 200,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 153,
+    "fromNode": {
+      "latitude": -92.33057141,
+      "longitude": 38.94480139,
+      "description": "Door D for Townsend Hall",
+      "nodeID": 115
+    },
+    "toNode": {
+      "latitude": -92.33034343,
+      "longitude": 38.94499957,
+      "description": "Door E for Townsend Hall",
+      "nodeID": 116
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 115,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 154,
+    "fromNode": {
+      "latitude": 38.94604042,
+      "longitude": -92.33167786,
+      "description": "Door A for Academic Support Center",
+      "nodeID": 77
+    },
+    "toNode": {
+      "latitude": 38.94614629,
+      "longitude": -92.33114678,
+      "description": "Door B for Academic Support Center",
+      "nodeID": 78
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 261,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 155,
+    "fromNode": {
+      "latitude": 38.94604042,
+      "longitude": -92.33167786,
+      "description": "Door A for Academic Support Center",
+      "nodeID": 77
+    },
+    "toNode": {
+      "latitude": 38.94626467,
+      "longitude": -92.3316383,
+      "description": "Door C for Academic Support Center",
+      "nodeID": 79
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 124,
+    "pathshape": "{}",
+    "bidirectional": true
+  },
+  {
+    "edgeId": 156,
+    "fromNode": {
+      "latitude": 38.94614629,
+      "longitude": -92.33114678,
+      "description": "Door B for Academic Support Center",
+      "nodeID": 78
+    },
+    "toNode": {
+      "latitude": 38.94626467,
+      "longitude": -92.3316383,
+      "description": "Door C for Academic Support Center",
+      "nodeID": 79
+    },
+    "fromToAction": "",
+    "toFromAction": "",
+    "distance": 228,
+    "pathshape": "{}",
+    "bidirectional": true
+  }
+]
