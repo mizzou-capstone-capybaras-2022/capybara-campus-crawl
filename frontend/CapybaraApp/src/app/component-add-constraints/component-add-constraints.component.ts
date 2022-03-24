@@ -10,7 +10,8 @@ export class ComponentAddConstraintsComponent implements OnInit {
 
   addConstraints = new FormGroup({
     indoor: new FormControl(''),
-    food: new FormControl('')
+    food: new FormControl(''),
+    time: new FormControl('')
   });
 
   constructor() { }
