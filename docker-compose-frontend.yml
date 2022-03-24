@@ -5,8 +5,9 @@ services:
     build:
       context: ./frontend
       args:
-        - TILESERVICE=${TILESERVICE:-http://localhost:8100/tile}
+        - TILESERVICE=${TILESERVICE:-https://api.maptiler.com/maps/openstreetmap}
         - BASEAPIPATH=${BASEAPIPATH:-http://localhost:8090}
+        - MAPAPIKEY=${MAPAPIKEY}
     restart: always
     ports:
       - "4200:80"

@@ -3,6 +3,7 @@ FROM node:lts-alpine as node
 
 ARG TILESERVICE=http://{s}.tile.openstreetmap.org
 ARG BASEAPIPATH=http://localhost:8090
+ARG MAPAPIKEY
 
 WORKDIR /app
 
@@ -11,7 +12,8 @@ COPY ./CapybaraApp .
 RUN printf "export const environment = {\n" >> environment.docker.ts
 RUN printf "production: false,\n" >> environment.docker.ts
 RUN printf "tileservice: '${TILESERVICE}',\n" >> environment.docker.ts
-RUN printf "baseApiPath: '${BASEAPIPATH}'\n" >> environment.docker.ts
+RUN printf "baseApiPath: '${BASEAPIPATH},'\n" >> environment.docker.ts
+RUN printf "tileKey: '${MAPAPIKEY}'\n" >> environment.docker.ts
 RUN printf "};\n" >> environment.docker.ts
 
 RUN cat environment.docker.ts
