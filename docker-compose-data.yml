@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  pgadmin:
+    container_name: fullstack_pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: capybara@admin.com
+      PGADMIN_DEFAULT_PASSWORD: capy
+    ports:
+      - "5050:80"
+  db:
+    container_name: fullstack_pg_container
+    image: postgres
+    restart: always
+    volumes:
+            - capybaradbdata:/var/lib/postgresql/data
+            - ./capybara-database/sql-scripts/container-backup.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    environment:
+      POSTGRES_USER: capy
+      POSTGRES_PASSWORD: capy
+      POSTGRES_DB: capybara_db
+    healthcheck:
+      test: "exit 0"
+    ports:
+      - "5432:5432"
+volumes:
+        capybaradbdata:
+                driver: local
+networks:
+  default:
+    name: docker-capybara-network

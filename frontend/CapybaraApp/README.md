@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.3.
 
+To install angular cli:  "npm install -g @angular/cli"
+
+# Setup
+Using this Leaflet helper: https://github.com/Asymmetrik/ngx-leaflet
+
+Install:
+npm install leaflet
+npm install @asymmetrik/ngx-leaflet
+
+npm install --save-dev @types/leaflet
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

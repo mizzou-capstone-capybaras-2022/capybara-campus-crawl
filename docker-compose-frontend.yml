@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  frontend:
+    container_name: fullstack_frontend_container
+    build:
+      context: ./frontend
+      args:
+        - TILESERVICE=${TILESERVICE:-https://api.maptiler.com/maps/openstreetmap}
+        - BASEAPIPATH=${BASEAPIPATH:-http://localhost:8090}
+        - MAPAPIKEY=${MAPAPIKEY}
+    restart: always
+    ports:
+      - "4200:80"
+volumes:
+        capybaradbdata:
+                driver: local
+networks:
+  default:
+    name: docker-capybara-network

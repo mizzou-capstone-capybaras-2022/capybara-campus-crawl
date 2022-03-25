@@ -1,0 +1,28 @@
+plugin: openapi
+specFile: spec.yaml
+
+resources:
+  - path: /building-route/
+    method: put
+    response:
+      staticFile: mocked-data/fake-route.json
+  - path: /routes/
+    method: put
+    response:
+      staticFile: mocked-data/fake-route.json
+  - path: /buildings/
+    method: get
+    response:
+      staticFile: mocked-data/buildings.json
+  - path: /graph-nodes/
+    method: get
+    response:
+      staticFile: mocked-data/nodes.json
+  - path: /graph-edges/
+    method: get
+    response:
+      staticFile: mocked-data/edges.json
+  - path: /doors/
+    method: get
+    response:
+      staticFile: mocked-data/doors.json

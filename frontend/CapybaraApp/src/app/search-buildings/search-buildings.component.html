@@ -1,0 +1,18 @@
+<div id="formContainer">
+
+    <form [formGroup]="searchBuildings" (ngSubmit)="searchBuildingsFn()">
+      <mat-form-field appearance="standard">
+        <mat-label>Building Search</mat-label>
+        <mat-select  formControlName="start">
+          <mat-option value="one">Building 1</mat-option>
+          <mat-option value="two">Building 2</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <br>
+      <div>
+        <button mat-raised-button color="basic" type="submit">Submit</button>
+      </div>
+    </form>
+  
+  </div>

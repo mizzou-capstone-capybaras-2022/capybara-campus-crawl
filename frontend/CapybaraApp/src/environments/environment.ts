@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  tileservice: "https://api.maptiler.com/maps/openstreetmap",
+  baseApiPath: 'http://localhost:8090',
+  tileKey: ""
 };
 
 /*

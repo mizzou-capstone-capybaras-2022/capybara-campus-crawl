@@ -1,0 +1,187 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- description: Generated server url
+  url: http://localhost:8090
+paths:
+  /graph-nodes/:
+    get:
+      operationId: getNodes
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/GraphNode'
+                type: array
+          description: OK
+      tags:
+      - Graph Node Controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: Graph Node Controller
+  /graph-edges/:
+    get:
+      operationId: getGraphs
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/GraphEdge'
+                type: array
+          description: OK
+      tags:
+      - Graph Controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: Graph Controller
+  /doors/:
+    get:
+      operationId: getDoors
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Door'
+                type: array
+          description: OK
+      tags:
+      - Door Controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: Door Controller
+  /buildings/:
+    get:
+      operationId: getBuildings
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Building'
+                type: array
+          description: OK
+      tags:
+      - Building Controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: Building Controller
+components:
+  schemas:
+    GraphNode:
+      example:
+        latitude: 0.8008281904610115
+        description: description
+        nodeID: 1
+        longitude: 6.027456183070403
+      properties:
+        latitude:
+          format: double
+          type: number
+        longitude:
+          format: double
+          type: number
+        description:
+          type: string
+        nodeID:
+          format: int64
+          type: integer
+      type: object
+    GraphEdge:
+      example:
+        fromNode:
+          latitude: 0.8008281904610115
+          description: description
+          nodeID: 1
+          longitude: 6.027456183070403
+        edgeId: 0
+        bidirectional: true
+        distance: 6.027456183070403
+        toNode:
+          latitude: 0.8008281904610115
+          description: description
+          nodeID: 1
+          longitude: 6.027456183070403
+        fromToAction: fromToAction
+        pathshape: pathshape
+        toFromAction: toFromAction
+      properties:
+        edgeId:
+          format: int64
+          type: integer
+        fromNode:
+          $ref: '#/components/schemas/GraphNode'
+        toNode:
+          $ref: '#/components/schemas/GraphNode'
+        fromToAction:
+          type: string
+        toFromAction:
+          type: string
+        distance:
+          format: double
+          type: number
+        pathshape:
+          type: string
+        bidirectional:
+          type: boolean
+      type: object
+    Building:
+      example:
+        geojson: geojson
+        name: name
+        graphNode:
+          latitude: 0.8008281904610115
+          description: description
+          nodeID: 1
+          longitude: 6.027456183070403
+        nodeID: 1
+        buildingId: 6
+      properties:
+        buildingId:
+          format: int64
+          type: integer
+        name:
+          type: string
+        geojson:
+          type: string
+        graphNode:
+          $ref: '#/components/schemas/GraphNode'
+        nodeID:
+          format: int64
+          type: integer
+      type: object
+    Door:
+      example:
+        node:
+          latitude: 0.8008281904610115
+          description: description
+          nodeID: 1
+          longitude: 6.027456183070403
+        doorId: 0
+        building:
+          geojson: geojson
+          name: name
+          graphNode:
+            latitude: 0.8008281904610115
+            description: description
+            nodeID: 1
+            longitude: 6.027456183070403
+          nodeID: 1
+          buildingId: 6
+      properties:
+        doorId:
+          format: int64
+          type: integer
+        node:
+          $ref: '#/components/schemas/GraphNode'
+        building:
+          $ref: '#/components/schemas/Building'
+      type: object

@@ -1,5 +1,26 @@
 version: '3.8'
 services:
+  pgadmin:
+    container_name: fullstack_pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: capybara@admin.com
+      PGADMIN_DEFAULT_PASSWORD: capy
+    ports:
+      - "5050:80"
+  backend:
+    container_name: fullstack_backend_container
+    build: 
+      context: ./backend
+      args:
+        - DATABASE_STRING=${DATABASE_STRING:-jdbc:postgresql://fullstack_pg_container:5432/capybara_db}
+        - DATABASE_USER=${DATABASE_USER:-capy} 
+        - DATABASE_PASSWD=${DATABASE_PASSWD:-capy}
+        - ORS_KEY=${ORS_KEY}
+    restart: always
+    ports:
+      - "8090:8090"
   db:
     container_name: fullstack_pg_container
     image: postgres
@@ -15,22 +36,6 @@ services:
       test: "exit 0"
     ports:
       - "5432:5432"
-  pgadmin:
-    container_name: fullstack_pgadmin4_container
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: capybara@admin.com
-      PGADMIN_DEFAULT_PASSWORD: capy
-    ports:
-      - "5050:80"
-  backend:
-    container_name: fullstack_backend_container
-    build: ./backend
-    restart: always
-    ports:
-      - "8090:8090"
-
 volumes:
         capybaradbdata:
                 driver: local
