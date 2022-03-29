@@ -32,7 +32,12 @@ docker compose -f docker-compose-backend.yml build
 docker compose -f docker-compose-frontend.yml -f docker-compose-backend.yml up
 ```
 
-6. Tear down the docker compose
+6. Navigate to Swagger UI
+```
+http://localhost:8090/swagger-ui/index.html
+```
+
+7. Tear down the docker compose
 ```
 docker compose -f docker-compose-frontend.yml -f docker-compose-backend.yml down
 ```
