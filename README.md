@@ -12,6 +12,7 @@ TBD
 - Daniel Marin
 - Alex Centorbi
 
+# Instructions
 Instructions on how to run the docker containers can be found [here](instructions.md)
 
 # Running the Map Tile server
