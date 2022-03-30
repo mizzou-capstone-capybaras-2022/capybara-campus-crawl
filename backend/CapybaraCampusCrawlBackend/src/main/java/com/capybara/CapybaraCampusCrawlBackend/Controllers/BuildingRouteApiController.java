@@ -71,26 +71,9 @@ public class BuildingRouteApiController implements BuildingRouteApi {
     		Point pointA = new Point().latitude(graphNodeOne.getLatitude()).longitude(graphNodeOne.getLongitude());
     		Point pointB = new Point().latitude(graphNodeTwo.getLatitude()).longitude(graphNodeTwo.getLongitude());
     		
-    		String startString = pointA.getLatitude().toString() + "," + pointA.getLongitude().toString();
-    		String endString = pointB.getLatitude().toString() + "," + pointB.getLongitude().toString();
-    		String orsStringResponse = restTemplate.getForObject(
-                    "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" + apiKey + "&start=" + startString + "&end=" + endString, String.class);
     		
-    		ObjectMapper mapper = new ObjectMapper();
-    		
-    		JsonNode node = mapper.readTree(orsStringResponse);
-    		JsonNode coordinates = node.get("features").get(0).get("geometry").get("coordinates");
-    		
-    		ArrayList<Point> points = new ArrayList<Point>();
-    		
-    		for (int i = 0; i < coordinates.size(); i++) {
-    			JsonNode coordinateNode = coordinates.get(i);
-    			Double latitude = coordinateNode.get(0).asDouble();
-    			Double longitude = coordinateNode.get(1).asDouble();
-    			
-    			points.add(new Point().latitude(latitude).longitude(longitude));
-    		}
-    		
+    		ArrayList<Point> points = routeDao.GetRouteBetweenPoints(pointA, pointB);
+
     		return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
 
         }
