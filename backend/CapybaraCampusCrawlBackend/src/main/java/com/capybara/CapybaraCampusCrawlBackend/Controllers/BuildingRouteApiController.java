@@ -37,10 +37,6 @@ import javax.validation.Valid;
 public class BuildingRouteApiController implements BuildingRouteApi {
 
     private final NativeWebRequest request;
-    private RestTemplate restTemplate;
-    
-    @Value("${openrouteservice.api.key}")
-	private String apiKey;
 
     @Autowired
 	OpenRouteServiceDao routeDao;
