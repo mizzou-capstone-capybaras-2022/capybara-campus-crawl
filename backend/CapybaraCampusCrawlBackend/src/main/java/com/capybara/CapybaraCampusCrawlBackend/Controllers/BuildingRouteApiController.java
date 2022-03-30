@@ -60,7 +60,6 @@ public class BuildingRouteApiController implements BuildingRouteApi {
             
     		// building id->building obj->graph node object->point(lat, long)
     		
-    		BuildingRepository buildingRepository;
     		Building buildingOne = buildingRepository.findById(id1); // Where are the building IDs coming from?
     		Building buildingTwo = buildingRepository.findById(id2);
     		
