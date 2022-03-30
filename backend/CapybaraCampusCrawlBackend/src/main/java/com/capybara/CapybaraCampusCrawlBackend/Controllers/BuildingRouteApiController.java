@@ -3,12 +3,8 @@ package com.capybara.CapybaraCampusCrawlBackend.Controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -18,8 +14,7 @@ import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.BuildingRouteRequest;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -58,21 +53,22 @@ public class BuildingRouteApiController implements BuildingRouteApi {
             @Parameter(name = "BuildingRouteRequest", description = "Get the Route with a building specific route request", required = true, schema = @Schema(description = "")) @Valid @RequestBody BuildingRouteRequest buildingRouteRequest
         ) {
             
-    		// building id->building obj->graph node object->point(lat, long)
-    		
-	Building buildingOne = buildingDao.findById(buildingRouteRequest.getFromBuilding().getBuildingId());
-    		Building buildingTwo = buildingDao.findById(buildingRouteRequest.getToBuilding().getBuildingId());
+    		Building buildingA = buildingDao.findById((buildingRouteRequest.getFromBuilding().getBuildingId()).longValue());
+    		Building buildingB = buildingDao.findById(buildingRouteRequest.getToBuilding().getBuildingId().longValue());
    
-
+    		GraphNode graphNodeA = buildingA.getGraphNode();
+    		GraphNode graphNodeB = buildingB.getGraphNode();
     		
-    		GraphNode graphNodeOne = buildingOne.getGraphNode();
-    		GraphNode graphNodeTwo = buildingTwo.getGraphNode();
-    		
-    		Point pointA = new Point().latitude(graphNodeOne.getLatitude()).longitude(graphNodeOne.getLongitude());
-    		Point pointB = new Point().latitude(graphNodeTwo.getLatitude()).longitude(graphNodeTwo.getLongitude());
+    		Point pointA = new Point().latitude(graphNodeA.getLatitude()).longitude(graphNodeA.getLongitude());
+    		Point pointB = new Point().latitude(graphNodeB.getLatitude()).longitude(graphNodeB.getLongitude());
     		
     		
-    		ArrayList<Point> points = routeDao.GetRouteBetweenPoints(pointA, pointB);
+    		try {
+				ArrayList<Point> points = (ArrayList<Point>) routeDao.GetRouteBetweenPoints(pointA, pointB);
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
     		return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
 
