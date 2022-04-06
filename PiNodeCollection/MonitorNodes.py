@@ -3,6 +3,8 @@ import logging
 import os
 import signal
 import subprocess
+from datetime import datetime
+import csv
 
 """
     Fairly straightforward script to collect information about nearby wireless access points and their clients.
@@ -10,13 +12,38 @@ import subprocess
 
 """
 
+#Monitor mode instructions
+#sudo ip link set wlan1 down
+#sudo iw wlan1 set monitor none
+
 
 
 #Represents an instance of a client found using monitor mode on this machine.
 class Client:
-    def __init__(self,station):
-        self.station = station
+    def __init__(self,mac,seen,station=None,power=None,packets=None,probes=None,organization=None):
+        self.mac = mac
+        self.firstSeen = seen
+        self.lastSeen = seen
+        self.power = power
+        self.packets = packets
+        self.probes = probes
+        self.organization = organization
 
+#Represents an access point found using monitor mode.
+class AccessPoint:
+    def __init__(self,mac,bssid,seen,station=None,power=None,packets=None,probes=None,organization=None):
+        self.mac = mac
+        self.bssid = bssid
+        self.firstSeen = seen
+        self.lastSeen = seen
+        self.power = power
+        self.packets = packets
+        self.probes = probes
+        self.organization = organization
+
+def extractAccessPointData(csvFile):
+    timestringExampleFormat = "2006-01-02 15:04:05"
+    now = datetime.now()
 
 
 #Start of script
@@ -38,4 +65,6 @@ if __name__ == "__main__":
 
     airdumpProcess.kill()
     redirectOutput.close()
+    
+    #Split weird default csv created by airdump-ng into two for access points and clients.
     
