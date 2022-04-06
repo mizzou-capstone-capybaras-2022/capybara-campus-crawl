@@ -44,6 +44,8 @@ class AccessPoint:
 def extractAccessPointData(csvFile):
     timestringExampleFormat = "2006-01-02 15:04:05"
     now = datetime.now()
+    
+    #with open('outputTest')
 
 
 #Start of script
