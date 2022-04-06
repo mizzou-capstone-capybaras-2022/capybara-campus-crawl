@@ -12,6 +12,8 @@ import csv
 
 """
 
+logger = logging.getLogger(__name__)
+
 #Monitor mode instructions
 #sudo ip link set wlan1 down
 #sudo iw wlan1 set monitor none
@@ -20,17 +22,6 @@ import csv
 
 #Represents an instance of a client found using monitor mode on this machine.
 class Client:
-    def __init__(self,mac,seen,station=None,power=None,packets=None,probes=None,organization=None):
-        self.mac = mac
-        self.firstSeen = seen
-        self.lastSeen = seen
-        self.power = power
-        self.packets = packets
-        self.probes = probes
-        self.organization = organization
-
-#Represents an access point found using monitor mode.
-class AccessPoint:
     def __init__(self,mac,bssid,seen,station=None,power=None,packets=None,probes=None,organization=None):
         self.mac = mac
         self.bssid = bssid
@@ -41,16 +32,59 @@ class AccessPoint:
         self.probes = probes
         self.organization = organization
 
-def extractAccessPointData(csvFile):
-    timestringExampleFormat = "2006-01-02 15:04:05"
+#Represents an access point found using monitor mode.
+class AccessPoint:
+    def __init__(self,mac,firstSeen,lastSeen,channel=None,power=None,packets=None,probes=None,organization=None,speed=None,privacy=None,authentication=None,name=None):
+        self.mac = mac
+        self.firstSeen = firstSeen
+        self.lastSeen = lastSeen
+        self.power = power
+        self.packets = packets
+        self.probes = probes
+        self.organization = organization
+        self.channel = channel
+        self.speed = speed
+        self.privacy = privacy
+        self.authentication = authentication
+        self.name = name
+
+def extractAccessPointData(csvFileAPString):
+    accessPoints = []
     now = datetime.now()
     
-    #with open('outputTest')
+    apReader = csv.reader(csvFileAPString,delimeter=',',quotechar='|')
+    
+    for row in apReader:
+        if len(row) < 14:
+            logger.error(f'Not enough columns for access points!: {row}')
+            continue
+        
+        firstSeen = row[1]
+        lastSeen = row[2]
+        channel = row[3]
+        power = row[8]
+        
+        
+        #mac = row[0]
+        newAccessPoint = AccessPoint(row[0].replace(":", "-"),
+                                    firstSeen, lastSeen,
+                                    channel=channel,
+                                    speed=row[4],
+                                    privacy=row[5],
+                                    authentication=row[7],
+                                    power=int(record[8]),
+                                    name=row[13]
+                                    )
+
+        accessPoints.append(newAccessPoint)
+    
+    return accessPoints
+
+        
 
 
 #Start of script
 if __name__ == "__main__":
-    logger = logging.getLogger(__name__)
     logger.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 
     with logging as l:
