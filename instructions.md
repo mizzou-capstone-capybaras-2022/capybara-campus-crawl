@@ -26,10 +26,18 @@ docker compose -f docker-compose-frontend.yml build
 ```
 docker compose -f docker-compose-backend.yml build
 ```
+or linux
+```
+docker-compose -f docker-compose-backend.yml build
+```
 
 5. Startup the frontend and the backend
 ```
 docker compose -f docker-compose-frontend.yml -f docker-compose-backend.yml up
+```
+or linux
+```
+docker-compose -f docker-compose-frontend.yml -f docker-compose-backend.yml up
 ```
 
 6. Navigate to Swagger UI
@@ -41,6 +49,10 @@ http://localhost:8090/swagger-ui/index.html
 ```
 docker compose -f docker-compose-frontend.yml -f docker-compose-backend.yml down
 ```
+or linux
+```
+docker-compose -f docker-compose-frontend.yml -f docker-compose-backend.yml down
+
 
 ## Alternatively if just running the backend in docker. Do the following.
 1. Run the backend
