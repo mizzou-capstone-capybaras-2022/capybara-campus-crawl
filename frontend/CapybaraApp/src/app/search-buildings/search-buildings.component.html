@@ -3,9 +3,8 @@
     <form [formGroup]="searchBuildings" (ngSubmit)="searchBuildingsFn()">
       <mat-form-field appearance="standard">
         <mat-label>Building Search</mat-label>
-        <mat-select  formControlName="start">
-          <mat-option value="one">Building 1</mat-option>
-          <mat-option value="two">Building 2</mat-option>
+        <mat-select formControlName="building">
+          <mat-option *ngFor="let building of buildings;" [value]="building.buildingId">{{building.name}}</mat-option>
         </mat-select>
       </mat-form-field>
   
