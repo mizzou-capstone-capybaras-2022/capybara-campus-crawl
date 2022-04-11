@@ -37,7 +37,15 @@ public class routing{
 	        nodes.add(nodeA);
 	    }
 
-	    // getters and setters 
+	    // getters and setters
+	    
+	    public Set<Node> getNodes() {
+	        return nodes;
+	    }
+
+	    public void setNodes(Set<Node> nodes) {
+	        this.nodes = nodes;
+	    }
 	}
 	
 	public static class Node{
@@ -45,13 +53,12 @@ public class routing{
 		private String description;
 		double lat;
 		double lon;
-		private List<Node> shortestPath = new LinkedList<>();
-		private Integer distance = Integer.MAX_VALUE;
-		Map<Node,Double> adjList = new HashMap<>();
 		
-		public void addEdge(Node destination, double distance) {
-			adjList.put(destination, distance);
-	    }
+		private LinkedList<Node> shortestPath = new LinkedList<>();
+		
+		private Double distance = Double.MAX_VALUE;
+		
+		Map<Node,Double> adjList = new HashMap<>();
 		
 		public Node(int ID, String desc,double lat, double lon) {
 	        this.ID = ID;
@@ -59,6 +66,12 @@ public class routing{
 	        this.lat = lat;
 	        this.lon = lon;
 	    }
+		
+		public void addEdge(Node destination, double distance) {
+			adjList.put(destination, distance);
+	    }
+		
+		
 		public int getID() {
 			return ID;
 		}
@@ -71,6 +84,23 @@ public class routing{
 		}
 		public Map<Node, Double> getAdjacentNodes() {
 	        return adjList;
+	    }
+
+	    public void setAdjacentNodes(Map<Node, Double> adjacentNodes) {
+	        this.adjList = adjacentNodes;
+	    }
+	    
+	    public Double getDistance() {
+	        return distance;
+	    }
+	    public void setDistance(Double distance) {
+	        this.distance = distance;
+	    }
+	    public List<Node> getShortestPath() {
+	        return shortestPath;
+	    }
+	    public void setShortestPath(LinkedList<Node> shortestPath) {
+	        this.shortestPath = shortestPath;
 	    }
 	}
 	
@@ -141,7 +171,7 @@ public class routing{
 	    System.out.println("Starting ORS routing");
 	    for(int i =0;i<nodeObj.size();i++) {
 	    	JsonNode fromJSON = nodeObj.get(i);
-	    	String fromID=fromJSON.get("nodeID").asText();
+	    	int fromID=fromJSON.get("nodeID").asInt();
 	    	for(int j =i+1;j<nodeObj.size();j++) {
 	    		//System.out.println(fromJSON.toPrettyString());
 	    		
@@ -202,7 +232,8 @@ public class routing{
 	    		}
 	    		//System.out.println("From:"+fromJSON.get("description").asText()+"To:"+toJSON.get("description").asText());
 	    	}
-	    	System.out.println(fromID+" is done mapping");
+	    	//int left = nodeObj.size()-fromID
+	    	System.out.println(fromID+" is done mapping Left:"+ (nodeObj.size()-fromID));
 	    }
 	    
 	    int count =0;
@@ -223,8 +254,13 @@ public class routing{
 	    for(int i=0;i<nodeList.size();i++) {
 	    	graph.addNode(nodeList.get(i));
 	    }
-	   
-	    
+	    System.out.println("Starting routing shortest from NodeID 0");
+	    long start = System.nanoTime();
+	    graph = calculateShortestPathFromSource(graph, nodeList.get(0));
+	    long end = System.nanoTime();
+	    long duration = (end-start)/1000000;
+    	System.out.println("finished calculating: Took "+duration);
+	    System.out.println("test");
 	    
 	    
 	}
@@ -234,25 +270,79 @@ public class routing{
 //	}
 
 
+
+
+	public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
+
+        source.setDistance((double) 0);
+
+        Set<Node> settledNodes = new HashSet<>();
+        Set<Node> unsettledNodes = new HashSet<>();
+        unsettledNodes.add(source);
+
+        while (unsettledNodes.size() != 0) {
+            Node currentNode = getLowestDistanceNode(unsettledNodes);
+            unsettledNodes.remove(currentNode);
+            for (Entry<Node, Double> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
+                Node adjacentNode = adjacencyPair.getKey();
+                Double edgeWeigh = adjacencyPair.getValue();
+
+                if (!settledNodes.contains(adjacentNode)) {
+                    CalculateMinimumDistance(adjacentNode, edgeWeigh, currentNode);
+                    unsettledNodes.add(adjacentNode);
+                }
+            }
+            settledNodes.add(currentNode);
+        }
+        return graph;
+    }
+
+    private static void CalculateMinimumDistance(Node evaluationNode, Double edgeWeigh, Node sourceNode) {
+        Double sourceDistance = sourceNode.getDistance();
+        if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
+            evaluationNode.setDistance(sourceDistance + edgeWeigh);
+            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
+            shortestPath.add(sourceNode);
+            evaluationNode.setShortestPath(shortestPath);
+        }
+    }
+
+    private static Node getLowestDistanceNode(Set<Node> unsettledNodes) {
+        Node lowestDistanceNode = null;
+        double lowestDistance = Double.MAX_VALUE;
+        for (Node node : unsettledNodes) {
+            double nodeDistance = node.getDistance();
+            if (nodeDistance < lowestDistance) {
+                lowestDistance = nodeDistance;
+                lowestDistanceNode = node;
+            }
+        }
+        return lowestDistanceNode;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
