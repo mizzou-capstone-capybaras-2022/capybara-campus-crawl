@@ -128,33 +128,36 @@ public class routing{
 	
 	
 	public static void main(String arg[]) throws Exception{
+		
 		System.out.println("GET requests");
 		String nodeString = getRequest("http://localhost:8090/graph-nodes/");
 	    String edgeString = getRequest("http://localhost:8090/graph-edges/");
-	    //System.out.print(responseContent.toString());
 	    System.out.println("end requests");
+	    
 	    //turn into JSON object and pretty print
 	    ObjectMapper mapper = new ObjectMapper();
 	    JsonNode nodeObj = mapper.readTree(nodeString);
 	    JsonNode edgeObj = mapper.readTree(edgeString);
+	    
 	    //String nodepretty = nodeObj.toPrettyString();
 	    //String edgepretty = edgeObj.toPrettyString();
 	    //System.out.print(nodepretty);
 	    //System.out.print(edgepretty);
 	    
-	    //creating node objects
-	    
 	    List<Node> nodeList = new ArrayList<Node>();
 	    //generate nodes
 	    for(int i =0;i<nodeObj.size();i++) {
 	    	JsonNode currentJSON = nodeObj.get(i);
+	    	
 	    	int nodeID = currentJSON.get("nodeID").asInt();
 	    	String nodeDesc = currentJSON.get("description").asText();
 	    	double lat = currentJSON.get("latitude").asDouble();
 	    	double lon = currentJSON.get("longitude").asDouble();
+	    	
 	    	Node node = new Node(nodeID,nodeDesc,lat,lon);
 	    	nodeList.add(node);
 	    }
+	    
 	    System.out.println("Starting inside routing");
 	    //generate adj lists for every node
 	    for(int i=0;i<edgeObj.size();i++) {
@@ -163,41 +166,54 @@ public class routing{
 		    double distance = edgeObj.get(i).get("distance").asDouble();
 		    
 		    //System.out.println("From Node ID:"+fromNode+"  toNode ID:"+toNode+" distance:"+distance+"\r\n"+"From Desc:"+nodeList.get(fromNode-1).getDescription()+"    to Desc:"+nodeList.get(toNode-1).getDescription()+"\r\n\r\n");
-		    //add nodes based on a specific distance
+		    
+		    //add edges based on distance
 		    nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance);
 		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance);
 	    }
 	    
 	    System.out.println("Starting ORS routing");
+	    //TO BE DELTED BEFORE DEPLOYING. MUST HAVE ORS RUNNING WITH SPECIFIC CONFIGURATIONS TO WORK 
+	    
 	    for(int i =0;i<nodeObj.size();i++) {
+	    	//Starting point
 	    	JsonNode fromJSON = nodeObj.get(i);
+    		
+	    	String fromName=fromJSON.get("description").asText();
 	    	int fromID=fromJSON.get("nodeID").asInt();
+	    	
 	    	for(int j =i+1;j<nodeObj.size();j++) {
-	    		//System.out.println(fromJSON.toPrettyString());
-	    		
+	    		//end point
 	    		JsonNode toJSON = nodeObj.get(j);
-	    		//System.out.println(toJSON.toPrettyString());
-	    		String fromName=fromJSON.get("description").asText();
-	    		String toName=toJSON.get("description").asText();
 	    		
+	    		String toName=toJSON.get("description").asText();  		
 	    		String toID=toJSON.get("nodeID").asText();
+	    		
+	    		//if inside route
 	    		if((fromName.toLowerCase().startsWith("door") &&toName.toLowerCase().startsWith("door"))&&(fromName.substring(11).equals(toName.substring(11)))) {
 	    			
 	    			//System.out.println("From: "+fromName.substring(11)+"To: "+toName.substring(11));
 	    			//System.out.println("two doors!!");
 	    		}else {
 	    			
-	    			//make openrouteservice call from fromJSON to toJSON
+	    			//coordinates for starting point
 	    			Double lat1=fromJSON.get("latitude").asDouble();
 	    			Double lon1=fromJSON.get("longitude").asDouble();
+	    			
+	    			//coordinates for end point
 	    			Double lat2=toJSON.get("latitude").asDouble();
 	    			Double lon2=toJSON.get("longitude").asDouble();
+	    			
+	    			//DATA CORRECTION, SHOULD BE FIXED ONCE DATABASE IS RE-SEEDED
 	    			if(lon1 >50)
 	    				lon1 = lon1*-1;
 	    			if(lon2 >50)
 	    				lon2 = lon2*-1;
+	    			
 	    			String request ="";
 	    			//System.out.println("lat1: "+lat1+" lon1: "+lon1+"lat2: "+lat2+" lon2: "+lon2);
+	    			
+	    			//MORE DATA CORRECTION
 	    			if(lat1 <0) {
 	    				if(lat2<0) {//switch both lats and lons
 	    					request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lat1+","+lon1+"&end="+lat2+","+lon2;
@@ -212,18 +228,28 @@ public class routing{
 	    					request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lon1+","+lat1+"&end="+lon2+","+lat2;
 	    				}
 	    			}
+	    			
 	    			//String request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lon1+","+lat1+"&end="+lon2+","+lat2; 
 	    			//System.out.println(request);
+	    			
 	    			String requestString = getRequest(request);
+	    			
+	    			//JSON of the result from the ORS call
 	    			JsonNode jsonrequest = mapper.readTree(requestString);
 	    			//System.out.println("FROM: "+fromID+" TO: "+toID);
 	    			//System.out.println("FROM: "+fromName+" TO: "+toName+"\r\nJSON:\r\n"+jsonrequest.toPrettyString());
 	    			Double distance = jsonrequest.get("features").get(0).get("properties").get("segments").get(0).get("distance").asDouble();
+	    			
+	    			//change distance here to prioritize inside walking cuz of rain, other preferences
+	    			
 	    			//System.out.println(distance);
 	    			//System.out.println(distance);
+	    			
 	    			int fromNode = fromJSON.get("nodeID").asInt();
 	    		    int toNode = toJSON.get("nodeID").asInt();
 	    		    //System.out.println("creating ORS edge from: "+fromNode+" To: "+toNode);
+	    		    
+	    		    //if negative or 0 distance
 	    		    if(distance >0) {
 	    		    	nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance);
 		    		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance);	
@@ -235,7 +261,11 @@ public class routing{
 	    	//int left = nodeObj.size()-fromID
 	    	System.out.println(fromID+" is done mapping Left:"+ (nodeObj.size()-fromID));
 	    }
+	    //END OF WHAT SHOULD BE DELETED ONCE ORS GETS ADDED TO DATABASE
+	    //once it is added, the node in a data
 	    
+//prints the adj list of all the nodes. Used for testing purposes
+/*	    
 	    int count =0;
 	    for(int i=0;i<nodeList.size();i++) {
 	    	Node currentNode = nodeList.get(i);
@@ -249,11 +279,14 @@ public class routing{
 	    }
  
 	    System.out.println(count);
-	    
+*/	    
+	    //cerates graph for algorithm
 	    Graph graph = new Graph();
 	    for(int i=0;i<nodeList.size();i++) {
 	    	graph.addNode(nodeList.get(i));
 	    }
+	    
+	    //calculating shortest path from Node 0. Can be changed later to any node
 	    System.out.println("Starting routing shortest from NodeID 0");
 	    long start = System.nanoTime();
 	    graph = calculateShortestPathFromSource(graph, nodeList.get(0));
@@ -271,7 +304,7 @@ public class routing{
 
 
 
-
+	//algorithms
 	public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
 
         source.setDistance((double) 0);
