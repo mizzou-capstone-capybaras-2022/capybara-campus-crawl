@@ -12,7 +12,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.Set;
+
+import com.capybara.CapybaraCampusCrawlBackend.Controllers.generateEdges.Node;
 
 //import org.apache.commons.logging.Log;
 //import org.apache.tomcat.util.json.JSONParser;
@@ -149,7 +152,7 @@ public class routing{
 	    for(int i =0;i<nodeObj.size();i++) {
 	    	JsonNode currentJSON = nodeObj.get(i);
 	    	
-	    	int nodeID = currentJSON.get("nodeID").asInt();
+	    	int nodeID = currentJSON.get("nodeID").asInt()-1;
 	    	String nodeDesc = currentJSON.get("description").asText();
 	    	double lat = currentJSON.get("latitude").asDouble();
 	    	double lon = currentJSON.get("longitude").asDouble();
@@ -168,6 +171,10 @@ public class routing{
 		    //System.out.println("From Node ID:"+fromNode+"  toNode ID:"+toNode+" distance:"+distance+"\r\n"+"From Desc:"+nodeList.get(fromNode-1).getDescription()+"    to Desc:"+nodeList.get(toNode-1).getDescription()+"\r\n\r\n");
 		    
 		    //add edges based on distance
+		    
+		     
+		    //nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,coordinates);
+		    //nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,coordinatesReversed);
 		    nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance);
 		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance);
 	    }
@@ -181,13 +188,15 @@ public class routing{
     		
 	    	String fromName=fromJSON.get("description").asText();
 	    	int fromID=fromJSON.get("nodeID").asInt();
-	    	
 	    	for(int j =i+1;j<nodeObj.size();j++) {
-	    		//end point
+	    	//for(int j =0;j<nodeObj.size();j++) {
 	    		JsonNode toJSON = nodeObj.get(j);
 	    		
 	    		String toName=toJSON.get("description").asText();  		
 	    		String toID=toJSON.get("nodeID").asText();
+	    		if(j!=i) {
+	    		//end point
+	    		
 	    		
 	    		//if inside route
 	    		if((fromName.toLowerCase().startsWith("door") &&toName.toLowerCase().startsWith("door"))&&(fromName.substring(11).equals(toName.substring(11)))) {
@@ -240,6 +249,7 @@ public class routing{
 	    			//System.out.println("FROM: "+fromName+" TO: "+toName+"\r\nJSON:\r\n"+jsonrequest.toPrettyString());
 	    			Double distance = jsonrequest.get("features").get(0).get("properties").get("segments").get(0).get("distance").asDouble();
 	    			
+	    			distance = distance *1.3;
 	    			//change distance here to prioritize inside walking cuz of rain, other preferences
 	    			
 	    			//System.out.println(distance);
@@ -257,6 +267,9 @@ public class routing{
 	    			
 	    		}
 	    		//System.out.println("From:"+fromJSON.get("description").asText()+"To:"+toJSON.get("description").asText());
+	    		}else {
+	    			System.out.println("From:"+fromID+" TO:"+toID);
+	    		}
 	    	}
 	    	//int left = nodeObj.size()-fromID
 	    	System.out.println(fromID+" is done mapping Left:"+ (nodeObj.size()-fromID));
@@ -286,17 +299,86 @@ public class routing{
 	    	graph.addNode(nodeList.get(i));
 	    }
 	    
-	    //calculating shortest path from Node 0. Can be changed later to any node
-	    System.out.println("Starting routing shortest from NodeID 0");
-	    long start = System.nanoTime();
-	    graph = calculateShortestPathFromSource(graph, nodeList.get(0));
-	    long end = System.nanoTime();
-	    long duration = (end-start)/1000000;
-    	System.out.println("finished calculating: Took "+duration);
+	    Scanner obj = new Scanner(System.in);
+	    System.out.println("Enter From ID:");
+	    int ID = Integer.parseInt(obj.nextLine());
+	    int found =-1;
+	    
+	    //calculating shortest path from Node that user specifies
+	    System.out.println("Starting routing shortest from NodeID "+ID);
+	    for(int i=0;i<nodeList.size();i++) {
+	    	Node currentNode = nodeList.get(i);
+	    	int currentID = currentNode.getID();
+	    	if(ID == currentID) {
+	    		found =currentID;
+	    	}
+	    }
+	    
+	    if(found >=0) {
+	    	long start = System.nanoTime();
+	    	Node startNode = nodeList.get(found);
+	    	Graph graph2 = calculateShortestPathFromSource(graph,startNode);
+		    long end = System.nanoTime();
+		    long duration = (end-start)/1000000;
+	    	System.out.println("finished calculating: Took "+duration);
+	    	
+	    	Scanner obj2 = new Scanner(System.in);
+		    System.out.println("Enter to ID:");
+		    int toID = Integer.parseInt(obj2.nextLine());
+		    int found2 =-1;
+		    for(int i=0;i<nodeList.size();i++) {
+		    	Node currentNode = nodeList.get(i);
+		    	int currentID = currentNode.getID();
+		    	if(toID == currentID) {
+		    		found2 =currentID;
+		    	}
+		    }
+		    ListShortestPath(found,found2,nodeList);
+	    	
+	    	
+	    	
+	    	
+	    	
+	    }else {
+	    	System.out.println("COULDN'T FIND ID");
+	    }
+	    
 	    System.out.println("test");
 	    
 	    
 	}
+
+private static void ListShortestPath(int iD, int toID, List<Node> nodeList) {
+		// TODO Auto-generated method stub
+		System.out.println("From Node "+iD +" To Node "+toID);
+		Node currentNode = nodeList.get(toID);
+		List<Node> path = currentNode.getShortestPath();
+		Node PreviousNode=null;
+		Double distance =(double) -1;
+		
+		for(Node current : path) {
+			if(PreviousNode!=null) {
+				for (Entry<Node, Double> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
+			        if(current.getID() == adjacencyPair.getKey().getID()) {
+			        	distance = adjacencyPair.getValue();
+			        }	          
+			    }
+				System.out.println("Path from "+PreviousNode.getID()+" To "+current.getID()+ "With a weight of "+distance);
+				PreviousNode=current;
+			}else {
+				PreviousNode = current;
+			}
+		}
+		for (Entry<Node, Double> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
+	        if(currentNode.getID() == adjacencyPair.getKey().getID()) {
+	        	distance = adjacencyPair.getValue();
+	        }	          
+	    }
+		System.out.println("Path from "+PreviousNode.getID()+" To "+currentNode.getID()+ "With a weight of "+distance);
+		
+	}
+
+
 
 //	public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
 //		source
