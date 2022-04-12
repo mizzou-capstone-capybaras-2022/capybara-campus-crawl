@@ -102,7 +102,6 @@ CREATE TABLE public."PIMetrics"
 			REFERENCES public."GraphNode"("NodeID")
 );
 
--- Create Graphnodes --
 INSERT INTO public."GraphNode" VALUES (1, 38.9437187, -92.32955217, 'The Mizzou Alumni Center');
 INSERT INTO public."GraphNode" VALUES (2, 38.94271735, -92.32471347, 'Home of College of Agriculture');
 INSERT INTO public."GraphNode" VALUES (3, 38.94038395, -92.32093289, 'Dining and Fine Arts');
@@ -137,8 +136,8 @@ INSERT INTO public."GraphNode" VALUES (31, 38.94189957, -92.32454181, 'Dining an
 INSERT INTO public."GraphNode" VALUES (32, 38.94873148, -92.32917398, 'Journalism');
 INSERT INTO public."GraphNode" VALUES (33, 38.94606138, -92.32293248, 'Biological Science');
 INSERT INTO public."GraphNode" VALUES (34, 38.94331399, -92.33329654, 'Health Science');
-INSERT INTO public."GraphNode" VALUES (35, 38.9481, -92.3317, '');
-INSERT INTO public."GraphNode" VALUES (36, 38.9453, -92.3273, '');
+INSERT INTO public."GraphNode" VALUES (35, 38.9481, -92.3317, 'Loeb');
+INSERT INTO public."GraphNode" VALUES (36, 38.9453, -92.3273, 'Lowry');
 INSERT INTO public."GraphNode" VALUES (37, 38.9453, -92.3327, 'Res Life and dining');
 INSERT INTO public."GraphNode" VALUES (38, 38.9478, -92.3281, 'lots of Teacher offices');
 INSERT INTO public."GraphNode" VALUES (39, 38.9478, -92.3315, 'res life');
@@ -147,36 +146,36 @@ INSERT INTO public."GraphNode" VALUES (41, 38.9484, -92.3315, 'res life');
 INSERT INTO public."GraphNode" VALUES (42, 38.9325, -92.3338, 'Sports stadium');
 INSERT INTO public."GraphNode" VALUES (43, 38.936, -92.3332, 'Sports stadium');
 INSERT INTO public."GraphNode" VALUES (44, 38.9467, -92.3314, 'Engineering');
-INSERT INTO public."GraphNode" VALUES (45, 38.9478, -92.3282, '');
+INSERT INTO public."GraphNode" VALUES (45, 38.9478, -92.3282, 'Neff');
 INSERT INTO public."GraphNode" VALUES (46, 38.93894444, -92.33323216, 'Residential Life');
 INSERT INTO public."GraphNode" VALUES (47, 38.937, -92.3252, 'Parking');
 INSERT INTO public."GraphNode" VALUES (48, 38.9395, -92.326, 'hitt street market. Student grocerry');
 INSERT INTO public."GraphNode" VALUES (49, 38.9468, -92.3267, 'teacher offices');
-INSERT INTO public."GraphNode" VALUES (50, 38.9492, -92.3295, '');
+INSERT INTO public."GraphNode" VALUES (50, 38.9492, -92.3295, 'psychology building');
 INSERT INTO public."GraphNode" VALUES (51, 38.9399, -92.3229, 'Residential Life');
 INSERT INTO public."GraphNode" VALUES (52, 38.9399, -92.3229, 'Residential Life');
 INSERT INTO public."GraphNode" VALUES (53, 38.9417, -92.323, 'dining hall');
 INSERT INTO public."GraphNode" VALUES (54, 38.94, -92.3213, 'residential Life');
-INSERT INTO public."GraphNode" VALUES (55, 38.9454, -92.3225, '');
+INSERT INTO public."GraphNode" VALUES (55, 38.9454, -92.3225, 'Schweitzer');
 INSERT INTO public."GraphNode" VALUES (56, 38.93894444, -92.33323216, 'Residential Life');
 INSERT INTO public."GraphNode" VALUES (57, 38.9408, -92.3292, 'rec sports field ');
-INSERT INTO public."GraphNode" VALUES (58, 38.9459, -92.3224, '');
+INSERT INTO public."GraphNode" VALUES (58, 38.9459, -92.3224, 'Stephens hall');
 INSERT INTO public."GraphNode" VALUES (59, 38.9414, -92.3266, 'The rec');
-INSERT INTO public."GraphNode" VALUES (60, 38.9453, -92.3267, '');
+INSERT INTO public."GraphNode" VALUES (60, 38.9453, -92.3267, 'Student Success center');
 INSERT INTO public."GraphNode" VALUES (61, 38.9385, -92.3302, 'Parking structure');
-INSERT INTO public."GraphNode" VALUES (62, 38.9492, -92.3279, '');
-INSERT INTO public."GraphNode" VALUES (63, 38.9437, -92.3242, '');
+INSERT INTO public."GraphNode" VALUES (62, 38.9492, -92.3279, 'Theatre');
+INSERT INTO public."GraphNode" VALUES (63, 38.9437, -92.3242, 'Tucker');
 INSERT INTO public."GraphNode" VALUES (64, 38.9438, -92.3308, 'Parking structure');
 INSERT INTO public."GraphNode" VALUES (65, 38.9471, -92.3239, 'Parking structure');
 INSERT INTO public."GraphNode" VALUES (66, 38.9413, -92.3176, 'University Vet');
 INSERT INTO public."GraphNode" VALUES (67, 38.9415, -92.325, 'Residential Life');
-INSERT INTO public."GraphNode" VALUES (68, 38.9412, -92.32, '');
-INSERT INTO public."GraphNode" VALUES (69, 38.9467, -92.3281, '');
-INSERT INTO public."GraphNode" VALUES (70, 38.9467, -92.3305, '');
-INSERT INTO public."GraphNode" VALUES (71, 38.94575055, -92.33129561, '');
-INSERT INTO public."GraphNode" VALUES (72, -92.32437551, 38.94598211, 'Door A for Walters Hall');
-INSERT INTO public."GraphNode" VALUES (73, -92.32395306, 38.946028, 'Door B for Walters Hall');
-INSERT INTO public."GraphNode" VALUES (74, -92.3239544, 38.94587363, 'Door C for Walters Hall');
+INSERT INTO public."GraphNode" VALUES (68, 38.9412, -92.32, 'Agricultural Engineering');
+INSERT INTO public."GraphNode" VALUES (69, 38.9467, -92.3281, 'Pickard Hall');
+INSERT INTO public."GraphNode" VALUES (70, 38.9467, -92.3305, 'Noyes Hall');
+INSERT INTO public."GraphNode" VALUES (71, 38.94575055, -92.33129561, 'London Hall');
+INSERT INTO public."GraphNode" VALUES (72, 38.94598211, -92.32437551, 'Door A for Walters Hall');
+INSERT INTO public."GraphNode" VALUES (73, 38.946028, -92.32395306, 'Door B for Walters Hall');
+INSERT INTO public."GraphNode" VALUES (74, 38.94587363, -92.3239544, 'Door C for Walters Hall');
 INSERT INTO public."GraphNode" VALUES (75, 38.94726447, -92.32915847, 'Door A for Geological Science');
 INSERT INTO public."GraphNode" VALUES (76, 38.94731098, -92.32957951, 'Door B for Geological Science');
 INSERT INTO public."GraphNode" VALUES (77, 38.94604042, -92.33167786, 'Door A for Academic Support Center');
@@ -214,27 +213,27 @@ INSERT INTO public."GraphNode" VALUES (108, 38.94291868, -92.32649618, 'Door D f
 INSERT INTO public."GraphNode" VALUES (109, 38.94252678, -92.32967813, 'Door A for Cornell Hall');
 INSERT INTO public."GraphNode" VALUES (110, 38.94309004, -92.32937235, 'Door B for Cornell Hall');
 INSERT INTO public."GraphNode" VALUES (111, 38.9432465, -92.32967276, 'Door C for Cornell Hall');
-INSERT INTO public."GraphNode" VALUES (112, -92.32978016, 38.94497245, 'Door A for Townsend Hall');
-INSERT INTO public."GraphNode" VALUES (113, -92.32960314, 38.94475549, 'Door B for Townsend Hall');
-INSERT INTO public."GraphNode" VALUES (114, -92.33008325, 38.94465536, 'Door C for Townsend Hall');
-INSERT INTO public."GraphNode" VALUES (115, -92.33057141, 38.94480139, 'Door D for Townsend Hall');
-INSERT INTO public."GraphNode" VALUES (116, -92.33034343, 38.94499957, 'Door E for Townsend Hall');
+INSERT INTO public."GraphNode" VALUES (112, 38.94497245, -92.32978016, 'Door A for Townsend Hall');
+INSERT INTO public."GraphNode" VALUES (113, 38.94475549, -92.32960314, 'Door B for Townsend Hall');
+INSERT INTO public."GraphNode" VALUES (114, 38.94465536, -92.33008325, 'Door C for Townsend Hall');
+INSERT INTO public."GraphNode" VALUES (115, 38.94480139, -92.33057141, 'Door D for Townsend Hall');
+INSERT INTO public."GraphNode" VALUES (116, 38.94499957, -92.33034343, 'Door E for Townsend Hall');
 INSERT INTO public."GraphNode" VALUES (117, 38.94337216, -92.32725642, 'Door A for Arts & Sciences');
 INSERT INTO public."GraphNode" VALUES (118, 38.94337216, -92.32741624, 'Door B for Arts & Sciences');
 INSERT INTO public."GraphNode" VALUES (119, 38.94377127, -92.32726701, 'Door C for Arts & Sciences');
 INSERT INTO public."GraphNode" VALUES (120, 38.94377576, -92.32740661, 'Door D for Arts & Sciences');
-INSERT INTO public."GraphNode" VALUES (121, -92.329699, 38.94549, 'Door A for Hill Hall');
-INSERT INTO public."GraphNode" VALUES (122, -92.329721, 38.945107, 'Door B for Hill Hall');
-INSERT INTO public."GraphNode" VALUES (123, 38.94374731, 92.32824324, 'Door A for Hulston Hall');
+INSERT INTO public."GraphNode" VALUES (121, 38.94549, -92.329699, 'Door A for Hill Hall');
+INSERT INTO public."GraphNode" VALUES (122, 38.945107, -92.329721, 'Door B for Hill Hall');
+INSERT INTO public."GraphNode" VALUES (123, 38.94374731, -92.32824324, 'Door A for Hulston Hall');
 INSERT INTO public."GraphNode" VALUES (124, 38.94375854, -92.32841654, 'Door B for Hulston Hall');
-INSERT INTO public."GraphNode" VALUES (125, 38.94392103, 92.32781, 'Door C for Hulston Hall');
-INSERT INTO public."GraphNode" VALUES (126, -92.32728034, 38.9460885, 'Door A for Middlebush Hall');
-INSERT INTO public."GraphNode" VALUES (127, -92.32714355, 38.9460885, 'Door B for Middlebush Hall');
-INSERT INTO public."GraphNode" VALUES (128, -92.32669562, 38.94611561, 'Door C for Middlebush Hall');
-INSERT INTO public."GraphNode" VALUES (129, -92.32669026, 38.94627207, 'Door D for Middlebush Hall');
-INSERT INTO public."GraphNode" VALUES (130, -92.3265186, 38.9459529, 'Door E for Middlebush Hall');
-INSERT INTO public."GraphNode" VALUES (131, -92.32370362, 38.94508614, 'Door A for Stewart Hall');
-INSERT INTO public."GraphNode" VALUES (132, -92.32395977, 38.94510387, 'Door B for Stewart Hall');
+INSERT INTO public."GraphNode" VALUES (125, 38.94392103, -92.32781, 'Door C for Hulston Hall');
+INSERT INTO public."GraphNode" VALUES (126, 38.9460885, -92.32728034, 'Door A for Middlebush Hall');
+INSERT INTO public."GraphNode" VALUES (127, 38.9460885, -92.32714355, 'Door B for Middlebush Hall');
+INSERT INTO public."GraphNode" VALUES (128, 38.94611561, -92.32669562, 'Door C for Middlebush Hall');
+INSERT INTO public."GraphNode" VALUES (129, 38.94627207, -92.32669026, 'Door D for Middlebush Hall');
+INSERT INTO public."GraphNode" VALUES (130, 38.9459529, -92.3265186, 'Door E for Middlebush Hall');
+INSERT INTO public."GraphNode" VALUES (131, 38.94508614, -92.32370362, 'Door A for Stewart Hall');
+INSERT INTO public."GraphNode" VALUES (132, 38.94510387, -92.32395977, 'Door B for Stewart Hall');
 INSERT INTO public."GraphNode" VALUES (133, 38.944591, -92.322905, 'Door A for Chemistry Building');
 INSERT INTO public."GraphNode" VALUES (134, 38.944253, -92.322949, 'Door B for Chemistry Building');
 INSERT INTO public."GraphNode" VALUES (135, 38.944222, -92.322239, 'Door C for Chemistry Building');
@@ -242,14 +241,14 @@ INSERT INTO public."GraphNode" VALUES (136, 38.944068, -92.322657, 'Door D for C
 INSERT INTO public."GraphNode" VALUES (137, 38.9475435, -92.3305047, 'Door A for McAlester Hall');
 INSERT INTO public."GraphNode" VALUES (138, 38.9475198, -92.3301054, 'Door B for McAlester Hall');
 INSERT INTO public."GraphNode" VALUES (139, 38.947731, -92.3305094, 'Door C for McAlester Hall');
-INSERT INTO public."GraphNode" VALUES (140, -92.32529014, 38.94506841, 'Door A for Memorial Union');
-INSERT INTO public."GraphNode" VALUES (141, -92.32529551, 38.94547728, 'Door B for Memorial Union');
-INSERT INTO public."GraphNode" VALUES (142, -92.32485563, 38.94541887, 'Door C for Memorial Union');
-INSERT INTO public."GraphNode" VALUES (143, -92.32503533, 38.9460134, 'Door A for Mumford Hall');
-INSERT INTO public."GraphNode" VALUES (144, -92.32485831, 38.94601653, 'Door B for Mumford Hall');
-INSERT INTO public."GraphNode" VALUES (145, -92.32494146, 38.94617402, 'Door C for Mumford Hall');
-INSERT INTO public."GraphNode" VALUES (146, -92.32928798, 38.94672161, 'Door A for Switzler Hall');
-INSERT INTO public."GraphNode" VALUES (147, -92.32955888, 38.94662252, 'Door B for Switzler Hall');
+INSERT INTO public."GraphNode" VALUES (140, 38.94506841, -92.32529014, 'Door A for Memorial Union');
+INSERT INTO public."GraphNode" VALUES (141, 38.94547728, -92.32529551, 'Door B for Memorial Union');
+INSERT INTO public."GraphNode" VALUES (142, 38.94541887, -92.32485563, 'Door C for Memorial Union');
+INSERT INTO public."GraphNode" VALUES (143, 38.9460134, -92.32503533, 'Door A for Mumford Hall');
+INSERT INTO public."GraphNode" VALUES (144, 38.94601653, -92.32485831, 'Door B for Mumford Hall');
+INSERT INTO public."GraphNode" VALUES (145, 38.94617402, -92.32494146, 'Door C for Mumford Hall');
+INSERT INTO public."GraphNode" VALUES (146, 38.94672161, -92.32928798, 'Door A for Switzler Hall');
+INSERT INTO public."GraphNode" VALUES (147, 38.94662252, -92.32955888, 'Door B for Switzler Hall');
 INSERT INTO public."GraphNode" VALUES (148, 38.94471878, -92.32790592, 'Door A for Tate Hall');
 INSERT INTO public."GraphNode" VALUES (149, 38.94454, -92.327998, 'Door B for Tate Hall');
 INSERT INTO public."GraphNode" VALUES (150, 38.94464914, -92.32811291, 'Door C for Tate Hall');
@@ -263,20 +262,20 @@ INSERT INTO public."GraphNode" VALUES (157, 38.9443, -92.324919, 'Door B for Gen
 INSERT INTO public."GraphNode" VALUES (158, 38.944425, -92.325008, 'Door C for Gentry Hall');
 INSERT INTO public."GraphNode" VALUES (159, 38.944307, -92.325238, 'Door D for Gentry Hall');
 INSERT INTO public."GraphNode" VALUES (160, 38.944231, -92.32476, 'Door E for Gentry Hall');
-INSERT INTO public."GraphNode" VALUES (161, -92.32623696, 38.94579019, 'Door A for Fine Arts Building');
-INSERT INTO public."GraphNode" VALUES (162, -92.3258695, 38.94577767, 'Door B for Fine Arts Building');
-INSERT INTO public."GraphNode" VALUES (163, -92.3258239, 38.94540427, 'Door C for Fine Arts Building');
-INSERT INTO public."GraphNode" VALUES (164, -92.32593924, 38.94515185, 'Door D for Fine Arts Building');
-INSERT INTO public."GraphNode" VALUES (165, -92.32621014, 38.94515394, 'Door E for Fine Arts Building');
-INSERT INTO public."GraphNode" VALUES (166, -92.32631475, 38.94539384, 'Door F for Fine Arts Building');
-INSERT INTO public."GraphNode" VALUES (167, -92.32823789, 38.94581105, 'Door A for Swallow Hall');
-INSERT INTO public."GraphNode" VALUES (168, -92.32826337, 38.9456233, 'Door B for Swallow Hall');
-INSERT INTO public."GraphNode" VALUES (169, -92.32795626, 38.94577976, 'Door C for Swallow Hall');
-INSERT INTO public."GraphNode" VALUES (170, -92.32795492, 38.94560974, 'Door D for Swallow Hall');
+INSERT INTO public."GraphNode" VALUES (161, 38.94579019, -92.32623696, 'Door A for Fine Arts Building');
+INSERT INTO public."GraphNode" VALUES (162, 38.94577767, -92.3258695, 'Door B for Fine Arts Building');
+INSERT INTO public."GraphNode" VALUES (163, 38.94540427, -92.3258239, 'Door C for Fine Arts Building');
+INSERT INTO public."GraphNode" VALUES (164, 38.94515185, -92.32593924, 'Door D for Fine Arts Building');
+INSERT INTO public."GraphNode" VALUES (165, 38.94515394, -92.32621014, 'Door E for Fine Arts Building');
+INSERT INTO public."GraphNode" VALUES (166, 38.94539384, -92.32631475, 'Door F for Fine Arts Building');
+INSERT INTO public."GraphNode" VALUES (167, 38.94581105, -92.32823789, 'Door A for Swallow Hall');
+INSERT INTO public."GraphNode" VALUES (168, 38.9456233, -92.32826337, 'Door B for Swallow Hall');
+INSERT INTO public."GraphNode" VALUES (169, 38.94577976, -92.32795626, 'Door C for Swallow Hall');
+INSERT INTO public."GraphNode" VALUES (170, 38.94560974, -92.32795492, 'Door D for Swallow Hall');
 INSERT INTO public."GraphNode" VALUES (171, 38.93932727, -92.33171672, 'Door A for Southwest Village');
 INSERT INTO public."GraphNode" VALUES (172, 38.939, -92.3318, 'Door B for Southwest Village');
-INSERT INTO public."GraphNode" VALUES (173, -92.32530087, 38.94572135, 'Door A for Whitten Hall');
-INSERT INTO public."GraphNode" VALUES (174, -92.32510239, 38.94577976, 'Door B for Whitten Hall');
+INSERT INTO public."GraphNode" VALUES (173, 38.94572135, -92.32530087, 'Door A for Whitten Hall');
+INSERT INTO public."GraphNode" VALUES (174, 38.94577976, -92.32510239, 'Door B for Whitten Hall');
 INSERT INTO public."GraphNode" VALUES (175, 38.943853, -92.322682, 'Door A for Physics Building');
 INSERT INTO public."GraphNode" VALUES (176, 38.943417, -92.322689, 'Door B for Physics Building');
 INSERT INTO public."GraphNode" VALUES (177, 38.943138, -92.323608, 'Door A for Life Sciences Center');
@@ -285,12 +284,18 @@ INSERT INTO public."GraphNode" VALUES (179, 38.943068, -92.322642, 'Door C for L
 INSERT INTO public."GraphNode" VALUES (180, 38.942875, -92.323241, 'Door D for Life Sciences Center');
 INSERT INTO public."GraphNode" VALUES (181, 38.942794, -92.323618, 'Door E for Life Sciences Center');
 INSERT INTO public."GraphNode" VALUES (182, 38.942911, -92.32382, 'Door F for Life Sciences Center');
-INSERT INTO public."GraphNode" VALUES (183, -92.32801259, 38.9475216, 'Door A for Reynolds Journalism Institude');
-INSERT INTO public."GraphNode" VALUES (184, -92.32780874, 38.94751743, 'Door B for Reynolds Journalism Institude');
-INSERT INTO public."GraphNode" VALUES (185, -92.32804209, 38.94720035, 'Door C for Reynolds Journalism Institude');
-INSERT INTO public."GraphNode" VALUES (186, -92.32775509, 38.94727545, 'Door D for Reynolds Journalism Institude');
+INSERT INTO public."GraphNode" VALUES (183, 38.9475216, -92.32801259, 'Door A for Reynolds Journalism Institude');
+INSERT INTO public."GraphNode" VALUES (184, 38.94751743, -92.32780874, 'Door B for Reynolds Journalism Institude');
+INSERT INTO public."GraphNode" VALUES (185, 38.94720035, -92.32804209, 'Door C for Reynolds Journalism Institude');
+INSERT INTO public."GraphNode" VALUES (186, 38.94727545, -92.32775509, 'Door D for Reynolds Journalism Institude');
 
--- Create Buildings --
+
+--
+-- TOC entry 3386 (class 0 OID 16395)
+-- Dependencies: 212
+-- Data for Name: Building; Type: TABLE DATA; Schema: public; Owner: capy
+--
+
 INSERT INTO public."Building" VALUES (1, 'Alumni Center', 1, '{}');
 INSERT INTO public."Building" VALUES (2, 'Anheuser-Busch /agriculture science building', 2, '{}');
 INSERT INTO public."Building" VALUES (3, 'Bingham Commons', 3, '{}');
@@ -396,7 +401,13 @@ INSERT INTO public."Building" VALUES (102, 'Physics Building', NULL, '{}');
 INSERT INTO public."Building" VALUES (103, 'Life Sciences Center', NULL, '{}');
 INSERT INTO public."Building" VALUES (104, 'Reynolds Journalism Institude', NULL, '{}');
 
--- Create Doors --
+
+--
+-- TOC entry 3398 (class 0 OID 16490)
+-- Dependencies: 224
+-- Data for Name: Door; Type: TABLE DATA; Schema: public; Owner: capy
+--
+
 INSERT INTO public."Door" VALUES (1, 72, 72);
 INSERT INTO public."Door" VALUES (2, 73, 72);
 INSERT INTO public."Door" VALUES (3, 74, 72);
@@ -513,7 +524,13 @@ INSERT INTO public."Door" VALUES (113, 184, 104);
 INSERT INTO public."Door" VALUES (114, 185, 104);
 INSERT INTO public."Door" VALUES (115, 186, 104);
 
--- Create GraphEdges --
+
+--
+-- TOC entry 3388 (class 0 OID 16409)
+-- Dependencies: 214
+-- Data for Name: GraphEdge; Type: TABLE DATA; Schema: public; Owner: capy
+--
+
 INSERT INTO public."GraphEdge" VALUES (1, 80, 81, '', '', true, 179.66667, '{}');
 INSERT INTO public."GraphEdge" VALUES (2, 80, 82, '', '', true, 315, '{}');
 INSERT INTO public."GraphEdge" VALUES (3, 80, 83, '', '', true, 380.33334, '{}');
