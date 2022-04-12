@@ -1,11 +1,15 @@
 package com.capybara.CapybaraCampusCrawlBackend.Controllers;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -179,14 +183,21 @@ public class routing{
 		    int fromNode = edgeObj.get(i).get("fromNode").get("nodeID").asInt();
 		    int toNode = edgeObj.get(i).get("toNode").get("nodeID").asInt();
 		    double distance = edgeObj.get(i).get("distance").asDouble();
-		    
 		    //System.out.println("From Node ID:"+fromNode+"  toNode ID:"+toNode+" distance:"+distance+"\r\n"+"From Desc:"+(fromNode-1).getDescription()+"    to Desc:"+nodeList.get(toNode-1).getDescription()+"\r\n\r\n");
 		    
-		    //add edges based on distance
+//		    ArrayList<double[]> listzoom = new ArrayList<double[]>();
+//		    ArrayNode array = (ArrayNode) edgeObj.get(i).get("coordinates")
+//	    	if(array.isArray()) {
+//	    	int count=0;
+//	    	for (final JsonNode objNode : array) {
+//	    		double[] test = {objNode.get(0).asDouble(),objNode.get(1).asDouble()};
+//	    		list.add(test);	    		
+//	    		count++;
+//	        }
+//	    }
 		    
-		     
-		    //nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,coordinates);
-		    //nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,coordinatesReversed);
+//DELETE WHEN COORDS GET ADDED INTO JSON
+
 		    
 		    Double lon1=edgeObj.get(i).get("fromNode").get("longitude").asDouble();
 		    Double lat1=edgeObj.get(i).get("fromNode").get("latitude").asDouble();
@@ -195,26 +206,24 @@ public class routing{
 		    double[] first = {lon1,lat1};
 		    double[] second = {lon2,lat2};
 		    ArrayList<double[]> list = new ArrayList<double[]>();
-		    ArrayList<double[]> list2 = new ArrayList<double[]>();
 		    list.add(first);
 		    list.add(second);
-		    list2.add(second);
-		    list2.add(first);
 		    nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,list);
-		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list2);
+		    Collections.reverse(list);
+		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list);
 	    }
 	    
 	    System.out.println("Starting ORS routing");
 	    //TO BE DELTED BEFORE DEPLOYING. MUST HAVE ORS RUNNING WITH SPECIFIC CONFIGURATIONS TO WORK 
-	    
-	    for(int i =0;i<nodeObj.size();i++) {
+  
+	  	    for(int i =0;i<nodeObj.size();i++) {
 	    	//Starting point
 	    	JsonNode fromJSON = nodeObj.get(i);
     		
 	    	String fromName=fromJSON.get("description").asText();
 	    	int fromID=fromJSON.get("nodeID").asInt();
-	    	//for(int j =i+1;j<nodeObj.size();j++) {
-	    	for(int j =0;j<nodeObj.size();j++) {
+	    	for(int j =i+1;j<nodeObj.size();j++) {
+	    	//for(int j =0;j<nodeObj.size();j++) {
 	    		JsonNode toJSON = nodeObj.get(j);
 	    		
 	    		String toName=toJSON.get("description").asText();  		
@@ -223,7 +232,7 @@ public class routing{
 	    		//end point
 	    		
 	    		
-	    		//if inside route
+	    		//if inside route and from same building
 	    		if((fromName.toLowerCase().startsWith("door") &&toName.toLowerCase().startsWith("door"))&&(fromName.substring(11).equals(toName.substring(11)))) {
 	    			
 	    			//System.out.println("From: "+fromName.substring(11)+"To: "+toName.substring(11));
@@ -251,14 +260,18 @@ public class routing{
 	    			Double distance = jsonrequest.get("features").get(0).get("properties").get("segments").get(0).get("distance").asDouble();
 	    			ArrayNode array = (ArrayNode) jsonrequest.get("features").get(0).get("geometry").get("coordinates");
 	    			ArrayList<double[]> list = new ArrayList<double[]>();
+	    			String coordsArray="[";
 	    			for (final JsonNode objNode : array) {
 	    	    		double[] test = {objNode.get(0).asDouble(),objNode.get(1).asDouble()};
+	    	    		String tmp ="["+objNode.get(0).asDouble()+","+objNode.get(1).asDouble()+"],";
+	    	    		coordsArray = coordsArray +tmp;
 	    	    		list.add(test);
 	    			}
+	    			coordsArray = coordsArray.substring(0,coordsArray.length() -1) +"]";
+	    			//System.out.println(coordsArray);
 	    			distance = distance *1.3;
 	    			//change distance here to prioritize inside walking cuz of rain, other preferences
 	    			
-	    			//System.out.println(distance);
 	    			//System.out.println(distance);
 	    			
 	    			int fromNode = fromJSON.get("nodeID").asInt();
@@ -268,7 +281,10 @@ public class routing{
 	    		    //if negative or 0 distance
 	    		    if(distance >0) {
 	    		    	nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,list);
-		    		    //nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list);	
+	    		    	//String csvtest = "\""+fromName+"\",\""+toName+"\","+distance+",\""+coordsArray+"\"";
+	    		    	//System.out.println(csvtest);
+	    		    	Collections.reverse(list);
+		    		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list);	
 	    		    }
 	    			
 	    		}
@@ -285,18 +301,52 @@ public class routing{
 	    //once it is added, the node in a data
 	    
 //prints the adj list of all the nodes. Used for testing purposes
-	    
+//TO DELETE ONCE DATABASE IS RESEEDED	   
+//	  	    try {
+//	        File myObj = new File("filename.txt");
+//	        if (myObj.createNewFile()) {
+//	          System.out.println("File created: " + myObj.getName() + myObj.getAbsolutePath());
+//	        } else {
+//	          System.out.println("File already exists.");
+//	        }
+//	      } catch (IOException e) {
+//	        System.out.println("An error occurred.");
+//	        e.printStackTrace();
+//	      }
+//	    FileWriter myWriter = new FileWriter("filename.txt");
+//	    myWriter.write("Door1,Door2,Distance,isOutside,Coords\n");
+//END TO DELETE ONCE DATABASE IS RESEEDED	    
 	    int count =0;
 	    for(int i=0;i<nodeList.size();i++) {
 	    	Node currentNode = nodeList.get(i);
-	    	System.out.println("Adj List for Node of ID:"+currentNode.getID()+"    Desc:"+currentNode.getDescription());
+	    	//System.out.println("Adj List for Node of ID:"+currentNode.getID()+"    Desc:"+currentNode.getDescription());
 	    	for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
-		          Node adjacentNode = adjacencyPair.getKey();
-		          Double edgeWeigh = adjacencyPair.getValue().distance;
+	    		
+		        Node adjacentNode = adjacencyPair.getKey();
+		        Double edgeWeigh = adjacencyPair.getValue().distance;
+//TO DELETE ONCE DATABASE IS RESEEDED		          
+//		        ArrayList<double[]> list = adjacencyPair.getValue().coords;
+//		        String coordsArray="[";
+//	    		for (final double[] coords : list) {
+//	    	    	String tmp ="["+coords[0]+","+coords[1]+"],";
+//	    	    	coordsArray = coordsArray +tmp;
+//	    		}
+//	    		coordsArray = coordsArray.substring(0,coordsArray.length() -1) +"]";
+//	    		String csvtest;
+//	    		if(list.size()>2) {
+//	    			csvtest = "\""+currentNode.getDescription()+"\",\""+adjacentNode.getDescription()+"\","+edgeWeigh+",1"+",\""+coordsArray+"\"";
+//	    		}else {
+//	    			csvtest = "\""+currentNode.getDescription()+"\",\""+adjacentNode.getDescription()+"\","+edgeWeigh+",0"+",\""+coordsArray+"\"";
+//	    		}
+//		           
+//		          myWriter.write(csvtest+"\n");
+//END TO DELETE ONCE DATABASE IS RESEEDED
 		          count ++;
-		          System.out.println("        ID:"+adjacentNode.getID()+" Desc:"+adjacentNode.getDescription()+ "  Weight:"+edgeWeigh);
+		          //System.out.println("        ID:"+adjacentNode.getID()+" Desc:"+adjacentNode.getDescription()+ "  Weight:"+edgeWeigh);
 		    }
 	    }
+	  //TO DELETE ONCE DATABASE IS RESEEDED
+//	    myWriter.close();
  
 	    System.out.println(count);
 	    
