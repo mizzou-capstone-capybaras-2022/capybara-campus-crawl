@@ -19,7 +19,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 
-import com.capybara.CapybaraCampusCrawlBackend.Controllers.generateEdges.Node;
+import com.capybara.CapybaraCampusCrawlBackend.Controllers.Node;
 
 //import org.apache.commons.logging.Log;
 //import org.apache.tomcat.util.json.JSONParser;
@@ -36,97 +36,6 @@ import org.jgrapht.*;
 
 
 public class routing{
-  
-	public routing() {
-		
-	}
-	
-	public static class Pair{
-		public ArrayList<double[]> coords;
-		Double distance;
-		
-		public Pair(ArrayList<double[]> coords,Double distance) {
-			this.coords = coords;
-			this.distance = distance;
-		}
-	}
-	
-	public static class Graph {
-
-	    private Set<Node> nodes = new HashSet<>();
-	    
-	    public void addNode(Node nodeA) {
-	        nodes.add(nodeA);
-	    }
-
-	    // getters and setters
-	    
-	    public Set<Node> getNodes() {
-	        return nodes;
-	    }
-
-	    public void setNodes(Set<Node> nodes) {
-	        this.nodes = nodes;
-	    }
-	}
-	
-	public static class Node{
-		private int ID;
-		private String description;
-		double lat;
-		double lon;
-		
-		private LinkedList<Node> shortestPath = new LinkedList<>();
-		
-		private Double distance = Double.MAX_VALUE;
-		
-		Map<Node,Pair> adjList = new HashMap<>();
-		
-		public Node(int ID, String desc,double lat, double lon) {
-	        this.ID = ID;
-	        this.description = desc;
-	        this.lat = lat;
-	        this.lon = lon;
-	    }
-		
-		public void addEdge(Node destination, double distance, ArrayList<double[]> coords) {
-			
-			adjList.put(destination, new Pair(coords,distance));
-	    }
-		
-		
-		public int getID() {
-			return ID;
-		}
-		public void setID(int ID) {
-			this.ID = ID;
-		}
-		
-		public String getDescription() {
-			return description;
-		}
-		public Map<Node, Pair> getAdjacentNodes() {
-	        return adjList;
-	    }
-
-	    public void setAdjacentNodes(Map<Node, Pair> adjacentNodes) {
-	        this.adjList = adjacentNodes;
-	    }
-	    
-	    public Double getDistance() {
-	        return distance;
-	    }
-	    public void setDistance(Double distance) {
-	        this.distance = distance;
-	    }
-	    public List<Node> getShortestPath() {
-	        return shortestPath;
-	    }
-	    public void setShortestPath(LinkedList<Node> shortestPath) {
-	        this.shortestPath = shortestPath;
-	    }
-	}
-	
 	
 	public static String getRequest(String url) throws Exception{
 		BufferedReader reader;
@@ -378,7 +287,7 @@ public class routing{
 	    if(found >=0) {
 	    	long start = System.nanoTime();
 	    	Node startNode = nodeList.get(found);
-	    	Graph graph2 = calculateShortestPathFromSource(graph,startNode);
+	    	Graph graph2 = Graph.calculateShortestPathFromSource(graph,startNode);
 		    long end = System.nanoTime();
 		    long duration = (end-start)/1000000;
 	    	System.out.println("finished calculating: Took "+duration);
@@ -453,53 +362,53 @@ private static ArrayList<double[]> ListPath(int iD, int toID, List<Node> nodeLis
 
 
 	//algorithms
-	public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
-
-        source.setDistance((double) 0);
-
-        Set<Node> settledNodes = new HashSet<>();
-        Set<Node> unsettledNodes = new HashSet<>();
-        unsettledNodes.add(source);
-
-        while (unsettledNodes.size() != 0) {
-            Node currentNode = getLowestDistanceNode(unsettledNodes);
-            unsettledNodes.remove(currentNode);
-            for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
-                Node adjacentNode = adjacencyPair.getKey();
-                Double edgeWeigh = adjacencyPair.getValue().distance;
-
-                if (!settledNodes.contains(adjacentNode)) {
-                    CalculateMinimumDistance(adjacentNode, edgeWeigh, currentNode);
-                    unsettledNodes.add(adjacentNode);
-                }
-            }
-            settledNodes.add(currentNode);
-        }
-        return graph;
-    }
-
-    private static void CalculateMinimumDistance(Node evaluationNode, Double edgeWeigh, Node sourceNode) {
-        Double sourceDistance = sourceNode.getDistance();
-        if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
-            evaluationNode.setDistance(sourceDistance + edgeWeigh);
-            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
-            shortestPath.add(sourceNode);
-            evaluationNode.setShortestPath(shortestPath);
-        }
-    }
-
-    private static Node getLowestDistanceNode(Set<Node> unsettledNodes) {
-        Node lowestDistanceNode = null;
-        double lowestDistance = Double.MAX_VALUE;
-        for (Node node : unsettledNodes) {
-            double nodeDistance = node.getDistance();
-            if (nodeDistance < lowestDistance) {
-                lowestDistance = nodeDistance;
-                lowestDistanceNode = node;
-            }
-        }
-        return lowestDistanceNode;
-    }
+//	public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
+//
+//        source.setDistance((double) 0);
+//
+//        Set<Node> settledNodes = new HashSet<>();
+//        Set<Node> unsettledNodes = new HashSet<>();
+//        unsettledNodes.add(source);
+//
+//        while (unsettledNodes.size() != 0) {
+//            Node currentNode = getLowestDistanceNode(unsettledNodes);
+//            unsettledNodes.remove(currentNode);
+//            for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
+//                Node adjacentNode = adjacencyPair.getKey();
+//                Double edgeWeigh = adjacencyPair.getValue().distance;
+//
+//                if (!settledNodes.contains(adjacentNode)) {
+//                    CalculateMinimumDistance(adjacentNode, edgeWeigh, currentNode);
+//                    unsettledNodes.add(adjacentNode);
+//                }
+//            }
+//            settledNodes.add(currentNode);
+//        }
+//        return graph;
+//    }
+//
+//    private static void CalculateMinimumDistance(Node evaluationNode, Double edgeWeigh, Node sourceNode) {
+//        Double sourceDistance = sourceNode.getDistance();
+//        if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
+//            evaluationNode.setDistance(sourceDistance + edgeWeigh);
+//            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
+//            shortestPath.add(sourceNode);
+//            evaluationNode.setShortestPath(shortestPath);
+//        }
+//    }
+//
+//    private static Node getLowestDistanceNode(Set<Node> unsettledNodes) {
+//        Node lowestDistanceNode = null;
+//        double lowestDistance = Double.MAX_VALUE;
+//        for (Node node : unsettledNodes) {
+//            double nodeDistance = node.getDistance();
+//            if (nodeDistance < lowestDistance) {
+//                lowestDistance = nodeDistance;
+//                lowestDistanceNode = node;
+//            }
+//        }
+//        return lowestDistanceNode;
+//    }
 
 
 
