@@ -26,12 +26,23 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import org.jgrapht.*;
 
 
 public class routing{
   
+	public static class Pair{
+		public ArrayList<double[]> coords;
+		Double distance;
+		
+		public Pair(ArrayList<double[]> coords,Double distance) {
+			this.coords = coords;
+			this.distance = distance;
+		}
+	}
+	
 	public static class Graph {
 
 	    private Set<Node> nodes = new HashSet<>();
@@ -61,7 +72,7 @@ public class routing{
 		
 		private Double distance = Double.MAX_VALUE;
 		
-		Map<Node,Double> adjList = new HashMap<>();
+		Map<Node,Pair> adjList = new HashMap<>();
 		
 		public Node(int ID, String desc,double lat, double lon) {
 	        this.ID = ID;
@@ -70,8 +81,9 @@ public class routing{
 	        this.lon = lon;
 	    }
 		
-		public void addEdge(Node destination, double distance) {
-			adjList.put(destination, distance);
+		public void addEdge(Node destination, double distance, ArrayList<double[]> coords) {
+			
+			adjList.put(destination, new Pair(coords,distance));
 	    }
 		
 		
@@ -85,11 +97,11 @@ public class routing{
 		public String getDescription() {
 			return description;
 		}
-		public Map<Node, Double> getAdjacentNodes() {
+		public Map<Node, Pair> getAdjacentNodes() {
 	        return adjList;
 	    }
 
-	    public void setAdjacentNodes(Map<Node, Double> adjacentNodes) {
+	    public void setAdjacentNodes(Map<Node, Pair> adjacentNodes) {
 	        this.adjList = adjacentNodes;
 	    }
 	    
@@ -168,15 +180,28 @@ public class routing{
 		    int toNode = edgeObj.get(i).get("toNode").get("nodeID").asInt();
 		    double distance = edgeObj.get(i).get("distance").asDouble();
 		    
-		    //System.out.println("From Node ID:"+fromNode+"  toNode ID:"+toNode+" distance:"+distance+"\r\n"+"From Desc:"+nodeList.get(fromNode-1).getDescription()+"    to Desc:"+nodeList.get(toNode-1).getDescription()+"\r\n\r\n");
+		    //System.out.println("From Node ID:"+fromNode+"  toNode ID:"+toNode+" distance:"+distance+"\r\n"+"From Desc:"+(fromNode-1).getDescription()+"    to Desc:"+nodeList.get(toNode-1).getDescription()+"\r\n\r\n");
 		    
 		    //add edges based on distance
 		    
 		     
 		    //nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,coordinates);
 		    //nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,coordinatesReversed);
-		    nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance);
-		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance);
+		    
+		    Double lon1=edgeObj.get(i).get("fromNode").get("longitude").asDouble();
+		    Double lat1=edgeObj.get(i).get("fromNode").get("latitude").asDouble();
+		    Double lon2=edgeObj.get(i).get("toNode").get("longitude").asDouble();
+		    Double lat2=edgeObj.get(i).get("toNode").get("latitude").asDouble();
+		    double[] first = {lon1,lat1};
+		    double[] second = {lon2,lat2};
+		    ArrayList<double[]> list = new ArrayList<double[]>();
+		    ArrayList<double[]> list2 = new ArrayList<double[]>();
+		    list.add(first);
+		    list.add(second);
+		    list2.add(second);
+		    list2.add(first);
+		    nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,list);
+		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list2);
 	    }
 	    
 	    System.out.println("Starting ORS routing");
@@ -188,8 +213,8 @@ public class routing{
     		
 	    	String fromName=fromJSON.get("description").asText();
 	    	int fromID=fromJSON.get("nodeID").asInt();
-	    	for(int j =i+1;j<nodeObj.size();j++) {
-	    	//for(int j =0;j<nodeObj.size();j++) {
+	    	//for(int j =i+1;j<nodeObj.size();j++) {
+	    	for(int j =0;j<nodeObj.size();j++) {
 	    		JsonNode toJSON = nodeObj.get(j);
 	    		
 	    		String toName=toJSON.get("description").asText();  		
@@ -213,32 +238,8 @@ public class routing{
 	    			Double lat2=toJSON.get("latitude").asDouble();
 	    			Double lon2=toJSON.get("longitude").asDouble();
 	    			
-	    			//DATA CORRECTION, SHOULD BE FIXED ONCE DATABASE IS RE-SEEDED
-	    			if(lon1 >50)
-	    				lon1 = lon1*-1;
-	    			if(lon2 >50)
-	    				lon2 = lon2*-1;
 	    			
-	    			String request ="";
-	    			//System.out.println("lat1: "+lat1+" lon1: "+lon1+"lat2: "+lat2+" lon2: "+lon2);
-	    			
-	    			//MORE DATA CORRECTION
-	    			if(lat1 <0) {
-	    				if(lat2<0) {//switch both lats and lons
-	    					request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lat1+","+lon1+"&end="+lat2+","+lon2;
-	    				}else {//only switch lat1 and lon1
-	    					request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lat1+","+lon1+"&end="+lon2+","+lat2;
-	    				}
-	    			}else {
-	    				if(lat2<0) {//only switch lat2 and lon2
-	    					request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lon1+","+lat1+"&end="+lat2+","+lon2;
-	    				}
-	    				else {//switch none
-	    					request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lon1+","+lat1+"&end="+lon2+","+lat2;
-	    				}
-	    			}
-	    			
-	    			//String request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lon1+","+lat1+"&end="+lon2+","+lat2; 
+	    			String request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lon1+","+lat1+"&end="+lon2+","+lat2; 
 	    			//System.out.println(request);
 	    			
 	    			String requestString = getRequest(request);
@@ -248,7 +249,12 @@ public class routing{
 	    			//System.out.println("FROM: "+fromID+" TO: "+toID);
 	    			//System.out.println("FROM: "+fromName+" TO: "+toName+"\r\nJSON:\r\n"+jsonrequest.toPrettyString());
 	    			Double distance = jsonrequest.get("features").get(0).get("properties").get("segments").get(0).get("distance").asDouble();
-	    			
+	    			ArrayNode array = (ArrayNode) jsonrequest.get("features").get(0).get("geometry").get("coordinates");
+	    			ArrayList<double[]> list = new ArrayList<double[]>();
+	    			for (final JsonNode objNode : array) {
+	    	    		double[] test = {objNode.get(0).asDouble(),objNode.get(1).asDouble()};
+	    	    		list.add(test);
+	    			}
 	    			distance = distance *1.3;
 	    			//change distance here to prioritize inside walking cuz of rain, other preferences
 	    			
@@ -261,8 +267,8 @@ public class routing{
 	    		    
 	    		    //if negative or 0 distance
 	    		    if(distance >0) {
-	    		    	nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance);
-		    		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance);	
+	    		    	nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,list);
+		    		    //nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list);	
 	    		    }
 	    			
 	    		}
@@ -274,25 +280,26 @@ public class routing{
 	    	//int left = nodeObj.size()-fromID
 	    	System.out.println(fromID+" is done mapping Left:"+ (nodeObj.size()-fromID));
 	    }
+	    
 	    //END OF WHAT SHOULD BE DELETED ONCE ORS GETS ADDED TO DATABASE
 	    //once it is added, the node in a data
 	    
 //prints the adj list of all the nodes. Used for testing purposes
-/*	    
+	    
 	    int count =0;
 	    for(int i=0;i<nodeList.size();i++) {
 	    	Node currentNode = nodeList.get(i);
 	    	System.out.println("Adj List for Node of ID:"+currentNode.getID()+"    Desc:"+currentNode.getDescription());
-	    	for (Entry<Node, Double> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
+	    	for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
 		          Node adjacentNode = adjacencyPair.getKey();
-		          Double edgeWeigh = adjacencyPair.getValue();
+		          Double edgeWeigh = adjacencyPair.getValue().distance;
 		          count ++;
 		          System.out.println("        ID:"+adjacentNode.getID()+" Desc:"+adjacentNode.getDescription()+ "  Weight:"+edgeWeigh);
 		    }
 	    }
  
 	    System.out.println(count);
-*/	    
+	    
 	    //cerates graph for algorithm
 	    Graph graph = new Graph();
 	    for(int i=0;i<nodeList.size();i++) {
@@ -333,7 +340,7 @@ public class routing{
 		    		found2 =currentID;
 		    	}
 		    }
-		    ListShortestPath(found,found2,nodeList);
+		    ListPath(found,found2,nodeList);
 	    	
 	    	
 	    	
@@ -348,34 +355,39 @@ public class routing{
 	    
 	}
 
-private static void ListShortestPath(int iD, int toID, List<Node> nodeList) {
+private static ArrayList<double[]> ListPath(int iD, int toID, List<Node> nodeList) {
 		// TODO Auto-generated method stub
 		System.out.println("From Node "+iD +" To Node "+toID);
 		Node currentNode = nodeList.get(toID);
 		List<Node> path = currentNode.getShortestPath();
 		Node PreviousNode=null;
 		Double distance =(double) -1;
+		ArrayList<double[]> listToSend = new ArrayList<double[]>();
+		ArrayList<double[]> list = new ArrayList<double[]>();
 		
 		for(Node current : path) {
 			if(PreviousNode!=null) {
-				for (Entry<Node, Double> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
+				for (Entry<Node, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
 			        if(current.getID() == adjacencyPair.getKey().getID()) {
-			        	distance = adjacencyPair.getValue();
+			        	distance = adjacencyPair.getValue().distance;
+			        	list = adjacencyPair.getValue().coords;
 			        }	          
 			    }
-				System.out.println("Path from "+PreviousNode.getID()+" To "+current.getID()+ "With a weight of "+distance);
+				listToSend.addAll(list);
+				System.out.println("Path from "+PreviousNode.getID()+" To "+current.getID()+ "With a weight of "+distance+" Size of coords:"+list.size());
 				PreviousNode=current;
 			}else {
 				PreviousNode = current;
 			}
 		}
-		for (Entry<Node, Double> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
+		for (Entry<Node, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
 	        if(currentNode.getID() == adjacencyPair.getKey().getID()) {
-	        	distance = adjacencyPair.getValue();
+	        	distance = adjacencyPair.getValue().distance;
+	        	list = adjacencyPair.getValue().coords;
 	        }	          
 	    }
-		System.out.println("Path from "+PreviousNode.getID()+" To "+currentNode.getID()+ "With a weight of "+distance);
-		
+		System.out.println("Path from "+PreviousNode.getID()+" To "+currentNode.getID()+ "With a weight of "+distance+" Size of coords:"+list.size());
+		return listToSend;
 	}
 
 
@@ -398,9 +410,9 @@ private static void ListShortestPath(int iD, int toID, List<Node> nodeList) {
         while (unsettledNodes.size() != 0) {
             Node currentNode = getLowestDistanceNode(unsettledNodes);
             unsettledNodes.remove(currentNode);
-            for (Entry<Node, Double> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
+            for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
                 Node adjacentNode = adjacencyPair.getKey();
-                Double edgeWeigh = adjacencyPair.getValue();
+                Double edgeWeigh = adjacencyPair.getValue().distance;
 
                 if (!settledNodes.contains(adjacentNode)) {
                     CalculateMinimumDistance(adjacentNode, edgeWeigh, currentNode);
