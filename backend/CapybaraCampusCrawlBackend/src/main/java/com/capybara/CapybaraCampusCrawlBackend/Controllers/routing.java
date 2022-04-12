@@ -37,6 +37,10 @@ import org.jgrapht.*;
 
 public class routing{
   
+	public routing() {
+		
+	}
+	
 	public static class Pair{
 		public ArrayList<double[]> coords;
 		Double distance;
