@@ -44,6 +44,17 @@ public class RoutesApiController implements RoutesApi {
     public ResponseEntity<List<Point>> getRoute(
             @Parameter(name = "RouteRequest", description = "Get the Route with a generic route request", required = true, schema = @Schema(description = "")) @Valid @RequestBody RouteRequest routeRequest
     	    ) {
+
+                System.out.println("Prefer Indoors: " + routeRequest.getConstraints().getPreferIndoors());
+                
+                System.out.println("Avoid Crouds:" + routeRequest.getConstraints().getAvoidCrowds());
+                
+                System.out.println("Building ID: " + routeRequest.getConstraints().getPitstops().getLocation().getBuildingId());
+                System.out.println("Building Lat: " + routeRequest.getConstraints().getPitstops().getLocation().getLatitude());
+                System.out.println("Building Long: " + routeRequest.getConstraints().getPitstops().getLocation().getLongitude());
+                
+                System.out.println("Max Time: "+ routeRequest.getConstraints().getTimeConstraint().getMaxTime());
+
     	return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
     }
     
