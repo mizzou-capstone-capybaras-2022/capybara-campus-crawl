@@ -1,6 +1,10 @@
 
 <div class="map-container">
   <div class="map-frame">
-    <div id="map" leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl"></div>
+    <div id="map" leaflet 
+    [leafletOptions]="options" 
+    [leafletLayersControl]="layersControl"
+    [leafletLayers]="layers"></div>
   </div>
+  <button (click)="rerenderMap()">re render</button>
 </div>

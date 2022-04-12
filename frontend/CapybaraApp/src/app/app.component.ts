@@ -10,20 +10,11 @@ import { BuildingControllerService } from 'src/services/crawl-api';
 export class AppComponent {
   title = 'CapybaraApp';
 
-  constructor(private buildingDao: BuildingControllerService){
+  constructor(){
 
   }
 
   ngOnInit(){
-    /**
-    console.log("TesT");
-    fetch('http://localhost:8090/buildings')
-      .then(response => response.json())
-      .then(data => console.log(data));
-    **/
 
-    this.buildingDao.getBuildings().subscribe((value) => {
-      console.log(value);
-    })
   }
 }
