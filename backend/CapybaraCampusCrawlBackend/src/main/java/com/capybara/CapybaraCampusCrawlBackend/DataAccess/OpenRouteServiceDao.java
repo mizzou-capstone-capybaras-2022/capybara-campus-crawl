@@ -42,8 +42,8 @@ public class OpenRouteServiceDao {
 	}
 	
 	public List<Point> GetRouteBetweenPoints(Point a, Point b) throws JsonMappingException, JsonProcessingException{
-		String startString = a.getLatitude().toString() + "," + a.getLongitude().toString();
-		String endString = b.getLatitude().toString() + "," + b.getLongitude().toString();
+		String startString = a.getLongitude().toString() + "," + a.getLatitude().toString();
+		String endString = b.getLongitude().toString() + "," + b.getLatitude().toString();
 		String orsStringResponse = restTemplate.getForObject(
                 "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" + apiKey + "&start=" + startString + "&end=" + endString, String.class);
         
@@ -56,8 +56,8 @@ public class OpenRouteServiceDao {
 		
 		for (int i = 0; i < coordinates.size(); i++) {
 			JsonNode coordinateNode = coordinates.get(i);
-			Double latitude = coordinateNode.get(0).asDouble();
-			Double longitude = coordinateNode.get(1).asDouble();
+			Double latitude = coordinateNode.get(1).asDouble();
+			Double longitude = coordinateNode.get(0).asDouble();
 			
 			points.add(new Point()
 					.latitude(latitude)

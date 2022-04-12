@@ -68,18 +68,5 @@ public class CapybaraCampusCrawlBackendApplication {
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
-	
-	@Bean
-    public CommandLineRunner run(OpenRouteServiceDao dao) throws Exception {
-        return args -> {
-        	
-        	String useOrs = env.getProperty("openrouteservice.active");
-        	logger.info("Ors: " + useOrs);
-        	if (useOrs.contains("true")) {
-            	logger.info(dao.GetDummyData());
-        	}
-        	
-        };
-    }
-	
+
 }

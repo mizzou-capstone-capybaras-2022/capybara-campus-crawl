@@ -62,15 +62,16 @@ public class BuildingRouteApiController implements BuildingRouteApi {
     		Point pointA = new Point().latitude(graphNodeA.getLatitude()).longitude(graphNodeA.getLongitude());
     		Point pointB = new Point().latitude(graphNodeB.getLatitude()).longitude(graphNodeB.getLongitude());
     		
+    		ArrayList<Point> points = new ArrayList<Point>();
     		
     		try {
-				ArrayList<Point> points = (ArrayList<Point>) routeDao.GetRouteBetweenPoints(pointA, pointB);
+				points = (ArrayList<Point>) routeDao.GetRouteBetweenPoints(pointA, pointB);
 			} catch (JsonProcessingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-    		return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
+    		return new ResponseEntity<List<Point>>(points, HttpStatus.OK);
 
         }
 
