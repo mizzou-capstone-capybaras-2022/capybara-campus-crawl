@@ -1,59 +1,54 @@
-
-.home-container {
-  width: 99%;
-  //overflow: auto;
-  height: 100vh;
+.navbar {
+  background-color: #b53d00;
+  color: white;
 }
 
-.home-text {
-  margin: auto;
-  text-align: center;
-}
-.home-text1 {
-  text-align: center;
-  font-size: 30px;
-}
-.home-text2 {
-  text-align: center;
-  font-size: 25px;
-}
-.home-text3 {
-  text-align: center;
-  width: fit-content;
-  margin: auto;
-  padding-top: 25px;
-  font-size: 20px;
-}
-
-.home-separator {
-  width: 75%;
-  margin: auto;
-  height: 1px;
-  border-top: 1px solid black;
-}
-
-.home-container1 {
-  width: 100%;
+.body {
+  width: 80%;
   margin: auto;
 }
 
-.map-container {
-  height: 50%;
-  width: 60%;
+.app-map-container {
+  height: 30rem;
+  width: 60rem;
   margin: auto;
   padding-bottom: 20px;
 }
 
-/*
-.body {
-  font-weight: 400;
-  font-style:normal;
-  text-decoration: none;
-  text-transform: none;
-  letter-spacing: normal;
-  line-height: 1.15;
-  background-color: white;
-  font-family: Inter;
-  font-size: 16px;
+.welcome-card {
+  margin-top: 16px;
 }
-*/
+
+.mat-divider {
+  border-top-color: rgba(0,0,0,.50);
+  margin-top: 32px !important;
+  margin-bottom: 32px !important;
+}
+
+.mat-tab-label {
+  min-width: 100px !important;
+  padding: 16px !important;
+  background-color: #78909c;
+  color: black;
+  font-weight: 700;
+  opacity: 1.0 !important;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  min-width: 100px !important;
+  padding: 16px !important;
+  background-color: #b53d00 !important;
+  color: white;
+  font-weight: 700;
+}
+
+.mat-tab-label:hover:not(.mat-tab-disabled):not(.mat-tab-label-active) {
+  background-color: #ffa06d;
+  color: black !important;
+  font-weight: 900;
+}
+
+.mat-ink-bar {
+  background-color: black !important;
+}

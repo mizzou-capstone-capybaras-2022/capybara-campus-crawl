@@ -1,17 +1,46 @@
+<div>
+  <mat-toolbar class = "navbar">
+    <span>Capybara College Crawl</span>
+  </mat-toolbar>
+</div>  
 
+<div class = "body">
+  <div class = "welcome-card">   
+    <mat-card>
+      <mat-card-title class = "mat-title">
+        Welcome!
+      </mat-card-title>
+      <mat-card-content class = "mat-display-1">
+        Explore Mizzou and get the best routes below!
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Input Locations">
+      <app-input-locations></app-input-locations>
+    </mat-tab>
+    <mat-tab label="Add Constraints">
+      <app-component-add-constraints></app-component-add-constraints>
+    </mat-tab>
+    <mat-tab label="Search Buildings">
+      <app-search-buildings></app-search-buildings>
+    </mat-tab>
+  </mat-tab-group>
+
+  <mat-divider></mat-divider>
+
+  <div class="app-map-container">
+    <app-map></app-map>
+  </div>
+
+</div>
+
+<!--
 <div class="body">
   <div class="home-container">
-    <div class="home-text">
-      <span class="home-text1">
-        Welcome to the Capybara College Crawl
-      </span>
-      <br>
-      <span class="home-text2">
-        Explore Mizzou and get the best routes below!
-      </span>
-    </div>
-    <div class="home-separator"></div>
-
     <div class="home-container1">
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Home">
@@ -35,12 +64,5 @@
 </div>
 
 
-<!--
-<div>
-  <p>
-    <mat-toolbar>
-      <span>My Application</span>
-    </mat-toolbar>
-  </p>
-</div>
+
 -->
