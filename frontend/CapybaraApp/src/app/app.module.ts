@@ -18,7 +18,7 @@ import { ComponentAddConstraintsComponent } from './component-add-constraints/co
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SearchBuildingsComponent } from './search-buildings/search-buildings.component';
 
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 import {ApiModule, BASE_PATH} from '../services/crawl-api';
@@ -37,6 +37,7 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     MatTabsModule,
     ApiModule,
+    MatToolbarModule,
     AppRoutingModule,
     LeafletModule,
     BrowserAnimationsModule,
