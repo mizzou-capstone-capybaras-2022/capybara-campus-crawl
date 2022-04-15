@@ -9,11 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.BuildingRouteRequest;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
+import com.capybara.CapybaraCampusCrawlBackend.Routing.RoutingSystem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,6 +35,9 @@ public class BuildingRouteApiController implements BuildingRouteApi {
 
     private final NativeWebRequest request;
 
+    @Autowired
+	private RoutingSystem routingDao;
+    
     @Autowired
 	OpenRouteServiceDao routeDao;
     
