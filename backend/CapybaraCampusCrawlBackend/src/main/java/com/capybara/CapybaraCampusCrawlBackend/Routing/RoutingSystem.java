@@ -6,15 +6,22 @@ import org.springframework.stereotype.Component;
 import com.capybara.CapybaraCampusCrawlBackend.CapybaraCampusCrawlBackendApplication;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
+import com.capybara.CapybaraCampusCrawlBackend.Models.CapybaraGraphEdgeForRouting;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphEdge;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.jgrapht.*;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
@@ -31,7 +38,7 @@ public class RoutingSystem {
 	
 	private GraphNodeRepository nodeDao;
 	
-	private Graph<Long, DefaultEdge> mizzouGraph;
+	private Graph<Long,CapybaraGraphEdgeForRouting> mizzouGraph;
 	
 	private HashMap<Long, GraphNode> graphNodeLookupTable = new HashMap<>();
 	
@@ -40,7 +47,7 @@ public class RoutingSystem {
 		this.edgeDao = edgeDao;
 		this.nodeDao = nodeDao;
 		
-		mizzouGraph = new DefaultUndirectedWeightedGraph<Long, DefaultEdge>(DefaultEdge.class);
+		mizzouGraph = new DefaultUndirectedWeightedGraph<Long, CapybaraGraphEdgeForRouting>(CapybaraGraphEdgeForRouting.class);
 		
 		List<GraphNode> nodes = nodeDao.findAll();
 		
@@ -52,9 +59,27 @@ public class RoutingSystem {
 		List<GraphEdge> edges = edgeDao.findAll();
 		
 		for (GraphEdge edge: edges) {
-			DefaultEdge addedEdge = mizzouGraph.addEdge(edge.getFromNode().getNodeID(), edge.getToNode().getNodeID());
-			mizzouGraph.setEdgeWeight(addedEdge, edge.getDistance());
+			CapybaraGraphEdgeForRouting edgeForRouting = new CapybaraGraphEdgeForRouting(edge.getEdgeId());
+			mizzouGraph.addEdge(edge.getFromNode().getNodeID(), edge.getToNode().getNodeID(), edgeForRouting);
+			mizzouGraph.setEdgeWeight(edgeForRouting, edge.getDistance());
 		}
+	}
+	
+	public List<Point> ComputeRoute(Long startingBuildingId, Long endingBuildingId) throws JsonMappingException, JsonProcessingException {
+		GraphPath<Long, CapybaraGraphEdgeForRouting> djikstraPath = DijkstraShortestPath.findPathBetween(mizzouGraph, startingBuildingId, endingBuildingId);
+		List<CapybaraGraphEdgeForRouting> pathEdges = djikstraPath.getEdgeList();
+		
+		ArrayList<Point> pointsList = new ArrayList<Point>();
+		
+		for (CapybaraGraphEdgeForRouting capybaraEdge : pathEdges) {
+			System.out.println(capybaraEdge.getEdgeId().toString());
+			GraphEdge actualEdge = edgeDao.getById(capybaraEdge.getEdgeId());
+			String pathShape = actualEdge.getPathshape();
+			List<Point> points = OpenRouteServiceDao.MapToPointList(pathShape);
+			pointsList.addAll(points);
+		}
+		
+		return pointsList;
 	}
 	
 }

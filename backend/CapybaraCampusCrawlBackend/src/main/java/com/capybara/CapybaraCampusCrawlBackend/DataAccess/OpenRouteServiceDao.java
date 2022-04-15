@@ -50,7 +50,15 @@ public class OpenRouteServiceDao {
 		ObjectMapper mapper = new ObjectMapper();
 	
 		JsonNode node = mapper.readTree(orsStringResponse);
-		JsonNode coordinates = node.get("features").get(0).get("geometry").get("coordinates");
+		String coordinatesJson = node.get("features").get(0).get("geometry").get("coordinates").toString();
+		
+		return MapToPointList(coordinatesJson);
+	}
+	
+	public static List<Point> MapToPointList(String coordsListJson) throws JsonMappingException, JsonProcessingException{
+		ObjectMapper mapper = new ObjectMapper();
+		
+		JsonNode coordinates = mapper.readTree(coordsListJson);
 		
 		ArrayList<Point> points = new ArrayList<Point>();
 		

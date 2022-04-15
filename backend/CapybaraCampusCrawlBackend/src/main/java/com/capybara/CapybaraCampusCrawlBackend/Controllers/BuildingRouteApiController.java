@@ -64,14 +64,11 @@ public class BuildingRouteApiController implements BuildingRouteApi {
     		GraphNode graphNodeA = buildingA.getGraphNode();
     		GraphNode graphNodeB = buildingB.getGraphNode();
     		
-    		Point pointA = new Point().latitude(graphNodeA.getLatitude()).longitude(graphNodeA.getLongitude());
-    		Point pointB = new Point().latitude(graphNodeB.getLatitude()).longitude(graphNodeB.getLongitude());
-    		
-    		ArrayList<Point> points = new ArrayList<Point>();
+    		List<Point> points = new ArrayList<Point>();
     		
     		try {
-				points = (ArrayList<Point>) routeDao.GetRouteBetweenPoints(pointA, pointB);
-			} catch (JsonProcessingException e) {
+				points = routingDao.ComputeRoute(graphNodeA.getNodeID(), graphNodeB.getNodeID());
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
