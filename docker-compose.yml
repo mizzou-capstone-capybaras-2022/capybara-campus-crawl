@@ -3,6 +3,7 @@ services:
   pgadmin:
     container_name: fullstack_pgadmin4_container
     image: dpage/pgadmin4
+    profiles: ["all", "database", "fullstack", "nonseeded-database"]
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: capybara@admin.com
@@ -11,6 +12,7 @@ services:
       - "5050:80"
   backend:
     container_name: fullstack_backend_container
+    profiles: ["all", "fullstack-no-database", "fullstack", "backend"]
     build: 
       context: ./backend
       args:
@@ -21,8 +23,40 @@ services:
     restart: always
     ports:
       - "8090:8090"
+  frontend:
+    container_name: fullstack_frontend_container
+    profiles:
+      - "all"
+      - "fullstack"
+      - "frontend"
+    build:
+      context: ./frontend
+      args:
+        - TILESERVICE=${TILESERVICE:-https://api.maptiler.com/maps/openstreetmap}
+        - BASEAPIPATH=${BASEAPIPATH:-http://localhost:8090}
+        - MAPAPIKEY=${MAPAPIKEY}
+    restart: always
+    ports:
+      - "4200:80"
+  dbnoseed:
+    container_name: fullstack_pg_nonseeded_container
+    profiles: ["nonseeded-database"]
+    image: postgres
+    restart: always
+    volumes:
+            - capybaradbdata:/var/lib/postgresql/data
+            - ./capybara-database/sql-scripts/full-schema.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    environment:
+      POSTGRES_USER: capy
+      POSTGRES_PASSWORD: capy
+      POSTGRES_DB: capybara_db
+    healthcheck:
+      test: "exit 0"
+    ports:
+      - "5432:5432"
   db:
     container_name: fullstack_pg_container
+    profiles: ["all", "fullstack", "database"]
     image: postgres
     restart: always
     volumes:

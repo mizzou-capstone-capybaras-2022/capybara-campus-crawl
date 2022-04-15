@@ -13,6 +13,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 
 import com.capybara.CapybaraCampusCrawl.databaseseeder.Models.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReaderHeaderAware;
 
 
@@ -217,9 +219,27 @@ public class BuildingsWithDoorsSeeder {
 				Door door2Entity = savedDoorsLookup.get(fullBuildingName2).get(doorCode2);
 				GraphNode door2Node = door2Entity.getNode();
 				
-				GraphEdge doorEdgeToSave = new GraphEdge(door1Node, door2Node, "", "", doorDistance,"{}", true);
-		
-				graphEdgeDao.save(doorEdgeToSave);
+				ObjectMapper mapper = new ObjectMapper();
+				
+				ArrayList<double[]> coordList = new ArrayList<>();
+				double[] fromPoint =  {door1Node.getLongitude(),door2Node.getLatitude()};
+				double[] toPoint =  {door2Node.getLongitude(),door2Node.getLatitude()};
+				
+				coordList.add(fromPoint);
+				coordList.add(toPoint);
+				
+				try {
+					
+					String coordsListString = mapper.writeValueAsString(coordList);
+					
+					
+					GraphEdge doorEdgeToSave = new GraphEdge(door1Node, door2Node, "insideWalking", "insideWalking", doorDistance,coordsListString, true);
+					
+					graphEdgeDao.save(doorEdgeToSave);
+				} catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

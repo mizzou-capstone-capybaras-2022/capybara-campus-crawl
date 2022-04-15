@@ -29,10 +29,15 @@ public class GraphNode {
 	 }
 	 
 	public GraphNode() {
-		
+		super();
+	}
+	
+	public GraphNode(long nodeId) {
+		this.NodeID = nodeId;
 	}
 	 
 	public GraphNode(Double latitude, Double longitude, String description) {
+		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.description = description;
