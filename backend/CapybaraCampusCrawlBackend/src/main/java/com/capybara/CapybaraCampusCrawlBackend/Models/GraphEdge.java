@@ -34,6 +34,7 @@ public class GraphEdge {
 	
 	private Double distance;
 	
+	@Column(name="pathshape")
 	private String pathshape;
 	
 	private boolean bidirectional;

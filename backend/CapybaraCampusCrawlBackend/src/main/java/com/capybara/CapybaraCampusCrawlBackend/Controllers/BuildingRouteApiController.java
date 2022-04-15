@@ -9,11 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
 import com.capybara.CapybaraCampusCrawlBackend.Models.BuildingRouteRequest;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
+import com.capybara.CapybaraCampusCrawlBackend.Routing.RoutingSystem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,6 +35,9 @@ public class BuildingRouteApiController implements BuildingRouteApi {
 
     private final NativeWebRequest request;
 
+    @Autowired
+	private RoutingSystem routingDao;
+    
     @Autowired
 	OpenRouteServiceDao routeDao;
     
@@ -59,14 +64,11 @@ public class BuildingRouteApiController implements BuildingRouteApi {
     		GraphNode graphNodeA = buildingA.getGraphNode();
     		GraphNode graphNodeB = buildingB.getGraphNode();
     		
-    		Point pointA = new Point().latitude(graphNodeA.getLatitude()).longitude(graphNodeA.getLongitude());
-    		Point pointB = new Point().latitude(graphNodeB.getLatitude()).longitude(graphNodeB.getLongitude());
-    		
-    		ArrayList<Point> points = new ArrayList<Point>();
+    		List<Point> points = new ArrayList<Point>();
     		
     		try {
-				points = (ArrayList<Point>) routeDao.GetRouteBetweenPoints(pointA, pointB);
-			} catch (JsonProcessingException e) {
+				points = routingDao.ComputeRoute(graphNodeA.getNodeID(), graphNodeB.getNodeID());
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
