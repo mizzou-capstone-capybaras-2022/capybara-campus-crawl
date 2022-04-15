@@ -3,7 +3,11 @@ services:
   pgadmin:
     container_name: fullstack_pgadmin4_container
     image: dpage/pgadmin4
-    profiles: ["all", "database", "fullstack", "nonseeded-database"]
+    profiles: 
+      - "all"
+      - "database"
+      - "nonseeded-database"
+      - "dbadmin"
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: capybara@admin.com
@@ -12,7 +16,11 @@ services:
       - "5050:80"
   backend:
     container_name: fullstack_backend_container
-    profiles: ["all", "fullstack-no-database", "fullstack", "backend"]
+    profiles:
+      - "all"
+      - "fullstack-db"
+      - "fullstack"
+      - "backend"
     build: 
       context: ./backend
       args:
@@ -28,6 +36,7 @@ services:
     profiles:
       - "all"
       - "fullstack"
+      - "fullstack-db"
       - "frontend"
     build:
       context: ./frontend
@@ -40,7 +49,8 @@ services:
       - "4200:80"
   dbnoseed:
     container_name: fullstack_pg_nonseeded_container
-    profiles: ["nonseeded-database"]
+    profiles: 
+      - "nonseeded-database"
     image: postgres
     restart: always
     volumes:
@@ -56,7 +66,10 @@ services:
       - "5432:5432"
   db:
     container_name: fullstack_pg_container
-    profiles: ["all", "fullstack", "database"]
+    profiles: 
+      - "all"
+      - "fullstack-db"
+      - "database"
     image: postgres
     restart: always
     volumes:
