@@ -20,7 +20,7 @@
 
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Input Locations">
-      <app-input-locations></app-input-locations>
+      <app-input-locations (inputBuildings) = "onSelectBuildingForNavigation($event)"></app-input-locations>
     </mat-tab>
     <mat-tab label="Add Constraints">
       <app-component-add-constraints></app-component-add-constraints>

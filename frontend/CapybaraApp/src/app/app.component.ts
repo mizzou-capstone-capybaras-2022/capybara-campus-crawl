@@ -1,4 +1,5 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
 
 import { Building, BuildingControllerService, Point } from 'src/services/crawl-api';
 import { MapComponent } from './map/map.component';
@@ -14,7 +15,7 @@ export class AppComponent {
 
   @ViewChild(MapComponent) mapComponent!: MapComponent;
 
-  constructor(){
+  constructor(private baraApi: BaraBackendWrapperService){
 
   }
 
@@ -23,11 +24,23 @@ export class AppComponent {
   }
 
   onSelectBuildingFromSearch(selectedBuilding: Building){
-    let buildingPoint = <Point>{
-      latitude: selectedBuilding.graphNode?.latitude,
-      longitude: selectedBuilding.graphNode?.longitude
-    }
-
+    let buildingPoint = this.getBuildingPoint(selectedBuilding);
     this.mapComponent.renderMapMarkers([buildingPoint]);
+  }
+
+  async onSelectBuildingForNavigation(selectedBuilding: [Building, Building]){
+    let buildingFrom = selectedBuilding[0];
+    let buildingTo = selectedBuilding[1];
+
+    let routePoints: Point[] = await this.baraApi.getRouteBetweenBuildings(<number>buildingFrom.buildingId, <number>buildingTo.buildingId);
+    
+    this.mapComponent.renderRoute(routePoints);
+  }
+
+  private getBuildingPoint(building: Building): Point {
+    return <Point>{
+      latitude: building.graphNode?.latitude,
+      longitude: building.graphNode?.longitude
+    }
   }
 }
