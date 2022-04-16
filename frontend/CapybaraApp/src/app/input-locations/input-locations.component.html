@@ -2,7 +2,7 @@
 
   <form [formGroup]="inputLocations" (ngSubmit)="inputLocationsFn()">
     <mat-form-field appearance="standard">
-      <mat-label>Select Starting Building</mat-label>
+      <mat-label>Start location</mat-label>
       <mat-select formControlName="start">
         <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
       </mat-select>
@@ -11,7 +11,7 @@
     <br>
 
     <mat-form-field appearance="standard">
-      <mat-label>Select Destination Building</mat-label>
+      <mat-label>End location</mat-label>
       <mat-select formControlName="destination">
         <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
       </mat-select>

@@ -11,7 +11,9 @@ export class ComponentAddConstraintsComponent implements OnInit {
   addConstraints = new FormGroup({
     indoor: new FormControl(''),
     food: new FormControl(''),
-    time: new FormControl('')
+    time: new FormControl(''),
+    timeHours: new FormControl(''),
+    timeMinutes: new FormControl('')
   });
 
   constructor() { }
@@ -22,10 +24,9 @@ export class ComponentAddConstraintsComponent implements OnInit {
   addConstraintsfn() {
     console.log(this.addConstraints.value);
   }
+
   isShown: boolean = false ;
   toggleShow() {
-
     this.isShown = ! this.isShown;
-    
     }
 }

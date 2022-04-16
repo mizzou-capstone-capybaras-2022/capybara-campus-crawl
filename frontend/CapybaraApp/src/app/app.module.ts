@@ -16,12 +16,11 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { ComponentAddConstraintsComponent } from './component-add-constraints/component-add-constraints.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
 import { SearchBuildingsComponent } from './search-buildings/search-buildings.component';
-
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
-
 import {ApiModule, BASE_PATH} from '../services/crawl-api';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -49,6 +48,7 @@ import { environment } from 'src/environments/environment';
     FormsModule,ReactiveFormsModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
