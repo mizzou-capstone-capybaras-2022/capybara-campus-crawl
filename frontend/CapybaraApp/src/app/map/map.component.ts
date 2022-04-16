@@ -1,8 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { LeafletControlLayersConfig } from '@asymmetrik/ngx-leaflet';
 
-import { latLng, LatLng, tileLayer, polyline, TileLayer, Polyline, LatLngExpression } from 'leaflet';
+import { latLng, LatLng, tileLayer, polyline, TileLayer, Polyline, LatLngExpression, Marker } from 'leaflet';
 import { Point } from 'src/services/crawl-api/model/point';
+import { PointUtil } from 'src/share/geoutils/point/pointutil';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -10,40 +11,25 @@ import { environment } from '../../environments/environment';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent {
 
-  streetMaps: TileLayer
-  route: Polyline;
+  streetMaps: TileLayer;
   layersControl: LeafletControlLayersConfig;
   layers: any[] = [];
-
   options: {};
 
-  private initMap(): void {
-
+  private getMapTileLayer(tileserviceUrl: string, tileKey: string): TileLayer {
+    return tileLayer(tileserviceUrl + "/{z}/{x}/{y}.jpg" + "?key=" + tileKey, { maxZoom: 18, attribution: '...' });
   }
 
   constructor() {
-    this.streetMaps = tileLayer(environment.tileservice + "/{z}/{x}/{y}.jpg" + "?key=" + environment.tileKey, { maxZoom: 18, attribution: '...' });
-
-    let points: Array<Point> = [
-      <Point>{latitude: 38.946831, longitude: -92.329229},
-      <Point>{latitude: 38.944311, longitude: -92.328049 }
-    ]
-
-    let pointsPlural: LatLngExpression[] = points.map(point => <LatLngExpression>[point.latitude,point.longitude]);
-
-    this.route = polyline(pointsPlural);
-
-    this.layers = [this.route]
+    this.streetMaps = this.getMapTileLayer(environment.tileservice, environment.tileKey);
 
     this.layersControl = {
       baseLayers: {
         'Street Maps': this.streetMaps,
       },
-      overlays: {
-        'Destination route': this.route
-      }
+      overlays: {}
     };
 
     this.options = {
@@ -51,13 +37,23 @@ export class MapComponent implements AfterViewInit {
       zoom: 17,
       center: latLng(38.945095, -92.329261)
     };
+  }
+
+  renderMapMarkers(points: Point[]){
+    let mapMarkers: Marker<any>[] = <Marker<any>[]> points.map(point => {
+      return PointUtil.convertPointToMarker(point);
+    }).filter(point => {
+      return point != undefined
+    });
+
+    this.layers = mapMarkers;
+  }
+
+  renderRoute(){
 
   }
 
-  ngAfterViewInit(): void {
-    this.initMap();
-  }
-
+  /*
   rerenderMap(){
 
     console.log("fix");
@@ -85,5 +81,6 @@ export class MapComponent implements AfterViewInit {
       }
     };
   }
+  */
 
 }

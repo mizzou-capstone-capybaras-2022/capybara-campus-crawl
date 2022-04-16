@@ -1,6 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { BuildingControllerService } from 'src/services/crawl-api';
+import { Building, BuildingControllerService, Point } from 'src/services/crawl-api';
+import { MapComponent } from './map/map.component';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,22 @@ import { BuildingControllerService } from 'src/services/crawl-api';
 export class AppComponent {
   title = 'CapybaraApp';
 
+  @ViewChild(MapComponent) mapComponent!: MapComponent;
+
   constructor(){
 
   }
 
   ngOnInit(){
 
+  }
+
+  onSelectBuildingFromSearch(selectedBuilding: Building){
+    let buildingPoint = <Point>{
+      latitude: selectedBuilding.graphNode?.latitude,
+      longitude: selectedBuilding.graphNode?.longitude
+    }
+
+    this.mapComponent.renderMapMarkers([buildingPoint]);
   }
 }

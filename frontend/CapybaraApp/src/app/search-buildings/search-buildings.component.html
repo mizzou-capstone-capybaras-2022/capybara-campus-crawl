@@ -4,7 +4,7 @@
       <mat-form-field appearance="standard">
         <mat-label>Building Search</mat-label>
         <mat-select formControlName="building">
-          <mat-option *ngFor="let building of buildings;" [value]="building.buildingId">{{building.name}}</mat-option>
+          <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
         </mat-select>
       </mat-form-field>
   
@@ -12,6 +12,10 @@
       <div>
         <button mat-raised-button color="basic" type="submit">Submit</button>
       </div>
+
+      <p class = "building-marker-success">
+        Success! If you zoom out, you will see a marker that represents the markers of where the buildings are!
+      </p>
     </form>
   
   </div>

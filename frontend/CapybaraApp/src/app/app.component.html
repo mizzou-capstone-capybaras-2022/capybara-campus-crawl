@@ -26,7 +26,7 @@
       <app-component-add-constraints></app-component-add-constraints>
     </mat-tab>
     <mat-tab label="Search Buildings">
-      <app-search-buildings></app-search-buildings>
+      <app-search-buildings (selectBuildingFromSearch) = "onSelectBuildingFromSearch($event)"></app-search-buildings>
     </mat-tab>
   </mat-tab-group>
 
