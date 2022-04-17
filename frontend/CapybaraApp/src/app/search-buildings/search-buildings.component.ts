@@ -31,7 +31,6 @@ export class SearchBuildingsComponent implements OnInit {
         buildingId: this.searchBuildings.value
       }
     );
-
   }
 
 }

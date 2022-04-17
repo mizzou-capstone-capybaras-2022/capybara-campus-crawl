@@ -2,28 +2,31 @@
 
     <form [formGroup]="addConstraints" (ngSubmit)="addConstraintsfn()">
 
-          
-          <mat-checkbox formControlName="indoor"></mat-checkbox>
-          <mat-label> Prefer Indoors</mat-label>
-        <br>
-        <br>
-    
-        <mat-checkbox formControlName="food"></mat-checkbox>
-        <mat-label> Stop for food</mat-label>
+      <br>
+      <mat-checkbox formControlName="indoor" ></mat-checkbox>
+      <mat-label> Prefer Indoors</mat-label>
+      <br><br>
+      <mat-checkbox formControlName="food"></mat-checkbox>
+      <mat-label> Stop for food</mat-label>
+      <br><br>
+      <mat-checkbox formControlName="time" (click)="toggleShow()"></mat-checkbox>
+      <mat-label> Time constraint</mat-label>
+      <br><br>
 
-        <br>
-        <br>
-        <mat-checkbox formControlName="time" ng-model="chkselct" (click)="toggleShow()"></mat-checkbox>
-        <mat-label> Is there a time constraint</mat-label>
-        <br>
-        <br>
-        <div *ngIf="isShown">
-            <input type="time">
-        </div>
-        <br>
-        <div>
+      <mat-form-field appearance="standard" *ngIf="isShown">
+        <input matInput type="number" formControlName="timeHours" min="0">
+        <mat-label> Hours</mat-label>
+      </mat-form-field>
+      <p *ngIf="isShown"> and </p>
+      <mat-form-field appearance="standard" *ngIf="isShown">
+        <input matInput type="number" formControlName="timeMinutes" min="0" max="59">
+        <mat-label> Minutes</mat-label>
+      </mat-form-field>
+      <br>
 
-          <button mat-raised-button color="basic" type="submit" style="position: center;">Submit</button>
-        </div>
-      </form>
+      <div>
+        <button mat-raised-button color="basic" type="submit" style="position: center;">Submit</button>
+      </div>
+
+    </form>
   </div>
