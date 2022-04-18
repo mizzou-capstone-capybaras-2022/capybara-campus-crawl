@@ -102,7 +102,26 @@ def extractClientData(csvFileClientsString):
     clientReader = csv.reader(csvFileAPString,delimeter=',',quotechar='|')
 
 
-def parseAirdumpCsv()
+def parseAirdumpCsv(filename):
+    with open(filename, 'rb') as file:
+        wholeCSV = file.read()
+    
+
+    #Split into string for clients and string for AP
+
+    parts = str(wholeCSV).split('Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs')
+
+    apString = parts[0]
+
+    clientString = parts[1]
+
+    accessPoints = extractAccessPointData(apString)
+
+    clients = extractClientData(clientString)
+
+    print(len(clients) + " clients found at location!")
+
+    return
 
 
 #Start of script
