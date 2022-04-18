@@ -10,6 +10,7 @@ import java.util.Map;
 
 //import com.capybara.CapybaraCampusCrawlBackend.Controllers.routing.Node;
 import com.capybara.CapybaraCampusCrawlBackend.Controllers.Pair;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
 
 public class Node{
 		private int ID;
@@ -30,7 +31,7 @@ public class Node{
 	        this.lon = lon;
 	    }
 		
-		public void addEdge(Node destination, double distance, ArrayList<double[]> coords) {
+		public void addEdge(Node destination, double distance, ArrayList<Point> coords) {
 			
 			adjList.put(destination, new Pair(coords,distance));
 	    }
