@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 import logging
+import logging.handlers
 import os
 import signal
 import subprocess
 from datetime import datetime
 import csv
+from mac_vendor_lookup import MacLookup
 
 """
     Fairly straightforward script to collect information about nearby wireless access points and their clients.
@@ -86,11 +88,7 @@ def isLocalMAC(macAddress):
 
     octetBits = int(firstOctet, 16)
 
-    print(bin(octetBits))
-
     secondLeastSignificantBit = bin(octetBits >> 1)[-1]
-    print(bin(octetBits >> 1))
-    print(secondLeastSignificantBit)
     #second least significant bit of the first octet is what determins locality
 
     if secondLeastSignificantBit == '1':
@@ -99,17 +97,23 @@ def isLocalMAC(macAddress):
 
     return False
         
+def extractClientData(csvFileClientsString):
+    
+    clientReader = csv.reader(csvFileAPString,delimeter=',',quotechar='|')
+
+
+def parseAirdumpCsv()
 
 
 #Start of script
 if __name__ == "__main__":
     logger.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 
-    with logging as l:
-        handler = l.handlers.WatchedFileHandler(os.environ.get("LOGFILE", "/var/log/MonitorNode.log"))
-        formatter = l.Formatter(logging.BASIC_FORMAT)
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
+    
+    handler = logging.handlers.WatchedFileHandler(os.environ.get("LOGFILE", "/var/log/MonitorNode.log"))
+    formatter = logging.Formatter(logging.BASIC_FORMAT)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
 
     logger.info("Starting airodump-ng...")
     redirectOutput = open("/dev/null",'w')
