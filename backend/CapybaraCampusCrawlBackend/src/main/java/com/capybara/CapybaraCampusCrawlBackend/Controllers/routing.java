@@ -62,8 +62,21 @@ public class routing{
 	public static void main(String arg[]) throws Exception{
 		
 		System.out.println("GET requests");
+		long start = System.nanoTime();
 		String nodeString = getRequest("http://localhost:8090/graph-nodes/");
-	    String edgeString = getRequest("http://localhost:8090/graph-edges/");
+	    //String edgeString = getRequest("http://localhost:8090/graph-edges/");
+	    File myObj = new File("edges.txt");
+	    Scanner myReader = new Scanner(myObj);
+	    String edgeString = myReader.nextLine();
+	    //System.out.println(edgeString);
+//	    FileWriter myWriter = new FileWriter("edges.txt");
+//	    myWriter.write(edgeString);
+//	    myWriter.close();
+	    
+	    long end = System.nanoTime();
+	    long duration = (end-start)/1000000;
+    	System.out.println("finished calculating: Took "+duration);
+		
 	    System.out.println("end requests");
 	    
 	    //turn into JSON object and pretty print
@@ -95,7 +108,13 @@ public class routing{
 	    for(int i=0;i<edgeObj.size();i++) {
 		    int fromNode = edgeObj.get(i).get("fromNode").get("nodeID").asInt();
 		    int toNode = edgeObj.get(i).get("toNode").get("nodeID").asInt();
-		    double distance = edgeObj.get(i).get("distance").asDouble();
+		    double distance;
+		    if(edgeObj.get(i).get("fromToAction").asText().equals("outsideWalking")) {
+		    	distance = edgeObj.get(i).get("distance").asDouble() * 1.3;
+		    }else {
+		    	distance = edgeObj.get(i).get("distance").asDouble();
+		    }
+		    
 		    //System.out.println("From Node ID:"+fromNode+"  toNode ID:"+toNode+" distance:"+distance+"\r\n"+"From Desc:"+(fromNode-1).getDescription()+"    to Desc:"+nodeList.get(toNode-1).getDescription()+"\r\n\r\n");
 		    
 //		    ArrayList<double[]> listzoom = new ArrayList<double[]>();
@@ -126,142 +145,21 @@ public class routing{
 		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list);
 	    }
 	    
-	    System.out.println("Starting ORS routing");
-	    //TO BE DELTED BEFORE DEPLOYING. MUST HAVE ORS RUNNING WITH SPECIFIC CONFIGURATIONS TO WORK 
-  
-	  	    for(int i =0;i<nodeObj.size();i++) {
-	    	//Starting point
-	    	JsonNode fromJSON = nodeObj.get(i);
-    		
-	    	String fromName=fromJSON.get("description").asText();
-	    	int fromID=fromJSON.get("nodeID").asInt();
-	    	for(int j =i+1;j<nodeObj.size();j++) {
-	    	//for(int j =0;j<nodeObj.size();j++) {
-	    		JsonNode toJSON = nodeObj.get(j);
-	    		
-	    		String toName=toJSON.get("description").asText();  		
-	    		String toID=toJSON.get("nodeID").asText();
-	    		if(j!=i) {
-	    		//end point
-	    		
-	    		
-	    		//if inside route and from same building
-	    		if((fromName.toLowerCase().startsWith("door") &&toName.toLowerCase().startsWith("door"))&&(fromName.substring(11).equals(toName.substring(11)))) {
-	    			
-	    			//System.out.println("From: "+fromName.substring(11)+"To: "+toName.substring(11));
-	    			//System.out.println("two doors!!");
-	    		}else {
-	    			
-	    			//coordinates for starting point
-	    			Double lat1=fromJSON.get("latitude").asDouble();
-	    			Double lon1=fromJSON.get("longitude").asDouble();
-	    			
-	    			//coordinates for end point
-	    			Double lat2=toJSON.get("latitude").asDouble();
-	    			Double lon2=toJSON.get("longitude").asDouble();
-	    			
-	    			
-	    			String request = "http://localhost:8080/ors/v2/directions/foot-walking?start="+lon1+","+lat1+"&end="+lon2+","+lat2; 
-	    			//System.out.println(request);
-	    			
-	    			String requestString = getRequest(request);
-	    			
-	    			//JSON of the result from the ORS call
-	    			JsonNode jsonrequest = mapper.readTree(requestString);
-	    			//System.out.println("FROM: "+fromID+" TO: "+toID);
-	    			//System.out.println("FROM: "+fromName+" TO: "+toName+"\r\nJSON:\r\n"+jsonrequest.toPrettyString());
-	    			Double distance = jsonrequest.get("features").get(0).get("properties").get("segments").get(0).get("distance").asDouble();
-	    			ArrayNode array = (ArrayNode) jsonrequest.get("features").get(0).get("geometry").get("coordinates");
-	    			ArrayList<double[]> list = new ArrayList<double[]>();
-	    			String coordsArray="[";
-	    			for (final JsonNode objNode : array) {
-	    	    		double[] test = {objNode.get(0).asDouble(),objNode.get(1).asDouble()};
-	    	    		String tmp ="["+objNode.get(0).asDouble()+","+objNode.get(1).asDouble()+"],";
-	    	    		coordsArray = coordsArray +tmp;
-	    	    		list.add(test);
-	    			}
-	    			coordsArray = coordsArray.substring(0,coordsArray.length() -1) +"]";
-	    			//System.out.println(coordsArray);
-	    			distance = distance *1.3;
-	    			//change distance here to prioritize inside walking cuz of rain, other preferences
-	    			
-	    			//System.out.println(distance);
-	    			
-	    			int fromNode = fromJSON.get("nodeID").asInt();
-	    		    int toNode = toJSON.get("nodeID").asInt();
-	    		    //System.out.println("creating ORS edge from: "+fromNode+" To: "+toNode);
-	    		    
-	    		    //if negative or 0 distance
-	    		    if(distance >0) {
-	    		    	nodeList.get(fromNode-1).addEdge(nodeList.get(toNode-1), distance,list);
-	    		    	//String csvtest = "\""+fromName+"\",\""+toName+"\","+distance+",\""+coordsArray+"\"";
-	    		    	//System.out.println(csvtest);
-	    		    	Collections.reverse(list);
-		    		    nodeList.get(toNode-1).addEdge(nodeList.get(fromNode-1), distance,list);	
-	    		    }
-	    			
-	    		}
-	    		//System.out.println("From:"+fromJSON.get("description").asText()+"To:"+toJSON.get("description").asText());
-	    		}else {
-	    			System.out.println("From:"+fromID+" TO:"+toID);
-	    		}
-	    	}
-	    	//int left = nodeObj.size()-fromID
-	    	System.out.println(fromID+" is done mapping Left:"+ (nodeObj.size()-fromID));
-	    }
 	    
-	    //END OF WHAT SHOULD BE DELETED ONCE ORS GETS ADDED TO DATABASE
-	    //once it is added, the node in a data
 	    
-//prints the adj list of all the nodes. Used for testing purposes
-//TO DELETE ONCE DATABASE IS RESEEDED	   
-//	  	    try {
-//	        File myObj = new File("filename.txt");
-//	        if (myObj.createNewFile()) {
-//	          System.out.println("File created: " + myObj.getName() + myObj.getAbsolutePath());
-//	        } else {
-//	          System.out.println("File already exists.");
-//	        }
-//	      } catch (IOException e) {
-//	        System.out.println("An error occurred.");
-//	        e.printStackTrace();
-//	      }
-//	    FileWriter myWriter = new FileWriter("filename.txt");
-//	    myWriter.write("Door1,Door2,Distance,isOutside,Coords\n");
-//END TO DELETE ONCE DATABASE IS RESEEDED	    
-	    int count =0;
-	    for(int i=0;i<nodeList.size();i++) {
-	    	Node currentNode = nodeList.get(i);
-	    	//System.out.println("Adj List for Node of ID:"+currentNode.getID()+"    Desc:"+currentNode.getDescription());
-	    	for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
-	    		
-		        Node adjacentNode = adjacencyPair.getKey();
-		        Double edgeWeigh = adjacencyPair.getValue().distance;
-//TO DELETE ONCE DATABASE IS RESEEDED		          
-//		        ArrayList<double[]> list = adjacencyPair.getValue().coords;
-//		        String coordsArray="[";
-//	    		for (final double[] coords : list) {
-//	    	    	String tmp ="["+coords[0]+","+coords[1]+"],";
-//	    	    	coordsArray = coordsArray +tmp;
-//	    		}
-//	    		coordsArray = coordsArray.substring(0,coordsArray.length() -1) +"]";
-//	    		String csvtest;
-//	    		if(list.size()>2) {
-//	    			csvtest = "\""+currentNode.getDescription()+"\",\""+adjacentNode.getDescription()+"\","+edgeWeigh+",1"+",\""+coordsArray+"\"";
-//	    		}else {
-//	    			csvtest = "\""+currentNode.getDescription()+"\",\""+adjacentNode.getDescription()+"\","+edgeWeigh+",0"+",\""+coordsArray+"\"";
-//	    		}
-//		           
-//		          myWriter.write(csvtest+"\n");
-//END TO DELETE ONCE DATABASE IS RESEEDED
-		          count ++;
-		          //System.out.println("        ID:"+adjacentNode.getID()+" Desc:"+adjacentNode.getDescription()+ "  Weight:"+edgeWeigh);
-		    }
-	    }
-	  //TO DELETE ONCE DATABASE IS RESEEDED
-//	    myWriter.close();
- 
-	    System.out.println(count);
+//prints the adj list of all the nodes. Used for testing purposes  
+//	    int count =0;
+//	    for(int i=0;i<nodeList.size();i++) {
+//	    	Node currentNode = nodeList.get(i);
+//	    	System.out.println("Adj List for Node of ID:"+currentNode.getID()+"    Desc:"+currentNode.getDescription());
+//	    	for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
+//		        Node adjacentNode = adjacencyPair.getKey();
+//		        Double edgeWeigh = adjacencyPair.getValue().distance;
+//		        count ++;
+//		        System.out.println("        ID:"+adjacentNode.getID()+" Desc:"+adjacentNode.getDescription()+ "  Weight:"+edgeWeigh);
+//		    }
+//	    } 
+//	    //System.out.println(count);
 	    
 	    //cerates graph for algorithm
 	    Graph graph = new Graph();
@@ -285,11 +183,11 @@ public class routing{
 	    }
 	    
 	    if(found >=0) {
-	    	long start = System.nanoTime();
+	    	start = System.nanoTime();
 	    	Node startNode = nodeList.get(found);
-	    	Graph graph2 = Graph.calculateShortestPathFromSource(graph,startNode);
-		    long end = System.nanoTime();
-		    long duration = (end-start)/1000000;
+	    	Graph.calculateShortestPathFromSource(graph,startNode);
+		    end = System.nanoTime();
+		    duration = (end-start)/1000000;
 	    	System.out.println("finished calculating: Took "+duration);
 	    	
 	    	Scanner obj2 = new Scanner(System.in);
@@ -319,7 +217,6 @@ public class routing{
 	}
 
 private static ArrayList<double[]> ListPath(int iD, int toID, List<Node> nodeList) {
-		// TODO Auto-generated method stub
 		System.out.println("From Node "+iD +" To Node "+toID);
 		Node currentNode = nodeList.get(toID);
 		List<Node> path = currentNode.getShortestPath();
@@ -337,7 +234,7 @@ private static ArrayList<double[]> ListPath(int iD, int toID, List<Node> nodeLis
 			        }	          
 			    }
 				listToSend.addAll(list);
-				System.out.println("Path from "+PreviousNode.getID()+" To "+current.getID()+ "With a weight of "+distance+" Size of coords:"+list.size());
+				System.out.println("Path from "+PreviousNode.getDescription()+" To "+current.getDescription()+ "With a weight of "+distance+" Size of coords:"+list.size());
 				PreviousNode=current;
 			}else {
 				PreviousNode = current;
@@ -349,90 +246,29 @@ private static ArrayList<double[]> ListPath(int iD, int toID, List<Node> nodeLis
 	        	list = adjacencyPair.getValue().coords;
 	        }	          
 	    }
-		System.out.println("Path from "+PreviousNode.getID()+" To "+currentNode.getID()+ "With a weight of "+distance+" Size of coords:"+list.size());
+		System.out.println("Path from "+PreviousNode.getDescription()+" To "+currentNode.getDescription()+ "With a weight of "+distance+" Size of coords:"+list.size());
 		return listToSend;
-	}
-
-
-
-//	public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
-//		source
-//	}
-
-
-
-	//algorithms
-//	public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
-//
-//        source.setDistance((double) 0);
-//
-//        Set<Node> settledNodes = new HashSet<>();
-//        Set<Node> unsettledNodes = new HashSet<>();
-//        unsettledNodes.add(source);
-//
-//        while (unsettledNodes.size() != 0) {
-//            Node currentNode = getLowestDistanceNode(unsettledNodes);
-//            unsettledNodes.remove(currentNode);
-//            for (Entry<Node, Pair> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
-//                Node adjacentNode = adjacencyPair.getKey();
-//                Double edgeWeigh = adjacencyPair.getValue().distance;
-//
-//                if (!settledNodes.contains(adjacentNode)) {
-//                    CalculateMinimumDistance(adjacentNode, edgeWeigh, currentNode);
-//                    unsettledNodes.add(adjacentNode);
-//                }
-//            }
-//            settledNodes.add(currentNode);
-//        }
-//        return graph;
-//    }
-//
-//    private static void CalculateMinimumDistance(Node evaluationNode, Double edgeWeigh, Node sourceNode) {
-//        Double sourceDistance = sourceNode.getDistance();
-//        if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
-//            evaluationNode.setDistance(sourceDistance + edgeWeigh);
-//            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
-//            shortestPath.add(sourceNode);
-//            evaluationNode.setShortestPath(shortestPath);
-//        }
-//    }
-//
-//    private static Node getLowestDistanceNode(Set<Node> unsettledNodes) {
-//        Node lowestDistanceNode = null;
-//        double lowestDistance = Double.MAX_VALUE;
-//        for (Node node : unsettledNodes) {
-//            double nodeDistance = node.getDistance();
-//            if (nodeDistance < lowestDistance) {
-//                lowestDistance = nodeDistance;
-//                lowestDistanceNode = node;
-//            }
-//        }
-//        return lowestDistanceNode;
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
-	
+	}	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
