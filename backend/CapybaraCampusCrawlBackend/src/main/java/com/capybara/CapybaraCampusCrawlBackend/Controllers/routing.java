@@ -38,41 +38,19 @@ import org.jgrapht.*;
 
 public class routing{
 	
-	public static String getRequest(String url) throws Exception{
-		BufferedReader reader;
-	    String line;
-	    StringBuffer responseContent = new StringBuffer();
-	    
-	    URL url2 = new URL(url);
-	    HttpURLConnection http = (HttpURLConnection)url2.openConnection();
-	    http.setRequestMethod("GET");
-
-	    if(http.getResponseCode() >299) {
-	    	System.out.println("!!!!ERROR :" + http.getResponseCode() );
-	    }else {
-	    	reader = new BufferedReader(new InputStreamReader(http.getInputStream()));
-	    	while((line = reader.readLine())!=null) {
-	    		responseContent.append(line);
-	    	}
-	    }
-	    return responseContent.toString();
-	}
-	
-	
-	
 	public static void main(String arg[]) throws Exception{
 		
 		System.out.println("GET requests");
-		long start = System.nanoTime();
+		//long start = System.nanoTime();
 		String nodeString = getRequest("http://localhost:8090/graph-nodes/");
 	    //String edgeString = getRequest("http://localhost:8090/graph-edges/");
 	    File myObj = new File("edges.txt");
 	    Scanner myReader = new Scanner(myObj);
 	    String edgeString = myReader.nextLine();
 	    myReader.close();
-	    long end = System.nanoTime();
-	    long duration = (end-start)/1000000;
-    	System.out.println("finished calculating: Took "+duration);
+	    //long end = System.nanoTime();
+	    //long duration = (end-start)/1000000;
+    	//System.out.println("finished calculating: Took "+duration);
 	    System.out.println("end requests");
 	    
 	    //turn into JSON object
@@ -249,7 +227,29 @@ public class routing{
 		System.out.println("Path from "+PreviousNode.getDescription()+" To "+currentNode.getDescription()+ "With a weight of "+distance+" Size of coords:"+points.size());
 		return listToSend;
 	}	
+
+	public static String getRequest(String url) throws Exception{
+		BufferedReader reader;
+	    String line;
+	    StringBuffer responseContent = new StringBuffer();
+	    
+	    URL url2 = new URL(url);
+	    HttpURLConnection http = (HttpURLConnection)url2.openConnection();
+	    http.setRequestMethod("GET");
+
+	    if(http.getResponseCode() >299) {
+	    	System.out.println("!!!!ERROR :" + http.getResponseCode() );
+	    }else {
+	    	reader = new BufferedReader(new InputStreamReader(http.getInputStream()));
+	    	while((line = reader.readLine())!=null) {
+	    		responseContent.append(line);
+	    	}
+	    }
+	    return responseContent.toString();
+	}
 }
+
+
 
 
 
