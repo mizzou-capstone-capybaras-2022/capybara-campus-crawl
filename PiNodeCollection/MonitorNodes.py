@@ -80,6 +80,24 @@ def extractAccessPointData(csvFileAPString):
     
     return accessPoints
 
+def isLocalMAC(macAddress):
+    #Get the first octet for bit math
+    firstOctet = macAddress.split(':')[0]
+
+    octetBits = int(firstOctet, 16)
+
+    print(bin(octetBits))
+
+    secondLeastSignificantBit = bin(octetBits >> 1)[-1]
+    print(bin(octetBits >> 1))
+    print(secondLeastSignificantBit)
+    #second least significant bit of the first octet is what determins locality
+
+    if secondLeastSignificantBit == '1':
+        return True
+    
+
+    return False
         
 
 
