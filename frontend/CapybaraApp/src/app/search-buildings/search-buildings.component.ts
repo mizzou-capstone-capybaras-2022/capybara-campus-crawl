@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Building, BuildingControllerService, RouteControllerService } from 'src/services/crawl-api';
 import { firstValueFrom, lastValueFrom  } from 'rxjs';
 import {BuildingLocation} from 'src/services/crawl-api/'
+import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
+
 
 @Component({
   selector: 'app-search-buildings',
@@ -11,26 +13,24 @@ import {BuildingLocation} from 'src/services/crawl-api/'
 })
 export class SearchBuildingsComponent implements OnInit {
 
+  @Output() selectBuildingFromSearch: EventEmitter<Building> = new EventEmitter<Building>();
+
   searchBuildings = new FormGroup({
-    building: new FormControl('')
+    building: new FormControl(null)
   });
 
   buildings: Array<Building> = [];
 
-  constructor(private buildingDao: BuildingControllerService, private routeDao: RouteControllerService){
-
-  }
+  constructor(private baraApi: BaraBackendWrapperService){}
 
   async ngOnInit(){
-    this.buildings = await lastValueFrom(this.buildingDao.getBuildings());
+    this.buildings = await this.baraApi.getBuildings();
+    this.searchBuildings.get("building")?.setValue(this.buildings[0]);
   }
 
   searchBuildingsFn() {
-    console.log(
-      <BuildingLocation>{
-        buildingId: this.searchBuildings.value
-      }
-    );
+    let selectedBuilding: Building = this.searchBuildings.get("building")?.value;
+    this.selectBuildingFromSearch.emit(selectedBuilding);
   }
 
 }

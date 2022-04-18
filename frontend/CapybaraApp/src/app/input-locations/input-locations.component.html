@@ -4,16 +4,16 @@
     <mat-form-field appearance="standard">
       <mat-label>Start location</mat-label>
       <mat-select formControlName="start">
-        <mat-option *ngFor="let building of buildings;" [value]="building.buildingId">{{building.name}}</mat-option>
+        <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <br>
 
     <mat-form-field appearance="standard">
-      <mat-label>Destination</mat-label>
+      <mat-label>End location</mat-label>
       <mat-select formControlName="destination">
-        <mat-option *ngFor="let building of buildings;" [value]="building.buildingId">{{building.name}}</mat-option>
+        <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 

@@ -54,7 +54,8 @@ docker compose --profile fullstack down
 2. In a separate terminal do the following
 3. change to the main frontend directory `/frontend/CapybaraApp`
 4. Make sure you replace the `tileKey` with the MapTiler api key in `/frontend/CapybaraApp/environment/environment.ts`
-5. run `ng serve`
+5. run `npm install`
+6. run `ng serve`
 
 ## VMMEM issue
 1. https://ryanharrison.co.uk/2021/05/13/wsl2-better-managing-system-resources.html#:~:text=Setting%20a%20WSL2%20Memory%20Limit,wslconfig%20).

@@ -18,7 +18,9 @@ import { ComponentAddConstraintsComponent } from './component-add-constraints/co
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { SearchBuildingsComponent } from './search-buildings/search-buildings.component';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 import {ApiModule, BASE_PATH} from '../services/crawl-api';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -34,7 +36,10 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserModule,
     MatTabsModule,
+    MatCardModule,
+    MatDividerModule,
     ApiModule,
+    MatToolbarModule,
     AppRoutingModule,
     LeafletModule,
     BrowserAnimationsModule,

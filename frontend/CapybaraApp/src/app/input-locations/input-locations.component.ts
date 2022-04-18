@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Building, BuildingControllerService, RouteControllerService } from 'src/services/crawl-api';
-import { firstValueFrom, lastValueFrom  } from 'rxjs';
-import {BuildingLocation} from 'src/services/crawl-api/'
+import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
+import { Building } from 'src/services/crawl-api';
 
 @Component({
   selector: 'app-input-locations',
@@ -11,29 +10,31 @@ import {BuildingLocation} from 'src/services/crawl-api/'
 })
 export class InputLocationsComponent implements OnInit {
 
+  @Output() inputBuildings: EventEmitter<[Building, Building]> = new EventEmitter<[Building, Building]>();
+
+  buildings: Array<Building> = [];
+
   inputLocations = new FormGroup({
     start: new FormControl(''),
     destination: new FormControl('')
   });
 
-  buildings: Array<Building> = [];
+  constructor(private baraApi: BaraBackendWrapperService) { 
+    
+  }
 
-  constructor(private buildingDao: BuildingControllerService, private routeDao: RouteControllerService) { }
+  async ngOnInit(): Promise<void> {
+    this.buildings = await this.baraApi.getBuildings();
 
-  async ngOnInit() {
-    this.buildings = await lastValueFrom(this.buildingDao.getBuildings());
+    this.inputLocations.get("start")?.setValue(this.buildings[0]);
+    this.inputLocations.get("destination")?.setValue(this.buildings[1]);
   }
 
   inputLocationsFn() {
-    console.log(this.inputLocations.value);
-  }
+    let fromBuilding: Building = <Building> this.inputLocations.get("start")?.value;
+    let toBuilding: Building = <Building> this.inputLocations.get("destination")?.value;
 
-  searchBuildingsFn() {
-    console.log(
-      <BuildingLocation>{
-        buildingId: this.inputLocations.value
-      }
-    );
+    this.inputBuildings.emit([fromBuilding, toBuilding]);
   }
 
 }

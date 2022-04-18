@@ -1,73 +1,62 @@
+<div>
+  <mat-toolbar class = "navbar">
+    <span>Capybara College Crawl</span>
+  </mat-toolbar>
+</div>  
 
-    <div class="body">
-      <div class="home-container">
-        <div class="home-text">
-          <span class="home-text1">
-            Welcome to the Capybara College Crawl
-          </span>
-          <br>
-          <span class="home-text2">
-            Explore Mizzou and get the best routes below!
-          </span>
-        </div>
-        <div class="home-separator"></div>
-          <!--
-          <div class="weatherWidget" ></div>
+<div class = "body">
+  <div class = "welcome-card">   
+    <mat-card>
+      <mat-card-title class = "mat-title">
+        Welcome!
+      </mat-card-title>
+      <mat-card-content class = "mat-display-1">
+        Explore Mizzou and get the best routes below!
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-          <script>
-             window.weatherWidgetConfig =  window.weatherWidgetConfig || [];
-             window.weatherWidgetConfig.push({
-                 selector:".weatherWidget",
-                 apiKey:"XEQ7W2P9DK63HD649J7ES43GM", //Sign up for your personal key
-                 location:"Columbia, MO", //Enter an address
-                 unitGroup:"us", //"us" or "metric"
-                 forecastDays:5, //how many days forecast to show
-                 title:"Columbia Missouri", //optional title to show in the
-                 showTitle:true,
-                 showConditions:true
-             });
+  <mat-divider></mat-divider>
 
-             (function() {
-             var d = document, s = d.createElement('script');
-             s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
-             s.setAttribute('data-timestamp', +new Date());
-             (d.head || d.body).appendChild(s);
-             })();
-          </script>
-          -->
-        <div class="home-container1">
-          <mat-tab-group mat-align-tabs="center">
-            <mat-tab label="Home"> <div class="home-text3">Please click one of the tabs above to get started</div> </mat-tab>
-            <mat-tab label="Input Locations"> <app-input-locations></app-input-locations> </mat-tab>
-            <mat-tab label="Add Constraints"><app-component-add-constraints></app-component-add-constraints></mat-tab>
-            <mat-tab label="Search Buildings"><app-search-buildings></app-search-buildings></mat-tab>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Input Locations">
+      <app-input-locations (inputBuildings) = "onSelectBuildingForNavigation($event)"></app-input-locations>
+    </mat-tab>
+    <mat-tab label="Add Constraints">
+      <app-component-add-constraints></app-component-add-constraints>
+    </mat-tab>
+    <mat-tab label="Search Buildings">
+      <app-search-buildings (selectBuildingFromSearch) = "onSelectBuildingFromSearch($event)"></app-search-buildings>
+    </mat-tab>
+  </mat-tab-group>
+
+  <mat-divider></mat-divider>
+
+  <div class="app-map-container">
+    <app-map></app-map>
+  </div>
+
+</div>
+
 <!--
-            <mat-tab label="View Places"> View Places </mat-tab>
--->
-          </mat-tab-group>
-        </div>
-        
-      <script>
-          window.weatherWidgetConfig =  window.weatherWidgetConfig || [];
-          window.weatherWidgetConfig.push({
-              selector:".weatherWidget",
-              apiKey:"XEQ7W2P9DK63HD649J7ES43GM", //Sign up for your personal key
-              location:"Columbia, MO", //Enter an address
-              unitGroup:"us", //"us" or "metric"
-              forecastDays:5, //how many days forecast to show
-              title:"Columbia Missouri", //optional title to show in the 
-              showTitle:true, 
-              showConditions:true
-          });
-        
-          (function() {
-          var d = document, s = d.createElement('script');
-          s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-          })();
-      </script>
-
+<div class="body">
+  <div class="home-container">
+    <div class="home-container1">
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Home">
+          <div class="home-text3">Please click one of the tabs above to get started</div>
+        </mat-tab>
+        <mat-tab label="Input Locations">
+          <app-input-locations></app-input-locations>
+        </mat-tab>
+        <mat-tab label="Add Constraints">
+          <app-component-add-constraints></app-component-add-constraints>
+        </mat-tab>
+        <mat-tab label="Search Buildings">
+          <app-search-buildings></app-search-buildings>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
     <div class="map-container">
       <app-map></app-map>
     </div>
@@ -75,12 +64,5 @@
 </div>
 
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<router-outlet></router-outlet>
+-->
