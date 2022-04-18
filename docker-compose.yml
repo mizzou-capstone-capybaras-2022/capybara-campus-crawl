@@ -99,6 +99,25 @@ services:
       test: "exit 0"
     ports:
       - "5432:5432"
+
+  frontend-deploy:
+    container_name: fullstack_frontend_container
+    image: ghcr.io/mizzou-capstone-capybaras-2022/capybara_frontend:main
+    restart: always
+    profiles:
+      - "all"
+      - "deploy"
+    ports:
+      - "4200:80"
+  backend-deploy:
+    container_name: fullstack_backend_container
+    image: ghcr.io/mizzou-capstone-capybaras-2022/capybara_backend:main
+    restart: always
+    profiles:
+      - "all"
+      - "deploy"
+    ports:
+      - "8090:8090"
 volumes:
         capybaradbdata:
                 driver: local
