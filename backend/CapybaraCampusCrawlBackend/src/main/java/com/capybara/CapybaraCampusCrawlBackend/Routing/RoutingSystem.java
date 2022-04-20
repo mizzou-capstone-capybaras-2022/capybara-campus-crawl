@@ -13,10 +13,16 @@ import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
@@ -33,53 +39,186 @@ public class RoutingSystem {
 
 	private static final Logger logger = LoggerFactory.getLogger(CapybaraCampusCrawlBackendApplication.class);
 	
-	
-	private GraphEdgeRepository edgeDao;
-	
-	private GraphNodeRepository nodeDao;
-	
-	private Graph<Long,CapybaraGraphEdgeForRouting> mizzouGraph;
-	
-	private HashMap<Long, GraphNode> graphNodeLookupTable = new HashMap<>();
+	private List<CapybaraRouteNode> nodeList;
 	
 	@Inject
 	public RoutingSystem(GraphEdgeRepository edgeDao, GraphNodeRepository nodeDao) {
-		this.edgeDao = edgeDao;
-		this.nodeDao = nodeDao;
-		
-		mizzouGraph = new DefaultUndirectedWeightedGraph<Long, CapybaraGraphEdgeForRouting>(CapybaraGraphEdgeForRouting.class);
-		
 		List<GraphNode> nodes = nodeDao.findAll();
-		
-		for (GraphNode node : nodes) {
-			graphNodeLookupTable.put(node.getNodeID(), node);
-			mizzouGraph.addVertex(node.getNodeID());
-		}
-		
 		List<GraphEdge> edges = edgeDao.findAll();
-		
-		for (GraphEdge edge: edges) {
-			CapybaraGraphEdgeForRouting edgeForRouting = new CapybaraGraphEdgeForRouting(edge.getEdgeId());
-			mizzouGraph.addEdge(edge.getFromNode().getNodeID(), edge.getToNode().getNodeID(), edgeForRouting);
-			mizzouGraph.setEdgeWeight(edgeForRouting, edge.getDistance());
+	
+		try {
+			nodeList = generateNodes(nodes, edges);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			nodeList = new ArrayList<CapybaraRouteNode>();
+			e.printStackTrace();
 		}
 	}
 	
 	public List<Point> ComputeRoute(Long startingBuildingId, Long endingBuildingId) throws JsonMappingException, JsonProcessingException {
-		GraphPath<Long, CapybaraGraphEdgeForRouting> djikstraPath = DijkstraShortestPath.findPathBetween(mizzouGraph, startingBuildingId, endingBuildingId);
-		List<CapybaraGraphEdgeForRouting> pathEdges = djikstraPath.getEdgeList();
+		List<Point> routePoints = GetRouteBetweenPoints(startingBuildingId-1, endingBuildingId-1, nodeList);		
+		return routePoints;
+	}
 		
-		ArrayList<Point> pointsList = new ArrayList<Point>();
+	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
+		List<CapybaraRouteNode> capybaraNodeList = new ArrayList<CapybaraRouteNode>();
 		
-		for (CapybaraGraphEdgeForRouting capybaraEdge : pathEdges) {
-			System.out.println(capybaraEdge.getEdgeId().toString());
-			GraphEdge actualEdge = edgeDao.getById(capybaraEdge.getEdgeId());
-			String pathShape = actualEdge.getPathshape();
-			List<Point> points = OpenRouteServiceDao.MapToPointList(pathShape);
-			pointsList.addAll(points);
+		//generate nodes
+		for (GraphNode currentNode : graphNodeList) {
+			int nodeID = (int) (currentNode.getNodeID() - 1);
+	    	String nodeDesc = currentNode.getDescription();
+	    	double lat = currentNode.getLatitude();
+	    	double lon = currentNode.getLongitude();
+	    	
+	    	CapybaraRouteNode capybaraNode = new CapybaraRouteNode(nodeID,nodeDesc,lat,lon);
+	    	capybaraNodeList.add(capybaraNode);
+		}
+
+	    //generate adj lists for every node
+	    for (GraphEdge currentEdge: graphEdgeList) {
+	    	int fromNode = (int)(currentEdge.getFromNode().getNodeID() - 0);
+		    int toNode = (int)(currentEdge.getToNode().getNodeID() - 0);
+		    
+		    //get distance and modify for outside
+		    double distance;
+		    if(currentEdge.getFromToAction().equals("outsideWalking")) {
+		    	distance = currentEdge.getDistance() * 6;
+		    }else {
+		    	distance = currentEdge.getDistance();
+		    }
+
+		    String coordsListJson = currentEdge.getPathshape();
+		    ObjectMapper mapper = new ObjectMapper();
+			JsonNode coordinates = mapper.readTree(coordsListJson);	
+			
+			ArrayList<Point> points = new ArrayList<Point>();
+			
+			for (JsonNode coordinateNode : coordinates) {
+				Double latitude = coordinateNode.get(1).asDouble();
+				Double longitude = coordinateNode.get(0).asDouble();
+				
+				points.add(new Point()
+						.latitude(latitude)
+						.longitude(longitude));
+			}
+			
+			capybaraNodeList.get(fromNode-1).addEdge(capybaraNodeList.get(toNode-1), distance,points);
+			 
+			for (int z = 0, j = points.size() - 1; z < j; z++) {
+		            points.add(z, points.remove(j));
+	        }
+			
+		    capybaraNodeList.get(toNode-1).addEdge(capybaraNodeList.get(fromNode-1), distance,points);
+	    }
+		
+	    return capybaraNodeList; 
+	}
+
+	private static ArrayList<Point> ListPath(long fromNodeId, long toNodeID, List<CapybaraRouteNode> nodeList) {
+		System.out.println("From Node "+fromNodeId +" To Node "+ toNodeID);
+		
+		CapybaraRouteNode currentNode = nodeList.get((int) toNodeID);
+		List<CapybaraRouteNode> path = currentNode.getShortestPath();
+		
+		CapybaraRouteNode PreviousNode = null;
+		Double distance = (double)-1;
+		
+		ArrayList<Point> listToSend = new ArrayList<Point>();
+		ArrayList<double[]> list = new ArrayList<double[]>();
+		ArrayList<Point> points = new ArrayList<Point>();
+		
+		for(CapybaraRouteNode current : path) {
+			if(PreviousNode != null) {
+				for (Entry<CapybaraRouteNode, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
+			        if(current.getID() == adjacencyPair.getKey().getID()) {
+			        	distance = adjacencyPair.getValue().distance;
+			        	points = adjacencyPair.getValue().coords;
+			        }	          
+			    }
+				
+				if(PreviousNode.getID() < current.getID()) {
+					Collections.reverse(points);
+				}
+				
+				listToSend.addAll(points);
+				PreviousNode = current;
+			}else {
+				PreviousNode = current;
+			}
 		}
 		
-		return pointsList;
+		for (Entry<CapybaraRouteNode, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
+	        if(currentNode.getID() == adjacencyPair.getKey().getID()) {
+	        	distance = adjacencyPair.getValue().distance;
+	        	points = adjacencyPair.getValue().coords;
+	        }	          
+	    }
+		
+		if(PreviousNode.getID() < currentNode.getID()) {
+			Collections.reverse(points);
+		}
+		
+		listToSend.addAll(points);
+		return listToSend;
+	}
+	
+	public static List<Point> GetRouteBetweenPoints(long start, long end, List<CapybaraRouteNode> nodeList){
+		CapybaraRouteGraph graph = new CapybaraRouteGraph();
+	    
+	    for(int i=0;i<nodeList.size();i++) {
+	    	graph.addNode(nodeList.get(i));
+	    }
+	    
+		System.out.println("Starting routing shortest from NodeID " + start);
+	    
+		int found =-1;
+	    int found2 =-1;
+	    
+	    ArrayList<Point> toReturn = new ArrayList<Point>();
+	    
+	    for(int i=0;i<nodeList.size();i++) {
+	    	CapybaraRouteNode currentNode = nodeList.get(i);
+	    	int currentID = currentNode.getID();
+	    	if(start == currentID) {
+	    		found = currentID;
+	    	}
+	    }
+	    
+	    if(found >= 0) {
+	    	CapybaraRouteNode startNode = nodeList.get(found);
+	    	CapybaraRouteGraph.calculateShortestPathFromSource(graph,startNode);
+		    	    	
+		    for(int i=0;i<nodeList.size();i++) {
+		    	CapybaraRouteNode currentNode = nodeList.get(i);
+		    	int currentID = currentNode.getID();
+		    	if(end == currentID) {
+		    		found2 = currentID;
+		    	}
+		    }
+		    
+		    toReturn = ListPath(found,found2,nodeList);
+	    	
+		    System.out.println(toReturn.size());
+	    	
+	    }else {
+	    	
+	    	System.out.println("COULDN'T FIND ID");
+	    
+	    }
+	    return toReturn;
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
