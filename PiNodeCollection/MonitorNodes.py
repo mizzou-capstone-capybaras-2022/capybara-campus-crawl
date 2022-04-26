@@ -184,6 +184,9 @@ def parseAirdumpCsv(filename):
 if __name__ == "__main__":
     logger.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 
+    #dbname = "Database"
+
+
     
     handler = logging.handlers.WatchedFileHandler(os.environ.get("LOGFILE", "/var/log/MonitorNode.log"))
     formatter = logging.Formatter(logging.BASIC_FORMAT)
