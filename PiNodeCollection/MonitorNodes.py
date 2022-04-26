@@ -15,6 +15,8 @@ from mac_vendor_lookup import MacLookup
 """
 
 logger = logging.getLogger(__name__)
+mac = MacLookup()
+mac.update_vendors()
 
 #Monitor mode instructions
 #sudo ip link set wlan1 down
@@ -54,38 +56,56 @@ def extractAccessPointData(csvFileAPString):
     accessPoints = []
     now = datetime.now()
     
-    apReader = csv.reader(csvFileAPString,delimeter=',',quotechar='|')
-    
-    for row in apReader:
-        if len(row) < 14:
+    #apReader = csv.reader(csvFileAPString,delimiter=',')
+    lines = csvFileAPString.split("\\r\\n")
+
+
+    #print(csvFileAPString)
+    for row in lines:
+        record = row.split(',')
+
+        #print(list(record))
+        #print(row)
+        if len(list(record)) < 14:
             logger.error(f'Not enough columns for access points!: {row}')
             continue
+
+        record = list(record)
+        #Skip non numeral header
+        try:
+            int(record[8])
+        except:
+            continue
+
+        firstSeen = record[1]
+        lastSeen = record[2]
+        channel = record[3]
+        power = record[8]
         
-        firstSeen = row[1]
-        lastSeen = row[2]
-        channel = row[3]
-        power = row[8]
         
         
-        #mac = row[0]
-        newAccessPoint = AccessPoint(row[0].replace(":", "-"),
+        #mac = record[0]
+        newAccessPoint = AccessPoint(record[0].replace(":", "-"),
                                     firstSeen, lastSeen,
                                     channel=channel,
-                                    speed=row[4],
-                                    privacy=row[5],
-                                    authentication=row[7],
+                                    speed=record[4],
+                                    privacy=record[5],
+                                    authentication=record[7],
                                     power=int(record[8]),
-                                    name=row[13]
+                                    name=record[13]
                                     )
 
+        #print(newAccessPoint.mac)
         accessPoints.append(newAccessPoint)
     
     return accessPoints
 
 def isLocalMAC(macAddress):
     #Get the first octet for bit math
-    firstOctet = macAddress.split(':')[0]
+    firstOctet = macAddress.split('-')[0]
 
+    #print(macAddress)
+    #print(firstOctet)
     octetBits = int(firstOctet, 16)
 
     secondLeastSignificantBit = bin(octetBits >> 1)[-1]
@@ -98,8 +118,43 @@ def isLocalMAC(macAddress):
     return False
         
 def extractClientData(csvFileClientsString):
+    clients = []
+    now = datetime.now()
     
-    clientReader = csv.reader(csvFileAPString,delimeter=',',quotechar='|')
+    lines = csvFileClientsString.split("\\r\\n")
+
+    for row in lines:
+        record = row.split(',')
+
+        if len(list(record)) < 7:
+            logger.error(f'Not enough columns for clients!: {row}')
+            continue
+
+        
+        firstSeen = record[1]
+        lastSeen = record[2]
+        packets = record[4]
+        power = record[3]
+        
+        
+        macAddr = record[0]
+        newClient = Client(record[0].replace(":", "-"),#mac
+                                    record[5], #bssid
+                                    lastSeen,
+                                    packets=packets,
+                                    probes=record[6],
+                                    power=int(record[3])
+                                    )
+        
+        if isLocalMAC(newClient.mac):
+            newClient.organization = "LOCAL"
+        else:
+            newClient.organization = mac.lookup(macAddr)
+
+
+        clients.append(newClient)
+    
+    return clients
 
 
 def parseAirdumpCsv(filename):
@@ -119,7 +174,8 @@ def parseAirdumpCsv(filename):
 
     clients = extractClientData(clientString)
 
-    print(len(clients) + " clients found at location!")
+    #print(len(accessPoints))
+    #print(len(clients))
 
     return
 
@@ -133,6 +189,8 @@ if __name__ == "__main__":
     formatter = logging.Formatter(logging.BASIC_FORMAT)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+
+    
 
     logger.info("Starting airodump-ng...")
     redirectOutput = open("/dev/null",'w')
