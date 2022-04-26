@@ -7,6 +7,7 @@ import subprocess
 from datetime import datetime
 import csv
 from mac_vendor_lookup import MacLookup
+import time
 
 """
     Fairly straightforward script to collect information about nearby wireless access points and their clients.
@@ -199,6 +200,8 @@ if __name__ == "__main__":
     redirectOutput = open("/dev/null",'w')
     airdumpProcess = subprocess.Popen("exec airodump-ng -w output --output-format csv wlan1",stdout=redirectOutput,shell=True)
 
+    #Let run for a minute
+    time.sleep(60)
 
 
     airdumpProcess.kill()
