@@ -9,11 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Door;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import javax.annotation.Generated;
 
 @Controller
@@ -26,6 +32,9 @@ public class BuildingsApiController implements BuildingsApi {
     private BuildingRepository buildingDao;
     
     @Autowired
+    private DoorRepository doorDao;
+    
+    @Autowired
     public BuildingsApiController(NativeWebRequest request) {
         this.request = request;
     }
@@ -36,6 +45,40 @@ public class BuildingsApiController implements BuildingsApi {
     }
     
     public ResponseEntity<List<Building>> getBuildings() {
-    	return new ResponseEntity<List<Building>>(buildingDao.findAll(), HttpStatus.OK);
+    	List<Building> buildingToReturn = getSanitizedBuildings();
+    	
+    	return new ResponseEntity<List<Building>>(buildingToReturn, HttpStatus.OK);
+    }
+    
+    private List<Building> getSanitizedBuildings(){
+    	List<Building> rawBuildings = buildingDao.findAll();
+    	
+    	List<Building> modifiedBuildings = rawBuildings.stream()
+				.filter(building -> building.getGraphNode() != null)
+				.collect(Collectors.toList());
+    	
+    	List<Building> unmodifiedBuildings = rawBuildings.stream()
+				.filter(building -> building.getGraphNode() == null)
+				.collect(Collectors.toList());
+    	
+    	List<Building> fixedBuildings = addMissingLocationToBuildings(unmodifiedBuildings);
+    	
+    	modifiedBuildings.addAll(fixedBuildings);
+    	return modifiedBuildings;
+    }
+    
+    private List<Building> addMissingLocationToBuildings(List<Building> brokenBuildings) {
+    	
+    	List<Building> repairedBuildings = new ArrayList<Building>();
+    	
+    	for (Building repairedBuilding: brokenBuildings) {
+    		Collection<Door> validDoors = doorDao.findAllDoorsForBuilding(repairedBuilding.getBuildingId());
+    		Door door = validDoors.iterator().next();
+    		
+    		repairedBuilding.setGraphNode(door.getNode());
+    		repairedBuildings.add(repairedBuilding);
+    	}
+    	
+    	return repairedBuildings;
     }
 }

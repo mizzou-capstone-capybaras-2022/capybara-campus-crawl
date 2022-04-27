@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "4f012839-cee7-4938-b032-9a0253eb17f3",
+		"name": "Backend Capybara Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Graph Nodes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()\r",
+							"\r",
+							"console.log(response);\r",
+							"\r",
+							"const schema = {\r",
+							"    \"properties\": {\r",
+							"        \"latitude\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"longitude\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"description\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"nodeID\": {\r",
+							"            \"type\": \"number\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Proper Node Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        pm.expect(tv4.validate(responseItem, schema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct Node Count\", function () {\r",
+							"    pm.expect(response.length).to.equal(186);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/graph-nodes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graph-nodes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Buildings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()\r",
+							"\r",
+							"console.log(response);\r",
+							"\r",
+							"const buildingSchema = {\r",
+							"    \"properties\": {\r",
+							"        \"buildingId\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"geojson\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"name\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"nodeID\": {\r",
+							"            \"type\": \"number\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"const nodeSchema = {\r",
+							"    \"properties\": {\r",
+							"        \"latitude\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"longitude\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"description\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"nodeID\": {\r",
+							"            \"type\": \"number\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"\r",
+							"pm.test(\"Has nested Node Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        let graphNodeExists = responseItem.hasOwnProperty(\"graphNode\");\r",
+							"        let graphNodeToTest = responseItem[\"graphNode\"];\r",
+							"        pm.expect(graphNodeExists).to.be.true;\r",
+							"        pm.expect(graphNodeToTest).to.be.not.null;\r",
+							"        pm.expect(tv4.validate(graphNodeToTest, nodeSchema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Proper Building Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        pm.expect(tv4.validate(responseItem, buildingSchema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct Building Count\", function () {\r",
+							"    pm.expect(response.length).to.equal(104);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/buildings/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"buildings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Doors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()\r",
+							"\r",
+							"const buildingSchema = {\r",
+							"    \"properties\": {\r",
+							"        \"buildingId\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"geojson\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"name\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"nodeID\": {\r",
+							"            \"type\": \"number\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"const doorSchema = {\r",
+							"    \"properties\": {\r",
+							"        \"buildingId\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"geojson\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"name\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"nodeID\": {\r",
+							"            \"type\": \"number\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"const nodeSchema = {\r",
+							"    \"properties\": {\r",
+							"        \"doorId\": {\r",
+							"            \"type\": \"number\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"\r",
+							"pm.test(\"Has nested Building Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        let buildingExists = responseItem.hasOwnProperty(\"building\");\r",
+							"        let buildingToTest = responseItem[\"building\"];\r",
+							"        pm.expect(buildingExists).to.be.true;\r",
+							"        pm.expect(buildingToTest).to.be.not.null;\r",
+							"        pm.expect(tv4.validate(buildingToTest, buildingSchema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has nested Node Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        let graphNodeExists = responseItem.hasOwnProperty(\"node\");\r",
+							"        let graphNodeToTest = responseItem[\"node\"];\r",
+							"        pm.expect(graphNodeExists).to.be.true;\r",
+							"        pm.expect(graphNodeToTest).to.be.not.null;\r",
+							"        pm.expect(tv4.validate(graphNodeToTest, nodeSchema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has nested Building Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        let graphNodeExists = responseItem.hasOwnProperty(\"node\");\r",
+							"        let graphNodeToTest = responseItem[\"node\"];\r",
+							"        pm.expect(graphNodeExists).to.be.true;\r",
+							"        pm.expect(graphNodeToTest).to.be.not.null;\r",
+							"        pm.expect(tv4.validate(graphNodeToTest, nodeSchema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Proper Door Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        pm.expect(tv4.validate(responseItem, doorSchema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct Door Count\", function () {\r",
+							"    pm.expect(response.length).to.equal(115);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/doors/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"doors",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	]
+}
