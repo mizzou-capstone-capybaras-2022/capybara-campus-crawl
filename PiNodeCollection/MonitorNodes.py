@@ -2,6 +2,8 @@
 import logging
 import logging.handlers
 import os
+import glob
+import sqlalchemy as s
 import signal
 import subprocess
 from datetime import datetime
@@ -24,6 +26,20 @@ mac.update_vendors()
 #sudo iw wlan1 set monitor none
 
 
+#return a database connection object
+def initialize_database(database_name,password,host,port):
+  DB_STR = 'postgresql://{}:{}@{}:{}/{}'.format(
+            "capy", password, host, port, database_name
+        )
+
+  print("Making database connections...")
+
+  db = s.create_engine(DB_STR, poolclass=s.pool.NullPool,
+      connect_args={'options': '-csearch_path={}'.format('augur_data')})
+
+  return db
+
+
 
 #Represents an instance of a client found using monitor mode on this machine.
 class Client:
@@ -36,6 +52,26 @@ class Client:
         self.packets = packets
         self.probes = probes
         self.organization = organization
+    
+    def isLocalMAC(self):
+
+        assert self.mac is not None
+
+        #Get the first octet for bit math
+        firstOctet = self.mac.split('-')[0]
+
+        #print(macAddress)
+        #print(firstOctet)
+        octetBits = int(firstOctet, 16)
+
+        secondLeastSignificantBit = bin(octetBits >> 1)[-1]
+        #second least significant bit of the first octet is what determins locality
+
+        if secondLeastSignificantBit == '1':
+            return True
+    
+
+        return False
 
 #Represents an access point found using monitor mode.
 class AccessPoint:
@@ -52,6 +88,26 @@ class AccessPoint:
         self.privacy = privacy
         self.authentication = authentication
         self.name = name
+    
+    def isLocalMAC(self):
+
+        assert self.mac is not None
+
+        #Get the first octet for bit math
+        firstOctet = self.mac.split('-')[0]
+
+        #print(macAddress)
+        #print(firstOctet)
+        octetBits = int(firstOctet, 16)
+
+        secondLeastSignificantBit = bin(octetBits >> 1)[-1]
+        #second least significant bit of the first octet is what determins locality
+
+        if secondLeastSignificantBit == '1':
+            return True
+    
+
+        return False
 
 def extractAccessPointData(csvFileAPString):
     accessPoints = []
@@ -101,22 +157,7 @@ def extractAccessPointData(csvFileAPString):
     
     return accessPoints
 
-def isLocalMAC(macAddress):
-    #Get the first octet for bit math
-    firstOctet = macAddress.split('-')[0]
 
-    #print(macAddress)
-    #print(firstOctet)
-    octetBits = int(firstOctet, 16)
-
-    secondLeastSignificantBit = bin(octetBits >> 1)[-1]
-    #second least significant bit of the first octet is what determins locality
-
-    if secondLeastSignificantBit == '1':
-        return True
-    
-
-    return False
         
 def extractClientData(csvFileClientsString):
     clients = []
@@ -147,7 +188,7 @@ def extractClientData(csvFileClientsString):
                                     power=int(record[3])
                                     )
         
-        if isLocalMAC(newClient.mac):
+        if newClient.isLocalMAC():
             newClient.organization = "LOCAL"
         else:
             newClient.organization = mac.lookup(macAddr)
@@ -175,8 +216,8 @@ def parseAirdumpCsv(filename):
 
     clients = extractClientData(clientString)
 
-    #print(len(accessPoints))
-    #print(len(clients))
+    print(len(accessPoints))
+    print(len(clients))
 
     return
 
@@ -185,8 +226,16 @@ def parseAirdumpCsv(filename):
 if __name__ == "__main__":
     logger.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 
-    #dbname = "Database"
+    #This should be consistant
+    dbName = "capybara_db"
+    dbPass = os.environ.get('PiNodeDBPass')
+    dbHost = os.environ.get('PiNodeDBHost')
+    dbPort = 5432#os.environ.get('PiNodeDBPort')
 
+    db = initialize_database(dbName,dbPass,dbHost,dbPort)
+
+    os.chdir('/tmp')
+    cwd = os.getcwd()
 
     
     handler = logging.handlers.WatchedFileHandler(os.environ.get("LOGFILE", "/var/log/MonitorNode.log"))
@@ -208,4 +257,10 @@ if __name__ == "__main__":
     redirectOutput.close()
     
     #Split weird default csv created by airdump-ng into two for access points and clients.
-    
+    # parseAirdumpCsv('output-01.csv')
+
+    path = '/tmp/*.csv'
+
+    for filename in glob.glob(path):
+        parseAirdumpCsv(filename)
+        os.remove(filename) # Don't keep temp info
