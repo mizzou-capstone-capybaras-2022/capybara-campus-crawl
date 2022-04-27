@@ -54,31 +54,24 @@ public class BuildingsApiController implements BuildingsApi {
     	List<Building> rawBuildings = buildingDao.findAll();
     	
     	List<Building> modifiedBuildings = rawBuildings.stream()
-				.filter(building -> building.getGraphNode() != null)
+    			.map(building -> repairedBuildingWithLocation(building, doorDao))
 				.collect(Collectors.toList());
     	
-    	List<Building> unmodifiedBuildings = rawBuildings.stream()
-				.filter(building -> building.getGraphNode() == null)
-				.collect(Collectors.toList());
-    	
-    	List<Building> fixedBuildings = addMissingLocationToBuildings(unmodifiedBuildings);
-    	
-    	modifiedBuildings.addAll(fixedBuildings);
     	return modifiedBuildings;
     }
     
-    private List<Building> addMissingLocationToBuildings(List<Building> brokenBuildings) {
+    public static Building repairedBuildingWithLocation(Building building, DoorRepository doorDao) {
+    	Building repairedBuilding = building;
     	
-    	List<Building> repairedBuildings = new ArrayList<Building>();
-    	
-    	for (Building repairedBuilding: brokenBuildings) {
-    		Collection<Door> validDoors = doorDao.findAllDoorsForBuilding(repairedBuilding.getBuildingId());
-    		Door door = validDoors.iterator().next();
-    		
-    		repairedBuilding.setGraphNode(door.getNode());
-    		repairedBuildings.add(repairedBuilding);
+    	if (repairedBuilding.getGraphNode() != null) {
+    		return repairedBuilding;
     	}
     	
-    	return repairedBuildings;
+    	Collection<Door> validDoors = doorDao.findAllDoorsForBuilding(repairedBuilding.getBuildingId());
+		Door door = validDoors.iterator().next();
+		
+		repairedBuilding.setGraphNode(door.getNode());
+		
+		return repairedBuilding;
     }
 }

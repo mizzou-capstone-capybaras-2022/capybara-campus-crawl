@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
@@ -43,6 +44,9 @@ public class BuildingRouteApiController implements BuildingRouteApi {
     
     @Autowired
 	BuildingRepository buildingDao;
+
+    @Autowired
+    DoorRepository doorDao;
     
     @Autowired
     public BuildingRouteApiController(NativeWebRequest request) {
@@ -61,8 +65,8 @@ public class BuildingRouteApiController implements BuildingRouteApi {
     		Building buildingA = buildingDao.findById((buildingRouteRequest.getFromBuilding().getBuildingId()).longValue());
     		Building buildingB = buildingDao.findById(buildingRouteRequest.getToBuilding().getBuildingId().longValue());
    
-    		GraphNode graphNodeA = buildingA.getGraphNode();
-    		GraphNode graphNodeB = buildingB.getGraphNode();
+    		GraphNode graphNodeA = BuildingsApiController.repairedBuildingWithLocation(buildingA, doorDao).getGraphNode();
+    		GraphNode graphNodeB = BuildingsApiController.repairedBuildingWithLocation(buildingB, doorDao).getGraphNode();
     		
     		List<Point> points = new ArrayList<Point>();
     		
