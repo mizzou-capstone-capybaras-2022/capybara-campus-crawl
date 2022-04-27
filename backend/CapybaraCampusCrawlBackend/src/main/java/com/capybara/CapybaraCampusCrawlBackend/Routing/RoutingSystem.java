@@ -60,7 +60,7 @@ public class RoutingSystem {
 		return routePoints;
 	}
 		
-	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
+	private static List<CapybaraRouteNode> constructNodes(List<GraphNode> graphNodeList){
 		List<CapybaraRouteNode> capybaraNodeList = new ArrayList<CapybaraRouteNode>();
 		
 		//generate nodes
@@ -73,6 +73,12 @@ public class RoutingSystem {
 	    	CapybaraRouteNode capybaraNode = new CapybaraRouteNode(nodeID,nodeDesc,lat,lon);
 	    	capybaraNodeList.add(capybaraNode);
 		}
+		
+		return capybaraNodeList;
+	}
+	
+	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
+		List<CapybaraRouteNode> capybaraNodeList = constructNodes(graphNodeList);
 
 	    //generate adj lists for every node
 	    for (GraphEdge currentEdge: graphEdgeList) {
