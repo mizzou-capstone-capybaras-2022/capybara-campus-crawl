@@ -20,20 +20,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GraphNode'
-  /graph-edges/:
-    get:
-      tags:
-        - Graph Controller
-      operationId: getGraphs
-      responses:
-        '200':
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GraphEdge'
+
   /doors/:
     get:
       tags:

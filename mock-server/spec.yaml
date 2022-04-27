@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: OpenAPI definition
-  version: v0
+  version: v1
 servers:
   - url: http://localhost:8090
     description: Generated server url
@@ -15,25 +15,12 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/GraphNode'
-  /graph-edges/:
-    get:
-      tags:
-        - Graph Controller
-      operationId: getGraphs
-      responses:
-        '200':
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GraphEdge'
+
   /doors/:
     get:
       tags:
@@ -43,7 +30,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: array
                 items:
@@ -57,7 +44,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: array
                 items:
@@ -79,7 +66,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 $ref: '#/components/schemas/RouteResponse'
   /routes/:
@@ -99,7 +86,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 $ref: '#/components/schemas/RouteResponse'
         '404':

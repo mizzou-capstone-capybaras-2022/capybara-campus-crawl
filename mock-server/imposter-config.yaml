@@ -18,10 +18,6 @@ resources:
     method: get
     response:
       staticFile: mocked-data/nodes.json
-  - path: /graph-edges/
-    method: get
-    response:
-      staticFile: mocked-data/edges.json
   - path: /doors/
     method: get
     response:

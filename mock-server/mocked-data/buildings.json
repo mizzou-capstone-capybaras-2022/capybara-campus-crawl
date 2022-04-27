@@ -160,8 +160,8 @@
     "name": "Discovery Hall",
     "geojson": "{}",
     "graphNode": {
-      "latitude": 38.9399,
-      "longitude": -92.3229,
+      "latitude": 38.93964438,
+      "longitude": -92.3224631,
       "description": "Residential Life",
       "nodeID": 14
     },
@@ -196,8 +196,8 @@
     "name": "Excellence Hall",
     "geojson": "{}",
     "graphNode": {
-      "latitude": 38.9399,
-      "longitude": -92.3229,
+      "latitude": 38.94018471,
+      "longitude": -92.32236117,
       "description": "Residential Life",
       "nodeID": 17
     },
@@ -414,7 +414,7 @@
     "graphNode": {
       "latitude": 38.9481,
       "longitude": -92.3317,
-      "description": "",
+      "description": "Loeb",
       "nodeID": 35
     },
     "nodeID": 35
@@ -426,7 +426,7 @@
     "graphNode": {
       "latitude": 38.9453,
       "longitude": -92.3273,
-      "description": "",
+      "description": "Lowry",
       "nodeID": 36
     },
     "nodeID": 36
@@ -534,7 +534,7 @@
     "graphNode": {
       "latitude": 38.9478,
       "longitude": -92.3282,
-      "description": "",
+      "description": "Neff",
       "nodeID": 45
     },
     "nodeID": 45
@@ -544,8 +544,8 @@
     "name": "north hall",
     "geojson": "{}",
     "graphNode": {
-      "latitude": 38.93894444,
-      "longitude": -92.33323216,
+      "latitude": 38.93935439,
+      "longitude": -92.33324826,
       "description": "Residential Life",
       "nodeID": 46
     },
@@ -594,7 +594,7 @@
     "graphNode": {
       "latitude": 38.9492,
       "longitude": -92.3295,
-      "description": "",
+      "description": "psychology building",
       "nodeID": 50
     },
     "nodeID": 50
@@ -604,8 +604,8 @@
     "name": "respect",
     "geojson": "{}",
     "graphNode": {
-      "latitude": 38.9399,
-      "longitude": -92.3229,
+      "latitude": 38.94019514,
+      "longitude": -92.32325166,
       "description": "Residential Life",
       "nodeID": 51
     },
@@ -616,8 +616,8 @@
     "name": "Responsibility",
     "geojson": "{}",
     "graphNode": {
-      "latitude": 38.9399,
-      "longitude": -92.3229,
+      "latitude": 38.93964855,
+      "longitude": -92.32326508,
       "description": "Residential Life",
       "nodeID": 52
     },
@@ -654,7 +654,7 @@
     "graphNode": {
       "latitude": 38.9454,
       "longitude": -92.3225,
-      "description": "",
+      "description": "Schweitzer",
       "nodeID": 55
     },
     "nodeID": 55
@@ -664,8 +664,8 @@
     "name": "South hall",
     "geojson": "{}",
     "graphNode": {
-      "latitude": 38.93894444,
-      "longitude": -92.33323216,
+      "latitude": 38.93850737,
+      "longitude": -92.33368278,
       "description": "Residential Life",
       "nodeID": 56
     },
@@ -690,7 +690,7 @@
     "graphNode": {
       "latitude": 38.9459,
       "longitude": -92.3224,
-      "description": "",
+      "description": "Stephens hall",
       "nodeID": 58
     },
     "nodeID": 58
@@ -714,7 +714,7 @@
     "graphNode": {
       "latitude": 38.9453,
       "longitude": -92.3267,
-      "description": "",
+      "description": "Student Success center",
       "nodeID": 60
     },
     "nodeID": 60
@@ -738,7 +738,7 @@
     "graphNode": {
       "latitude": 38.9492,
       "longitude": -92.3279,
-      "description": "",
+      "description": "Theatre",
       "nodeID": 62
     },
     "nodeID": 62
@@ -750,7 +750,7 @@
     "graphNode": {
       "latitude": 38.9437,
       "longitude": -92.3242,
-      "description": "",
+      "description": "Tucker",
       "nodeID": 63
     },
     "nodeID": 63
@@ -810,7 +810,7 @@
     "graphNode": {
       "latitude": 38.9412,
       "longitude": -92.32,
-      "description": "",
+      "description": "Agricultural Engineering",
       "nodeID": 68
     },
     "nodeID": 68
@@ -822,7 +822,7 @@
     "graphNode": {
       "latitude": 38.9467,
       "longitude": -92.3281,
-      "description": "",
+      "description": "Pickard Hall",
       "nodeID": 69
     },
     "nodeID": 69
@@ -834,7 +834,7 @@
     "graphNode": {
       "latitude": 38.9467,
       "longitude": -92.3305,
-      "description": "",
+      "description": "Noyes Hall",
       "nodeID": 70
     },
     "nodeID": 70
@@ -846,7 +846,7 @@
     "graphNode": {
       "latitude": 38.94575055,
       "longitude": -92.33129561,
-      "description": "",
+      "description": "London Hall",
       "nodeID": 71
     },
     "nodeID": 71
@@ -855,231 +855,396 @@
     "buildingId": 72,
     "name": "Walters Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94598211,
+      "longitude": -92.32437551,
+      "description": "Door A for Walters Hall",
+      "nodeID": 72
+    },
+    "nodeID": 72
   },
   {
     "buildingId": 73,
     "name": "Geological Science",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94726447,
+      "longitude": -92.32915847,
+      "description": "Door A for Geological Science",
+      "nodeID": 75
+    },
+    "nodeID": 75
   },
   {
     "buildingId": 74,
     "name": "Academic Support Center",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94604042,
+      "longitude": -92.33167786,
+      "description": "Door A for Academic Support Center",
+      "nodeID": 77
+    },
+    "nodeID": 77
   },
   {
     "buildingId": 75,
     "name": "Natural Resources (Ag Science)",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.943259,
+      "longitude": -92.325279,
+      "description": "Door A for Natural Resources (Ag Science)",
+      "nodeID": 80
+    },
+    "nodeID": 80
   },
   {
     "buildingId": 76,
     "name": "Curtis Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.944687,
+      "longitude": -92.323696,
+      "description": "Door A for Curtis Hall",
+      "nodeID": 86
+    },
+    "nodeID": 86
   },
   {
     "buildingId": 77,
     "name": "Lafferre Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.946331,
+      "longitude": -92.33086,
+      "description": "Door A for Lafferre Hall",
+      "nodeID": 89
+    },
+    "nodeID": 89
   },
   {
     "buildingId": 78,
     "name": "Parker Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.9471941,
+      "longitude": -92.3305285,
+      "description": "Door A for Parker Hall",
+      "nodeID": 94
+    },
+    "nodeID": 94
   },
   {
     "buildingId": 79,
     "name": "Ellis Library",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94470061,
+      "longitude": -92.32661798,
+      "description": "Door A for Ellis Library",
+      "nodeID": 96
+    },
+    "nodeID": 96
   },
   {
     "buildingId": 80,
     "name": "Herman Schlundt Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.944916,
+      "longitude": -92.323179,
+      "description": "Door A for Herman Schlundt Hall",
+      "nodeID": 98
+    },
+    "nodeID": 98
   },
   {
     "buildingId": 81,
     "name": "Gwynn / Stanley Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.944559,
+      "longitude": -92.324973,
+      "description": "Door A for Gwynn / Stanley Hall",
+      "nodeID": 101
+    },
+    "nodeID": 101
   },
   {
     "buildingId": 82,
     "name": "Student Center",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94236171,
+      "longitude": -92.32665998,
+      "description": "Door A for Student Center",
+      "nodeID": 105
+    },
+    "nodeID": 105
   },
   {
     "buildingId": 83,
     "name": "Cornell Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94252678,
+      "longitude": -92.32967813,
+      "description": "Door A for Cornell Hall",
+      "nodeID": 109
+    },
+    "nodeID": 109
   },
   {
     "buildingId": 84,
     "name": "Townsend Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94497245,
+      "longitude": -92.32978016,
+      "description": "Door A for Townsend Hall",
+      "nodeID": 112
+    },
+    "nodeID": 112
   },
   {
     "buildingId": 85,
     "name": "Arts & Sciences",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94337216,
+      "longitude": -92.32725642,
+      "description": "Door A for Arts & Sciences",
+      "nodeID": 117
+    },
+    "nodeID": 117
   },
   {
     "buildingId": 86,
     "name": "Hill Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94549,
+      "longitude": -92.329699,
+      "description": "Door A for Hill Hall",
+      "nodeID": 121
+    },
+    "nodeID": 121
   },
   {
     "buildingId": 87,
     "name": "Hulston Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94374731,
+      "longitude": -92.32824324,
+      "description": "Door A for Hulston Hall",
+      "nodeID": 123
+    },
+    "nodeID": 123
   },
   {
     "buildingId": 88,
     "name": "Middlebush Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.9460885,
+      "longitude": -92.32728034,
+      "description": "Door A for Middlebush Hall",
+      "nodeID": 126
+    },
+    "nodeID": 126
   },
   {
     "buildingId": 89,
     "name": "Stewart Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94508614,
+      "longitude": -92.32370362,
+      "description": "Door A for Stewart Hall",
+      "nodeID": 131
+    },
+    "nodeID": 131
   },
   {
     "buildingId": 90,
     "name": "Chemistry Building",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.944591,
+      "longitude": -92.322905,
+      "description": "Door A for Chemistry Building",
+      "nodeID": 133
+    },
+    "nodeID": 133
   },
   {
     "buildingId": 91,
     "name": "McAlester Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.9475435,
+      "longitude": -92.3305047,
+      "description": "Door A for McAlester Hall",
+      "nodeID": 137
+    },
+    "nodeID": 137
   },
   {
     "buildingId": 92,
     "name": "Memorial Union",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94506841,
+      "longitude": -92.32529014,
+      "description": "Door A for Memorial Union",
+      "nodeID": 140
+    },
+    "nodeID": 140
   },
   {
     "buildingId": 93,
     "name": "Mumford Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.9460134,
+      "longitude": -92.32503533,
+      "description": "Door A for Mumford Hall",
+      "nodeID": 143
+    },
+    "nodeID": 143
   },
   {
     "buildingId": 94,
     "name": "Switzler Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94672161,
+      "longitude": -92.32928798,
+      "description": "Door A for Switzler Hall",
+      "nodeID": 146
+    },
+    "nodeID": 146
   },
   {
     "buildingId": 95,
     "name": "Tate Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94471878,
+      "longitude": -92.32790592,
+      "description": "Door A for Tate Hall",
+      "nodeID": 148
+    },
+    "nodeID": 148
   },
   {
     "buildingId": 96,
     "name": "Strickland Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94233242,
+      "longitude": -92.32802481,
+      "description": "Door A for Strickland Hall",
+      "nodeID": 153
+    },
+    "nodeID": 153
   },
   {
     "buildingId": 97,
     "name": "Gentry Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.944179,
+      "longitude": -92.324912,
+      "description": "Door A for Gentry Hall",
+      "nodeID": 156
+    },
+    "nodeID": 156
   },
   {
     "buildingId": 98,
     "name": "Fine Arts Building",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94579019,
+      "longitude": -92.32623696,
+      "description": "Door A for Fine Arts Building",
+      "nodeID": 161
+    },
+    "nodeID": 161
   },
   {
     "buildingId": 99,
     "name": "Swallow Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94581105,
+      "longitude": -92.32823789,
+      "description": "Door A for Swallow Hall",
+      "nodeID": 167
+    },
+    "nodeID": 167
   },
   {
     "buildingId": 100,
     "name": "Southwest Village",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.93932727,
+      "longitude": -92.33171672,
+      "description": "Door A for Southwest Village",
+      "nodeID": 171
+    },
+    "nodeID": 171
   },
   {
     "buildingId": 101,
     "name": "Whitten Hall",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.94572135,
+      "longitude": -92.32530087,
+      "description": "Door A for Whitten Hall",
+      "nodeID": 173
+    },
+    "nodeID": 173
   },
   {
     "buildingId": 102,
     "name": "Physics Building",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.943853,
+      "longitude": -92.322682,
+      "description": "Door A for Physics Building",
+      "nodeID": 175
+    },
+    "nodeID": 175
   },
   {
     "buildingId": 103,
     "name": "Life Sciences Center",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.943138,
+      "longitude": -92.323608,
+      "description": "Door A for Life Sciences Center",
+      "nodeID": 177
+    },
+    "nodeID": 177
   },
   {
     "buildingId": 104,
     "name": "Reynolds Journalism Institude",
     "geojson": "{}",
-    "graphNode": null,
-    "nodeID": -1
+    "graphNode": {
+      "latitude": 38.9475216,
+      "longitude": -92.32801259,
+      "description": "Door A for Reynolds Journalism Institude",
+      "nodeID": 183
+    },
+    "nodeID": 183
   }
 ]
