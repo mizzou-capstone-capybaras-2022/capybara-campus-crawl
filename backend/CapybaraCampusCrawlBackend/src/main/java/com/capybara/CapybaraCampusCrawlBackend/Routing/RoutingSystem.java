@@ -45,6 +45,8 @@ public class RoutingSystem {
 	public RoutingSystem(GraphEdgeRepository edgeDao, GraphNodeRepository nodeDao) {
 		List<GraphNode> nodes = nodeDao.findAll();
 		List<GraphEdge> edges = edgeDao.findAll();
+		
+		logger.info("Fetch nodes and edges");
 	
 		try {
 			nodeList = generateNodes(nodes, edges);
@@ -60,6 +62,13 @@ public class RoutingSystem {
 		return routePoints;
 	}
 		
+	
+	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
+		List<CapybaraRouteNode> capybaraNodeList = constructNodes(graphNodeList);
+		capybaraNodeList = addCapybaraEdges(capybaraNodeList, graphEdgeList);
+	    return capybaraNodeList; 
+	}
+
 	private static List<CapybaraRouteNode> constructNodes(List<GraphNode> graphNodeList){
 		List<CapybaraRouteNode> capybaraNodeList = new ArrayList<CapybaraRouteNode>();
 		
@@ -77,10 +86,8 @@ public class RoutingSystem {
 		return capybaraNodeList;
 	}
 	
-	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
-		List<CapybaraRouteNode> capybaraNodeList = constructNodes(graphNodeList);
-
-	    //generate adj lists for every node
+	private static List<CapybaraRouteNode> addCapybaraEdges(List<CapybaraRouteNode> capybaraNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
+		//generate adj lists for every node
 	    for (GraphEdge currentEdge: graphEdgeList) {
 	    	int fromNode = (int)(currentEdge.getFromNode().getNodeID() - 0);
 		    int toNode = (int)(currentEdge.getToNode().getNodeID() - 0);
@@ -116,10 +123,11 @@ public class RoutingSystem {
 			
 		    capybaraNodeList.get(toNode-1).addEdge(capybaraNodeList.get(fromNode-1), distance,points);
 	    }
-		
-	    return capybaraNodeList; 
+	    
+	    return capybaraNodeList;
 	}
 
+	
 	private static ArrayList<Point> ListPath(long fromNodeId, long toNodeID, List<CapybaraRouteNode> nodeList) {
 		System.out.println("From Node "+fromNodeId +" To Node "+ toNodeID);
 		
@@ -138,7 +146,7 @@ public class RoutingSystem {
 				for (Entry<CapybaraRouteNode, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
 			        if(current.getID() == adjacencyPair.getKey().getID()) {
 			        	distance = adjacencyPair.getValue().distance;
-			        	points = adjacencyPair.getValue().coords;
+			        	points = new ArrayList<Point>(adjacencyPair.getValue().coords);
 			        }	          
 			    }
 				
@@ -156,7 +164,7 @@ public class RoutingSystem {
 		for (Entry<CapybaraRouteNode, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
 	        if(currentNode.getID() == adjacencyPair.getKey().getID()) {
 	        	distance = adjacencyPair.getValue().distance;
-	        	points = adjacencyPair.getValue().coords;
+	        	points = new ArrayList<Point>(adjacencyPair.getValue().coords);
 	        }	          
 	    }
 		
