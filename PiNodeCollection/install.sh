@@ -15,5 +15,7 @@ cp ./MonitorNodes.py /root
 
 chmod +x /root/MonitorNodes.py
 
+cp ./env.json /etc/pi_env.json
 
-(crontab -l 2>/dev/null; echo "*/5 * * * * python3 /root/MonitorNodes.py") | crontab -
+#Will run hourly
+(crontab -l 2>/dev/null; echo "0 * * * * python3 /root/MonitorNodes.py") | crontab -

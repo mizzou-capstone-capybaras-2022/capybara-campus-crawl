@@ -12,6 +12,7 @@ import csv
 from mac_vendor_lookup import MacLookup
 import time
 import socket
+import json
 
 """
     Fairly straightforward script to collect information about nearby wireless access points and their clients.
@@ -34,7 +35,7 @@ def initialize_database(database_name,password,host,port):
             "capybaradevuser", password, host, port, database_name
         )
 
-  print("Making database connections...")
+  logger.info("Making database connections...")
 
   db = s.create_engine(DB_STR, poolclass=s.pool.NullPool,
       connect_args={'options': '-csearch_path={}'.format('augur_data')})
@@ -221,7 +222,7 @@ def parseAirdumpCsv(filename):
     print(len(accessPoints))
     print(len(clients))
 
-    return
+    return clients
 
 
 #Start of script
@@ -232,10 +233,16 @@ if __name__ == "__main__":
     hostname = socket.gethostname()
     nodeValue = int(hostname[-1])
 
+    dbPass = None
+    dbHost = None
+
+    with open('/etc/pi_env.json') as json_file:
+        data = json.load(json_file)
+        dbPass = data['PiNodeDBPass']
+        dbHost = data['PiNodeDBHost']
+
     #This should be consistant
     dbName = "capybara_db"
-    dbPass = os.environ.get('PiNodeDBPass')
-    dbHost = os.environ.get('PiNodeDBHost')
     dbPort = 5432#os.environ.get('PiNodeDBPort')
 
     db = initialize_database(dbName,dbPass,dbHost,dbPort)
@@ -278,7 +285,11 @@ if __name__ == "__main__":
 
     intensity = 0
     for filename in glob.glob(path):
-        intensity += parseAirdumpCsv(filename)
+        try:
+            intensity += parseAirdumpCsv(filename)
+        except Exception as e:
+            logger.error(f"Ran into problem parsing csv: {e}")
+
         os.remove(filename) # Don't keep temp info
     
     #insert to db
