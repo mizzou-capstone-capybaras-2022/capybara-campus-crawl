@@ -4,12 +4,14 @@ import logging.handlers
 import os
 import glob
 import sqlalchemy as s
+from sqlalchemy.sql.expression import bindparam
 import signal
 import subprocess
 from datetime import datetime
 import csv
 from mac_vendor_lookup import MacLookup
 import time
+import socket
 
 """
     Fairly straightforward script to collect information about nearby wireless access points and their clients.
@@ -29,7 +31,7 @@ mac.update_vendors()
 #return a database connection object
 def initialize_database(database_name,password,host,port):
   DB_STR = 'postgresql://{}:{}@{}:{}/{}'.format(
-            "capy", password, host, port, database_name
+            "capybaradevuser", password, host, port, database_name
         )
 
   print("Making database connections...")
@@ -161,7 +163,7 @@ def extractAccessPointData(csvFileAPString):
         
 def extractClientData(csvFileClientsString):
     clients = []
-    now = datetime.now()
+    #now = datetime.now()
     
     lines = csvFileClientsString.split("\\r\\n")
 
@@ -226,6 +228,10 @@ def parseAirdumpCsv(filename):
 if __name__ == "__main__":
     logger.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 
+    #For database keeping track
+    hostname = socket.gethostname()
+    nodeValue = int(hostname[-1])
+
     #This should be consistant
     dbName = "capybara_db"
     dbPass = os.environ.get('PiNodeDBPass')
@@ -234,9 +240,14 @@ if __name__ == "__main__":
 
     db = initialize_database(dbName,dbPass,dbHost,dbPort)
 
+    #Get a python object that corresponds to the pi metrics table.
     metadata = s.MetaData()
-    metadata.reflect(db, only=["Pi Metrics"])
+    metadata.reflect(db, only=["PIMetrics"])
 
+    Base = automap_base(metadata=metadata)
+    Base.prepare()
+
+    PIMetricsTable = Base.classes["PIMetrics"].__table__
 
     os.chdir('/tmp')
     cwd = os.getcwd()
@@ -265,6 +276,18 @@ if __name__ == "__main__":
 
     path = '/tmp/*.csv'
 
+    intensity = 0
     for filename in glob.glob(path):
-        parseAirdumpCsv(filename)
+        intensity += parseAirdumpCsv(filename)
         os.remove(filename) # Don't keep temp info
+    
+    #insert to db
+    toInsert = {
+        "NodeID" : nodeValue,
+        "Time" : datetime.now(),
+        "Intensity" : intensity
+    }  
+    db.execute(
+        PIMetricsTable.insert().values(toInsert))
+
+
