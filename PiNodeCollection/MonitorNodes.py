@@ -234,6 +234,10 @@ if __name__ == "__main__":
 
     db = initialize_database(dbName,dbPass,dbHost,dbPort)
 
+    metadata = s.MetaData()
+    metadata.reflect(db, only=["Pi Metrics"])
+
+
     os.chdir('/tmp')
     cwd = os.getcwd()
 
