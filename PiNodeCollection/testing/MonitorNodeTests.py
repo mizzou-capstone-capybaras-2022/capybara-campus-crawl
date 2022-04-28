@@ -17,4 +17,16 @@ def test_database_connection():
     db = initialize_database(dbName,dbPass,dbHost,dbPort)
 
     assert db is not None
-    
+
+
+def test_read_csv():
+    path = '*.csv'
+
+    for filename in glob.glob(path):
+        try:
+            print(parseAirdumpCsv(filename))
+        except Exception as e:
+            logger.error(f"Ran into problem parsing csv: {e}")
+            raise e
+
+        os.remove(filename) # Don't keep temp info
