@@ -61,15 +61,14 @@ public class BuildingsApiController implements BuildingsApi {
     }
     
     public static Building repairedBuildingWithLocation(Building building, DoorRepository doorDao) {
-    	Building repairedBuilding = building;
-    	
-    	if (repairedBuilding.getGraphNode() != null) {
-    		return repairedBuilding;
+    	if (building.getGraphNode() != null) {
+    		return building;
     	}
     	
-    	Collection<Door> validDoors = doorDao.findAllDoorsForBuilding(repairedBuilding.getBuildingId());
+    	Collection<Door> validDoors = doorDao.findAllDoorsForBuilding(building.getBuildingId());
 		Door door = validDoors.iterator().next();
 		
+		Building repairedBuilding = building;
 		repairedBuilding.setGraphNode(door.getNode());
 		
 		return repairedBuilding;
