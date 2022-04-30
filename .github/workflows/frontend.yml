@@ -4,9 +4,6 @@ on:
   push:
     paths: 'frontend/**'
     branches: [ main ]
-  pull_request:
-    paths: 'frontend/**'
-    branches: [ main ]
   workflow_dispatch:
 env:
   IMAGE_NAME: capybara_frontend
