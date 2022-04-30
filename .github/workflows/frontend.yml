@@ -44,3 +44,23 @@ jobs:
         echo VERSION=$VERSION
         docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
+  deploy:
+    needs: build  
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        env:
+            PAT: ${{ secrets.GITHUB_TOKEN }}
+        with:
+         host: ${{ secrets.SSH_TARGET }}
+         username: ${{ secrets.SSH_USER }}
+         password: ${{ secrets.SSH_PASS }}
+         envs: PAT
+         script: |
+          cd capybara-campus-crawl
+          echo $PAT | docker login ghcr.io -u USERNAME --password-stdin
+          docker compose --profile deploy down
+          docker compose --profile deploy pull
+          docker compose --profile deploy up -d

@@ -4,12 +4,15 @@ import logging.handlers
 import os
 import glob
 import sqlalchemy as s
+from sqlalchemy.sql.expression import bindparam
 import signal
 import subprocess
 from datetime import datetime
 import csv
 from mac_vendor_lookup import MacLookup
 import time
+import socket
+import json
 
 """
     Fairly straightforward script to collect information about nearby wireless access points and their clients.
@@ -29,10 +32,10 @@ mac.update_vendors()
 #return a database connection object
 def initialize_database(database_name,password,host,port):
   DB_STR = 'postgresql://{}:{}@{}:{}/{}'.format(
-            "capy", password, host, port, database_name
+            "capybaradevuser", password, host, port, database_name
         )
 
-  print("Making database connections...")
+  logger.info("Making database connections...")
 
   db = s.create_engine(DB_STR, poolclass=s.pool.NullPool,
       connect_args={'options': '-csearch_path={}'.format('augur_data')})
@@ -161,7 +164,7 @@ def extractAccessPointData(csvFileAPString):
         
 def extractClientData(csvFileClientsString):
     clients = []
-    now = datetime.now()
+    #now = datetime.now()
     
     lines = csvFileClientsString.split("\\r\\n")
 
@@ -219,20 +222,39 @@ def parseAirdumpCsv(filename):
     print(len(accessPoints))
     print(len(clients))
 
-    return
+    return clients
 
 
 #Start of script
 if __name__ == "__main__":
     logger.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 
+    #For database keeping track
+    hostname = socket.gethostname()
+    nodeValue = int(hostname[-1])
+
+    dbPass = None
+    dbHost = None
+
+    with open('/etc/pi_env.json') as json_file:
+        data = json.load(json_file)
+        dbPass = data['PiNodeDBPass']
+        dbHost = data['PiNodeDBHost']
+
     #This should be consistant
     dbName = "capybara_db"
-    dbPass = os.environ.get('PiNodeDBPass')
-    dbHost = os.environ.get('PiNodeDBHost')
     dbPort = 5432#os.environ.get('PiNodeDBPort')
 
     db = initialize_database(dbName,dbPass,dbHost,dbPort)
+
+    #Get a python object that corresponds to the pi metrics table.
+    metadata = s.MetaData()
+    metadata.reflect(db, only=["PIMetrics"])
+
+    Base = automap_base(metadata=metadata)
+    Base.prepare()
+
+    PIMetricsTable = Base.classes["PIMetrics"].__table__
 
     os.chdir('/tmp')
     cwd = os.getcwd()
@@ -261,6 +283,22 @@ if __name__ == "__main__":
 
     path = '/tmp/*.csv'
 
+    intensity = 0
     for filename in glob.glob(path):
-        parseAirdumpCsv(filename)
+        try:
+            intensity += parseAirdumpCsv(filename)
+        except Exception as e:
+            logger.error(f"Ran into problem parsing csv: {e}")
+
         os.remove(filename) # Don't keep temp info
+    
+    #insert to db
+    toInsert = {
+        "NodeID" : nodeValue,
+        "Time" : datetime.now(),
+        "Intensity" : intensity
+    }  
+    db.execute(
+        PIMetricsTable.insert().values(toInsert))
+
+
