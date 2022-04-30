@@ -2,9 +2,10 @@ name: Build Frontend Image
 
 on:
   push:
-    paths: /frontend/**
+    paths: 'frontend/**'
     branches: [ main ]
   pull_request:
+    paths: 'frontend/**'
     branches: [ main ]
   workflow_dispatch:
 env:
