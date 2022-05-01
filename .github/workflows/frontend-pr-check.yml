@@ -17,6 +17,7 @@ jobs:
       with:
         node-version: 14
         cache: 'npm'
+        cache-dependency-path: "./frontend/CapybaraApp/package-lock.json"
     - name: Install Packages
       run: |
         cd frontend/CapybaraApp
