@@ -89,10 +89,12 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/RouteResponse'
-        '404':
-          description: Route not possible
         '500':
-          description: Internal Server Error
+          description: Route not possible
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RouteErrorResponse'
 
 components:
   schemas:
@@ -210,16 +212,28 @@ components:
         constraints:
           type: object
           properties:
+            stopForFood:
+              type: boolean
             preferIndoors:
               type: boolean
             avoidCrowds:
               type: boolean
             pitstops:
-              $ref: '#/components/schemas/PitstopConstraint'
+              type: array
+              items:
+                $ref: '#/components/schemas/PitstopConstraint'
             timeConstraint:
               $ref: '#/components/schemas/TimeConstraint'
     RouteResponse:
       type: array
       items:
         $ref: '#/components/schemas/Point'
+    RouteErrorResponse:
+      type: object
+      properties:
+        failingConstraint:
+          type: array
+          items:
+            type: string
+            enum: [food, pitstop, time, crowds, route]
             
