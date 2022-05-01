@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: capybara_backend
 
 jobs:
-  build:
+  backend-build-check:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
