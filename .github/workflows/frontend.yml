@@ -16,11 +16,25 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 14
+        cache: 'npm'
+        cache-dependency-path: "./frontend/CapybaraApp/package-lock.json"
+    - name: Install Packages
+      run: |
+        cd frontend/CapybaraApp
+        npm install
+    - name: Create Docker Config 
+      run: cd frontend && ./create-docker-env.sh
+      env:
+        TILESERVICE: ${{ secrets.TILESERVICE }}
+        MAPAPIKEY: ${{ secrets.MAPAPIKEY }}
+        BASEAPIPATH: ${{ secrets.BASEAPIPATH }}
+    - name: Build the Angular Frontend
+      run: cd frontend/CapybaraApp && npm run build -- --configuration=docker
     - name: Build the Docker image
-      run: cd frontend && docker build . --file Dockerfile --build-arg TILESERVICE=${{ secrets.TILESERVICE }} --build-arg MAPAPIKEY=${{ secrets.MAPAPIKEY }} --build-arg BASEAPIPATH=${{ secrets.BASEAPIPATH }} --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
-           
-           
+      run: cd frontend && docker build . --file Dockerfile-slim --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
     
     - name: Log in to registry
       # This is where you will update the PAT to GITHUB_TOKEN

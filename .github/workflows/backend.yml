@@ -14,8 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '8'
+        cache: 'maven'
+    - name: Build with Maven
+      run: cd backend/CapybaraCampusCrawlBackend && ./mvnw install -DskipTests
+    - name: Extract the Java files
+      run: cd backend/CapybaraCampusCrawlBackend && java -Djarmode=layertools -jar target/*.jar extract --destination target/extracted
     - name: Build the Docker image
-      run: cd backend && docker build . --file Dockerfile --build-arg ORS_KEY=${{secrets.ORS_KEY}} --build-arg DATABASE_STRING=${{secrets.DATABASE_STRING}} --build-arg DATABASE_USER=${{secrets.DATABASE_USER}} --build-arg DATABASE_PASSWD=${{secrets.DATABASE_PASSWD}} --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
+      run: cd backend && docker build . --file Dockerfile-slim --build-arg ORS_KEY=${{secrets.ORS_KEY}} --build-arg DATABASE_STRING=${{secrets.DATABASE_STRING}} --build-arg DATABASE_USER=${{secrets.DATABASE_USER}} --build-arg DATABASE_PASSWD=${{secrets.DATABASE_PASSWD}} --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
     - name: Log in to registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
