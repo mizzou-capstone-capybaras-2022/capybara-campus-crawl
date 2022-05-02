@@ -1,5 +1,6 @@
 package com.capybara.CapybaraCampusCrawlBackend.Routing;
 
+import org.jgrapht.graph.SimpleDirectedGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,23 +34,33 @@ import org.slf4j.LoggerFactory;
 public class RoutingSystem {
 
 	private static final Logger logger = LoggerFactory.getLogger(CapybaraCampusCrawlBackendApplication.class);
-	
-	private List<CapybaraRouteNode> nodeList;
-	
+
+	SimpleDirectedGraph<GraphNode, CapybaraGraphEdge> capybaraGraph;
+
 	@Inject
 	public RoutingSystem(GraphEdgeRepository edgeDao, GraphNodeRepository nodeDao) {
 		List<GraphNode> nodes = nodeDao.findAll();
 		List<GraphEdge> edges = edgeDao.findAll();
-		
+
 		logger.info("Fetch nodes and edges");
-	
+
 		try {
-			nodeList = generateNodes(nodes, edges);
+			capybaraGraph = constructGraph(nodes, edges);
 		} catch (JsonProcessingException e) {
-			nodeList = new ArrayList<>();
-			e.printStackTrace();
+			capybaraGraph = new SimpleDirectedGraph<>(CapybaraGraphEdge.class);
 		}
 	}
+
+	public SimpleDirectedGraph<GraphNode, CapybaraGraphEdge> constructGraph(List<GraphNode> nodes, List<GraphEdge> edges) throws JsonProcessingException {
+		SimpleDirectedGraph<GraphNode, CapybaraGraphEdge> capybaraGraph = new SimpleDirectedGraph<>(CapybaraGraphEdge.class);
+
+
+
+		return capybaraGraph;
+	}
+
+	/*
+
 	public List<Point> ComputeRoute(Long startingBuildingId, Long endingBuildingId) {
 		List<Point> routePoints = GetRouteBetweenPoints(startingBuildingId, endingBuildingId, nodeList);
 		return routePoints;
@@ -196,7 +207,7 @@ public class RoutingSystem {
 	    }
 	    return toReturn;
 	}
-	
+	*/
 }
 
 
