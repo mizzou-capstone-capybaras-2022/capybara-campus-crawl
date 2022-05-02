@@ -28,15 +28,18 @@ public class BuildingsApiController implements BuildingsApi {
 
     private final NativeWebRequest request;
 
-    @Autowired 
     private BuildingRepository buildingDao;
-    
-    @Autowired
+
     private DoorRepository doorDao;
-    
+
+    private List<Building> sanitizedBuildings;
+
     @Autowired
-    public BuildingsApiController(NativeWebRequest request) {
+    public BuildingsApiController(NativeWebRequest request, BuildingRepository buildingDao, DoorRepository doorDao) {
         this.request = request;
+        this.buildingDao = buildingDao;
+        this.doorDao = doorDao;
+        this.sanitizedBuildings = getSanitizedBuildings();
     }
 
     @Override
@@ -45,9 +48,7 @@ public class BuildingsApiController implements BuildingsApi {
     }
     
     public ResponseEntity<List<Building>> getBuildings() {
-    	List<Building> buildingToReturn = getSanitizedBuildings();
-    	
-    	return new ResponseEntity<List<Building>>(buildingToReturn, HttpStatus.OK);
+    	return new ResponseEntity<>(this.sanitizedBuildings, HttpStatus.OK);
     }
     
     private List<Building> getSanitizedBuildings(){
