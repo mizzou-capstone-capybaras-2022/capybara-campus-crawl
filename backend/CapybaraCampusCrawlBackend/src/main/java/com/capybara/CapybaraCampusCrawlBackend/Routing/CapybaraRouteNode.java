@@ -32,7 +32,7 @@ public class CapybaraRouteNode{
 	        this.lon = lon;
 	    }
 		
-		public void addEdge(CapybaraRouteNode destination, double distance, ArrayList<Point> coords) {
+		public void addEdge(CapybaraRouteNode destination, double distance, List<Point> coords) {
 			
 			adjList.put(destination, new Pair(coords,distance));
 	    }

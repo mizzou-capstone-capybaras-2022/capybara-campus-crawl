@@ -25,7 +25,7 @@ public class Building {
 	@OneToOne
 	@JoinColumn(name="\"NodeID\"", nullable=true)
 	private GraphNode graphNode;
-	
+
 	//TODO Many Doors belong to One Building
 	
 	public Building() {

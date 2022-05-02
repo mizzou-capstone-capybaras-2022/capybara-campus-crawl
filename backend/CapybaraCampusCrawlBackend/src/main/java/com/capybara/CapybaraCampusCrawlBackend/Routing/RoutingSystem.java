@@ -16,12 +16,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
@@ -51,24 +46,19 @@ public class RoutingSystem {
 		try {
 			nodeList = generateNodes(nodes, edges);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			nodeList = new ArrayList<CapybaraRouteNode>();
+			nodeList = new ArrayList<>();
 			e.printStackTrace();
 		}
 	}
-	
-	public List<Point> ComputeRoute(Long startingBuildingId, Long endingBuildingId) throws JsonMappingException, JsonProcessingException {
+	public List<Point> ComputeRoute(Long startingBuildingId, Long endingBuildingId) {
 		List<Point> routePoints = GetRouteBetweenPoints(startingBuildingId-1, endingBuildingId-1, nodeList);		
 		return routePoints;
 	}
-		
-	
-	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
+	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonProcessingException{
 		List<CapybaraRouteNode> capybaraNodeList = constructNodes(graphNodeList);
 		capybaraNodeList = addCapybaraEdges(capybaraNodeList, graphEdgeList);
 	    return capybaraNodeList; 
 	}
-
 	private static List<CapybaraRouteNode> constructNodes(List<GraphNode> graphNodeList){
 		List<CapybaraRouteNode> capybaraNodeList = new ArrayList<CapybaraRouteNode>();
 		
@@ -85,49 +75,51 @@ public class RoutingSystem {
 		
 		return capybaraNodeList;
 	}
-	
-	private static List<CapybaraRouteNode> addCapybaraEdges(List<CapybaraRouteNode> capybaraNodeList, List<GraphEdge> graphEdgeList) throws JsonMappingException, JsonProcessingException{
+	private static List<CapybaraRouteNode> addCapybaraEdges(List<CapybaraRouteNode> capybaraNodeList, List<GraphEdge> graphEdgeList) throws JsonProcessingException{
 		//generate adj lists for every node
 	    for (GraphEdge currentEdge: graphEdgeList) {
-	    	int fromNode = (int)(currentEdge.getFromNode().getNodeID() - 0);
-		    int toNode = (int)(currentEdge.getToNode().getNodeID() - 0);
+	    	int fromNode = Math.toIntExact(currentEdge.getFromNode().getNodeID());
+		    int toNode = Math.toIntExact(currentEdge.getToNode().getNodeID());
 		    
 		    //get distance and modify for outside
-		    double distance;
-		    if(currentEdge.getFromToAction().equals("outsideWalking")) {
-		    	distance = currentEdge.getDistance() * 6;
-		    }else {
-		    	distance = currentEdge.getDistance();
-		    }
+		    double distance = getModifiedGraphEdgeWeight(currentEdge);
 
-		    String coordsListJson = currentEdge.getPathshape();
-		    ObjectMapper mapper = new ObjectMapper();
-			JsonNode coordinates = mapper.readTree(coordsListJson);	
-			
-			ArrayList<Point> points = new ArrayList<Point>();
-			
-			for (JsonNode coordinateNode : coordinates) {
-				Double latitude = coordinateNode.get(1).asDouble();
-				Double longitude = coordinateNode.get(0).asDouble();
-				
-				points.add(new Point()
-						.latitude(latitude)
-						.longitude(longitude));
-			}
-			
+			List<Point> points = parseJSONPoints(currentEdge.getPathshape());
+
+			List<Point> reversedPoints = new ArrayList<>(points);
+			Collections.reverse(reversedPoints);
+
 			capybaraNodeList.get(fromNode-1).addEdge(capybaraNodeList.get(toNode-1), distance,points);
-			 
-			for (int z = 0, j = points.size() - 1; z < j; z++) {
-		            points.add(z, points.remove(j));
-	        }
-			
-		    capybaraNodeList.get(toNode-1).addEdge(capybaraNodeList.get(fromNode-1), distance,points);
+			capybaraNodeList.get(toNode-1).addEdge(capybaraNodeList.get(fromNode-1), distance,reversedPoints);
 	    }
 	    
 	    return capybaraNodeList;
 	}
 
-	
+	private static double getModifiedGraphEdgeWeight(GraphEdge currentEdge){
+		if(currentEdge.getFromToAction().equals("outsideWalking")) {
+			return currentEdge.getDistance() * 6;
+		}else {
+			return currentEdge.getDistance();
+		}
+	}
+	private static List<Point> parseJSONPoints(String pointsJson) throws JsonProcessingException{
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode coordinates = mapper.readTree(pointsJson);
+
+		ArrayList<Point> points = new ArrayList<Point>();
+
+		for (JsonNode coordinateNode : coordinates) {
+			Double latitude = coordinateNode.get(1).asDouble();
+			Double longitude = coordinateNode.get(0).asDouble();
+
+			points.add(new Point()
+					.latitude(latitude)
+					.longitude(longitude));
+		}
+
+		return points;
+	}
 	private static ArrayList<Point> ListPath(long fromNodeId, long toNodeID, List<CapybaraRouteNode> nodeList) {
 		System.out.println("From Node "+fromNodeId +" To Node "+ toNodeID);
 		
@@ -135,47 +127,27 @@ public class RoutingSystem {
 		List<CapybaraRouteNode> path = currentNode.getShortestPath();
 		
 		CapybaraRouteNode PreviousNode = null;
-		Double distance = (double)-1;
-		
-		ArrayList<Point> listToSend = new ArrayList<Point>();
-		ArrayList<double[]> list = new ArrayList<double[]>();
-		ArrayList<Point> points = new ArrayList<Point>();
-		
+		ArrayList<Point> listToSend = new ArrayList<>();
+
 		for(CapybaraRouteNode current : path) {
 			if(PreviousNode != null) {
-				for (Entry<CapybaraRouteNode, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
-			        if(current.getID() == adjacencyPair.getKey().getID()) {
-			        	distance = adjacencyPair.getValue().distance;
-			        	points = new ArrayList<Point>(adjacencyPair.getValue().coords);
-			        }	          
-			    }
-				
-				if(PreviousNode.getID() < current.getID()) {
-					Collections.reverse(points);
-				}
-				
+				List<Point> points = PreviousNode.getAdjacentNodes().entrySet().stream()
+						.filter(adjacencyPair -> adjacencyPair.getKey().getID() == current.getID())
+						.findFirst().get().getValue().coords;
 				listToSend.addAll(points);
-				PreviousNode = current;
-			}else {
-				PreviousNode = current;
 			}
+
+			PreviousNode = current;
 		}
-		
-		for (Entry<CapybaraRouteNode, Pair> adjacencyPair : PreviousNode.getAdjacentNodes().entrySet()) {
-	        if(currentNode.getID() == adjacencyPair.getKey().getID()) {
-	        	distance = adjacencyPair.getValue().distance;
-	        	points = new ArrayList<Point>(adjacencyPair.getValue().coords);
-	        }	          
-	    }
-		
-		if(PreviousNode.getID() < currentNode.getID()) {
-			Collections.reverse(points);
-		}
+
+		List<Point> points = PreviousNode.getAdjacentNodes().entrySet().stream()
+				.filter(adjacencyPair -> adjacencyPair.getKey().getID() == currentNode.getID())
+				.findFirst().get().getValue().coords;
 		
 		listToSend.addAll(points);
+
 		return listToSend;
 	}
-	
 	public static List<Point> GetRouteBetweenPoints(long start, long end, List<CapybaraRouteNode> nodeList){
 		CapybaraRouteGraph graph = new CapybaraRouteGraph();
 	    
