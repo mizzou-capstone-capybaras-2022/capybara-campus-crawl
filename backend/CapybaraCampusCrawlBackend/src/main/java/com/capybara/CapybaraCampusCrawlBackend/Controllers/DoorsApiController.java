@@ -19,14 +19,13 @@ import javax.annotation.Generated;
 @Controller
 @RequestMapping("${openapi.openAPIDefinition.base-path:}")
 public class DoorsApiController implements DoorsApi {
+    private List<Door> doors;
 
-	@Autowired
-	private DoorRepository doorDao;
-	
     private final NativeWebRequest request;
 
     @Autowired
-    public DoorsApiController(NativeWebRequest request) {
+    public DoorsApiController(NativeWebRequest request, DoorRepository doorDao) {
+        this.doors = doorDao.findAll();
         this.request = request;
     }
 
@@ -36,6 +35,6 @@ public class DoorsApiController implements DoorsApi {
     }
 
     public ResponseEntity<List<Door>> getDoors() {
-    	return new ResponseEntity<List<Door>>(doorDao.findAll(), HttpStatus.OK);     
+    	return new ResponseEntity<>(this.doors, HttpStatus.OK);
     }
 }
