@@ -14,4 +14,5 @@ public class CapybaraGraphEdge {
 			this.coords = coords;
 			this.distance = distance;
 		}
+
 	}
