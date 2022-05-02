@@ -51,7 +51,7 @@ public class RoutingSystem {
 		}
 	}
 	public List<Point> ComputeRoute(Long startingBuildingId, Long endingBuildingId) {
-		List<Point> routePoints = GetRouteBetweenPoints(startingBuildingId-1, endingBuildingId-1, nodeList);		
+		List<Point> routePoints = GetRouteBetweenPoints(startingBuildingId, endingBuildingId, nodeList);
 		return routePoints;
 	}
 	private static List<CapybaraRouteNode> generateNodes(List<GraphNode> graphNodeList, List<GraphEdge> graphEdgeList) throws JsonProcessingException{
@@ -148,24 +148,27 @@ public class RoutingSystem {
 
 		return listToSend;
 	}
-	public static List<Point> GetRouteBetweenPoints(long start, long end, List<CapybaraRouteNode> nodeList){
+	public static List<Point> GetRouteBetweenPoints(long startBuildingId, long endBuildingId, List<CapybaraRouteNode> nodeList){
+		long startIdx = startBuildingId - 1;
+		long endIdx = endBuildingId - 1;
+
 		CapybaraRouteGraph graph = new CapybaraRouteGraph();
 	    
 	    for(int i=0;i<nodeList.size();i++) {
 	    	graph.addNode(nodeList.get(i));
 	    }
 	    
-		System.out.println("Starting routing shortest from NodeID " + start);
+		System.out.println("Starting routing shortest from NodeID " + startIdx);
 	    
 		int found =-1;
 	    int found2 =-1;
 	    
-	    ArrayList<Point> toReturn = new ArrayList<Point>();
+	    ArrayList<Point> toReturn = new ArrayList<>();
 	    
 	    for(int i=0;i<nodeList.size();i++) {
 	    	CapybaraRouteNode currentNode = nodeList.get(i);
 	    	int currentID = currentNode.getID();
-	    	if(start == currentID) {
+	    	if(startIdx == currentID) {
 	    		found = currentID;
 	    	}
 	    }
@@ -177,7 +180,7 @@ public class RoutingSystem {
 		    for(int i=0;i<nodeList.size();i++) {
 		    	CapybaraRouteNode currentNode = nodeList.get(i);
 		    	int currentID = currentNode.getID();
-		    	if(end == currentID) {
+		    	if(endIdx == currentID) {
 		    		found2 = currentID;
 		    	}
 		    }
