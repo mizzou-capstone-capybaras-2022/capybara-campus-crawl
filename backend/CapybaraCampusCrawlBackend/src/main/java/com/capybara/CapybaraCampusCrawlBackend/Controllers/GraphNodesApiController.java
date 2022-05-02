@@ -19,13 +19,13 @@ import javax.annotation.Generated;
 @RequestMapping("${openapi.openAPIDefinition.base-path:}")
 public class GraphNodesApiController implements GraphNodesApi {
 
-    private List<GraphNode> nodes;
+    private GraphNodeRepository graphNodeDao;
 
     private final NativeWebRequest request;
 
     @Autowired
     public GraphNodesApiController(NativeWebRequest request, GraphNodeRepository graphNodeDao) {
-        this.nodes = graphNodeDao.findAll();
+        this.graphNodeDao = graphNodeDao;
         this.request = request;
     }
 
@@ -35,7 +35,7 @@ public class GraphNodesApiController implements GraphNodesApi {
     }
     
     public ResponseEntity<List<GraphNode>> getNodes(){
-    	return new ResponseEntity<>(this.nodes, HttpStatus.OK);
+    	return new ResponseEntity<>(graphNodeDao.findAll(), HttpStatus.OK);
     }
 
 }
