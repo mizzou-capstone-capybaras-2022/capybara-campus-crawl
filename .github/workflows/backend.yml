@@ -20,7 +20,7 @@ jobs:
         java-version: '8'
         cache: 'maven'
     - name: Build with Maven
-      run: cd backend/CapybaraCampusCrawlBackend && ./mvnw install -DskipTests
+      run: cd backend/CapybaraCampusCrawlBackend && mvn install -DskipTests
     - name: Extract the Java files
       run: cd backend/CapybaraCampusCrawlBackend && java -Djarmode=layertools -jar target/*.jar extract --destination target/extracted
     - name: Build the Docker image
