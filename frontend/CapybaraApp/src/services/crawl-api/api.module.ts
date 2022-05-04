@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { BuildingControllerService } from './api/buildingController.service';
 import { DoorControllerService } from './api/doorController.service';
-import { GraphControllerService } from './api/graphController.service';
 import { GraphNodeControllerService } from './api/graphNodeController.service';
 import { RouteControllerService } from './api/routeController.service';
 
