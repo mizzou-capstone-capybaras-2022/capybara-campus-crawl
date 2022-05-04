@@ -227,6 +227,21 @@ components:
           $ref: '#/components/schemas/BuildingLocation'
         toBuilding:
           $ref: '#/components/schemas/BuildingLocation'
+    RouteRequestConstraints:
+      type: object
+      properties:
+        stopForFood:
+          type: boolean
+        preferIndoors:
+          type: boolean
+        avoidCrowds:
+          type: boolean
+        pitstops:
+          type: array
+          items:
+            $ref: '#/components/schemas/PitstopConstraint'
+        timeConstraint:
+          $ref: '#/components/schemas/TimeConstraint'
     RouteRequest:
       type: object
       properties:
@@ -235,23 +250,7 @@ components:
         toLocation:
           $ref: '#/components/schemas/Location'
         constraints:
-          type: object
-          properties:
-            stopForFood:
-              type: boolean
-            preferIndoors:
-              type: boolean
-            avoidCrowds:
-              type: boolean
-            pitstops:
-              type: array
-              items:
-                $ref: '#/components/schemas/PitstopConstraint'
-            timeConstraint:
-                nullable: true
-                allOf:
-                  - $ref: '#/components/schemas/TimeConstraint'
-                
+          $ref: '#/components/schemas/RouteRequestConstraints'
     RouteResponse:
       type: array
       items:

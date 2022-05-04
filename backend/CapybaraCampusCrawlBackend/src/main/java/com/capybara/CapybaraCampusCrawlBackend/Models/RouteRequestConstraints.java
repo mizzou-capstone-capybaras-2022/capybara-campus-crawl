@@ -37,7 +37,7 @@ public class RouteRequestConstraints   {
   private List<PitstopConstraint> pitstops = null;
 
   @JsonProperty("timeConstraint")
-  private TimeConstraint timeConstraint;
+  private Optional<TimeConstraint> timeConstraint;
 
   public RouteRequestConstraints stopForFood(Boolean stopForFood) {
     this.stopForFood = stopForFood;
@@ -123,7 +123,7 @@ public class RouteRequestConstraints   {
     this.pitstops = pitstops;
   }
 
-  public RouteRequestConstraints timeConstraint(TimeConstraint timeConstraint) {
+  public RouteRequestConstraints timeConstraint(Optional<TimeConstraint> timeConstraint) {
     this.timeConstraint = timeConstraint;
     return this;
   }
@@ -134,11 +134,11 @@ public class RouteRequestConstraints   {
   */
   @Valid 
   @Schema(name = "timeConstraint", required = false)
-  public TimeConstraint getTimeConstraint() {
+  public Optional<TimeConstraint> getTimeConstraint() {
     return timeConstraint;
   }
 
-  public void setTimeConstraint(TimeConstraint timeConstraint) {
+  public void setTimeConstraint(Optional<TimeConstraint> timeConstraint) {
     this.timeConstraint = timeConstraint;
   }
 

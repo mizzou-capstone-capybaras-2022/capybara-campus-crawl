@@ -52,13 +52,21 @@ public class RoutesApiController implements RoutesApi {
                 System.out.println("Avoid Crouds:" + routeRequest.getConstraints().getAvoidCrowds());
                 
                 List<PitstopConstraint> pitstops = routeRequest.getConstraints().getPitstops();
-                Location location = pitstops.get(0).getLocation();
                 
-                System.out.println("Building ID: " + location.getBuildingId());
-                System.out.println("Building Lat: " + location.getLatitude());
-                System.out.println("Building Long: " + location.getLongitude());
+                if (pitstops.size() > 0) {
+                    Location location = pitstops.get(0).getLocation();
+                    
+                    System.out.println("Building ID: " + location.getBuildingId());
+                    System.out.println("Building Lat: " + location.getLatitude());
+                    System.out.println("Building Long: " + location.getLongitude());
+                }
                 
-                System.out.println("Max Time: "+ routeRequest.getConstraints().getTimeConstraint().getMaxTime());
+                if (routeRequest.getConstraints().getTimeConstraint().isPresent()) {
+                    System.out.println("Max Time: "+ routeRequest.getConstraints().getTimeConstraint().get().getMaxTime());
+                }else {
+                	System.out.println("Max Time: "+ "null");
+                }
+                
 
     	return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
     }
