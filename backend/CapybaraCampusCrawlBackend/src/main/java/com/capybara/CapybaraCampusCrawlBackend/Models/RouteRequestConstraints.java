@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.ArrayList;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -18,8 +20,11 @@ import javax.annotation.Generated;
  * RouteRequestConstraints
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-18T22:02:47.023914Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-03T22:02:07.033940Z[Etc/UTC]")
 public class RouteRequestConstraints   {
+
+  @JsonProperty("stopForFood")
+  private Boolean stopForFood;
 
   @JsonProperty("preferIndoors")
   private Boolean preferIndoors;
@@ -28,10 +33,30 @@ public class RouteRequestConstraints   {
   private Boolean avoidCrowds;
 
   @JsonProperty("pitstops")
-  private PitstopConstraint pitstops;
+  @Valid
+  private List<PitstopConstraint> pitstops = null;
 
   @JsonProperty("timeConstraint")
-  private TimeConstraint timeConstraint;
+  private Optional<TimeConstraint> timeConstraint;
+
+  public RouteRequestConstraints stopForFood(Boolean stopForFood) {
+    this.stopForFood = stopForFood;
+    return this;
+  }
+
+  /**
+   * Get stopForFood
+   * @return stopForFood
+  */
+  
+  @Schema(name = "stopForFood", required = false)
+  public Boolean getStopForFood() {
+    return stopForFood;
+  }
+
+  public void setStopForFood(Boolean stopForFood) {
+    this.stopForFood = stopForFood;
+  }
 
   public RouteRequestConstraints preferIndoors(Boolean preferIndoors) {
     this.preferIndoors = preferIndoors;
@@ -71,8 +96,16 @@ public class RouteRequestConstraints   {
     this.avoidCrowds = avoidCrowds;
   }
 
-  public RouteRequestConstraints pitstops(PitstopConstraint pitstops) {
+  public RouteRequestConstraints pitstops(List<PitstopConstraint> pitstops) {
     this.pitstops = pitstops;
+    return this;
+  }
+
+  public RouteRequestConstraints addPitstopsItem(PitstopConstraint pitstopsItem) {
+    if (this.pitstops == null) {
+      this.pitstops = new ArrayList<>();
+    }
+    this.pitstops.add(pitstopsItem);
     return this;
   }
 
@@ -82,15 +115,15 @@ public class RouteRequestConstraints   {
   */
   @Valid 
   @Schema(name = "pitstops", required = false)
-  public PitstopConstraint getPitstops() {
+  public List<PitstopConstraint> getPitstops() {
     return pitstops;
   }
 
-  public void setPitstops(PitstopConstraint pitstops) {
+  public void setPitstops(List<PitstopConstraint> pitstops) {
     this.pitstops = pitstops;
   }
 
-  public RouteRequestConstraints timeConstraint(TimeConstraint timeConstraint) {
+  public RouteRequestConstraints timeConstraint(Optional<TimeConstraint> timeConstraint) {
     this.timeConstraint = timeConstraint;
     return this;
   }
@@ -101,11 +134,11 @@ public class RouteRequestConstraints   {
   */
   @Valid 
   @Schema(name = "timeConstraint", required = false)
-  public TimeConstraint getTimeConstraint() {
+  public Optional<TimeConstraint> getTimeConstraint() {
     return timeConstraint;
   }
 
-  public void setTimeConstraint(TimeConstraint timeConstraint) {
+  public void setTimeConstraint(Optional<TimeConstraint> timeConstraint) {
     this.timeConstraint = timeConstraint;
   }
 
@@ -118,7 +151,8 @@ public class RouteRequestConstraints   {
       return false;
     }
     RouteRequestConstraints routeRequestConstraints = (RouteRequestConstraints) o;
-    return Objects.equals(this.preferIndoors, routeRequestConstraints.preferIndoors) &&
+    return Objects.equals(this.stopForFood, routeRequestConstraints.stopForFood) &&
+        Objects.equals(this.preferIndoors, routeRequestConstraints.preferIndoors) &&
         Objects.equals(this.avoidCrowds, routeRequestConstraints.avoidCrowds) &&
         Objects.equals(this.pitstops, routeRequestConstraints.pitstops) &&
         Objects.equals(this.timeConstraint, routeRequestConstraints.timeConstraint);
@@ -126,13 +160,14 @@ public class RouteRequestConstraints   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(preferIndoors, avoidCrowds, pitstops, timeConstraint);
+    return Objects.hash(stopForFood, preferIndoors, avoidCrowds, pitstops, timeConstraint);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RouteRequestConstraints {\n");
+    sb.append("    stopForFood: ").append(toIndentedString(stopForFood)).append("\n");
     sb.append("    preferIndoors: ").append(toIndentedString(preferIndoors)).append("\n");
     sb.append("    avoidCrowds: ").append(toIndentedString(avoidCrowds)).append("\n");
     sb.append("    pitstops: ").append(toIndentedString(pitstops)).append("\n");

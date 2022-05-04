@@ -516,7 +516,54 @@
 			]
 		},
 		{
-			"name": "Get a route",
+			"name": "get Places",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/places/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"places",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"placeID\": -19051701,\n \"node\": {\n  \"latitude\": -47699180.58116747,\n  \"longitude\": 34953450.987912536,\n  \"description\": \"ipsum dolore\",\n  \"nodeID\": 33999664\n },\n \"placeType\": \"DINING\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a constaint route",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -527,7 +574,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 1\n    },\n    \"toLocation\": {\n        \"buildingId\": 2\n    },\n    \"constraints\": {\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": {\n            \"location\": {\n                \"buildingId\": 3\n            }\n        },\n        \"timeConstraint\": {\n            \"maxTime\": 200.00\n        }\n    }\n}"
+					"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 50865099.668170184\n    },\n    \"toLocation\": {\n        \"buildingId\": 94813497.94706216\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 92235308.45984739\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": -37917696.62853928\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 54448757.17598575\n        }\n    }\n}"
 				},
 				"url": {
 					"raw": "{{baseUrl}}/routes/",
@@ -548,7 +595,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 37181331.59834278\n    },\n    \"toLocation\": {\n        \"buildingId\": 60232532.58158466\n    },\n    \"constraints\": {\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": {\n            \"location\": {\n                \"buildingId\": 36042717.218321264\n            }\n        },\n        \"timeConstraint\": {\n            \"maxTime\": 2613322.814103067\n        }\n    }\n}"
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 1\n    },\n    \"toLocation\": {\n        \"buildingId\": 2\n    },\n    \"constraints\": {\n        \"stopForFood\": true,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 4\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 5\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 100\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/routes/",
@@ -571,7 +618,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n {\n  \"latitude\": -60810143.155104466,\n  \"longitude\": 83262425.5022082\n },\n {\n  \"latitude\": -2769851.932589695,\n  \"longitude\": 17366284.317235127\n }\n]"
+					"body": "[\n {\n  \"latitude\": -13290201.183931544,\n  \"longitude\": 92428659.31701955\n },\n {\n  \"latitude\": 48131450.59189895,\n  \"longitude\": 32371157.98228647\n }\n]"
 				},
 				{
 					"name": "Route not possible",
@@ -580,39 +627,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 37181331.59834278\n    },\n    \"toLocation\": {\n        \"buildingId\": 60232532.58158466\n    },\n    \"constraints\": {\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": {\n            \"location\": {\n                \"buildingId\": 36042717.218321264\n            }\n        },\n        \"timeConstraint\": {\n            \"maxTime\": 2613322.814103067\n        }\n    }\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/routes/",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"routes",
-								""
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "text",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "text/plain"
-						}
-					],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"name": "Internal Server Error",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 37181331.59834278\n    },\n    \"toLocation\": {\n        \"buildingId\": 60232532.58158466\n    },\n    \"constraints\": {\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": {\n            \"location\": {\n                \"buildingId\": 36042717.218321264\n            }\n        },\n        \"timeConstraint\": {\n            \"maxTime\": 2613322.814103067\n        }\n    }\n}"
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": -80489843.49325989\n    },\n    \"toLocation\": {\n        \"buildingId\": -10528911.906426638\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": true,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 85429174.38149291\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 68633317.8765381\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 90138768.03969437\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/routes/",
@@ -627,15 +642,15 @@
 					},
 					"status": "Internal Server Error",
 					"code": 500,
-					"_postman_previewlanguage": "text",
+					"_postman_previewlanguage": "json",
 					"header": [
 						{
 							"key": "Content-Type",
-							"value": "text/plain"
+							"value": "application/json"
 						}
 					],
 					"cookie": [],
-					"body": ""
+					"body": "{\n \"failingConstraint\": [\n  \"time\",\n  \"crowds\"\n ]\n}"
 				}
 			]
 		}

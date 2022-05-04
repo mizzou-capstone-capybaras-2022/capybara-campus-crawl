@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Location;
+import com.capybara.CapybaraCampusCrawlBackend.Models.PitstopConstraint;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
 import com.capybara.CapybaraCampusCrawlBackend.Models.RouteRequest;
 
@@ -46,14 +48,25 @@ public class RoutesApiController implements RoutesApi {
     	    ) {
 
                 System.out.println("Prefer Indoors: " + routeRequest.getConstraints().getPreferIndoors());
-                
+                System.out.println("Stop by food: " + routeRequest.getConstraints().getStopForFood());
                 System.out.println("Avoid Crouds:" + routeRequest.getConstraints().getAvoidCrowds());
                 
-                System.out.println("Building ID: " + routeRequest.getConstraints().getPitstops().getLocation().getBuildingId());
-                System.out.println("Building Lat: " + routeRequest.getConstraints().getPitstops().getLocation().getLatitude());
-                System.out.println("Building Long: " + routeRequest.getConstraints().getPitstops().getLocation().getLongitude());
+                List<PitstopConstraint> pitstops = routeRequest.getConstraints().getPitstops();
                 
-                System.out.println("Max Time: "+ routeRequest.getConstraints().getTimeConstraint().getMaxTime());
+                if (pitstops.size() > 0) {
+                    Location location = pitstops.get(0).getLocation();
+                    
+                    System.out.println("Building ID: " + location.getBuildingId());
+                    System.out.println("Building Lat: " + location.getLatitude());
+                    System.out.println("Building Long: " + location.getLongitude());
+                }
+                
+                if (routeRequest.getConstraints().getTimeConstraint().isPresent()) {
+                    System.out.println("Max Time: "+ routeRequest.getConstraints().getTimeConstraint().get().getMaxTime());
+                }else {
+                	System.out.println("Max Time: "+ "null");
+                }
+                
 
     	return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
     }

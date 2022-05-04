@@ -24,9 +24,6 @@ public class Place {
 	@OneToOne
 	@JoinColumn(name="\"NodeID\"", nullable=false)
 	private GraphNode node;
-
-	@Column(name="\"Name\"")
-	private String name;
 	
     @Column(name="\"PlaceType\"")
     @Convert(converter = PlaceTypeConverter.class)
@@ -38,7 +35,6 @@ public class Place {
 	
 	public Place(GraphNode node, String name, PlaceType placeType) {
 		this.node = node;
-		this.name = name;
 		this.placeType = placeType;
 	}
 
@@ -48,14 +44,6 @@ public class Place {
 
 	public void setNode(GraphNode node) {
 		this.node = node;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public PlaceType getPlaceType() {
@@ -73,8 +61,8 @@ public class Place {
 	@Override
 	public String toString() {
 	  return String.format(
-	      "Place[id=%d, name='%s', placeType=%s, nodeId=%d]",
-	      placeID, name, placeType.toString(), node.getNodeID());
+	      "Place[id=%d, placeType=%s, nodeId=%d]",
+	      placeID, placeType.toString(), node.getNodeID());
 	}
 	
 }
