@@ -223,7 +223,10 @@ components:
               items:
                 $ref: '#/components/schemas/PitstopConstraint'
             timeConstraint:
-              $ref: '#/components/schemas/TimeConstraint'
+                nullable: true
+                allOf:
+                  - $ref: '#/components/schemas/TimeConstraint'
+                
     RouteResponse:
       type: array
       items:
