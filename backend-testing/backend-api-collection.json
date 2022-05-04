@@ -516,7 +516,54 @@
 			]
 		},
 		{
-			"name": "Get a route with constraints",
+			"name": "get Places",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/places/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"places",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"placeID\": -19051701,\n \"node\": {\n  \"latitude\": -47699180.58116747,\n  \"longitude\": 34953450.987912536,\n  \"description\": \"ipsum dolore\",\n  \"nodeID\": 33999664\n },\n \"placeType\": \"DINING\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a constaint route",
 			"request": {
 				"method": "PUT",
 				"header": [
