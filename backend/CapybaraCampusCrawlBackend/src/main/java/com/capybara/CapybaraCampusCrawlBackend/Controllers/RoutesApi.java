@@ -5,6 +5,10 @@
  */
 package com.capybara.CapybaraCampusCrawlBackend.Controllers;
 
+import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
+import com.capybara.CapybaraCampusCrawlBackend.Models.RouteErrorResponse;
+import com.capybara.CapybaraCampusCrawlBackend.Models.RouteRequest;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -21,9 +25,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
-import com.capybara.CapybaraCampusCrawlBackend.Models.RouteRequest;
-
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -31,8 +32,9 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-03-23T06:46:32.599746Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-03T22:02:07.033940Z[Etc/UTC]")
 @Validated
+@Tag(name = "routes", description = "the routes API")
 public interface RoutesApi {
 
     default Optional<NativeWebRequest> getRequest() {
@@ -44,8 +46,7 @@ public interface RoutesApi {
      *
      * @param routeRequest Get the Route with a generic route request (required)
      * @return OK (status code 200)
-     *         or Route not possible (status code 404)
-     *         or Internal Server Error (status code 500)
+     *         or Route not possible (status code 500)
      */
     @Operation(
         operationId = "getRoute",
@@ -53,14 +54,13 @@ public interface RoutesApi {
         tags = { "Route Controller" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  Point.class))),
-            @ApiResponse(responseCode = "404", description = "Route not possible"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+            @ApiResponse(responseCode = "500", description = "Route not possible", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  RouteErrorResponse.class)))
         }
     )
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/routes/",
-		produces = {"application/json", "text/xml"},
+        produces = { "application/json" },
         consumes = { "application/json" }
     )
     default ResponseEntity<List<Point>> getRoute(
@@ -68,9 +68,9 @@ public interface RoutesApi {
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"latitude\" : 0.8008281904610115, \"longitude\" : 6.027456183070403 }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
             }
