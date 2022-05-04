@@ -22,9 +22,12 @@
     <mat-tab label="Input Locations">
       <app-input-locations (inputBuildings) = "onSelectBuildingForNavigation($event)"></app-input-locations>
     </mat-tab>
+<!--
+  Below was removed so the add constraints is on the same page as the input locations
     <mat-tab label="Add Constraints">
       <app-component-add-constraints></app-component-add-constraints>
     </mat-tab>
+-->
     <mat-tab label="Search Buildings">
       <app-search-buildings (selectBuildingFromSearch) = "onSelectBuildingFromSearch($event)"></app-search-buildings>
     </mat-tab>

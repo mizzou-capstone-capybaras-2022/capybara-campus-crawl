@@ -37,4 +37,13 @@ export class InputLocationsComponent implements OnInit {
     this.inputBuildings.emit([fromBuilding, toBuilding]);
   }
 
+  isShown2: boolean = false ;
+  isShown: boolean = false ;
+  toggleShow2() {
+    this.isShown2 = ! this.isShown2;
+    }
+  toggleShow() {
+    this.isShown = ! this.isShown;
+    }
+
 }
