@@ -9,13 +9,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Building } from './building';
 import { GraphNode } from './graphNode';
 
 
-export interface Door { 
-    doorId?: number;
+export interface Place { 
+    placeID?: number;
     node?: GraphNode;
-    building?: Building;
+    placeType?: Place.PlaceTypeEnum;
 }
+export namespace Place {
+    export type PlaceTypeEnum = 'STUDY' | 'DINING' | 'CLASSROOM';
+    export const PlaceTypeEnum = {
+        Study: 'STUDY' as PlaceTypeEnum,
+        Dining: 'DINING' as PlaceTypeEnum,
+        Classroom: 'CLASSROOM' as PlaceTypeEnum
+    };
+}
+
 
