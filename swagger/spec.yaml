@@ -20,7 +20,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GraphNode'
-
+  /places/:
+    get:
+      tags:
+        - Places Controller
+      operationId: getPlaces
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
   /doors/:
     get:
       tags:
@@ -148,6 +159,20 @@ components:
         nodeID:
           type: integer
           format: int64
+    Place:
+      type: object
+      properties:
+        placeID:
+          type: integer
+          format: int64
+        node:
+          $ref: '#/components/schemas/GraphNode'
+        placeType:
+          type: string
+          enum:
+            - STUDY
+            - DINING
+            - CLASSROOM
     Door:
       type: object
       properties:
@@ -223,7 +248,10 @@ components:
               items:
                 $ref: '#/components/schemas/PitstopConstraint'
             timeConstraint:
-              $ref: '#/components/schemas/TimeConstraint'
+                nullable: true
+                allOf:
+                  - $ref: '#/components/schemas/TimeConstraint'
+                
     RouteResponse:
       type: array
       items:
