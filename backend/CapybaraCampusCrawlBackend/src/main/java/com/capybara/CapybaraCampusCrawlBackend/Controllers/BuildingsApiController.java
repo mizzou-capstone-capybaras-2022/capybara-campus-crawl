@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.capybara.CapybaraCampusCrawlBackend.BusinessLogic.BuildingBll;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
@@ -28,18 +29,12 @@ public class BuildingsApiController implements BuildingsApi {
 
     private final NativeWebRequest request;
 
-    private BuildingRepository buildingDao;
-
-    private DoorRepository doorDao;
-
     private List<Building> sanitizedBuildings;
 
     @Autowired
-    public BuildingsApiController(NativeWebRequest request, BuildingRepository buildingDao, DoorRepository doorDao) {
+    public BuildingsApiController(NativeWebRequest request, BuildingBll buildingBll) {
         this.request = request;
-        this.buildingDao = buildingDao;
-        this.doorDao = doorDao;
-        this.sanitizedBuildings = getSanitizedBuildings();
+        this.sanitizedBuildings = buildingBll.getSanitizedBuildings();
     }
 
     @Override
@@ -49,29 +44,5 @@ public class BuildingsApiController implements BuildingsApi {
     
     public ResponseEntity<List<Building>> getBuildings() {
     	return new ResponseEntity<>(this.sanitizedBuildings, HttpStatus.OK);
-    }
-    
-    private List<Building> getSanitizedBuildings(){
-    	List<Building> rawBuildings = buildingDao.findAll();
-    	
-    	List<Building> modifiedBuildings = rawBuildings.stream()
-    			.map(building -> repairedBuildingWithLocation(building, doorDao))
-				.collect(Collectors.toList());
-    	
-    	return modifiedBuildings;
-    }
-    
-    public static Building repairedBuildingWithLocation(Building building, DoorRepository doorDao) {
-    	if (building.getGraphNode() != null) {
-    		return building;
-    	}
-    	
-    	Collection<Door> validDoors = doorDao.findAllDoorsForBuilding(building.getBuildingId());
-		Door door = validDoors.iterator().next();
-		
-		Building repairedBuilding = building;
-		repairedBuilding.setGraphNode(door.getNode());
-		
-		return repairedBuilding;
     }
 }

@@ -8,15 +8,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.capybara.CapybaraCampusCrawlBackend.BusinessLogic.RoutingBll;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
+import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
+import com.capybara.CapybaraCampusCrawlBackend.Models.Building;
+import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Location;
 import com.capybara.CapybaraCampusCrawlBackend.Models.PitstopConstraint;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
 import com.capybara.CapybaraCampusCrawlBackend.Models.RouteRequest;
+import com.capybara.CapybaraCampusCrawlBackend.Models.RouteRequestConstraints;
+import com.capybara.CapybaraCampusCrawlBackend.Routing.RoutingSystem;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,14 +36,15 @@ import javax.validation.Valid;
 @RequestMapping("${openapi.openAPIDefinition.base-path:}")
 public class RoutesApiController implements RoutesApi {
 
-	@Autowired
-	OpenRouteServiceDao routeDao;
-	
+		
     private final NativeWebRequest request;
+    
+    private RoutingBll routingBll;
 
     @Autowired
-    public RoutesApiController(NativeWebRequest request) {
+    public RoutesApiController(NativeWebRequest request, RoutingBll routingBll) {
         this.request = request;
+        this.routingBll = routingBll;
     }
 
     @Override
@@ -43,32 +52,17 @@ public class RoutesApiController implements RoutesApi {
         return Optional.ofNullable(request);
     }
 
-    public ResponseEntity<List<Point>> getRoute(
-            @Parameter(name = "RouteRequest", description = "Get the Route with a generic route request", required = true, schema = @Schema(description = "")) @Valid @RequestBody RouteRequest routeRequest
-    	    ) {
-
-                System.out.println("Prefer Indoors: " + routeRequest.getConstraints().getPreferIndoors());
-                System.out.println("Stop by food: " + routeRequest.getConstraints().getStopForFood());
-                System.out.println("Avoid Crouds:" + routeRequest.getConstraints().getAvoidCrowds());
-                
-                List<PitstopConstraint> pitstops = routeRequest.getConstraints().getPitstops();
-                
-                if (pitstops.size() > 0) {
-                    Location location = pitstops.get(0).getLocation();
-                    
-                    System.out.println("Building ID: " + location.getBuildingId());
-                    System.out.println("Building Lat: " + location.getLatitude());
-                    System.out.println("Building Long: " + location.getLongitude());
-                }
-                
-                if (routeRequest.getConstraints().getTimeConstraint().isPresent()) {
-                    System.out.println("Max Time: "+ routeRequest.getConstraints().getTimeConstraint().get().getMaxTime());
-                }else {
-                	System.out.println("Max Time: "+ "null");
-                }
-                
-
-    	return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.OK);
+    public ResponseEntity<List<Point>> getRoute
+    (
+	    @Parameter(
+	    		name = "RouteRequest", 
+	    		description = "Get the Route with a generic route request", 
+	    		required = true, 
+	    		schema = @Schema(description = "")) @Valid @RequestBody RouteRequest routeRequest
+    ) 
+    {
+		List<Point> points = routingBll.fetchRoute(routeRequest);
+    	return new ResponseEntity<List<Point>>(points, HttpStatus.OK);
     }
     
 }

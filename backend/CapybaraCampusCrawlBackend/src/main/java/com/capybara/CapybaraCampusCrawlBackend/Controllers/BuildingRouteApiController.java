@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.capybara.CapybaraCampusCrawlBackend.BusinessLogic.BuildingBll;
+import com.capybara.CapybaraCampusCrawlBackend.BusinessLogic.RoutingBll;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
@@ -36,21 +38,12 @@ public class BuildingRouteApiController implements BuildingRouteApi {
 
     private final NativeWebRequest request;
 
-    @Autowired
-	private RoutingSystem routingDao;
+    private RoutingBll routingBll;
     
     @Autowired
-	OpenRouteServiceDao routeDao;
-    
-    @Autowired
-	BuildingRepository buildingDao;
-
-    @Autowired
-    DoorRepository doorDao;
-    
-    @Autowired
-    public BuildingRouteApiController(NativeWebRequest request) {
+    public BuildingRouteApiController(NativeWebRequest request, RoutingBll routingBll) {
         this.request = request;
+        this.routingBll = routingBll;
     }
 
     @Override
@@ -58,27 +51,18 @@ public class BuildingRouteApiController implements BuildingRouteApi {
         return Optional.ofNullable(request);
     }
     
-    public ResponseEntity<List<Point>> getSimpleRouteBetweenBuildings(
-            @Parameter(name = "BuildingRouteRequest", description = "Get the Route with a building specific route request", required = true, schema = @Schema(description = "")) @Valid @RequestBody BuildingRouteRequest buildingRouteRequest
-        ) {
-            
-    		Building buildingA = buildingDao.findById((buildingRouteRequest.getFromBuilding().getBuildingId()).longValue());
-    		Building buildingB = buildingDao.findById(buildingRouteRequest.getToBuilding().getBuildingId().longValue());
-   
-    		GraphNode graphNodeA = BuildingsApiController.repairedBuildingWithLocation(buildingA, doorDao).getGraphNode();
-    		GraphNode graphNodeB = BuildingsApiController.repairedBuildingWithLocation(buildingB, doorDao).getGraphNode();
-    		
-    		List<Point> points = new ArrayList<Point>();
-    		
-    		try {
-				points = routingDao.ComputeRoute(graphNodeA.getNodeID(), graphNodeB.getNodeID());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-    		return new ResponseEntity<List<Point>>(points, HttpStatus.OK);
-
-        }
+    public ResponseEntity<List<Point>> getSimpleRouteBetweenBuildings
+    (
+        @Parameter(
+        		name = "BuildingRouteRequest", 
+        		description = "Get the Route with a building specific route request", 
+        		required = true, 
+        		schema = @Schema(description = "")
+        ) @Valid @RequestBody BuildingRouteRequest buildingRouteRequest
+	) 
+    {
+	    List<Point> points = routingBll.fetchRoute(buildingRouteRequest);
+	    return new ResponseEntity<List<Point>>(points, HttpStatus.OK);
+    }
 
 }
