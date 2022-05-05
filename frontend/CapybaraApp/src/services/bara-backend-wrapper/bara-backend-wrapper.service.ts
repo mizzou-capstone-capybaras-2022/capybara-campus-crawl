@@ -35,7 +35,7 @@ export class BaraBackendWrapperService {
       preferIndoors: false,
       avoidCrowds: false,
       pitstops: [],
-      timeConstraint: undefined
+      timeConstraint: null
     }
     
     if (routeConstraints != null){
