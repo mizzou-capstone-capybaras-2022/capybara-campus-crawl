@@ -32,8 +32,7 @@ export class AppComponent {
     let buildingFrom = selectedBuilding[0];
     let buildingTo = selectedBuilding[1];
 
-    let routePoints: Point[] = await this.baraApi.getRouteBetweenBuildings(<number>buildingFrom.buildingId, <number>buildingTo.buildingId);
-    
+    let routePoints: Point[] = await this.baraApi.getRouteWithConstraints(<number>buildingFrom.buildingId, <number>buildingTo.buildingId, null);    
     this.mapComponent.renderRoute(routePoints);
   }
 

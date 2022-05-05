@@ -37,7 +37,7 @@ public class RoutingBll {
                 && constraints.getStopForFood() == false 
                 && constraints.getAvoidCrowds() == false
                 && constraints.getPitstops().size() == 0
-                && constraints.getTimeConstraint().isPresent();
+                && !constraints.getTimeConstraint().isPresent();
     }
     
     private static void LogConstraints(RouteRequestConstraints constraints) {
@@ -94,6 +94,7 @@ public class RoutingBll {
 		
 		Location toLocation = new Location();
 		toLocation.setBuildingId(buildingRouteRequest.getToBuilding().getBuildingId());
+		
 		
 		
 		RouteRequestConstraints nullConstraints = new RouteRequestConstraints();

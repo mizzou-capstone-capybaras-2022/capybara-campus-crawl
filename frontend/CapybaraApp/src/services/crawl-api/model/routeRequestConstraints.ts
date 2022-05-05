@@ -18,6 +18,6 @@ export interface RouteRequestConstraints {
     preferIndoors?: boolean;
     avoidCrowds?: boolean;
     pitstops?: Array<PitstopConstraint>;
-    timeConstraint?: TimeConstraint;
+    timeConstraint: TimeConstraint | null;
 }
 
