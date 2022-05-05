@@ -37,7 +37,7 @@ public class RoutingBll {
                 && constraints.getStopForFood() == false 
                 && constraints.getAvoidCrowds() == false
                 && constraints.getPitstops().size() == 0
-                && constraints.getTimeConstraint().isEmpty();
+                && constraints.getTimeConstraint().isPresent();
     }
     
     private static void LogConstraints(RouteRequestConstraints constraints) {
