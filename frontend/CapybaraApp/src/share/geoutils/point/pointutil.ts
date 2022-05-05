@@ -12,8 +12,8 @@ export class PointUtil {
                     icon: icon({
                         iconSize: [ 25, 41 ],
                         iconAnchor: [ 13, 41 ],
-                        iconUrl: '/assets/leaflet/marker-icon.png',
-                        iconRetinaUrl: '/assets/leaflet/marker-icon-2x.png',
+                        iconUrl: '/assets/marker-icon-x1.png',
+                        iconRetinaUrl: '/assets/marker-icon-x2.png',
                         shadowUrl: '/assets/leaflet/marker-shadow.png'
                     })
                 })
