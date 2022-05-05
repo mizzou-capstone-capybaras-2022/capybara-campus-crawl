@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.capybara.CapybaraCampusCrawlBackend.BusinessLogic.RoutingBll;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.BuildingRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.DoorRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
@@ -38,18 +39,12 @@ public class RoutesApiController implements RoutesApi {
 		
     private final NativeWebRequest request;
     
-    private RoutingSystem routingDao;
-    
-    private BuildingRepository buildingDao;
-    
-    private DoorRepository doorDao;
+    private RoutingBll routingBll;
 
     @Autowired
-    public RoutesApiController(NativeWebRequest request, RoutingSystem routeDao, BuildingRepository buildingDao, DoorRepository doorDao) {
+    public RoutesApiController(NativeWebRequest request, RoutingBll routingBll) {
         this.request = request;
-        this.doorDao = doorDao;
-        this.buildingDao = buildingDao;
-        this.routingDao = routeDao;
+        this.routingBll = routingBll;
     }
 
     @Override
@@ -57,64 +52,17 @@ public class RoutesApiController implements RoutesApi {
         return Optional.ofNullable(request);
     }
 
-    private static boolean hasNoConstraints(RouteRequestConstraints constraints) {
-    	return constraints.getPreferIndoors() == false 
-                && constraints.getStopForFood() == false 
-                && constraints.getAvoidCrowds() == false
-                && constraints.getPitstops().size() == 0
-                && constraints.getTimeConstraint().isEmpty();
-    }
-    
-    public ResponseEntity<List<Point>> getRoute(
-            @Parameter(name = "RouteRequest", description = "Get the Route with a generic route request", required = true, schema = @Schema(description = "")) @Valid @RequestBody RouteRequest routeRequest
-    	    ) {
-
-    			RouteRequestConstraints constraints = routeRequest.getConstraints();
-    			
-                System.out.println("Prefer Indoors: " + constraints.getPreferIndoors());
-                System.out.println("Stop by food: " + constraints.getStopForFood());
-                System.out.println("Avoid Crouds:" + constraints.getAvoidCrowds());
-                
-                List<PitstopConstraint> pitstops = constraints.getPitstops();
-                
-                if (pitstops.size() > 0) {
-                    Location location = pitstops.get(0).getLocation();
-                    
-                    System.out.println("Building ID: " + location.getBuildingId());
-                    System.out.println("Building Lat: " + location.getLatitude());
-                    System.out.println("Building Long: " + location.getLongitude());
-                }
-                
-                if (routeRequest.getConstraints().getTimeConstraint().isPresent()) {
-                    System.out.println("Max Time: "+ routeRequest.getConstraints().getTimeConstraint().get().getMaxTime());
-                }else {
-                	System.out.println("Max Time: "+ "null");
-                }
-                
-                if (hasNoConstraints(constraints)) {
-                	BigDecimal buildingIdFrom = routeRequest.getFromLocation().getBuildingId();
-                	BigDecimal buildingIdTo = routeRequest.getToLocation().getBuildingId();
-                	
-                	Building buildingA = buildingDao.findById(buildingIdFrom.longValue());
-            		Building buildingB = buildingDao.findById(buildingIdTo.longValue());
-           
-            		GraphNode graphNodeA = BuildingsApiController.repairedBuildingWithLocation(buildingA, doorDao).getGraphNode();
-            		GraphNode graphNodeB = BuildingsApiController.repairedBuildingWithLocation(buildingB, doorDao).getGraphNode();
-            		
-            		List<Point> points = new ArrayList<Point>();
-            		
-            		try {
-        				points = routingDao.ComputeRoute(graphNodeA.getNodeID(), graphNodeB.getNodeID());
-        			} catch (Exception e) {
-        				// TODO Auto-generated catch block
-        				e.printStackTrace();
-        			}
-
-                	return new ResponseEntity<List<Point>>(points, HttpStatus.OK);
-                }
-                
-                
-            	return new ResponseEntity<List<Point>>(new ArrayList<Point>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<List<Point>> getRoute
+    (
+	    @Parameter(
+	    		name = "RouteRequest", 
+	    		description = "Get the Route with a generic route request", 
+	    		required = true, 
+	    		schema = @Schema(description = "")) @Valid @RequestBody RouteRequest routeRequest
+    ) 
+    {
+		List<Point> points = routingBll.fetchRoute(routeRequest);
+    	return new ResponseEntity<List<Point>>(points, HttpStatus.OK);
     }
     
 }
