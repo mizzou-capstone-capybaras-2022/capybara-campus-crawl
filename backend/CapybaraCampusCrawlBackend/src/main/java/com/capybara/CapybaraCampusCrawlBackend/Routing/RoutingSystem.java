@@ -42,28 +42,41 @@ public class RoutingSystem {
 		logger.info("Fetch nodes and edges");
 
 		try {
-			capybaraGraph = constructGraph(nodes, edges);
+			//current capybara graph does not prefer indoors
+			capybaraGraph = constructGraph(nodes, edges, false);
 			logger.info("Graph constructed");
 		} catch (JsonProcessingException e) {
 			capybaraGraph = new SimpleDirectedWeightedGraph<>(CapybaraGraphEdge.class);
 		}
 	}
 
-	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId) {
-		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(capybaraGraph);
+	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId, boolean preferIndoors) {
+		
+		//TODO switch graph based on if prefer indoors is true
+		SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> weightedGraphToUse = capybaraGraph;
+		
+		
+		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(weightedGraphToUse);
+		
 		ShortestPathAlgorithm.SingleSourcePaths<Long, CapybaraGraphEdge> pathsFromStart = dijkstraAlg.getPaths(startingNodeId);
 		GraphPath<Long, CapybaraGraphEdge> shortestPath = pathsFromStart.getPath(endingNodeId);
-
-		List<Point> routePoints = new ArrayList<>();
-		for (CapybaraGraphEdge edge: shortestPath.getEdgeList()){
-			routePoints.addAll(edge.coords);
-		}
+		
+		List<Point> routePoints = getPathList(shortestPath);
 
 		logger.info(shortestPath.toString());
 		return routePoints;
 	}
 
-	public SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> constructGraph(List<GraphNode> nodes, List<GraphEdge> edges) throws JsonProcessingException {
+	private List<Point> getPathList(GraphPath<Long, CapybaraGraphEdge> shortestPath){
+		List<Point> routePoints = new ArrayList<>();
+		for (CapybaraGraphEdge edge: shortestPath.getEdgeList()){
+			routePoints.addAll(edge.coords);
+		}
+
+		return routePoints;
+	}
+	
+	public SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> constructGraph(List<GraphNode> nodes, List<GraphEdge> edges, boolean preferIndoors) throws JsonProcessingException {
 		SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> capybaraGraph = new SimpleDirectedWeightedGraph<>(CapybaraGraphEdge.class);
 
 		//Add the vertex of the graph
@@ -78,7 +91,7 @@ public class RoutingSystem {
 
 			Collections.reverse(reverseCoords);
 
-			double distance = getModifiedGraphEdgeWeight(edge);
+			double distance = getModifiedGraphEdgeWeight(edge, preferIndoors);
 			CapybaraGraphEdge capybaraEdge = new CapybaraGraphEdge(edgeCoords, distance);
 			CapybaraGraphEdge reverseCapybaraEdge = new CapybaraGraphEdge(reverseCoords, distance);
 
@@ -92,8 +105,8 @@ public class RoutingSystem {
 		return capybaraGraph;
 	}
 
-	private static double getModifiedGraphEdgeWeight(GraphEdge currentEdge){
-		if(currentEdge.getFromToAction().equals("outsideWalking")) {
+	private static double getModifiedGraphEdgeWeight(GraphEdge currentEdge, boolean preferIndoors){
+		if(currentEdge.getFromToAction().equals("outsideWalking") && preferIndoors) {
 			return currentEdge.getDistance() * 6;
 		}else {
 			return currentEdge.getDistance();

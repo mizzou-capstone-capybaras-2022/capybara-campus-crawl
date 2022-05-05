@@ -68,19 +68,18 @@ public class RoutingBll {
 		
 		List<Point> points = new ArrayList<Point>();
 		
-		if (hasNoConstraints(constraints)) {
-			BigDecimal buildingIdFrom = routeRequest.getFromLocation().getBuildingId();
-	    	BigDecimal buildingIdTo = routeRequest.getToLocation().getBuildingId();
-	    	
-	    	GraphNode graphNodeA = buildingBll.fetchBuildingGraphNode(buildingIdFrom);
-			GraphNode graphNodeB = buildingBll.fetchBuildingGraphNode(buildingIdTo);;
-			
-			try {
-				points = routingDao.ComputeRoute(graphNodeA.getNodeID(), graphNodeB.getNodeID());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		BigDecimal buildingIdFrom = routeRequest.getFromLocation().getBuildingId();
+    	BigDecimal buildingIdTo = routeRequest.getToLocation().getBuildingId();
+    	
+    	GraphNode graphNodeA = buildingBll.fetchBuildingGraphNode(buildingIdFrom);
+		GraphNode graphNodeB = buildingBll.fetchBuildingGraphNode(buildingIdTo);;
+		
+		try {
+			boolean preferIndoors = constraints.getPreferIndoors();
+			points = routingDao.ComputeRoute(graphNodeA.getNodeID(), graphNodeB.getNodeID(), preferIndoors);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return points;
