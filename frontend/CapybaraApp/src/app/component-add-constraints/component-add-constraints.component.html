@@ -1,32 +1,14 @@
 <div id="formContainer">
 
-    <form [formGroup]="addConstraints" (ngSubmit)="addConstraintsfn()">
+    <mat-form-field appearance="standard">
+      <mat-label>Places</mat-label>
+      <mat-select formControlName="places">
+      </mat-select>
+    </mat-form-field>
 
-      <br>
-      <mat-checkbox formControlName="indoor" ></mat-checkbox>
-      <mat-label> Prefer Indoors</mat-label>
-      <br><br>
-      <mat-checkbox formControlName="food"></mat-checkbox>
-      <mat-label> Stop for food</mat-label>
-      <br><br>
-      <mat-checkbox formControlName="time" (click)="toggleShow()"></mat-checkbox>
-      <mat-label> Time constraint</mat-label>
-      <br><br>
+    <br>
+    <div>
+      <button mat-raised-button color="basic" type="submit">View</button>
+    </div>
 
-      <mat-form-field appearance="standard" *ngIf="isShown">
-        <input matInput type="number" formControlName="timeHours" min="0">
-        <mat-label> Hours</mat-label>
-      </mat-form-field>
-      <p *ngIf="isShown"> and </p>
-      <mat-form-field appearance="standard" *ngIf="isShown">
-        <input matInput type="number" formControlName="timeMinutes" min="0" max="59">
-        <mat-label> Minutes</mat-label>
-      </mat-form-field>
-      <br>
-
-      <div>
-        <button mat-raised-button color="basic" type="submit" style="position: center;">Submit</button>
-      </div>
-
-    </form>
-  </div>
+</div>
