@@ -65,6 +65,15 @@ public class RoutingBll {
 	public List<Point> fetchRoute(RouteRequest routeRequest){
 		RouteRequestConstraints constraints = routeRequest.getConstraints();
 		LogConstraints(constraints);
+
+		List<PitstopConstraint> pitstopConstraints = constraints.getPitstops();
+		List<Location> pitstopConstraintLocations = new ArrayList<Location>();
+
+		// System.out.println(pitstopConstraints.size());
+		for(int i = 0; i < pitstopConstraints.size(); i++){
+			pitstopConstraintLocations.add(pitstopConstraints.get(i).getLocation());
+			System.out.println(pitstopConstraintLocations.get(i));
+		}
 		
 		List<Point> points = new ArrayList<Point>();
 		
