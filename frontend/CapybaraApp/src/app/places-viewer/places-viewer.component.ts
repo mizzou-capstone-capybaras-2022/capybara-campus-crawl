@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import {Place} from '../../services/crawl-api/model/place';
@@ -10,6 +10,8 @@ import {Place} from '../../services/crawl-api/model/place';
   styleUrls: ['./places-viewer.component.scss']
 })
 export class PlacesViewerComponent {
+
+  @Output() inputPlaceEvent: EventEmitter<Place.PlaceTypeEnum> = new EventEmitter<Place.PlaceTypeEnum>();
 
   places:Array<Place.PlaceTypeEnum> = [];
 
@@ -26,7 +28,8 @@ export class PlacesViewerComponent {
   }
 
   inputPlacesFn(): void {
-    
+    let selectedPlace: Place.PlaceTypeEnum = <Place.PlaceTypeEnum> this.inputPlaceForm.get("placeType")?.value;
+    this.inputPlaceEvent.emit(selectedPlace);
   }
 
 }
