@@ -19,7 +19,7 @@ export class AppComponent {
 
   onSelectBuildingFromSearch(selectedBuilding: Building){
     let buildingPoint = this.getBuildingPoint(selectedBuilding);
-    this.mapComponent.renderMapMarkers([buildingPoint]);
+    this.mapComponent.renderNormalMapMarkers([buildingPoint]);
   }
 
   async onSelectBuildingForNavigation(selectedBuilding: [Building, Building]){
@@ -32,8 +32,7 @@ export class AppComponent {
 
   async onSelectPlace(selectedPlace: Place.PlaceTypeEnum){
     let placesOfInterest: Array<Place> = await this.baraApi.getPlacesByPlaceType(selectedPlace);
-
-    console.log(placesOfInterest);
+    this.mapComponent.renderPlaceMarkers(placesOfInterest);
   }
 
   private getBuildingPoint(building: Building): Point {
