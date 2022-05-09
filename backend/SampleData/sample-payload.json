@@ -1,9 +1,9 @@
 {
     "fromLocation": {
-        "buildingId": 3
+        "buildingId": 1
     },
     "toLocation": {
-        "buildingId": 72
+        "buildingId": 5
     },
     "constraints": {
         "stopForFood": false,
@@ -12,7 +12,12 @@
         "pitstops": [
             {
                 "location": {
-                    "buildingId": 19
+                    "buildingId": 3
+                }
+            },
+            {
+                "location": {
+                    "buildingId": 7
                 }
             }
         ],

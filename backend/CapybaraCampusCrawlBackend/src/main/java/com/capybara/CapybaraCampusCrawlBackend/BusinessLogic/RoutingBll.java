@@ -69,10 +69,9 @@ public class RoutingBll {
 		List<PitstopConstraint> pitstopConstraints = constraints.getPitstops();
 		List<Location> pitstopConstraintLocations = new ArrayList<Location>();
 
-		// System.out.println(pitstopConstraints.size());
-		for(int i = 0; i < pitstopConstraints.size(); i++){
-			pitstopConstraintLocations.add(pitstopConstraints.get(i).getLocation());
-			System.out.println(pitstopConstraintLocations.get(i));
+		for (PitstopConstraint pitstopConstraint : pitstopConstraints) {
+			pitstopConstraintLocations.add(pitstopConstraint.getLocation());
+			System.out.println(pitstopConstraint.getLocation());
 		}
 		
 		List<Point> points = new ArrayList<Point>();
