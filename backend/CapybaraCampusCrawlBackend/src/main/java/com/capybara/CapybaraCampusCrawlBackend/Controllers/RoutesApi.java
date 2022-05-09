@@ -34,7 +34,6 @@ import javax.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-03T22:02:07.033940Z[Etc/UTC]")
 @Validated
-@Tag(name = "routes", description = "the routes API")
 public interface RoutesApi {
 
     default Optional<NativeWebRequest> getRequest() {
