@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { Building, BuildingControllerService, BuildingLocation, BuildingRouteRequest, Location, Point, RouteControllerService, RouteRequest, RouteRequestConstraints } from '../crawl-api';
 
+//TODO pull from places API
+
 @Injectable({
   providedIn: 'root'
 })

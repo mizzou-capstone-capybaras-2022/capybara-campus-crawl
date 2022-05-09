@@ -5,8 +5,8 @@ export class PointUtil {
     
     static convertPointToMarker(point: Point): Marker | undefined{
         if (point.latitude != undefined && point.longitude != undefined){
-            //TODO return custom marker
-            //TODO need to create 25x41 resolution versions
+            //TODO abstract into seperate method
+            //TODO utilize the place enum that returns dynamicaly changes the marker icon
             return marker([point.latitude, point.longitude],
                 {
                     icon: icon({
