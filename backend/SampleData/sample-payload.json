@@ -1,0 +1,21 @@
+{
+    "fromLocation": {
+        "buildingId": 3
+    },
+    "toLocation": {
+        "buildingId": 72
+    },
+    "constraints": {
+        "stopForFood": false,
+        "preferIndoors": false,
+        "avoidCrowds": false,
+        "pitstops": [
+            {
+                "location": {
+                    "buildingId": 19
+                }
+            }
+        ],
+        "timeConstraint": null
+    }
+}
