@@ -1,1 +1,15 @@
-<p>places-viewer works!</p>
+<div id="formPlaceContainer">
+    <form [formGroup]="inputPlaceForm" (ngSubmit)="inputPlacesFn()">
+      <mat-form-field appearance="standard"  >
+        <mat-label>Place Type</mat-label>
+        <mat-select formControlName="placeType">
+          <mat-option *ngFor="let place of places;" [value]="place">{{getPlaceName(place)}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <div>
+        <button mat-raised-button color="basic" type="submit">View Places on Map</button>
+      </div>
+    </form>
+</div>
+  
