@@ -24,6 +24,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {ApiModule, BASE_PATH} from '../services/crawl-api';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { PlacesViewerComponent } from './places-viewer/places-viewer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { environment } from 'src/environments/environment';
     MapComponent,
     InputLocationsComponent,
     ComponentAddConstraintsComponent,
-    SearchBuildingsComponent
+    SearchBuildingsComponent,
+    PlacesViewerComponent
   ],
   imports: [
     BrowserModule,

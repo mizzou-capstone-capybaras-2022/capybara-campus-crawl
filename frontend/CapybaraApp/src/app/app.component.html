@@ -23,7 +23,7 @@
       <app-input-locations (inputBuildings) = "onSelectBuildingForNavigation($event)"></app-input-locations>
     </mat-tab>
     <mat-tab label="View Places">
-      <app-component-add-constraints></app-component-add-constraints>
+      <app-places-viewer (inputPlaceEvent) = "onSelectPlace($event)"></app-places-viewer>
     </mat-tab>
 
     <mat-tab label="Search Buildings">
