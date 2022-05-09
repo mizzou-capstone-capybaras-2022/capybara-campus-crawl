@@ -25,6 +25,7 @@ import {ApiModule, BASE_PATH} from '../services/crawl-api';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PlacesViewerComponent } from './places-viewer/places-viewer.component';
+import { RaspberryPiViewerComponent } from './raspberry-pi-viewer/raspberry-pi-viewer.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PlacesViewerComponent } from './places-viewer/places-viewer.component';
     InputLocationsComponent,
     ComponentAddConstraintsComponent,
     SearchBuildingsComponent,
-    PlacesViewerComponent
+    PlacesViewerComponent,
+    RaspberryPiViewerComponent
   ],
   imports: [
     BrowserModule,
