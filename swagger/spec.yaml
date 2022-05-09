@@ -31,7 +31,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Place'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Place'
   /doors/:
     get:
       tags:
