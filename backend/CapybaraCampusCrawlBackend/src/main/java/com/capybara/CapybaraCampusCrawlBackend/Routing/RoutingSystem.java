@@ -33,6 +33,7 @@ public class RoutingSystem {
 	private static final Logger logger = LoggerFactory.getLogger(CapybaraCampusCrawlBackendApplication.class);
 
 	SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> capybaraGraph;
+	SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> capybaraGraphIndoors;
 
 	@Inject
 	public RoutingSystem(GraphEdgeRepository edgeDao, GraphNodeRepository nodeDao) {
@@ -44,6 +45,7 @@ public class RoutingSystem {
 		try {
 			//current capybara graph does not prefer indoors
 			capybaraGraph = constructGraph(nodes, edges, false);
+			capybaraGraphIndoors = constructGraph(nodes, edges, true);
 			logger.info("Graph constructed");
 		} catch (JsonProcessingException e) {
 			capybaraGraph = new SimpleDirectedWeightedGraph<>(CapybaraGraphEdge.class);
@@ -51,9 +53,12 @@ public class RoutingSystem {
 	}
 
 	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId, boolean preferIndoors) {
-		
+		//preferIndoors = true;
 		//TODO switch graph based on if prefer indoors is true
 		SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> weightedGraphToUse = capybaraGraph;
+		if(preferIndoors == true) {
+			weightedGraphToUse = capybaraGraphIndoors;
+		}
 		
 		
 		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(weightedGraphToUse);
