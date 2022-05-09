@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.jgrapht.Graph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -66,48 +68,39 @@ public class RoutingBll {
 		RouteRequestConstraints constraints = routeRequest.getConstraints();
 		LogConstraints(constraints);
 
+    	GraphNode startingGraphNode = buildingBll.fetchBuildingGraphNode(routeRequest.getFromLocation().getBuildingId());
+		GraphNode endingGraphNode = buildingBll.fetchBuildingGraphNode(routeRequest.getToLocation().getBuildingId());;
+
+		List<GraphNode> pitstopConstraintGraphNodes = constraints.getPitstops().stream()
+			.map(pitstopConstraint -> pitstopConstraint.getLocation())
+			.map(location -> location.getBuildingId())
+			.map(buildingId -> buildingBll.fetchBuildingGraphNode(buildingId))
+			.collect(Collectors.toList());
+
+		pitstopConstraintGraphNodes.add(0, startingGraphNode);
+		pitstopConstraintGraphNodes.add(endingGraphNode);
+
 		List<Point> points = new ArrayList<Point>();
-		
-		BigDecimal buildingIdFrom = routeRequest.getFromLocation().getBuildingId();
-    	BigDecimal buildingIdTo = routeRequest.getToLocation().getBuildingId();
-    	
-    	GraphNode graphNodeA = buildingBll.fetchBuildingGraphNode(buildingIdFrom);
-		GraphNode graphNodeB = buildingBll.fetchBuildingGraphNode(buildingIdTo);;
-		
-		List<PitstopConstraint> pitstopConstraints = constraints.getPitstops();
-		List<Location> pitstopConstraintLocations = new ArrayList<Location>();
-		List<BigDecimal> pitstopConstraintBuildingIDs = new ArrayList<BigDecimal>();
-		List<GraphNode> pitstopConstraintGraphNodes = new ArrayList<GraphNode>();
-		List<Point> tempPoints = new ArrayList<Point>();
 
-		for (PitstopConstraint pitstopConstraint : pitstopConstraints) {
-			pitstopConstraintLocations.add(pitstopConstraint.getLocation());
-			System.out.println(pitstopConstraint.getLocation());
-		}
+		int previousNodeIdx = 0;
+		for (int i = 1; i < pitstopConstraintGraphNodes.size(); i++){
+			GraphNode previousNode = pitstopConstraintGraphNodes.get(previousNodeIdx);
+			GraphNode currentNode = pitstopConstraintGraphNodes.get(i);
 
-		for(int i = 0; i < pitstopConstraintLocations.size(); i++){
-			pitstopConstraintBuildingIDs.add(pitstopConstraintLocations.get(i).getBuildingId());
-			pitstopConstraintGraphNodes.add(buildingBll.fetchBuildingGraphNode(pitstopConstraintBuildingIDs.get(i)));		
-		}
+			List<Point> tempPoints = new ArrayList<>();
 
-		pitstopConstraintGraphNodes.add(0, graphNodeA);
-		pitstopConstraintGraphNodes.add(graphNodeB);
-		System.out.println(pitstopConstraintGraphNodes);
-
-		try {
-			boolean preferIndoors = constraints.getPreferIndoors();
-			for(int j = 0; j < pitstopConstraintGraphNodes.size()-1; j++){
-				// System.out.println("NodeFrom: " + pitstopConstraintGraphNodes.get(j).getNodeID() + " -> NodeTo: " + pitstopConstraintGraphNodes.get(j+1).getNodeID());
-				tempPoints = routingDao.ComputeRoute(pitstopConstraintGraphNodes.get(j).getNodeID(), pitstopConstraintGraphNodes.get(j+1).getNodeID(), preferIndoors);
-				// System.out.println(tempPoints);
-				points.addAll(tempPoints);
+			try {
+				boolean preferIndoors = constraints.getPreferIndoors();
+				tempPoints = routingDao.ComputeRoute(previousNode.getNodeID(), currentNode.getNodeID(), preferIndoors);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			System.out.println(points);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			points.addAll(tempPoints);
+			previousNodeIdx = i;
 		}
-		
+
 		return points;
 	}
 	
