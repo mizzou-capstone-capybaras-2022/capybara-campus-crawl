@@ -980,6 +980,148 @@
 					"body": "{\n \"failingConstraint\": [\n  \"time\",\n  \"crowds\"\n ]\n}"
 				}
 			]
+		},
+		{
+			"name": "Get a constaint route given multiple pitstops (example payload)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 1\n    },\n    \"toLocation\": {\n        \"buildingId\": 5\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": false,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 3\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 7\n                }\n            }\n        ],\n        \"timeConstraint\": null\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/routes/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 1\n    },\n    \"toLocation\": {\n        \"buildingId\": 2\n    },\n    \"constraints\": {\n        \"stopForFood\": true,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 4\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 5\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 100\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n {\n  \"latitude\": -13290201.183931544,\n  \"longitude\": 92428659.31701955\n },\n {\n  \"latitude\": 48131450.59189895,\n  \"longitude\": 32371157.98228647\n }\n]"
+				},
+				{
+					"name": "Route not possible",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": -80489843.49325989\n    },\n    \"toLocation\": {\n        \"buildingId\": -10528911.906426638\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": true,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 85429174.38149291\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 68633317.8765381\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 90138768.03969437\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"failingConstraint\": [\n  \"time\",\n  \"crowds\"\n ]\n}"
+				},
+				{
+					"name": "Get a constaint route given multiple pitstops",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": {{fromBuilding_id}}\n    },\n    \"toLocation\": {\n        \"buildingId\": {{toBuilding_id}}\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": false,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": {{pitstopBuilding_id}}\n                }\n            }\n        ],\n        \"timeConstraint\": null\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	],
 	"event": [
