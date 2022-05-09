@@ -66,14 +66,6 @@ public class RoutingBll {
 		RouteRequestConstraints constraints = routeRequest.getConstraints();
 		LogConstraints(constraints);
 
-		List<PitstopConstraint> pitstopConstraints = constraints.getPitstops();
-		List<Location> pitstopConstraintLocations = new ArrayList<Location>();
-
-		for (PitstopConstraint pitstopConstraint : pitstopConstraints) {
-			pitstopConstraintLocations.add(pitstopConstraint.getLocation());
-			System.out.println(pitstopConstraint.getLocation());
-		}
-		
 		List<Point> points = new ArrayList<Point>();
 		
 		BigDecimal buildingIdFrom = routeRequest.getFromLocation().getBuildingId();
@@ -82,9 +74,35 @@ public class RoutingBll {
     	GraphNode graphNodeA = buildingBll.fetchBuildingGraphNode(buildingIdFrom);
 		GraphNode graphNodeB = buildingBll.fetchBuildingGraphNode(buildingIdTo);;
 		
+		List<PitstopConstraint> pitstopConstraints = constraints.getPitstops();
+		List<Location> pitstopConstraintLocations = new ArrayList<Location>();
+		List<BigDecimal> pitstopConstraintBuildingIDs = new ArrayList<BigDecimal>();
+		List<GraphNode> pitstopConstraintGraphNodes = new ArrayList<GraphNode>();
+		List<Point> tempPoints = new ArrayList<Point>();
+
+		for (PitstopConstraint pitstopConstraint : pitstopConstraints) {
+			pitstopConstraintLocations.add(pitstopConstraint.getLocation());
+			System.out.println(pitstopConstraint.getLocation());
+		}
+
+		for(int i = 0; i < pitstopConstraintLocations.size(); i++){
+			pitstopConstraintBuildingIDs.add(pitstopConstraintLocations.get(i).getBuildingId());
+			pitstopConstraintGraphNodes.add(buildingBll.fetchBuildingGraphNode(pitstopConstraintBuildingIDs.get(i)));		
+		}
+
+		pitstopConstraintGraphNodes.add(0, graphNodeA);
+		pitstopConstraintGraphNodes.add(graphNodeB);
+		System.out.println(pitstopConstraintGraphNodes);
+
 		try {
 			boolean preferIndoors = constraints.getPreferIndoors();
-			points = routingDao.ComputeRoute(graphNodeA.getNodeID(), graphNodeB.getNodeID(), preferIndoors);
+			for(int j = 0; j < pitstopConstraintGraphNodes.size()-1; j++){
+				// System.out.println("NodeFrom: " + pitstopConstraintGraphNodes.get(j).getNodeID() + " -> NodeTo: " + pitstopConstraintGraphNodes.get(j+1).getNodeID());
+				tempPoints = routingDao.ComputeRoute(pitstopConstraintGraphNodes.get(j).getNodeID(), pitstopConstraintGraphNodes.get(j+1).getNodeID(), preferIndoors);
+				// System.out.println(tempPoints);
+				points.addAll(tempPoints);
+			}
+			System.out.println(points);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
