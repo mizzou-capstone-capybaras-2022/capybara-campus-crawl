@@ -31,9 +31,9 @@ export class AppComponent {
   }
 
   async onSelectPlace(selectedPlace: Place.PlaceTypeEnum){
-    alert(selectedPlace);
+    let placesOfInterest: Array<Place> = await this.baraApi.getPlacesByPlaceType(selectedPlace);
 
-    //TODO grab selected places from the bara api
+    console.log(placesOfInterest);
   }
 
   private getBuildingPoint(building: Building): Point {
