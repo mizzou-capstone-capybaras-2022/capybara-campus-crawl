@@ -274,7 +274,7 @@ if __name__ == "__main__":
 
     logger.info("Starting airodump-ng...")
     redirectOutput = open("/dev/null",'w')
-    airdumpProcess = subprocess.Popen("exec airodump-ng -w output --output-format csv wlp0s20f0u1",stdout=redirectOutput,shell=True)
+    airdumpProcess = subprocess.Popen("exec airodump-ng -w output --output-format csv wlan1",stdout=redirectOutput,shell=True)
 
     #Let run for a minute
     time.sleep(60)
