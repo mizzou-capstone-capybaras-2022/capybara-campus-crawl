@@ -1,12 +1,15 @@
 #!/bin/bash
 
+
 if [ "$EUID" -ne 0 ];
   then echo "Please run as root"
   exit 1
 fi
 
 pip install -r ./requirements.txt
-#apt install aircrack-ng
+apt install aircrack-ng
+
+#Remember to change this to the desired interface name.
 ip link set wlan1 down
 iw wlan1 set monitor none
 ip link set wlan1 up

@@ -6,5 +6,6 @@ for use is named wlan1. However, the scripts will likely still work if you tweak
 hardware and software infrastructure. 
 
 For this script make sure to install it using the installer script provided that ensures all
-programs and settings are such that the python script will work.
+programs and settings are such that the python script will work. Remember to set environment variables for your 
+database and nodeID in your hostname before running. Set the variables in your env.json please.
 
