@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
 import { Building } from 'src/services/crawl-api';
 
@@ -16,11 +16,14 @@ export class InputLocationsComponent implements OnInit {
 
   inputLocations = new FormGroup({
     start: new FormControl(''),
-    destination: new FormControl('')
+    destination: new FormControl(''),
+    constraints: new FormControl(''),
+    indoor: new FormControl(''),
+    stops: new FormArray([])
   });
 
-  constructor(private baraApi: BaraBackendWrapperService) { 
-    
+  constructor(private baraApi: BaraBackendWrapperService) {
+
   }
 
   async ngOnInit(): Promise<void> {
@@ -34,16 +37,20 @@ export class InputLocationsComponent implements OnInit {
     let fromBuilding: Building = <Building> this.inputLocations.get("start")?.value;
     let toBuilding: Building = <Building> this.inputLocations.get("destination")?.value;
 
+    //console.log(this.inputLocations);
+
     this.inputBuildings.emit([fromBuilding, toBuilding]);
   }
 
   isShown2: boolean = false ;
-  isShown: boolean = false ;
+  numOfStops: number = 0;
   toggleShow2() {
     this.isShown2 = ! this.isShown2;
-    }
-  toggleShow() {
-    this.isShown = ! this.isShown;
-    }
+  }
+  addStop() {
+    let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
+    stopsInList.push(new FormControl(null));
+    this.numOfStops++;
+  }
 
 }
