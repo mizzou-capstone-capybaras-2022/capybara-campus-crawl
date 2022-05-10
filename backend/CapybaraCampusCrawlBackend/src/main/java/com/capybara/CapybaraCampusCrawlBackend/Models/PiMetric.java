@@ -1,5 +1,7 @@
 package com.capybara.CapybaraCampusCrawlBackend.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +30,7 @@ public class PiMetric {
 	private GraphNode node;
 
 	@Column(name="\"Time\"")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime time;
 	
 	@Column(name="\"Intensity\"")
@@ -42,7 +45,39 @@ public class PiMetric {
 		this.time = time;
 		this.intensity = intensity;
 	}
-	
+
+	public Long getMetricId() {
+		return metricId;
+	}
+
+	public void setMetricId(Long metricId) {
+		this.metricId = metricId;
+	}
+
+	public GraphNode getNode() {
+		return node;
+	}
+
+	public void setNode(GraphNode node) {
+		this.node = node;
+	}
+
+	public LocalDateTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDateTime time) {
+		this.time = time;
+	}
+
+	public int getIntensity() {
+		return intensity;
+	}
+
+	public void setIntensity(int intensity) {
+		this.intensity = intensity;
+	}
+
 	@Override
 	public String toString() {
 	  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a");
