@@ -6,7 +6,7 @@ if [ "$EUID" -ne 0 ];
 fi
 
 pip install -r ./requirements.txt
-apt install aircrack-ng
+#apt install aircrack-ng
 ip link set wlan1 down
 iw wlan1 set monitor none
 ip link set wlan1 up
