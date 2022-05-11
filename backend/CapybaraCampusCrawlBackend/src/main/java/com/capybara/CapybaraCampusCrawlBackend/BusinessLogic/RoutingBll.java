@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jgrapht.Graph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,15 +35,7 @@ public class RoutingBll {
 		this.routingDao = routingDao;
 		this.buildingBll = buildingBll;
 	}
-	
-	private static boolean hasNoConstraints(RouteRequestConstraints constraints) {
-    	return constraints.getPreferIndoors() == false 
-                && constraints.getStopForFood() == false 
-                && constraints.getAvoidCrowds() == false
-                && constraints.getPitstops().size() == 0
-                && !constraints.getTimeConstraint().isPresent();
-    }
-    
+
     private static void LogConstraints(RouteRequestConstraints constraints) {
     	 System.out.println("Prefer Indoors: " + constraints.getPreferIndoors());
          System.out.println("Stop by food: " + constraints.getStopForFood());
@@ -63,7 +57,55 @@ public class RoutingBll {
          	System.out.println("Max Time: "+ "null");
          }
     }
-	
+
+	private List<Pair<GraphNode, GraphNode>> constructRoutePairs(GraphNode startingNode, List<PitstopConstraint> pitstops, GraphNode endingNode){
+		List<GraphNode> pitstopConstraintGraphNodes = pitstops.stream()
+				.map(pitstopConstraint -> pitstopConstraint.getLocation())
+				.map(location -> location.getBuildingId())
+				.map(buildingId -> buildingBll.fetchBuildingGraphNode(buildingId))
+				.collect(Collectors.toList());
+
+		pitstopConstraintGraphNodes.add(0, startingNode);
+		pitstopConstraintGraphNodes.add(endingNode);
+
+		List<Pair<GraphNode, GraphNode>> routingPairs = new ArrayList<>();
+
+		int previousNodeIdx = 0;
+		for (int i = 1; i < pitstopConstraintGraphNodes.size(); i++){
+			GraphNode previousNode = pitstopConstraintGraphNodes.get(previousNodeIdx);
+			GraphNode currentNode = pitstopConstraintGraphNodes.get(i);
+
+			MutablePair<GraphNode, GraphNode> routingPair = new MutablePair<>();
+			routingPair.setLeft(previousNode);
+			routingPair.setRight(currentNode);
+
+			routingPairs.add(routingPair);
+
+			previousNodeIdx = i;
+		}
+
+		return routingPairs;
+	}
+
+	private List<Point> determineConcatenatedRoute(List<Pair<GraphNode, GraphNode>> routePairs, boolean preferIndoors){
+		List<Point> points = new ArrayList<Point>();
+
+		for (Pair<GraphNode, GraphNode> routingPair : routePairs){
+			List<Point> tempPoints = new ArrayList<>();
+
+			try {
+				tempPoints = routingDao.ComputeRoute(routingPair.getLeft().getNodeID(), routingPair.getRight().getNodeID(), preferIndoors);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			points.addAll(tempPoints);
+		}
+
+		return points;
+	}
+
 	public List<Point> fetchRoute(RouteRequest routeRequest){
 		RouteRequestConstraints constraints = routeRequest.getConstraints();
 		LogConstraints(constraints);
@@ -71,37 +113,10 @@ public class RoutingBll {
     	GraphNode startingGraphNode = buildingBll.fetchBuildingGraphNode(routeRequest.getFromLocation().getBuildingId());
 		GraphNode endingGraphNode = buildingBll.fetchBuildingGraphNode(routeRequest.getToLocation().getBuildingId());;
 
-		List<GraphNode> pitstopConstraintGraphNodes = constraints.getPitstops().stream()
-			.map(pitstopConstraint -> pitstopConstraint.getLocation())
-			.map(location -> location.getBuildingId())
-			.map(buildingId -> buildingBll.fetchBuildingGraphNode(buildingId))
-			.collect(Collectors.toList());
+		List<Pair<GraphNode, GraphNode>> routingPairs = constructRoutePairs(startingGraphNode, constraints.getPitstops(), endingGraphNode);
+		boolean preferIndoors = constraints.getPreferIndoors();
 
-		pitstopConstraintGraphNodes.add(0, startingGraphNode);
-		pitstopConstraintGraphNodes.add(endingGraphNode);
-
-		List<Point> points = new ArrayList<Point>();
-
-		int previousNodeIdx = 0;
-		for (int i = 1; i < pitstopConstraintGraphNodes.size(); i++){
-			GraphNode previousNode = pitstopConstraintGraphNodes.get(previousNodeIdx);
-			GraphNode currentNode = pitstopConstraintGraphNodes.get(i);
-
-			List<Point> tempPoints = new ArrayList<>();
-
-			try {
-				boolean preferIndoors = constraints.getPreferIndoors();
-				tempPoints = routingDao.ComputeRoute(previousNode.getNodeID(), currentNode.getNodeID(), preferIndoors);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			points.addAll(tempPoints);
-			previousNodeIdx = i;
-		}
-
-		return points;
+		return determineConcatenatedRoute(routingPairs, preferIndoors);
 	}
 	
 	public List<Point> fetchRoute(BuildingRouteRequest buildingRouteRequest){
