@@ -1,39 +1,33 @@
 package com.capybara.CapybaraCampusCrawlBackend.Routing;
 
-import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
-import org.jgrapht.graph.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.capybara.CapybaraCampusCrawlBackend.CapybaraCampusCrawlBackendApplication;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphEdgeRepository;
 import com.capybara.CapybaraCampusCrawlBackend.DataAccess.GraphNodeRepository;
-import com.capybara.CapybaraCampusCrawlBackend.DataAccess.OpenRouteServiceDao;
-import com.capybara.CapybaraCampusCrawlBackend.Models.CapybaraGraphEdgeForRouting;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphEdge;
 import com.capybara.CapybaraCampusCrawlBackend.Models.GraphNode;
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.*;
-import java.util.Map.Entry;
-
-import javax.inject.Inject;
-
-import org.jgrapht.*;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class RoutingSystem {
 	private static final Logger logger = LoggerFactory.getLogger(CapybaraCampusCrawlBackendApplication.class);
 
-	SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> capybaraGraph;
-	SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> capybaraGraphIndoors;
+	CapybaraGraph capybaraGraph;
+	CapybaraGraph capybaraGraphIndoors;
 
 	@Inject
 	public RoutingSystem(GraphEdgeRepository edgeDao, GraphNodeRepository nodeDao) {
@@ -48,19 +42,17 @@ public class RoutingSystem {
 			capybaraGraphIndoors = constructGraph(nodes, edges, true);
 			logger.info("Graph constructed");
 		} catch (JsonProcessingException e) {
-			capybaraGraph = new SimpleDirectedWeightedGraph<>(CapybaraGraphEdge.class);
+			capybaraGraph = new CapybaraGraph();
 		}
 	}
 
 	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId, boolean preferIndoors) {
-		//preferIndoors = true;
-		//TODO switch graph based on if prefer indoors is true
-		SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> weightedGraphToUse = capybaraGraph;
+		CapybaraGraph weightedGraphToUse = capybaraGraph;
+
 		if(preferIndoors == true) {
 			weightedGraphToUse = capybaraGraphIndoors;
 		}
-		
-		
+
 		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(weightedGraphToUse);
 		
 		ShortestPathAlgorithm.SingleSourcePaths<Long, CapybaraGraphEdge> pathsFromStart = dijkstraAlg.getPaths(startingNodeId);
@@ -81,8 +73,8 @@ public class RoutingSystem {
 		return routePoints;
 	}
 	
-	public SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> constructGraph(List<GraphNode> nodes, List<GraphEdge> edges, boolean preferIndoors) throws JsonProcessingException {
-		SimpleDirectedWeightedGraph<Long, CapybaraGraphEdge> capybaraGraph = new SimpleDirectedWeightedGraph<>(CapybaraGraphEdge.class);
+	public CapybaraGraph constructGraph(List<GraphNode> nodes, List<GraphEdge> edges, boolean preferIndoors) throws JsonProcessingException {
+		CapybaraGraph capybaraGraph = new CapybaraGraph();
 
 		//Add the vertex of the graph
 		for (GraphNode node: nodes){
