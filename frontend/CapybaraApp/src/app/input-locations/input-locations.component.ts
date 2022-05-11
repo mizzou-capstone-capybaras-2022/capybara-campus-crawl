@@ -40,6 +40,8 @@ export class InputLocationsComponent implements OnInit {
     let routeParameters: RouteParameters = <RouteParameters> {
       fromBuilding: fromBuilding,
       toBuilding: toBuilding,
+      avoidCrowds: false,
+      stopByFood: false,
       preferIndoors: false,
       pitstops: []
     };
@@ -51,6 +53,8 @@ export class InputLocationsComponent implements OnInit {
       
       routeParameters.preferIndoors = constraintForm.get("indoor")?.value;
       routeParameters.pitstops = constraintPitstops;
+      routeParameters.stopByFood = constraintForm.get("food")?.value;
+      routeParameters.avoidCrowds = constraintForm.get("avoidCrowds")?.value;
     }
 
     this.inputBuildings.emit(routeParameters);

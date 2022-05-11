@@ -62,6 +62,8 @@ export class AppComponent {
     };
 
     constraints.preferIndoors = routeParameters.preferIndoors;
+    constraints.stopForFood = routeParameters.stopByFood;
+    constraints.avoidCrowds = routeParameters.avoidCrowds;
     constraints.pitstops = routeParameters.pitstops.map (pitstop => 
       <PitstopConstraint> {
         location: <BuildingLocation> {
