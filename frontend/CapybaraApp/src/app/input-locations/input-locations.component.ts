@@ -52,5 +52,10 @@ export class InputLocationsComponent implements OnInit {
     stopsInList.push(new FormControl(null));
     this.numOfStops++;
   }
+  removeStop(){
+    let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
+    stopsInList.push(new FormControl(null));
+    this.numOfStops--;
+  }
 
 }

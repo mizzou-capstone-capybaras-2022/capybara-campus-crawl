@@ -32,6 +32,10 @@
       <mat-label *ngIf="isShown2"> Prefer Indoors</mat-label>
       <br><br>
       <button mat-raised-button color="primary" *ngIf="isShown2" (click)="addStop()">Add A Stop</button>
+<!--Remove a stop added option-->
+
+      <button  mat-raised-button color="primary" *ngIf="(numOfStops>0) && isShown2" (click)="removeStop()">Remove A Stop</button>
+
       <br><br>
 
       <div *ngIf="(numOfStops>0) && isShown2" formArrayName='stops'>
