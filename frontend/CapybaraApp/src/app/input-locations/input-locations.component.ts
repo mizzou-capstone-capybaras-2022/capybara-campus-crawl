@@ -14,13 +14,16 @@ export class InputLocationsComponent implements OnInit {
   @Output() inputBuildings: EventEmitter<RouteParameters> = new EventEmitter<RouteParameters>();
 
   buildings: Array<Building> = [];
+  showConstraintsForm: boolean = false;
+  numOfStops: number = 0;
 
   inputLocations = new FormGroup({
     start: new FormControl(''),
     destination: new FormControl(''),
-    constraints: new FormControl(''),
-    indoor: new FormControl(''),
-    stops: new FormArray([])
+    constraints: new FormGroup({
+      indoor: new FormControl(''),
+      stops: new FormArray([])
+    })
   });
 
   constructor(private baraApi: BaraBackendWrapperService) {}
@@ -46,21 +49,19 @@ export class InputLocationsComponent implements OnInit {
     this.inputBuildings.emit(routeParameters);
   }
 
-  isShown2: boolean = false ;
-  numOfStops: number = 0;
   
-  toggleShow2() {
-    this.isShown2 = ! this.isShown2;
+  toggleConstraints() {
+    this.showConstraintsForm = !this.showConstraintsForm;
   }
 
   addStop() {
-    let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
+    let stopsInList: FormArray = <FormArray> this.inputLocations.get("constraints")?.get("stops");
     stopsInList.push(new FormControl(null));
     this.numOfStops++;
   }
 
   removeStop(){
-    let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
+    let stopsInList: FormArray = <FormArray> this.inputLocations.get("constraints")?.get("stops");
     stopsInList.push(new FormControl(null));
     this.numOfStops--;
   }
