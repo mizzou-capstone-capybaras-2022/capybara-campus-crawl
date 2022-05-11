@@ -21,6 +21,10 @@ export class InputLocationsComponent implements OnInit {
     start: new FormControl(''),
     destination: new FormControl(''),
     constraints: new FormGroup({
+      food: new FormControl(''),
+      time: new FormControl(''),
+      timeHours: new FormControl(''),
+      timeMinutes: new FormControl(''),
       indoor: new FormControl(''),
       stops: new FormArray([])
     })
