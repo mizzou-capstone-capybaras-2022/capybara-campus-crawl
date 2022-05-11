@@ -102,14 +102,14 @@ public class RoutingBll {
 		return constructRoutePairs(pitstopConstraintGraphNodes);
 	}
 
-	private List<Point> determineConcatenatedRoute(List<Pair<GraphNode, GraphNode>> routePairs, boolean preferIndoors){
+	private List<Point> determineConcatenatedRoute(List<Pair<GraphNode, GraphNode>> routePairs, boolean preferIndoors, boolean avoidCrowds){
 		List<Point> points = new ArrayList<Point>();
 
 		for (Pair<GraphNode, GraphNode> routingPair : routePairs){
 			List<Point> tempPoints = new ArrayList<>();
 
 			try {
-				tempPoints = routingDao.ComputeRoute(routingPair.getLeft().getNodeID(), routingPair.getRight().getNodeID(), preferIndoors);
+				tempPoints = routingDao.ComputeRoute(routingPair.getLeft().getNodeID(), routingPair.getRight().getNodeID(), preferIndoors, avoidCrowds);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -121,14 +121,14 @@ public class RoutingBll {
 		return points;
 	}
 
-	private Double determineConcatenatedRouteDistance(List<Pair<GraphNode, GraphNode>> routePairs, boolean preferIndoors){
+	private Double determineConcatenatedRouteDistance(List<Pair<GraphNode, GraphNode>> routePairs, boolean preferIndoors, boolean avoidCrowds){
 		double totalWeight = 0;
 
 		for (Pair<GraphNode, GraphNode> routingPair : routePairs){
 			double routeWeight = 0;
 
 			try {
-				routeWeight = routingDao.ComputeRouteDistance(routingPair.getLeft().getNodeID(), routingPair.getRight().getNodeID(), preferIndoors);
+				routeWeight = routingDao.ComputeRouteDistance(routingPair.getLeft().getNodeID(), routingPair.getRight().getNodeID(), preferIndoors, avoidCrowds);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -147,7 +147,7 @@ public class RoutingBll {
 		return foodPlaces;
 	}
 
-	private List<Pair<GraphNode, GraphNode>> determineOptimalFoodRoute(List<Pair<GraphNode, GraphNode>> routingPairs, boolean preferIndoors){
+	private List<Pair<GraphNode, GraphNode>> determineOptimalFoodRoute(List<Pair<GraphNode, GraphNode>> routingPairs, boolean preferIndoors, boolean avoidCrowds){
 		List<Place> foodPlaces = fetchFoodPlaces();
 		double minRouteWeight = Double.POSITIVE_INFINITY;
 		List<Pair<GraphNode, GraphNode>> chosenFoodRoute = null;
@@ -163,7 +163,7 @@ public class RoutingBll {
 
 			List<Pair<GraphNode, GraphNode>> canidateFoodRoute = constructRoutePairs(flattenedNodes);
 
-			double routeWeight = determineConcatenatedRouteDistance(canidateFoodRoute, preferIndoors);
+			double routeWeight = determineConcatenatedRouteDistance(canidateFoodRoute, preferIndoors, avoidCrowds);
 
 			if (routeWeight <= minRouteWeight){
 				minRouteWeight = routeWeight;
@@ -178,6 +178,7 @@ public class RoutingBll {
 	public List<Point> fetchRoute(RouteRequest routeRequest){
 		RouteRequestConstraints constraints = routeRequest.getConstraints();
 		boolean preferIndoors = constraints.getPreferIndoors();
+		boolean avoidCrowds = constraints.getAvoidCrowds();
 		boolean stopByFood = constraints.getStopForFood();
 
 		LogConstraints(constraints);
@@ -189,13 +190,13 @@ public class RoutingBll {
 		List<Pair<GraphNode, GraphNode>> chosenRoutePairSet = routingPairs;
 
 		if (stopByFood){
-			List<Pair<GraphNode, GraphNode>> chosenFoodRoute = determineOptimalFoodRoute(routingPairs, preferIndoors);
+			List<Pair<GraphNode, GraphNode>> chosenFoodRoute = determineOptimalFoodRoute(routingPairs, preferIndoors, avoidCrowds);
 			if (chosenFoodRoute != null){
 				chosenRoutePairSet = chosenFoodRoute;
 			}
 		}
 
-		return determineConcatenatedRoute(chosenRoutePairSet, preferIndoors);
+		return determineConcatenatedRoute(chosenRoutePairSet, preferIndoors, avoidCrowds);
 	}
 	
 	public List<Point> fetchRoute(BuildingRouteRequest buildingRouteRequest){

@@ -13,18 +13,32 @@ public class CapybaraGraphEdge {
 		public Double distance;
 		public boolean indoors;
 
+		public boolean hasMetrics;
+
+		public int metricIntensity;
+
 		
 		public CapybaraGraphEdge(List<Point> coords, boolean indoors, Double distance) {
 			this.coords = coords;
 			this.indoors = indoors;
 			this.distance = distance;
+			this.hasMetrics = false;
+			this.metricIntensity = 0;
+		}
+
+		public CapybaraGraphEdge(List<Point> coords, boolean indoors, Double distance, boolean hasMetrics, int metricIntensity) {
+			this.coords = coords;
+			this.indoors = indoors;
+			this.distance = distance;
+			this.hasMetrics = hasMetrics;
+			this.metricIntensity = metricIntensity;
 		}
 
 		public CapybaraGraphEdge getReverseEdge(){
 			List<Point> reverseCoords = new ArrayList<>(this.coords);
 			Collections.reverse(reverseCoords);
 
-			return new CapybaraGraphEdge(reverseCoords, indoors, distance);
+			return new CapybaraGraphEdge(reverseCoords, indoors, distance, hasMetrics, metricIntensity);
 		}
 
 	}
