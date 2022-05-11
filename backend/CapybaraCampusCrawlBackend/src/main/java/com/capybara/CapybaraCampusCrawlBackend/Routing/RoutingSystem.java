@@ -76,30 +76,20 @@ public class RoutingSystem {
 		}
 
 		for (GraphEdge edge : edges){
+			Long nodeAId = edge.getFromNode().getNodeID();
+			Long nodeBId = edge.getToNode().getNodeID();
+
 			List<Point> edgeCoords = parseJSONPoints(edge.getPathshape());
-
-			List<Point> reverseCoords = new ArrayList<>(edgeCoords);
-			Collections.reverse(reverseCoords);
-
 			boolean indoorEdge = edge.getFromToAction().equals("outsideWalking");
-
 			CapybaraGraphEdge capybaraEdge = new CapybaraGraphEdge(edgeCoords, indoorEdge, edge.getDistance());
-			CapybaraGraphEdge reverseCapybaraEdge = new CapybaraGraphEdge(reverseCoords, indoorEdge, edge.getDistance());
 
-			capybaraGraph.addEdge(edge.getFromNode().getNodeID(), edge.getToNode().getNodeID(), capybaraEdge);
-			capybaraGraph.addEdge(edge.getToNode().getNodeID(), edge.getFromNode().getNodeID(), reverseCapybaraEdge);
+			capybaraGraph.addEdge(nodeAId, nodeBId, capybaraEdge);
+			capybaraGraph.addEdge(nodeBId, nodeAId, capybaraEdge.getReverseEdge());
 		}
 
 		return capybaraGraph;
 	}
-
-	private static double getModifiedGraphEdgeWeight(GraphEdge currentEdge, boolean preferIndoors){
-		if(currentEdge.getFromToAction().equals("outsideWalking") && preferIndoors) {
-			return currentEdge.getDistance() * 6;
-		}else {
-			return currentEdge.getDistance();
-		}
-	}
+	
 	private static List<Point> parseJSONPoints(String pointsJson) throws JsonProcessingException{
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode coordinates = mapper.readTree(pointsJson);

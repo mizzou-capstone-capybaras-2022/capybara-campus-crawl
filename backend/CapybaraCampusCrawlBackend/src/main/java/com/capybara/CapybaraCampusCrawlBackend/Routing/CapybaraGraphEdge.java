@@ -2,6 +2,8 @@ package com.capybara.CapybaraCampusCrawlBackend.Routing;
 
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.capybara.CapybaraCampusCrawlBackend.Models.Point;
@@ -16,6 +18,13 @@ public class CapybaraGraphEdge {
 			this.coords = coords;
 			this.indoors = indoors;
 			this.distance = distance;
+		}
+
+		public CapybaraGraphEdge getReverseEdge(){
+			List<Point> reverseCoords = new ArrayList<>(this.coords);
+			Collections.reverse(reverseCoords);
+
+			return new CapybaraGraphEdge(reverseCoords, indoors, distance);
 		}
 
 	}
