@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
 
-import { Building, BuildingControllerService, Place, Point } from 'src/services/crawl-api';
+import { Building, BuildingControllerService, BuildingLocation, PitstopConstraint, Place, Point, RouteRequestConstraints } from 'src/services/crawl-api';
 import { PiMetric } from 'src/services/crawl-api/model/piMetric';
 import { RouteParameters } from 'src/share/types/RouteParameters';
 import { MapComponent } from './map/map.component';
@@ -25,10 +25,13 @@ export class AppComponent {
   }
 
   async onRouteParametersRecieved(routeParameters: RouteParameters){
+    console.log(routeParameters);
+
     let buildingFrom: Building = routeParameters.fromBuilding;
     let buildingTo: Building = routeParameters.toBuilding;
+    let routeConstraints: RouteRequestConstraints = this.buildRouteConstraintsFromParameters(routeParameters);
 
-    let routePoints: Point[] = await this.baraApi.getRouteWithConstraints(<number>buildingFrom.buildingId, <number>buildingTo.buildingId, null);    
+    let routePoints: Point[] = await this.baraApi.getRouteWithConstraints(<number>buildingFrom.buildingId, <number>buildingTo.buildingId, routeConstraints);    
     this.mapComponent.renderRoute(routePoints);
   }
 
@@ -48,4 +51,26 @@ export class AppComponent {
       longitude: building.graphNode?.longitude
     }
   }
+
+  private buildRouteConstraintsFromParameters(routeParameters: RouteParameters): RouteRequestConstraints{
+    let constraints = <RouteRequestConstraints>{
+      stopForFood: false,
+      preferIndoors: false,
+      avoidCrowds: false,
+      pitstops: [],
+      timeConstraint: null
+    };
+
+    constraints.preferIndoors = routeParameters.preferIndoors;
+    constraints.pitstops = routeParameters.pitstops.map (pitstop => 
+      <PitstopConstraint> {
+        location: <BuildingLocation> {
+          buildingId: pitstop.buildingId
+        }
+      }
+    );
+
+    return constraints;
+  }
+
 }

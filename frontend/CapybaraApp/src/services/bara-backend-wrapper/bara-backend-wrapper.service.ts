@@ -51,19 +51,7 @@ export class BaraBackendWrapperService {
     return await firstValueFrom(this.routeDao.getSimpleRouteBetweenBuildings(buildingRouteRequest));
   }
 
-  async getRouteWithConstraints(fromBuildingId: number, toBuildingId: number, routeConstraints: RouteRequestConstraints | null): Promise<Point[]> {
-    let constraintsToUse: RouteRequestConstraints = <RouteRequestConstraints>{
-      stopForFood: false,
-      preferIndoors: false,
-      avoidCrowds: false,
-      pitstops: [],
-      timeConstraint: null
-    }
-    
-    if (routeConstraints != null){
-      constraintsToUse = <RouteRequestConstraints> routeConstraints;
-    }
-
+  async getRouteWithConstraints(fromBuildingId: number, toBuildingId: number, routeConstraints: RouteRequestConstraints): Promise<Point[]> {
     let fromBuilding: Location = <BuildingLocation>{
       buildingId: fromBuildingId
     }
@@ -75,7 +63,7 @@ export class BaraBackendWrapperService {
     let routeRequest: RouteRequest = <RouteRequest> {
       fromLocation: fromBuilding,
       toLocation: toBuilding,
-      constraints: constraintsToUse
+      constraints: routeConstraints
     }
 
     return await firstValueFrom(this.routeDao.getRoute(routeRequest));
