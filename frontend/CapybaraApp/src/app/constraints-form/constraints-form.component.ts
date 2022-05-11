@@ -14,6 +14,7 @@ export class ConstraintsFormComponent {
 
   constraintForm: FormGroup = new FormGroup({
     food: new FormControl(false),
+    avoidCrowds: new FormControl(false),
     time: new FormControl(null),
     timeHours: new FormControl(null),
     timeMinutes: new FormControl(null),

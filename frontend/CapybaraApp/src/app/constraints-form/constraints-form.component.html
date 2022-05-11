@@ -2,12 +2,16 @@
     <form [formGroup]="constraintForm">
         <mat-checkbox color="primary" formControlName="indoor"></mat-checkbox>
         <mat-label> Prefer Indoors</mat-label>
+
+        <!-- TODO STUB -->
+        <!-- Avoid crowds option -->
+        <!-- Visit food option -->
+
         <br><br>
 
         <div class="pitstop-buttons">
             <button mat-raised-button color="primary" (click)="addStop()">Add A Stop</button>
-            <button mat-raised-button color="primary" *ngIf="(numOfStops>0)" (click)="removeStop()">Remove A
-                Stop</button>
+            <button mat-raised-button color="primary" *ngIf="(numOfStops>0)" (click)="removeStop()">Remove A Stop</button>
         </div>
 
         <br><br>
