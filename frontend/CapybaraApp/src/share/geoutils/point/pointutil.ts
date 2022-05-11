@@ -1,5 +1,6 @@
 import { Icon, icon, IconOptions, LatLng, marker, Marker, Polyline } from "leaflet";
 import { Place, Point } from "src/services/crawl-api";
+import { PiMetric } from "src/services/crawl-api/model/piMetric";
 
 export class PointUtil {
     static generateMarkerIcon(markerType: Place.PlaceTypeEnum | "Raspberry" | undefined): Icon<IconOptions> {
@@ -48,6 +49,23 @@ export class PointUtil {
         }
     }
 
+    static convertMetricToMarker(metric: PiMetric): any {
+        let metricPointLocation: Point = <Point>{
+            latitude: metric.node?.latitude,
+            longitude: metric.node?.longitude
+        }
+
+        if (metricPointLocation.latitude != undefined &&
+            metricPointLocation.longitude != undefined){
+            return marker(
+                [metricPointLocation.latitude, metricPointLocation.longitude],
+                {icon: PointUtil.generateMarkerIcon("Raspberry")}
+            )
+        }else{
+            return undefined;
+        }
+    }
+
     static convertPlaceToMarker(place: Place): Marker | undefined {
         let placePointLocation: Point = <Point>{
             latitude: place.node?.latitude,
@@ -55,8 +73,6 @@ export class PointUtil {
         }
 
         if (placePointLocation.latitude != undefined && placePointLocation.longitude != undefined){
-            //TODO abstract into seperate method
-            //TODO utilize the place enum that returns dynamicaly changes the marker icon
             return marker(
                 [placePointLocation.latitude, placePointLocation.longitude],
                 {icon: PointUtil.generateMarkerIcon(place.placeType)}

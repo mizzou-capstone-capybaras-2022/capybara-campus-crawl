@@ -48,6 +48,20 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Door'
+  /metrics/:
+    get:
+      tags:
+        - Metrics Controller
+      operationId: getMetrics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PiMetric'
   /buildings/:
     get:
       tags:
@@ -185,6 +199,20 @@ components:
           $ref: '#/components/schemas/GraphNode'
         building:
           $ref: '#/components/schemas/Building'
+    PiMetric:
+      type: object
+      properties:
+        metricId:
+          type: integer
+          format: int64
+        node:
+          $ref: '#/components/schemas/GraphNode'
+        time:
+          type: string
+          format: date-time
+        intensity:
+          type: integer
+          format: int32
     Point:
       type: object
       properties:

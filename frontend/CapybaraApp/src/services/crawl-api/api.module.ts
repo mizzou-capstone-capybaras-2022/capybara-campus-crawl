@@ -6,12 +6,21 @@ import { BuildingControllerService } from './api/buildingController.service';
 import { DoorControllerService } from './api/doorController.service';
 import { GraphNodeControllerService } from './api/graphNodeController.service';
 import { RouteControllerService } from './api/routeController.service';
+import { MetricsControllerService } from './api/metricsController.service';
+import { PlacesControllerService } from './api/placesController.service';
 
 @NgModule({
   imports:      [],
   declarations: [],
   exports:      [],
-  providers: []
+  providers: [
+    BuildingControllerService,
+    DoorControllerService,
+    GraphNodeControllerService,
+    MetricsControllerService,
+    PlacesControllerService,
+    RouteControllerService 
+  ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {

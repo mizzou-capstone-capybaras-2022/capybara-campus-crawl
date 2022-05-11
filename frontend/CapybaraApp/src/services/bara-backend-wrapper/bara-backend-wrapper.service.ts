@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable, of } from 'rxjs';
-import { Building, BuildingControllerService, BuildingLocation, BuildingRouteRequest, Location, Place, Point, RouteControllerService, RouteRequest, RouteRequestConstraints } from '../crawl-api';
+import { Building, BuildingControllerService, BuildingLocation, BuildingRouteRequest, Location, MetricsControllerService, Place, Point, RouteControllerService, RouteRequest, RouteRequestConstraints } from '../crawl-api';
 import { PlacesControllerService } from '../crawl-api/api/placesController.service';
+import { PiMetric } from '../crawl-api/model/piMetric';
 
 //TODO pull from places API
 
@@ -11,8 +12,15 @@ import { PlacesControllerService } from '../crawl-api/api/placesController.servi
 export class BaraBackendWrapperService {
   private buildings: Observable<Building[]> = of(<Array<Building>>[]);
 
-  constructor(private buildingDao: BuildingControllerService, private routeDao: RouteControllerService, private placeDao: PlacesControllerService) {
+  constructor(private buildingDao: BuildingControllerService, private routeDao: RouteControllerService, private placeDao: PlacesControllerService, private metricDao: MetricsControllerService) {
     this.buildings = this.buildingDao.getBuildings();
+  }
+
+  async getMetrics(){
+    let metricsObservable = this.metricDao.getMetrics();
+    let returnedMetrics: Array<PiMetric> = await firstValueFrom(metricsObservable);
+
+    return returnedMetrics;
   }
 
   async getPlacesByPlaceType(placeTypeOfInterest: Place.PlaceTypeEnum): Promise<Place[]> {
