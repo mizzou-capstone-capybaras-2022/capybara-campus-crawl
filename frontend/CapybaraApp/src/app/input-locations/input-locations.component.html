@@ -15,27 +15,24 @@
         <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
       </mat-select>
     </mat-form-field>
- <!--New Code Below For Form Slection-->
 
-  <!--Divider line between constraints
-    <mat-divider></mat-divider>
--->
     <br>
-    <div id = "constraintbox">
-      <mat-checkbox color="primary" formControlName="constraints" (click)="toggleShow2()" ></mat-checkbox>
-      <mat-label> Add Constraints</mat-label>
-      <br>
-      <br>
-    <!--Constraint Options-->
+    
+    <mat-checkbox color="primary" formControlName="constraints" (click)="toggleShow2()" ></mat-checkbox>
+    <mat-label> Add Constraints</mat-label>
+    <br>
+    <br>
 
+    <div id = "constraintbox">
       <mat-checkbox color="primary" formControlName="indoor" *ngIf="isShown2"></mat-checkbox>
       <mat-label *ngIf="isShown2"> Prefer Indoors</mat-label>
       <br><br>
-      <button mat-raised-button color="primary" *ngIf="isShown2" (click)="addStop()">Add A Stop</button>
-<!--Remove a stop added option-->
 
-      <button  mat-raised-button color="primary" *ngIf="(numOfStops>0) && isShown2" (click)="removeStop()">Remove A Stop</button>
-
+      <div class = "pitstop-buttons">
+        <button mat-raised-button color="primary" *ngIf="isShown2" (click)="addStop()">Add A Stop</button>
+        <button  mat-raised-button color="primary" *ngIf="(numOfStops>0) && isShown2" (click)="removeStop()">Remove A Stop</button>  
+      </div>
+      
       <br><br>
 
       <div *ngIf="(numOfStops>0) && isShown2" formArrayName='stops'>
@@ -48,7 +45,6 @@
         </mat-form-field>
       </div>
     </div>
-<!--End New Code-->
     <div>
       <button mat-raised-button color="basic" type="submit">Submit</button>
     </div>

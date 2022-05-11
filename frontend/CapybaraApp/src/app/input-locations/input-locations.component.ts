@@ -22,9 +22,7 @@ export class InputLocationsComponent implements OnInit {
     stops: new FormArray([])
   });
 
-  constructor(private baraApi: BaraBackendWrapperService) {
-
-  }
+  constructor(private baraApi: BaraBackendWrapperService) {}
 
   async ngOnInit(): Promise<void> {
     this.buildings = await this.baraApi.getBuildings();
@@ -37,21 +35,22 @@ export class InputLocationsComponent implements OnInit {
     let fromBuilding: Building = <Building> this.inputLocations.get("start")?.value;
     let toBuilding: Building = <Building> this.inputLocations.get("destination")?.value;
 
-    //console.log(this.inputLocations);
-
     this.inputBuildings.emit([fromBuilding, toBuilding]);
   }
 
   isShown2: boolean = false ;
   numOfStops: number = 0;
+  
   toggleShow2() {
     this.isShown2 = ! this.isShown2;
   }
+
   addStop() {
     let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
     stopsInList.push(new FormControl(null));
     this.numOfStops++;
   }
+
   removeStop(){
     let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
     stopsInList.push(new FormControl(null));
