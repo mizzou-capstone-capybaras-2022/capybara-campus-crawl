@@ -48,15 +48,26 @@ public class RoutingSystem {
 	}
 
 	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId, boolean preferIndoors) {
+		GraphPath<Long, CapybaraGraphEdge> shortestPath = ComputeShortestCapybaraPath(startingNodeId, endingNodeId, preferIndoors);
+		List<Point> routePoints = getPathList(shortestPath);
+		return routePoints;
+	}
+
+	public Double ComputeRouteDistance(Long startingNodeId, Long endingNodeId, boolean preferIndoors){
+		GraphPath<Long, CapybaraGraphEdge> shortestPath = ComputeShortestCapybaraPath(startingNodeId, endingNodeId, preferIndoors);
+		return shortestPath.getWeight();
+	}
+
+	private GraphPath<Long, CapybaraGraphEdge> ComputeShortestCapybaraPath(Long startingNodeId, Long endingNodeId, boolean preferIndoors){
 		capybaraGraph.setPreferIndoors(preferIndoors);
 		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(capybaraGraph);
-		
+
 		ShortestPathAlgorithm.SingleSourcePaths<Long, CapybaraGraphEdge> pathsFromStart = dijkstraAlg.getPaths(startingNodeId);
 		GraphPath<Long, CapybaraGraphEdge> shortestPath = pathsFromStart.getPath(endingNodeId);
-		List<Point> routePoints = getPathList(shortestPath);
 
 		logger.info(shortestPath.toString());
-		return routePoints;
+
+		return shortestPath;
 	}
 
 	private List<Point> getPathList(GraphPath<Long, CapybaraGraphEdge> shortestPath){
