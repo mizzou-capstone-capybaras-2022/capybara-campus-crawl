@@ -20,33 +20,13 @@
     
     <mat-checkbox color="primary" (click)="toggleConstraints()" ></mat-checkbox>
     <mat-label> Add Constraints</mat-label>
-    <br>
-    <br>
+    
+    <br><br>
 
-    <div [hidden]="!showConstraintsForm" id = "constraintbox">
-      <mat-checkbox color="primary" formControlName="indoor"></mat-checkbox>
-      <mat-label> Prefer Indoors</mat-label>
-      <br><br>
-      
-      <div class="pitstop-buttons">
-        <button mat-raised-button color="primary" (click)="addStop()">Add A Stop</button>
-        <button mat-raised-button color="primary" *ngIf="(numOfStops>0)" (click)="removeStop()">Remove A Stop</button>
-      </div>
-      
-      <br><br>
-      
-      <div *ngIf="(numOfStops>0) " formArrayName='stops'>
-        <mat-form-field appearance="standard" *ngFor="let item of [].constructor(numOfStops); let i = index"
-          style="margin-right: 10px;">
-          <mat-label>Stop</mat-label>
-          <mat-select formControlName="{{i}}">
-            <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
-          </mat-select>
-          <br>
-        </mat-form-field>
-      </div>
-
+    <div [hidden]="!showConstraintsForm">
+     <app-constraints-form [buildings]="buildings"></app-constraints-form>
     </div>
+
     <div>
       <button mat-raised-button color="basic" type="submit">Submit</button>
     </div>

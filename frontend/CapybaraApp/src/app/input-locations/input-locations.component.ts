@@ -15,19 +15,10 @@ export class InputLocationsComponent implements OnInit {
 
   buildings: Array<Building> = [];
   showConstraintsForm: boolean = false;
-  numOfStops: number = 0;
-
+  
   inputLocations = new FormGroup({
     start: new FormControl(''),
     destination: new FormControl(''),
-    constraints: new FormGroup({
-      food: new FormControl(''),
-      time: new FormControl(''),
-      timeHours: new FormControl(''),
-      timeMinutes: new FormControl(''),
-      indoor: new FormControl(''),
-      stops: new FormArray([])
-    })
   });
 
   constructor(private baraApi: BaraBackendWrapperService) {}
@@ -57,17 +48,4 @@ export class InputLocationsComponent implements OnInit {
   toggleConstraints() {
     this.showConstraintsForm = !this.showConstraintsForm;
   }
-
-  addStop() {
-    let stopsInList: FormArray = <FormArray> this.inputLocations.get("constraints")?.get("stops");
-    stopsInList.push(new FormControl(null));
-    this.numOfStops++;
-  }
-
-  removeStop(){
-    let stopsInList: FormArray = <FormArray> this.inputLocations.get("constraints")?.get("stops");
-    stopsInList.push(new FormControl(null));
-    this.numOfStops--;
-  }
-
 }
