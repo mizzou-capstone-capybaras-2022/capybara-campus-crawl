@@ -50,7 +50,6 @@ public class RoutingSystem {
 		
 		ShortestPathAlgorithm.SingleSourcePaths<Long, CapybaraGraphEdge> pathsFromStart = dijkstraAlg.getPaths(startingNodeId);
 		GraphPath<Long, CapybaraGraphEdge> shortestPath = pathsFromStart.getPath(endingNodeId);
-
 		List<Point> routePoints = getPathList(shortestPath);
 
 		logger.info(shortestPath.toString());
@@ -89,7 +88,7 @@ public class RoutingSystem {
 
 		return capybaraGraph;
 	}
-	
+
 	private static List<Point> parseJSONPoints(String pointsJson) throws JsonProcessingException{
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode coordinates = mapper.readTree(pointsJson);
