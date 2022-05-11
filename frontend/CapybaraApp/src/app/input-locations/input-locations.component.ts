@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
 import { Building } from 'src/services/crawl-api';
+import { RouteParameters } from 'src/share/types/RouteParameters';
 
 @Component({
   selector: 'app-input-locations',
@@ -10,7 +11,7 @@ import { Building } from 'src/services/crawl-api';
 })
 export class InputLocationsComponent implements OnInit {
 
-  @Output() inputBuildings: EventEmitter<[Building, Building]> = new EventEmitter<[Building, Building]>();
+  @Output() inputBuildings: EventEmitter<RouteParameters> = new EventEmitter<RouteParameters>();
 
   buildings: Array<Building> = [];
 
@@ -35,7 +36,14 @@ export class InputLocationsComponent implements OnInit {
     let fromBuilding: Building = <Building> this.inputLocations.get("start")?.value;
     let toBuilding: Building = <Building> this.inputLocations.get("destination")?.value;
 
-    this.inputBuildings.emit([fromBuilding, toBuilding]);
+    let routeParameters: RouteParameters = <RouteParameters> {
+      fromBuilding: fromBuilding,
+      toBuilding: toBuilding,
+      preferIndoors: false,
+      pitstops: []
+    };
+
+    this.inputBuildings.emit(routeParameters);
   }
 
   isShown2: boolean = false ;

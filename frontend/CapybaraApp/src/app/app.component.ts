@@ -3,6 +3,7 @@ import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bar
 
 import { Building, BuildingControllerService, Place, Point } from 'src/services/crawl-api';
 import { PiMetric } from 'src/services/crawl-api/model/piMetric';
+import { RouteParameters } from 'src/share/types/RouteParameters';
 import { MapComponent } from './map/map.component';
 
 @Component({
@@ -23,9 +24,9 @@ export class AppComponent {
     this.mapComponent.renderNormalMapMarkers([buildingPoint]);
   }
 
-  async onSelectBuildingForNavigation(selectedBuilding: [Building, Building]){
-    let buildingFrom = selectedBuilding[0];
-    let buildingTo = selectedBuilding[1];
+  async onRouteParametersRecieved(routeParameters: RouteParameters){
+    let buildingFrom: Building = routeParameters.fromBuilding;
+    let buildingTo: Building = routeParameters.toBuilding;
 
     let routePoints: Point[] = await this.baraApi.getRouteWithConstraints(<number>buildingFrom.buildingId, <number>buildingTo.buildingId, null);    
     this.mapComponent.renderRoute(routePoints);
