@@ -26,7 +26,7 @@
       <app-places-viewer (inputPlaceEvent) = "onSelectPlace($event)"></app-places-viewer>
     </mat-tab>
     <mat-tab label="View IoT Devices">
-      <app-raspberry-pi-viewer></app-raspberry-pi-viewer>
+      <app-raspberry-pi-viewer (metricEvent) = "onViewMetrics()"></app-raspberry-pi-viewer>
     </mat-tab>
     <mat-tab label="Search Buildings">
       <app-search-buildings (selectBuildingFromSearch) = "onSelectBuildingFromSearch($event)"></app-search-buildings>

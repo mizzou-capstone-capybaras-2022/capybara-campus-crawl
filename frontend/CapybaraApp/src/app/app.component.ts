@@ -35,6 +35,10 @@ export class AppComponent {
     this.mapComponent.renderPlaceMarkers(placesOfInterest);
   }
 
+  async onViewMetrics(){
+    console.log("view metrics");
+  }
+
   private getBuildingPoint(building: Building): Point {
     return <Point>{
       latitude: building.graphNode?.latitude,
