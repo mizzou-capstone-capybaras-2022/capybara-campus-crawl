@@ -20,7 +20,7 @@
 
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Input Locations">
-      <app-input-locations (inputBuildings) = "onSelectBuildingForNavigation($event)"></app-input-locations>
+      <app-input-locations (inputBuildings) = "onRouteParametersRecieved($event)"></app-input-locations>
     </mat-tab>
     <mat-tab label="View Places">
       <app-places-viewer (inputPlaceEvent) = "onSelectPlace($event)"></app-places-viewer>

@@ -14,7 +14,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import { ComponentAddConstraintsComponent } from './component-add-constraints/component-add-constraints.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { SearchBuildingsComponent } from './search-buildings/search-buildings.component';
@@ -26,16 +25,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PlacesViewerComponent } from './places-viewer/places-viewer.component';
 import { RaspberryPiViewerComponent } from './raspberry-pi-viewer/raspberry-pi-viewer.component';
+import { ConstraintsFormComponent } from './constraints-form/constraints-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     InputLocationsComponent,
-    ComponentAddConstraintsComponent,
     SearchBuildingsComponent,
     PlacesViewerComponent,
-    RaspberryPiViewerComponent
+    RaspberryPiViewerComponent,
+    ConstraintsFormComponent
   ],
   imports: [
     BrowserModule,

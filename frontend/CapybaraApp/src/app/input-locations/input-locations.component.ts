@@ -1,7 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
 import { Building } from 'src/services/crawl-api';
+import { RouteParameters } from 'src/share/types/RouteParameters';
+import { ConstraintsFormComponent } from '../constraints-form/constraints-form.component';
 
 @Component({
   selector: 'app-input-locations',
@@ -10,21 +12,19 @@ import { Building } from 'src/services/crawl-api';
 })
 export class InputLocationsComponent implements OnInit {
 
-  @Output() inputBuildings: EventEmitter<[Building, Building]> = new EventEmitter<[Building, Building]>();
+  @Output() inputBuildings: EventEmitter<RouteParameters> = new EventEmitter<RouteParameters>();
+
+  @ViewChild(ConstraintsFormComponent) constraintFormComponent!: ConstraintsFormComponent;
 
   buildings: Array<Building> = [];
-
+  showConstraintsForm: boolean = false;
+  
   inputLocations = new FormGroup({
     start: new FormControl(''),
     destination: new FormControl(''),
-    constraints: new FormControl(''),
-    indoor: new FormControl(''),
-    stops: new FormArray([])
   });
 
-  constructor(private baraApi: BaraBackendWrapperService) {
-
-  }
+  constructor(private baraApi: BaraBackendWrapperService) {}
 
   async ngOnInit(): Promise<void> {
     this.buildings = await this.baraApi.getBuildings();
@@ -37,25 +37,26 @@ export class InputLocationsComponent implements OnInit {
     let fromBuilding: Building = <Building> this.inputLocations.get("start")?.value;
     let toBuilding: Building = <Building> this.inputLocations.get("destination")?.value;
 
-    //console.log(this.inputLocations);
+    let routeParameters: RouteParameters = <RouteParameters> {
+      fromBuilding: fromBuilding,
+      toBuilding: toBuilding,
+      preferIndoors: false,
+      pitstops: []
+    };
 
-    this.inputBuildings.emit([fromBuilding, toBuilding]);
-  }
+    if (this.showConstraintsForm){
+      let constraintForm: FormGroup = this.constraintFormComponent.getFormConstraints();
+      
+      let constraintPitstops: Building[] = (<Building[]>constraintForm.get("stops")?.value).filter(building => building != null);
+      
+      routeParameters.preferIndoors = constraintForm.get("indoor")?.value;
+      routeParameters.pitstops = constraintPitstops;
+    }
 
-  isShown2: boolean = false ;
-  numOfStops: number = 0;
-  toggleShow2() {
-    this.isShown2 = ! this.isShown2;
-  }
-  addStop() {
-    let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
-    stopsInList.push(new FormControl(null));
-    this.numOfStops++;
-  }
-  removeStop(){
-    let stopsInList: FormArray = <FormArray> this.inputLocations.get("stops");
-    stopsInList.push(new FormControl(null));
-    this.numOfStops--;
+    this.inputBuildings.emit(routeParameters);
   }
 
+  toggleConstraints() {
+    this.showConstraintsForm = !this.showConstraintsForm;
+  }
 }
