@@ -2,6 +2,7 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
 
 import { Building, BuildingControllerService, Place, Point } from 'src/services/crawl-api';
+import { PiMetric } from 'src/services/crawl-api/model/piMetric';
 import { MapComponent } from './map/map.component';
 
 @Component({
@@ -36,7 +37,8 @@ export class AppComponent {
   }
 
   async onViewMetrics(){
-    console.log("view metrics");
+    let metricsOfInterest: Array<PiMetric> = await this.baraApi.getMetrics();
+    this.mapComponent.renderMetricMarkers(metricsOfInterest);
   }
 
   private getBuildingPoint(building: Building): Point {
