@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { BaraBackendWrapperService } from 'src/services/bara-backend-wrapper/bara-backend-wrapper.service';
 import { Building } from 'src/services/crawl-api';
 import { RouteParameters } from 'src/share/types/RouteParameters';
+import { ConstraintsFormComponent } from '../constraints-form/constraints-form.component';
 
 @Component({
   selector: 'app-input-locations',
@@ -12,6 +13,8 @@ import { RouteParameters } from 'src/share/types/RouteParameters';
 export class InputLocationsComponent implements OnInit {
 
   @Output() inputBuildings: EventEmitter<RouteParameters> = new EventEmitter<RouteParameters>();
+
+  @ViewChild(ConstraintsFormComponent) constraintFormComponent!: ConstraintsFormComponent;
 
   buildings: Array<Building> = [];
   showConstraintsForm: boolean = false;
@@ -41,10 +44,18 @@ export class InputLocationsComponent implements OnInit {
       pitstops: []
     };
 
+    if (this.showConstraintsForm){
+      let constraintForm: FormGroup = this.constraintFormComponent.getFormConstraints();
+      
+      let constraintPitstops: Building[] = (<Building[]>constraintForm.get("stops")?.value).filter(building => building != null);
+      
+      routeParameters.preferIndoors = constraintForm.get("indoor")?.value;
+      routeParameters.pitstops = constraintPitstops;
+    }
+
     this.inputBuildings.emit(routeParameters);
   }
 
-  
   toggleConstraints() {
     this.showConstraintsForm = !this.showConstraintsForm;
   }

@@ -13,11 +13,11 @@ export class ConstraintsFormComponent {
   numOfStops: number = 0;
 
   constraintForm: FormGroup = new FormGroup({
-    food: new FormControl(''),
-    time: new FormControl(''),
-    timeHours: new FormControl(''),
-    timeMinutes: new FormControl(''),
-    indoor: new FormControl(''),
+    food: new FormControl(false),
+    time: new FormControl(null),
+    timeHours: new FormControl(null),
+    timeMinutes: new FormControl(null),
+    indoor: new FormControl(false),
     stops: new FormArray([])
   })
 
@@ -35,8 +35,12 @@ export class ConstraintsFormComponent {
 
   removeStop(){
     let stopsInList: FormArray = <FormArray> this.constraintForm.get("stops");
-    stopsInList.push(new FormControl(null));
+    stopsInList.removeAt(stopsInList.getRawValue().length - 1)
     this.numOfStops--;
+  }
+
+  getFormConstraints(): FormGroup{
+    return this.constraintForm
   }
 
 }
