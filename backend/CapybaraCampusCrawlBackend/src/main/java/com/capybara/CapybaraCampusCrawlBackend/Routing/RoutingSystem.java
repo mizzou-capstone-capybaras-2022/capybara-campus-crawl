@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class RoutingSystem {
@@ -47,18 +48,18 @@ public class RoutingSystem {
 		}
 	}
 
-	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId, boolean preferIndoors) {
-		GraphPath<Long, CapybaraGraphEdge> shortestPath = ComputeShortestCapybaraPath(startingNodeId, endingNodeId, preferIndoors);
+	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId, boolean preferIndoors, boolean avoidCrowds) {
+		GraphPath<Long, CapybaraGraphEdge> shortestPath = ComputeShortestCapybaraPath(startingNodeId, endingNodeId, preferIndoors, avoidCrowds);
 		List<Point> routePoints = getPathList(shortestPath);
 		return routePoints;
 	}
 
-	public Double ComputeRouteDistance(Long startingNodeId, Long endingNodeId, boolean preferIndoors){
-		GraphPath<Long, CapybaraGraphEdge> shortestPath = ComputeShortestCapybaraPath(startingNodeId, endingNodeId, preferIndoors);
+	public Double ComputeRouteDistance(Long startingNodeId, Long endingNodeId, boolean preferIndoors, boolean avoidCrowds){
+		GraphPath<Long, CapybaraGraphEdge> shortestPath = ComputeShortestCapybaraPath(startingNodeId, endingNodeId, preferIndoors, avoidCrowds);
 		return shortestPath.getWeight();
 	}
 
-	private GraphPath<Long, CapybaraGraphEdge> ComputeShortestCapybaraPath(Long startingNodeId, Long endingNodeId, boolean preferIndoors){
+	private GraphPath<Long, CapybaraGraphEdge> ComputeShortestCapybaraPath(Long startingNodeId, Long endingNodeId, boolean preferIndoors, boolean avoidCrowds){
 		capybaraGraph.setPreferIndoors(preferIndoors);
 		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(capybaraGraph);
 
@@ -93,7 +94,14 @@ public class RoutingSystem {
 			Long nodeBId = edge.getToNode().getNodeID();
 
 			List<Point> edgeCoords = parseJSONPoints(edge.getPathshape());
+
+
 			boolean indoorEdge = edge.getFromToAction().equals("outsideWalking");
+
+			Optional<PiMetric> matchingMetric = metrics.stream()
+					.filter(metric -> metric.getNode().getNodeID() == nodeAId || metric.getNode().getNodeID() == nodeBId)
+					.findFirst();
+
 			CapybaraGraphEdge capybaraEdge = new CapybaraGraphEdge(edgeCoords, indoorEdge, edge.getDistance());
 
 			capybaraGraph.addEdge(nodeAId, nodeBId, capybaraEdge);
