@@ -27,7 +27,6 @@ public class RoutingSystem {
 	private static final Logger logger = LoggerFactory.getLogger(CapybaraCampusCrawlBackendApplication.class);
 
 	CapybaraGraph capybaraGraph;
-	CapybaraGraph capybaraGraphIndoors;
 
 	@Inject
 	public RoutingSystem(GraphEdgeRepository edgeDao, GraphNodeRepository nodeDao) {
@@ -38,8 +37,7 @@ public class RoutingSystem {
 
 		try {
 			//current capybara graph does not prefer indoors
-			capybaraGraph = constructGraph(nodes, edges, false);
-			capybaraGraphIndoors = constructGraph(nodes, edges, true);
+			capybaraGraph = constructGraph(nodes, edges);
 			logger.info("Graph constructed");
 		} catch (JsonProcessingException e) {
 			capybaraGraph = new CapybaraGraph();
@@ -47,17 +45,12 @@ public class RoutingSystem {
 	}
 
 	public List<Point> ComputeRoute(Long startingNodeId, Long endingNodeId, boolean preferIndoors) {
-		CapybaraGraph weightedGraphToUse = capybaraGraph;
-
-		if(preferIndoors == true) {
-			weightedGraphToUse = capybaraGraphIndoors;
-		}
-
-		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(weightedGraphToUse);
+		capybaraGraph.setPreferIndoors(preferIndoors);
+		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(capybaraGraph);
 		
 		ShortestPathAlgorithm.SingleSourcePaths<Long, CapybaraGraphEdge> pathsFromStart = dijkstraAlg.getPaths(startingNodeId);
 		GraphPath<Long, CapybaraGraphEdge> shortestPath = pathsFromStart.getPath(endingNodeId);
-		
+
 		List<Point> routePoints = getPathList(shortestPath);
 
 		logger.info(shortestPath.toString());
@@ -73,7 +66,7 @@ public class RoutingSystem {
 		return routePoints;
 	}
 	
-	public CapybaraGraph constructGraph(List<GraphNode> nodes, List<GraphEdge> edges, boolean preferIndoors) throws JsonProcessingException {
+	public CapybaraGraph constructGraph(List<GraphNode> nodes, List<GraphEdge> edges) throws JsonProcessingException {
 		CapybaraGraph capybaraGraph = new CapybaraGraph();
 
 		//Add the vertex of the graph
@@ -84,19 +77,17 @@ public class RoutingSystem {
 
 		for (GraphEdge edge : edges){
 			List<Point> edgeCoords = parseJSONPoints(edge.getPathshape());
-			List<Point> reverseCoords = new ArrayList<>(edgeCoords);
 
+			List<Point> reverseCoords = new ArrayList<>(edgeCoords);
 			Collections.reverse(reverseCoords);
 
-			double distance = getModifiedGraphEdgeWeight(edge, preferIndoors);
-			CapybaraGraphEdge capybaraEdge = new CapybaraGraphEdge(edgeCoords, distance);
-			CapybaraGraphEdge reverseCapybaraEdge = new CapybaraGraphEdge(reverseCoords, distance);
+			boolean indoorEdge = edge.getFromToAction().equals("outsideWalking");
+
+			CapybaraGraphEdge capybaraEdge = new CapybaraGraphEdge(edgeCoords, indoorEdge, edge.getDistance());
+			CapybaraGraphEdge reverseCapybaraEdge = new CapybaraGraphEdge(reverseCoords, indoorEdge, edge.getDistance());
 
 			capybaraGraph.addEdge(edge.getFromNode().getNodeID(), edge.getToNode().getNodeID(), capybaraEdge);
 			capybaraGraph.addEdge(edge.getToNode().getNodeID(), edge.getFromNode().getNodeID(), reverseCapybaraEdge);
-
-			capybaraGraph.setEdgeWeight(capybaraEdge, capybaraEdge.distance);
-			capybaraGraph.setEdgeWeight(reverseCapybaraEdge, reverseCapybaraEdge.distance);
 		}
 
 		return capybaraGraph;
