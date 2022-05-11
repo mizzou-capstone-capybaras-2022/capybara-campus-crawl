@@ -61,6 +61,7 @@ public class RoutingSystem {
 
 	private GraphPath<Long, CapybaraGraphEdge> ComputeShortestCapybaraPath(Long startingNodeId, Long endingNodeId, boolean preferIndoors, boolean avoidCrowds){
 		capybaraGraph.setPreferIndoors(preferIndoors);
+		capybaraGraph.setAvoidCrowds(avoidCrowds);
 		DijkstraShortestPath<Long, CapybaraGraphEdge> dijkstraAlg = new DijkstraShortestPath<>(capybaraGraph);
 
 		ShortestPathAlgorithm.SingleSourcePaths<Long, CapybaraGraphEdge> pathsFromStart = dijkstraAlg.getPaths(startingNodeId);
@@ -95,14 +96,16 @@ public class RoutingSystem {
 
 			List<Point> edgeCoords = parseJSONPoints(edge.getPathshape());
 
-
-			boolean indoorEdge = edge.getFromToAction().equals("outsideWalking");
+			boolean indoorEdge = !edge.getFromToAction().equals("outsideWalking");
 
 			Optional<PiMetric> matchingMetric = metrics.stream()
 					.filter(metric -> metric.getNode().getNodeID() == nodeAId || metric.getNode().getNodeID() == nodeBId)
 					.findFirst();
 
 			CapybaraGraphEdge capybaraEdge = new CapybaraGraphEdge(edgeCoords, indoorEdge, edge.getDistance());
+			if (matchingMetric.isPresent()){
+				capybaraEdge = new CapybaraGraphEdge(edgeCoords, indoorEdge, edge.getDistance(), true, matchingMetric.get().getIntensity());
+			}
 
 			capybaraGraph.addEdge(nodeAId, nodeBId, capybaraEdge);
 			capybaraGraph.addEdge(nodeBId, nodeAId, capybaraEdge.getReverseEdge());
