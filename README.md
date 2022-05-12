@@ -2,20 +2,18 @@
 The main monorepo for the Mizzou CS Senior Capstone project.
 
 # About
-TBD
+A web application to find buildings and routes on Mizzou campus
+
+# DEMO url
+http://capybara-dev.eastus.cloudapp.azure.com:4200/
 
 # Team
-- Michael Navazhylau
-- Isaac Milarsky
-- Olivia LaVal
-- Robert Graman
-- Daniel Marin
-- Alex Centorbi
+- Michael Navazhylau: Backend, Swagger, Docker CI/CD
+- Isaac Milarsky: Raspberry PI Crowd Metrics collection
+- Olivia LaVal: Frontend
+- Robert Graman: Backend Routing
+- Daniel Marin: Backend
+- Alex Centorbi: Frontend
 
 # Instructions
-Instructions on how to run the docker containers can be found [here](instructions.md)
-
-# Running the Map Tile server
-1. `docker volume create capy-openstreetmap-data`
-2. `docker run -v $PWD/MapData/missouri.pbf:/data.osm.pbf -v capy-openstreetmap-data:/var/lib/postgresql/12/main overv/openstreetmap-tile-server:1.3.10 import`
-3. `docker compose -f docker-compose-map.yml up`
+Instructions on how to run the dev docker containers can be found [here](instructions.md)
