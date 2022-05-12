@@ -761,6 +761,367 @@
 					"body": "{\n \"failingConstraint\": [\n  \"time\",\n  \"crowds\"\n ]\n}"
 				}
 			]
+		},
+		{
+			"name": "Get a constaint route given multiple pitstops",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function getRandomBuilding(buildings){\r",
+							"    const buildingIndex = Math.trunc(Math.random() * buildings.length);\r",
+							"    return buildings[buildingIndex];\r",
+							"}\r",
+							"\r",
+							"function setBuildingEnvironment(building, key){\r",
+							"    pm.environment.set(key, building);\r",
+							"    pm.environment.set(key + \"_id\", building[\"buildingId\"])\r",
+							"}\r",
+							"\r",
+							"function populateBuildingsForRequest(buildings){\r",
+							"    buildingFrom = getRandomBuilding(buildings);\r",
+							"    buildingPitstop = getRandomBuilding(buildings);\r",
+							"    buildingTo = getRandomBuilding(buildings);\r",
+							"\r",
+							"    setBuildingEnvironment(buildingFrom, \"fromBuilding\");\r",
+							"    setBuildingEnvironment(buildingTo, \"toBuilding\");\r",
+							"    setBuildingEnvironment(buildingPitstop, \"pitstopBuilding\");\r",
+							"}\r",
+							"\r",
+							"pm.sendRequest(pm.collectionVariables.get(\"baseUrl\") + \"/buildings/\", (error, response) => {\r",
+							"    if (error) {\r",
+							"        console.log(error);\r",
+							"    }else{\r",
+							"        let buildings = response.json();\r",
+							"        populateBuildingsForRequest(buildings);\r",
+							"    }\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()\r",
+							"\r",
+							"function distance(lat1, lon1, lat2, lon2){\r",
+							"    const R = 6371e3; // metres\r",
+							"    const φ1 = lat1 * Math.PI/180; // φ, λ in radians\r",
+							"    const φ2 = lat2 * Math.PI/180;\r",
+							"    const Δφ = (lat2-lat1) * Math.PI/180;\r",
+							"    const Δλ = (lon2-lon1) * Math.PI/180;\r",
+							"\r",
+							"    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +\r",
+							"            Math.cos(φ1) * Math.cos(φ2) *\r",
+							"            Math.sin(Δλ/2) * Math.sin(Δλ/2);\r",
+							"    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));\r",
+							"\r",
+							"    const d = R * c; // in metres\r",
+							"\r",
+							"    return d;\r",
+							"}\r",
+							"\r",
+							"function findMinDistance(points, lat, lon){\r",
+							"    \r",
+							"    let minDistance = Infinity;\r",
+							"\r",
+							"    points.forEach(point => {\r",
+							"        let [pointLat, pointLon] = [point[\"latitude\"], point[\"longitude\"]];\r",
+							"\r",
+							"        let pointDistance = distance(pointLat, pointLon, lat, lon);\r",
+							"\r",
+							"        if (pointDistance <= minDistance){\r",
+							"            minDistance = pointDistance;\r",
+							"        }\r",
+							"    })\r",
+							"\r",
+							"    return minDistance;\r",
+							"}\r",
+							"\r",
+							"const pointSchema = {\r",
+							"    \"properties\": {\r",
+							"        \"latitude\": {\r",
+							"            \"type\": \"number\"\r",
+							"        },\r",
+							"        \"longitude\": {\r",
+							"            \"type\": \"number\"\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Proper Path Schema\", function () {\r",
+							"    response.forEach(function (responseItem){\r",
+							"        pm.expect(tv4.validate(responseItem, pointSchema)).to.be.true;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Ensure proper route endpoints AND pitstop visited\", function () {\r",
+							"    let startingBuilding = pm.environment.get(\"fromBuilding\");\r",
+							"    let endingBuilding = pm.environment.get(\"toBuilding\");\r",
+							"    let pitstopBuilding = pm.environment.get(\"pitstopBuilding\")\r",
+							"    \r",
+							"    let startingPoint = response[0];\r",
+							"    let endingPoint = response[response.length - 1];\r",
+							"\r",
+							"    let [buildingStartLat,buildingStartLong] = [startingBuilding[\"graphNode\"][\"latitude\"], startingBuilding[\"graphNode\"][\"longitude\"]]\r",
+							"\r",
+							"    let [buildingPitstopLat, buildingPitstopLon] = [pitstopBuilding[\"graphNode\"][\"latitude\"], pitstopBuilding[\"graphNode\"][\"longitude\"]]\r",
+							"\r",
+							"    let [buildingEndLat, buildingEndLong] = [endingBuilding[\"graphNode\"][\"latitude\"], endingBuilding[\"graphNode\"][\"longitude\"]];\r",
+							"\r",
+							"    let [pointEndLat, pointEndLong] = [endingPoint[\"latitude\"], endingPoint[\"longitude\"]];\r",
+							"    let [pointStartLat, pointStartLong] = [startingPoint[\"latitude\"], startingPoint[\"longitude\"]]\r",
+							"\r",
+							"    let startDistance = distance(buildingStartLat, buildingStartLong, pointStartLat, pointStartLong);\r",
+							"    let endDistance = distance(buildingEndLat, buildingEndLong, pointEndLat, pointEndLong);\r",
+							"    let minPitstopDistance = findMinDistance(response, buildingPitstopLat, buildingPitstopLon);\r",
+							"\r",
+							"    pm.expect(startDistance).to.be.within(0, 200);\r",
+							"    pm.expect(minPitstopDistance).to.be.within(0, 200);\r",
+							"    pm.expect(endDistance).to.be.within(0, 200);\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": {{fromBuilding_id}}\n    },\n    \"toLocation\": {\n        \"buildingId\": {{toBuilding_id}}\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": false,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": {{pitstopBuilding_id}}\n                }\n            }\n        ],\n        \"timeConstraint\": null\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/routes/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 1\n    },\n    \"toLocation\": {\n        \"buildingId\": 2\n    },\n    \"constraints\": {\n        \"stopForFood\": true,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 4\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 5\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 100\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n {\n  \"latitude\": -13290201.183931544,\n  \"longitude\": 92428659.31701955\n },\n {\n  \"latitude\": 48131450.59189895,\n  \"longitude\": 32371157.98228647\n }\n]"
+				},
+				{
+					"name": "Route not possible",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": -80489843.49325989\n    },\n    \"toLocation\": {\n        \"buildingId\": -10528911.906426638\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": true,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 85429174.38149291\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 68633317.8765381\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 90138768.03969437\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"failingConstraint\": [\n  \"time\",\n  \"crowds\"\n ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a constaint route given multiple pitstops (example payload)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 1\n    },\n    \"toLocation\": {\n        \"buildingId\": 5\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": false,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 3\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 7\n                }\n            }\n        ],\n        \"timeConstraint\": null\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/routes/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": 1\n    },\n    \"toLocation\": {\n        \"buildingId\": 2\n    },\n    \"constraints\": {\n        \"stopForFood\": true,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 4\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 5\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 100\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n {\n  \"latitude\": -13290201.183931544,\n  \"longitude\": 92428659.31701955\n },\n {\n  \"latitude\": 48131450.59189895,\n  \"longitude\": 32371157.98228647\n }\n]"
+				},
+				{
+					"name": "Route not possible",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": -80489843.49325989\n    },\n    \"toLocation\": {\n        \"buildingId\": -10528911.906426638\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": true,\n        \"avoidCrowds\": true,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": 85429174.38149291\n                }\n            },\n            {\n                \"location\": {\n                    \"buildingId\": 68633317.8765381\n                }\n            }\n        ],\n        \"timeConstraint\": {\n            \"maxTime\": 90138768.03969437\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"failingConstraint\": [\n  \"time\",\n  \"crowds\"\n ]\n}"
+				},
+				{
+					"name": "Get a constaint route given multiple pitstops",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromLocation\": {\n        \"buildingId\": {{fromBuilding_id}}\n    },\n    \"toLocation\": {\n        \"buildingId\": {{toBuilding_id}}\n    },\n    \"constraints\": {\n        \"stopForFood\": false,\n        \"preferIndoors\": false,\n        \"avoidCrowds\": false,\n        \"pitstops\": [\n            {\n                \"location\": {\n                    \"buildingId\": {{pitstopBuilding_id}}\n                }\n            }\n        ],\n        \"timeConstraint\": null\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/routes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"routes",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	],
 	"event": [

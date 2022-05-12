@@ -15,35 +15,18 @@
         <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
       </mat-select>
     </mat-form-field>
- <!--New Code Below For Form Slection-->
 
-  <!--Divider line between constraints
-    <mat-divider></mat-divider>
--->
-<br>
-<div id = "constraintbox">
-    <mat-checkbox formControlName="constraints" (click)="toggleShow2()" ></mat-checkbox>
-    <mat-label> Add Constraints</mat-label>
     <br>
-    <br>
-    <!--Constraint Options-->
     
-      <mat-checkbox formControlName="indoor" *ngIf="isShown2"></mat-checkbox>
-      <mat-label *ngIf="isShown2"> Prefer Indoors</mat-label>
-      <br><br>
-      <mat-checkbox formControlName="time" *ngIf="isShown2" (click)="toggleShow()"></mat-checkbox>
-      <mat-label *ngIf="isShown2"> Add A Stop</mat-label>
-      <br><br>
+    <mat-checkbox color="primary" (click)="toggleConstraints()" ></mat-checkbox>
+    <mat-label> Add Constraints</mat-label>
+    
+    <br><br>
 
-      <mat-form-field appearance="standard" *ngIf="isShown">
-        <mat-label>Stop</mat-label>
-        <mat-select formControlName="destination">
-          <mat-option *ngFor="let building of buildings;" [value]="building">{{building.name}}</mat-option>
-        </mat-select>
-      <br>
-    </mat-form-field>
-  </div>
-<!--End New Code-->
+    <div [hidden]="!showConstraintsForm">
+     <app-constraints-form [buildings]="buildings"></app-constraints-form>
+    </div>
+
     <div>
       <button mat-raised-button color="basic" type="submit">Submit</button>
     </div>

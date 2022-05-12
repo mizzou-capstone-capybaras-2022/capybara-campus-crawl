@@ -25,8 +25,6 @@ import { Place } from '../model/place';
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -91,9 +89,9 @@ export class PlacesControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getPlaces(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Place>;
-    public getPlaces(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Place>>;
-    public getPlaces(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Place>>;
+    public getPlaces(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Place>>;
+    public getPlaces(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Place>>>;
+    public getPlaces(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Place>>>;
     public getPlaces(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -127,7 +125,7 @@ export class PlacesControllerService {
             }
         }
 
-        return this.httpClient.get<Place>(`${this.configuration.basePath}/places/`,
+        return this.httpClient.get<Array<Place>>(`${this.configuration.basePath}/places/`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

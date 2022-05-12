@@ -20,12 +20,14 @@
 
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Input Locations">
-      <app-input-locations (inputBuildings) = "onSelectBuildingForNavigation($event)"></app-input-locations>
+      <app-input-locations (inputBuildings) = "onRouteParametersRecieved($event)"></app-input-locations>
     </mat-tab>
     <mat-tab label="View Places">
-      <app-component-add-constraints></app-component-add-constraints>
+      <app-places-viewer (inputPlaceEvent) = "onSelectPlace($event)"></app-places-viewer>
     </mat-tab>
-
+    <mat-tab label="View IoT Devices">
+      <app-raspberry-pi-viewer (metricEvent) = "onViewMetrics()"></app-raspberry-pi-viewer>
+    </mat-tab>
     <mat-tab label="Search Buildings">
       <app-search-buildings (selectBuildingFromSearch) = "onSelectBuildingFromSearch($event)"></app-search-buildings>
     </mat-tab>

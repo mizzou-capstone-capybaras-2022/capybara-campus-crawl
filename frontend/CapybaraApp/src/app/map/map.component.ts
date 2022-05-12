@@ -2,6 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import { LeafletControlLayersConfig } from '@asymmetrik/ngx-leaflet';
 
 import { latLng, LatLng, tileLayer, polyline, TileLayer, Polyline, LatLngExpression, Marker } from 'leaflet';
+import { Place } from 'src/services/crawl-api';
+import { PiMetric } from 'src/services/crawl-api/model/piMetric';
 import { Point } from 'src/services/crawl-api/model/point';
 import { PointUtil } from 'src/share/geoutils/point/pointutil';
 import { environment } from '../../environments/environment';
@@ -12,7 +14,6 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent {
-
   streetMaps: TileLayer;
   layersControl: LeafletControlLayersConfig;
   layers: any[] = [];
@@ -39,14 +40,34 @@ export class MapComponent {
     };
   }
 
-  renderMapMarkers(points: Point[]){
-    let mapMarkers: Marker<any>[] = <Marker<any>[]> points.map(point => {
+  renderNormalMapMarkers(points: Point[]){
+    let mapMarkers: Marker[] = <Marker[]> points.map(point => {
       return PointUtil.convertPointToMarker(point);
-    }).filter(point => {
-      return point != undefined
+    }).filter(marker => {
+      return marker != undefined
     });
 
     this.layers = mapMarkers;
+  }
+
+  renderPlaceMarkers(placesOfInterest: Array<Place>){
+    let placeMarkers: Marker[] = <Marker[]> placesOfInterest.map(place => {
+      return PointUtil.convertPlaceToMarker(place);
+    }).filter(marker => {
+      return marker != undefined
+    });
+
+    this.layers = placeMarkers;
+  }
+
+  renderMetricMarkers(metricsOfInterest: PiMetric[]) {
+    let metricMarkers: Marker[] = <Marker[]> metricsOfInterest.map(metric => {
+      return PointUtil.convertMetricToMarker(metric);
+    }).filter(marker => {
+      return marker != undefined
+    });
+    
+    this.layers = metricMarkers;
   }
 
   renderRoute(routePoints: Point[]){

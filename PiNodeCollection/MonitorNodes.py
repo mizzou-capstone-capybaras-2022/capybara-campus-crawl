@@ -5,6 +5,7 @@ import os
 import glob
 import sqlalchemy as s
 from sqlalchemy.sql.expression import bindparam
+from sqlalchemy.ext.automap import automap_base
 import signal
 import subprocess
 from datetime import datetime
@@ -13,11 +14,14 @@ from mac_vendor_lookup import MacLookup
 import time
 import socket
 import json
+import psycopg2
+import urllib.parse
 
 """
     Fairly straightforward script to collect information about nearby wireless access points and their clients.
     Intended to be used to send foot traffic data to the backend.
 
+    REMEMBER TO MAKE SURE THAT YOUR DEVICE NAME MATCHES THE ONE IN THIS SCRIPT. Linux can be annoyingly arbitrary so you kind of have to do it manually.
 """
 
 logger = logging.getLogger(__name__)
@@ -32,13 +36,12 @@ mac.update_vendors()
 #return a database connection object
 def initialize_database(database_name,password,host,port):
   DB_STR = 'postgresql://{}:{}@{}:{}/{}'.format(
-            "capybaradevuser", password, host, port, database_name
+            "capybaradevuser", urllib.parse.quote_plus(password), host, port, database_name
         )
 
   logger.info("Making database connections...")
 
-  db = s.create_engine(DB_STR, poolclass=s.pool.NullPool,
-      connect_args={'options': '-csearch_path={}'.format('augur_data')})
+  db = s.create_engine(DB_STR, poolclass=s.pool.NullPool)
 
   return db
 
@@ -231,7 +234,8 @@ if __name__ == "__main__":
 
     #For database keeping track
     hostname = socket.gethostname()
-    nodeValue = int(hostname[-1])
+    #Assign a unique number to this device manually
+    nodeValue = 1#int(hostname[-1])
 
     dbPass = None
     dbHost = None
@@ -249,6 +253,7 @@ if __name__ == "__main__":
 
     #Get a python object that corresponds to the pi metrics table.
     metadata = s.MetaData()
+    print(metadata.tables.keys())
     metadata.reflect(db, only=["PIMetrics"])
 
     Base = automap_base(metadata=metadata)
@@ -285,10 +290,11 @@ if __name__ == "__main__":
 
     intensity = 0
     for filename in glob.glob(path):
-        try:
-            intensity += parseAirdumpCsv(filename)
-        except Exception as e:
-            logger.error(f"Ran into problem parsing csv: {e}")
+        
+        parsed = parseAirdumpCsv(filename)
+        #print(parsed)
+        intensity += len(parsed)
+        
 
         os.remove(filename) # Don't keep temp info
     
