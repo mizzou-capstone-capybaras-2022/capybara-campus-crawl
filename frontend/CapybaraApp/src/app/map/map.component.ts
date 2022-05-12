@@ -54,5 +54,8 @@ export class MapComponent {
     this.layers = [routePolyline];
   }
 
+  resetMap(){
+    this.layers = [];
+  }
   
 }
