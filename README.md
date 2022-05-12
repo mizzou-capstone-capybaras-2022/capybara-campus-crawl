@@ -1,4 +1,6 @@
-# capybara-campus-crawl
+# Capybara Campus Crawl
+![plot](./logo.png)
+
 The main monorepo for the Mizzou CS Senior Capstone project.
 
 # About
